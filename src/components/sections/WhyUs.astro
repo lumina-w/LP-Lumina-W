@@ -1,0 +1,69 @@
+---
+const reasons = [
+  {
+    number: '01',
+    title: 'Seguridad desde la arquitectura.',
+    description:
+      'No es una capa que se agrega al final. Va en cada decisión técnica desde el día uno. Cada sistema que construimos está diseñado para resistir.',
+    icon: 'shield',
+  },
+  {
+    number: '02',
+    title: 'IA que automatiza procesos reales.',
+    description:
+      'No integramos IA como tendencia. La usamos donde genuinamente reduce trabajo, mejora decisiones y hace que tu operación sea más inteligente.',
+    icon: 'cpu',
+  },
+  {
+    number: '03',
+    title: 'Código limpio que escala.',
+    description:
+      'Sin deuda técnica desde el inicio. Lo que construimos hoy no lo reconstruyes en dos años. Documentado, mantenible y listo para crecer.',
+    icon: 'code',
+  },
+  {
+    number: '04',
+    title: 'Visión completa del producto.',
+    description:
+      'Diseño, frontend, backend, seguridad. Entendemos todo el sistema, no solo la parte que nos toca. Eso se nota en el resultado final.',
+    icon: 'layers',
+  },
+];
+---
+
+<section id="us" class="bg-card py-[var(--space-section)]">
+  <div class="mx-auto max-w-6xl px-6">
+    <div class="mx-auto mb-16 max-w-2xl text-center">
+      <p
+        class="font-body text-brand mb-4 text-sm font-medium tracking-widest uppercase"
+      >
+        Por qué Lúmina W
+      </p>
+      <h2
+        class="font-heading text-text-primary mb-6 text-4xl leading-tight font-bold md:text-5xl"
+      >
+        El software que construimos<br />
+        <span class="text-brand">no solo funciona hoy.</span>
+      </h2>
+    </div>
+    <div class="grid grid-cols-1 gap-8 md:grid-cols-2">
+      {
+        reasons.map((reason) => (
+          <div class="bg-page hover:border-l-brand group flex gap-6 rounded-lg border border-[var(--border-base)] p-8 transition-all duration-300 hover:border-l">
+            <span class="font-heading text-brand/50 group-hover:text-brand/70 shrink-0 text-5xl leading-none font-bold transition-colors duration-300">
+              {reason.number}
+            </span>
+            <div class="flex flex-col gap-3">
+              <h3 class="font-heading text-text-primary text-lg font-bold">
+                {reason.title}
+              </h3>
+              <p class="font-body text-text-muted text-sm leading-relaxed">
+                {reason.description}
+              </p>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

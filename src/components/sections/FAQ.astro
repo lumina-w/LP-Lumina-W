@@ -1,0 +1,121 @@
+---
+import Button from '@/components/ui/Button.astro';
+
+const faqs = [
+  {
+    question: '¿Cuánto cuesta desarrollar un software a medida?',
+    answer:
+      'Depende del alcance y la complejidad del proyecto. Trabajamos con presupuestos desde proyectos pequeños hasta plataformas completas. Lo primero es una conversación sin costo donde entendemos tu necesidad y te damos una estimación real.',
+  },
+  {
+    question: '¿Cuánto tiempo toma desarrollar un proyecto?',
+    answer:
+      'Un MVP básico puede estar listo en 6 a 12 semanas. Proyectos más complejos toman más tiempo. Siempre definimos un roadmap claro antes de empezar para que sepas exactamente qué esperar y cuándo.',
+  },
+  {
+    question: '¿Trabajan con empresas pequeñas o solo con grandes?',
+    answer:
+      'Trabajamos con empresas de todos los tamaños. Lo que importa no es el tamaño sino que tengas un problema real que el software pueda resolver. Si tienes ese problema, podemos construir la solución.',
+  },
+  {
+    question: '¿Qué pasa si el proyecto cambia durante el desarrollo?',
+    answer:
+      'Es normal que los proyectos evolucionen. Trabajamos con metodología ágil:  iteramos en ciclos cortos para adaptarnos a los cambios sin que eso descarrile el proyecto ni el presupuesto.',
+  },
+  {
+    question: '¿Qué es TerraCore y para quién es?',
+    answer:
+      'TerraCore es nuestro producto SaaS propio para el sector agroindustrial. Está diseñado para medianas empresas que gestionan inventario, usuarios y operaciones en Excel y necesitan una solución más robusta. Actualmente estamos en preventa con condiciones especiales para los primeros clientes.',
+  },
+  {
+    question: '¿El software que construyen es seguro?',
+    answer:
+      'Sí. La seguridad no es una capa que añadimos al final, está integrada desde la arquitectura. Aplicamos principios OWASP, desarrollo seguro y buenas prácticas desde la primera línea de código.',
+  },
+];
+---
+
+<section
+  id="faq"
+  aria-labelledby="faq-heading"
+  class="bg-page py-[var(--space-section)]"
+>
+  <div class="mx-auto max-w-3xl px-6">
+    <div class="mb-16 text-center">
+      <p
+        class="font-body text-brand mb-4 text-sm font-medium tracking-widest uppercase"
+      >
+        Preguntas frecuentes
+      </p>
+      <h2
+        id="faq-heading"
+        class="font-heading text-text-primary text-4xl leading-tight font-bold md:text-5xl"
+      >
+        Todo lo que necesitas<br />
+        <span class="text-brand">saber antes de escribirnos.</span>
+      </h2>
+      <p
+        class="font-body text-text-muted mx-auto mt-6 max-w-2xl text-base leading-relaxed"
+      >
+        Resolvemos dudas comunes sobre desarrollo de software a medida, SaaS B2B
+        y TerraCore para empresas que quieren dejar de operar en Excel y ganar
+        productividad.
+      </p>
+    </div>
+    <div class="flex flex-col gap-4" id="faq-list">
+      {
+        faqs.map((faq, index) => (
+          <div
+            class="faq-item hover:border-brand overflow-hidden rounded-lg border border-[var(--border-base)] transition-all duration-300"
+            data-index={index}
+          >
+            <button
+              type="button"
+              id={`faq-question-${index}`}
+              class="faq-trigger bg-card flex w-full cursor-pointer items-center justify-between gap-4 px-6 py-5 text-left transition-colors duration-200 hover:bg-[var(--bg-blur)]"
+              aria-expanded="false"
+              aria-controls={`faq-answer-${index}`}
+            >
+              <span class="font-heading text-text-primary text-base font-semibold">
+                {faq.question}
+              </span>
+              <span
+                class="faq-icon flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-[var(--border-base)] transition-transform duration-300"
+                aria-hidden="true"
+              >
+                <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+                  <path
+                    d="M2 4L5 7L8 4"
+                    stroke="#407bff"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                  />
+                </svg>
+              </span>
+            </button>
+            <div
+              id={`faq-answer-${index}`}
+              role="region"
+              aria-labelledby={`faq-question-${index}`}
+              class="faq-answer hidden overflow-hidden px-6 pb-5"
+            >
+              <p class="font-body text-text-muted text-sm leading-relaxed">
+                {faq.answer}
+              </p>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+    <div class="mt-12 text-center">
+      <p class="font-body text-text-muted mb-4 text-sm">
+        ¿No encontraste lo que buscabas?
+      </p>
+      <Button href="#contact" icon="send-form-white">Escríbenos</Button>
+    </div>
+  </div>
+</section>
+
+<script>
+  import '@/scripts/faq.ts';
+</script>

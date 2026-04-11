@@ -1,0 +1,59 @@
+@import 'tailwindcss';
+
+@theme {
+  --color-brand: #407bff;
+  --color-dark: #1b1f28;
+  --color-light: #dee9ff;
+  --color-page: #f0f4ff;
+  --color-card: #ffffff;
+  --color-text-primary: #1a1a2e;
+  --color-text-muted: #6b7280;
+  --color-accent-hover: #1a7fe0;
+  --color-border: #e2e8f0;
+
+  --font-heading: 'Poppins', sans-serif;
+  --font-body: 'Raleway', sans-serif;
+  --font-display: 'Poppins', sans-serif;
+
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+
+  --shadow-base: 0 4px 24px rgba(64, 123, 255, 0.08);
+}
+
+:root {
+  --text-muted: #6b7280;
+  --accent-link: #1e90ff;
+  --accent-hover: #1a7fe0;
+  --nav-blur: rgba(240, 244, 255, 0.85);
+  --bg-blur: rgba(64, 123, 255, 0.06);
+  --space-section: 96px;
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex cursor-pointer items-center gap-2 rounded-sm px-[14px] py-[12px] text-sm font-semibold tracking-wide text-white uppercase transition-all duration-300;
+    background-color: #1e90ff;
+  }
+  .btn-primary:hover {
+    background-color: #1a7fe0;
+    transform: translateX(4px);
+  }
+  .btn-ghost {
+    @apply inline-flex cursor-pointer items-center gap-2 rounded-lg border border-[var(--accent-link)] px-5 py-2.5 text-sm font-semibold tracking-wide text-[var(--accent-link)] uppercase transition-all duration-300 hover:bg-[var(--accent-link)] hover:text-white;
+  }
+  .nav-link {
+    @apply text-sm font-semibold tracking-wide text-[var(--text-muted)] uppercase transition-colors duration-200 hover:text-[var(--accent-link)];
+  }
+  .link {
+    @apply inline-block cursor-pointer text-sm font-semibold tracking-wide text-[var(--accent-link)] uppercase transition-all duration-300 hover:text-[var(--accent-hover)];
+  }
+  .link:hover {
+    transform: translateX(4px);
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}

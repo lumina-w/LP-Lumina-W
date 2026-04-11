@@ -1,0 +1,125 @@
+---
+import '@/styles/global.css';
+import NavBar from '@/components/ui/NavBar.astro';
+import Footer from '@/components/ui/Footer.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+}
+const {
+  title = 'Lúmina W | Software & Technology',
+  description = 'Creamos software. Los negocios lo rentan. Desarrollo a medida y SaaS B2B para empresas que necesitan dejar de operar en Excel.',
+  image = '/brand/og-image.png',
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, 'https://luminaw.co');
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="title" content={title} />
+    <meta name="description" content={description} />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href={canonicalURL} />
+    <link rel="alternate" href={canonicalURL} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={`https://luminaw.co${image}`} />
+    <meta
+      property="og:image:alt"
+      content="Lúmina W - Software a medida y SaaS B2B"
+    />
+    <meta property="og:locale" content="es_CO" />
+    <meta property="og:site_name" content="Lúmina W" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={`https://luminaw.co${image}`} />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="theme-color" content="#407bff" />
+    <link
+      rel="apple-touch-icon"
+      href={`${import.meta.env.BASE_URL}brand/logo.webp`}
+    />
+    <link rel="icon" href={`${import.meta.env.BASE_URL}brand/logo.ico`} />
+    <link
+      rel="icon"
+      type="image/webp"
+      href={`${import.meta.env.BASE_URL}brand/logo.webp`}
+    />
+    <meta
+      name="keywords"
+      content="desarrollo software, SaaS B2B, software a medida, TerraCore, gestión empresarial"
+    />
+    <meta name="author" content="Lúmina W" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Lúmina W",
+        "url": "https://luminaw.co",
+        "logo": "https://luminaw.co/brand/logo.webp",
+        "description": "Creamos software. Los negocios lo rentan. Desarrollo a medida y SaaS B2B para empresas que necesitan dejar de operar en Excel.",
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "telephone": "+57-3108283088",
+          "contactType": "customer service",
+          "url": "https://wa.me/573108283088"
+        },
+        "sameAs": [
+          "https://instagram.com/luminaw.co",
+          "https://linkedin.com/company/lumina-w"
+        ]
+      }
+    </script>
+  </head>
+  <body class="bg-dark text-light font-body">
+    <a
+      href="#main-content"
+      class="focus:bg-page focus:text-light sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:rounded-lg focus:px-4 focus:py-2"
+    >
+      Saltar al contenido
+    </a>
+    <NavBar />
+    <main id="main-content">
+      <slot />
+    </main>
+    <Footer />
+    <div
+      id="cursor-glow"
+      class="pointer-events-none fixed z-50 h-64 w-64 rounded-full opacity-0"
+      style="background: radial-gradient(circle, rgba(64,123,255,0.12) 0%, transparent 70%); transform: translate(-50%, -50%); transition: opacity 0.3s ease, left 0.08s ease, top 0.08s ease;"
+    >
+    </div>
+    <a
+      href="https://wa.me/573108283088"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Contactar por WhatsApp"
+      class="fixed right-6 bottom-6 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] shadow-lg transition-transform duration-200 hover:scale-110"
+    >
+      <img
+        src={`${import.meta.env.BASE_URL}icons/ui/whatsapp-white.svg`}
+        alt=""
+        aria-hidden="true"
+        class="h-9 w-9"
+      />
+    </a>
+    <script>
+      import '@/scripts/cursor.ts';
+    </script>
+    <script>
+      import '@/scripts/analytics.ts';
+    </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RBNC0VP6D3"
+    ></script>
+  </body>
+</html>

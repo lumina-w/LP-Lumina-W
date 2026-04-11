@@ -1,0 +1,123 @@
+---
+const modules = [
+  { name: 'Autenticación multiusuario.', icon: 'lock' },
+  { name: 'Gestión de inventario.', icon: 'layer' },
+  { name: 'Dashboard en tiempo real.', icon: 'chart' },
+  { name: 'Gestión de usuarios.', icon: 'users' },
+];
+---
+
+<section id="terracore" class="bg-page py-[var(--space-section)]">
+  <div class="mx-auto max-w-6xl px-6">
+    <div class="grid grid-cols-1 items-center gap-16 lg:grid-cols-2">
+      <div class="flex flex-col gap-8">
+        <div class="flex flex-col gap-4">
+          <div class="flex items-center gap-3">
+            <span
+              class="font-body text-brand text-xs font-semibold tracking-widest uppercase"
+            >
+              Producto estrella
+            </span>
+            <span
+              class="border-brand/20 font-body text-brand rounded-full border bg-[var(--bg-blur)] px-2 py-1 text-xs"
+            >
+              Preventa activa
+            </span>
+          </div>
+          <h2
+            class="font-heading text-text-primary text-4xl leading-tight font-bold md:text-5xl"
+          >
+            TerraCore
+          </h2>
+          <p class="font-body text-text-muted text-lg leading-relaxed">
+            El sistema de gestión que el sector agroindustrial necesitaba.
+            Construido para medianas empresas que necesitan dejar de operar en
+            Excel y empezar a tomar decisiones con datos reales.
+          </p>
+        </div>
+        <div class="flex flex-col gap-3">
+          <p
+            class="font-body text-text-primary text-sm font-semibold tracking-widest uppercase"
+          >
+            Módulos MVP
+          </p>
+          <div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
+            {
+              modules.map((module) => (
+                <div class="bg-card hover:border-brand flex items-center gap-3 rounded-md border border-[var(--border-base)] p-4 transition-all duration-300">
+                  <div class="flex h-8 w-8 shrink-0 items-center justify-center rounded-md bg-[var(--bg-blur)]">
+                    <img
+                      src={`/icons/isometrics/${module.icon}.webp`}
+                      alt="Icono de ${module.name.toLowerCase()} en TerraCore software de gestión agroindustrial"
+                      class="h-8 w-8"
+                    />
+                  </div>
+                  <span class="font-body text-text-primary text-sm">
+                    {module.name}
+                  </span>
+                </div>
+              ))
+            }
+          </div>
+        </div>
+        <div class="flex flex-col gap-3">
+          <a href="#contact" class="btn-primary w-fit">
+            Quiero ser de los primeros
+          </a>
+          <p class="font-body text-text-muted text-xs">
+            Estamos validando con los primeros clientes. Cupos limitados con
+            condiciones especiales.
+          </p>
+        </div>
+      </div>
+      <div class="relative flex items-center justify-center">
+        <div
+          class="bg-dark border-brand/20 shadow-base flex aspect-square w-full max-w-md items-center justify-center rounded-lg border p-8"
+        >
+          <div class="flex w-full flex-col gap-4">
+            <div class="flex items-center justify-between">
+              <span
+                class="font-body text-light/50 text-xs tracking-widest uppercase"
+                >TerraCore</span
+              >
+              <span class="bg-brand h-2 w-2 animate-pulse rounded-full"></span>
+            </div>
+            <div class="grid grid-cols-2 gap-3">
+              {
+                ['Inventario', 'Usuarios', 'Reportes', 'Empresas'].map(
+                  (item) => (
+                    <div class="bg-light/5 flex flex-col gap-2 rounded-md p-3">
+                      <div class="bg-brand/40 h-1 w-8 rounded-full" />
+                      <span class="font-body text-light/60 text-xs">
+                        {item}
+                      </span>
+                      <div class="bg-light/10 h-1 w-full rounded-full">
+                        <div
+                          class="bg-brand h-1 rounded-full"
+                          style={`width: ${Math.floor(Math.random() * 60 + 40)}%`}
+                        />
+                      </div>
+                    </div>
+                  )
+                )
+              }
+            </div>
+            <div class="flex flex-col gap-2">
+              {
+                [1, 2, 3].map(() => (
+                  <div class="bg-light/5 flex items-center gap-3 rounded-md p-2">
+                    <div class="bg-brand/60 h-2 w-2 shrink-0 rounded-full" />
+                    <div class="bg-light/10 h-1.5 flex-1 rounded-full" />
+                    <div class="bg-brand/30 h-1.5 w-8 rounded-full" />
+                  </div>
+                ))
+              }
+            </div>
+          </div>
+        </div>
+        <div class="bg-brand/5 absolute inset-0 -z-10 rounded-lg blur-3xl">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

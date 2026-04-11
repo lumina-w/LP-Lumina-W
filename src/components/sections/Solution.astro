@@ -1,0 +1,93 @@
+---
+import Link from '@/components/ui/Link.astro';
+
+const services = [
+  {
+    tag: 'Desarrollo a medida',
+    title: 'Software diseñado para tu operación',
+    description:
+      'No vendemos templates ni soluciones genéricas. Analizamos tu proceso, tu industria y tu equipo, y construimos exactamente lo que necesitas, con la arquitectura correcta desde el primer día.',
+    features: [
+      'Arquitectura escalable desde el inicio.',
+      'Seguridad integrada, no añadida después.',
+      'Código limpio y documentado.',
+      'Soporte y evolución continua.',
+    ],
+    icon: 'fit',
+  },
+  {
+    tag: 'Productos SaaS B2B',
+    title: 'Soluciones listas para tu industria',
+    description:
+      'Productos construidos con los mismos estándares del desarrollo a medida. Pagas por lo que usas, escalas cuando lo necesitas, sin inversión inicial en infraestructura.',
+    features: [
+      'Implementación rápida.',
+      'Actualizaciones automáticas.',
+      'Multi-empresa desde el inicio.',
+      'Precio por uso, no por proyecto.',
+    ],
+    icon: 'saas',
+  },
+];
+---
+
+<section id="services" class="bg-card py-[var(--space-section)]">
+  <div class="mx-auto max-w-6xl px-6">
+    <div class="mx-auto mb-16 max-w-2xl text-center">
+      <p
+        class="font-body text-brand mb-4 text-sm font-medium tracking-widest uppercase"
+      >
+        La solución
+      </p>
+      <h2
+        class="font-heading text-text-primary mb-6 text-4xl leading-tight font-bold md:text-5xl"
+      >
+        Lúmina W construye<br />
+        <span class="text-brand">software que dura.</span>
+      </h2>
+      <p class="font-body text-text-muted text-lg leading-relaxed">
+        No vendemos tecnología. Vendemos operaciones que funcionan sin que
+        tengas que pensar en ellas.
+      </p>
+    </div>
+    <div class="grid grid-cols-1 gap-8 md:grid-cols-2">
+      {
+        services.map((service) => (
+          <div class="bg-page shadow-base hover:border-brand flex flex-col gap-6 rounded-lg border border-[var(--border-base)] p-8 transition-all duration-300 hover:-translate-y-1">
+            <div class="flex items-center gap-3">
+              <div class="flex h-10 w-10 items-center justify-center">
+                <img
+                  src={`/icons/isometrics/${service.icon}.png`}
+                  alt="Icono de ${service.tag.toLowerCase()} en servicios de desarrollo de software"
+                  class="h-auto w-9"
+                />
+              </div>
+              <span class="font-body text-brand text-xs font-semibold tracking-widest uppercase">
+                {service.tag}
+              </span>
+            </div>
+            <div class="flex flex-col gap-3">
+              <h3 class="font-heading text-text-primary text-2xl font-bold">
+                {service.title}
+              </h3>
+              <p class="font-body text-text-muted text-base leading-relaxed">
+                {service.description}
+              </p>
+            </div>
+            <ul class="flex flex-col gap-3">
+              {service.features.map((feature) => (
+                <li class="flex items-center gap-3">
+                  <span class="bg-brand h-1.5 w-1.5 shrink-0 rounded-full" />
+                  <span class="font-body text-text-primary text-sm">
+                    {feature}
+                  </span>
+                </li>
+              ))}
+            </ul>
+            <Link href="#contact">Solicitar asesoría</Link>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

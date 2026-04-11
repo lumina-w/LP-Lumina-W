@@ -1,0 +1,79 @@
+---
+const problems = [
+  {
+    icon: 'clock',
+    title: 'Tiempo que no recuperas',
+    description:
+      'Procesos manuales que consumen horas que podrían invertirse en hacer crecer tu negocio.',
+  },
+  {
+    icon: 'chart',
+    title: 'Datos que no puedes leer',
+    description:
+      'Información dispersa en hojas de cálculo que nadie entiende y nadie mantiene actualizada.',
+  },
+  {
+    icon: 'eye-off',
+    title: 'Decisiones a ciegas',
+    description:
+      'Sin visibilidad en tiempo real, cada decisión es una apuesta. No una estrategia.',
+  },
+  {
+    icon: 'money',
+    title: 'Dinero que se va sin que lo veas',
+    description:
+      'Ineficiencias ocultas que se acumulan mes a mes sin que nadie las mida ni las corrija.',
+  },
+];
+---
+
+<section id="problem" class="bg-page py-[var(--space-section)]">
+  <div class="mx-auto max-w-6xl px-6">
+    <div class="mx-auto mb-16 max-w-2xl text-center">
+      <p
+        class="font-body text-brand mb-4 text-sm font-medium tracking-widest uppercase"
+      >
+        El problema
+      </p>
+      <h2
+        class="font-heading text-text-primary mb-6 text-4xl leading-tight font-bold md:text-5xl"
+      >
+        Tu empresa crece.<br />
+        <span class="text-brand">Tus herramientas, no.</span>
+      </h2>
+      <p class="font-body text-text-muted text-lg leading-relaxed">
+        Cada día que operas con procesos manuales y software genérico que no
+        entiende tu industria, estás perdiendo:
+      </p>
+    </div>
+    <div class="mb-16 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      {
+        problems.map((problem) => (
+          <div class="bg-card shadow-base flex flex-col gap-4 rounded-lg border border-[var(--border-base)] p-6 transition-all duration-300 hover:-translate-y-1">
+            <div class="flex items-center justify-center">
+              <img
+                src={`/icons/isometrics/${problem.icon}.svg`}
+                alt="Icono representando ${problem.title.toLowerCase()} en desarrollo de software personalizado"
+                class="h-auto w-16"
+              />
+              <h3 class="font-heading text-text-primary text-base font-semibold">
+                {problem.title}
+              </h3>
+            </div>
+            <p class="font-body text-text-muted text-sm leading-relaxed">
+              {problem.description}
+            </p>
+          </div>
+        ))
+      }
+    </div>
+    <div class="mx-auto max-w-2xl text-center">
+      <p class="font-body text-text-muted text-lg leading-relaxed">
+        No es un problema de disciplina.<br />
+        <span class="text-text-primary font-semibold"
+          >Es un problema de infraestructura.</span
+        >
+      </p>
+    </div>
+  </div>
+</section>

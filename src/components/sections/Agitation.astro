@@ -1,0 +1,30 @@
+---
+const points = [
+  'Un sistema que falla en producción detiene tu operación.',
+  'Uno que no escala te obliga a reconstruirlo en dos años.',
+  'Uno sin seguridad expone los datos de tu empresa y tus clientes.',
+];
+---
+
+<section class="bg-dark min-h-50dvh py-[var(--space-section)]">
+  <div class="mx-auto flex max-w-3xl flex-col gap-10 px-6 text-center">
+    <h2
+      class="font-heading text-light text-4xl leading-tight font-bold md:text-5xl"
+    >
+      El software mal construido<br />
+      <span class="text-brand">cuesta más que no tener software.</span>
+    </h2>
+    <div class="flex flex-col gap-6">
+      {
+        points.map((point) => (
+          <p class="font-body text-light/70 border-brand border-l-2 pl-6 text-left text-lg leading-relaxed">
+            {point}
+          </p>
+        ))
+      }
+    </div>
+    <p class="font-heading text-light/50 text-xl font-semibold">
+      La mayoría de las empresas lo descubren tarde.
+    </p>
+  </div>
+</section>

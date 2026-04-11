@@ -1,0 +1,166 @@
+---
+
+---
+
+<section id="contact" class="bg-dark h-100dvh py-[var(--space-section)]">
+  <div class="mx-auto max-w-6xl px-6">
+    <div class="grid grid-cols-1 items-start gap-16 lg:grid-cols-2">
+      <div class="flex flex-col gap-8">
+        <div class="flex flex-col gap-4">
+          <p
+            class="font-body text-brand text-sm font-medium tracking-widest uppercase"
+          >
+            Contacto
+          </p>
+          <h2
+            class="font-heading text-light text-4xl leading-tight font-bold md:text-5xl"
+          >
+            ¿Tienes un proyecto<br />
+            <span class="text-brand">en mente?</span>
+          </h2>
+          <p class="font-body text-light/60 text-lg leading-relaxed">
+            No necesitas tenerlo todo claro todavía. Cuéntanos dónde estás y
+            hacia dónde quieres ir.
+          </p>
+        </div>
+        <div class="flex flex-col gap-4">
+          <div class="flex items-center gap-4">
+            <div
+              class="bg-light/5 flex h-12 w-12 shrink-0 items-center justify-center rounded-md"
+            >
+              <img
+                src="/icons/ui/send-email-blue.svg"
+                alt="Icono de email para contactar Lúmina W desarrollo de software"
+                class="h-5 w-5"
+              />
+            </div>
+            <div class="flex flex-col">
+              <span
+                class="font-body text-light/40 text-xs tracking-widest uppercase"
+                >Email</span
+              >
+              <a
+                href="mailto:contact@luminaw.co"
+                class="font-body text-light hover:text-brand text-sm transition-colors duration-200"
+              >
+                contact@luminaw.co
+              </a>
+            </div>
+          </div>
+          <div class="flex items-center gap-4">
+            <div
+              class="bg-light/5 flex h-12 w-12 shrink-0 items-center justify-center rounded-md"
+            >
+              <img
+                src="/icons/ui/whatsapp.svg"
+                alt="Icono de WhatsApp para contactar Lúmina W desarrollo de software"
+                class="h-5 w-5"
+              />
+            </div>
+            <div class="flex flex-col">
+              <span
+                class="font-body text-light/40 text-xs tracking-widest uppercase"
+                >WhatsApp</span
+              >
+              <a
+                href="https://wa.me/573108283088"
+                target="_blank"
+                class="font-body text-light hover:text-brand text-sm transition-colors duration-200"
+              >
+                +57 3108283088
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="relative">
+        <form id="contact-form" class="flex flex-col gap-5">
+          <div class="flex flex-col gap-2">
+            <label
+              for="name"
+              class="font-body text-light/50 text-xs font-semibold tracking-widest uppercase"
+            >
+              Nombre
+            </label>
+            <input
+              id="name"
+              name="name"
+              type="text"
+              placeholder="Tu nombre"
+              required
+              class="bg-light/5 font-body text-light placeholder:text-light/30 focus:border-brand w-full cursor-pointer rounded-md border border-transparent px-4 py-3 text-sm transition-all duration-200 outline-none hover:scale-[1.01] focus:border"
+            />
+          </div>
+          <div class="flex flex-col gap-2">
+            <label
+              for="company"
+              class="font-body text-light/50 text-xs font-semibold tracking-widest uppercase"
+            >
+              Empresa
+            </label>
+            <input
+              id="company"
+              name="company"
+              type="text"
+              placeholder="Tu empresa"
+              class="bg-light/5 font-body text-light placeholder:text-light/30 focus:border-brand w-full cursor-pointer rounded-md border border-transparent px-4 py-3 text-sm transition-all duration-200 outline-none hover:scale-[1.01] focus:border"
+            />
+          </div>
+          <div class="flex flex-col gap-2">
+            <label
+              for="email"
+              class="font-body text-light/50 text-xs font-semibold tracking-widest uppercase"
+            >
+              Correo electrónico
+            </label>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              placeholder="tu@empresa.com"
+              required
+              class="bg-light/5 font-body text-light placeholder:text-light/30 focus:border-brand w-full cursor-pointer rounded-md border border-transparent px-4 py-3 text-sm transition-all duration-200 outline-none hover:scale-[1.01] focus:border"
+            />
+          </div>
+          <div class="flex flex-col gap-2">
+            <label
+              for="message"
+              class="font-body text-light/50 text-xs font-semibold tracking-widest uppercase"
+            >
+              ¿Qué necesitas?
+            </label>
+            <textarea
+              id="message"
+              name="message"
+              rows="4"
+              placeholder="Cuéntanos sobre tu proyecto o necesidad..."
+              required
+              class="bg-light/5 font-body text-light placeholder:text-light/30 focus:border-brand w-full cursor-pointer resize-none rounded-md border border-transparent px-4 py-3 text-sm transition-all duration-200 outline-none focus:border"
+            ></textarea>
+          </div>
+          <button
+            type="submit"
+            id="submit-btn"
+            class="btn-primary w-full justify-center"
+          >
+            Enviar mensaje
+          </button>
+        </form>
+        <div
+          id="form-success"
+          class="hidden flex-col items-center justify-center gap-4 py-16 text-center"
+        >
+          <img src="/icons/ui/done.svg" alt="" class="h-12 w-12" />
+          <p class="font-heading text-light text-xl font-bold">
+            ¡Mensaje enviado!
+          </p>
+          <p class="font-body text-light/40 text-sm">Te contactamos pronto.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import '@/scripts/contact.ts';
+</script>

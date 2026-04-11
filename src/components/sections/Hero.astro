@@ -1,0 +1,52 @@
+---
+import Button from '@/components/ui/Button.astro';
+import Link from '@/components/ui/Link.astro';
+---
+
+<section
+  class="bg-page relative flex min-h-screen items-center justify-center overflow-hidden px-6 py-24"
+  id="hero"
+>
+  <div class="absolute inset-0 z-0">
+    <div
+      class="from-page via-page absolute inset-0 bg-gradient-to-br to-[#e8effe]"
+    >
+    </div>
+    <div
+      class="absolute inset-0 opacity-40"
+      style="background-image: radial-gradient(circle, #407bff 1px, transparent 2px); background-size: 32px 32px;"
+    >
+    </div>
+    <div
+      class="from-page/0 to-page absolute inset-0 bg-gradient-to-b via-transparent"
+    >
+    </div>
+    <div
+      class="from-page to-page absolute inset-0 bg-gradient-to-r via-transparent"
+    >
+    </div>
+  </div>
+  <div
+    class="relative z-10 flex w-full max-w-3xl flex-col items-center gap-6 text-center"
+  >
+    <p
+      class="font-body text-brand text-sm font-medium tracking-widest uppercase"
+    >
+      Software & Technology
+    </p>
+    <h1
+      class="font-heading text-text-primary text-5xl leading-tight font-bold md:text-6xl lg:text-7xl"
+    >
+      Creamos software.<br />
+      <span class="text-brand">Los negocios lo rentan.</span>
+    </h1>
+    <p class="font-body text-text-muted max-w-lg text-lg leading-relaxed">
+      Tu operación tiene problemas que Excel no puede resolver.<br />
+      Nosotros sí.
+    </p>
+    <div class="flex items-center gap-10">
+      <Button href="#contact" icon="send-form-white">Agenda llamada</Button>
+      <Link href="#terracore">Ver TerraCore</Link>
+    </div>
+  </div>
+</section>

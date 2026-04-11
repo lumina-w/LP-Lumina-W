@@ -1,0 +1,119 @@
+---
+import Link from '@/components/ui/Link.astro';
+import Button from '@/components/ui/Button.astro';
+
+const BASE = import.meta.env.BASE_URL;
+const year = new Date().getFullYear();
+---
+
+<footer class="bg-dark border-t border-[var(--text-muted)] pt-16 pb-8">
+  <div class="mx-auto max-w-6xl px-6">
+    <div class="mb-16 grid grid-cols-2 gap-10 md:grid-cols-4">
+      <div class="flex flex-col gap-4">
+        <p
+          class="font-heading !text-light/60 text-sm font-semibold tracking-widest uppercase"
+        >
+          Empresa
+        </p>
+        <div class="flex flex-col gap-3">
+          <Link class="!text-xs" href="#hero">Inicio</Link>
+          <Link class="!text-xs" href="#terracore">TerraCore</Link>
+          <Link class="!text-xs" href="#contact">Contacto</Link>
+        </div>
+      </div>
+      <div class="flex flex-col gap-4">
+        <p
+          class="font-heading !text-light/60 text-sm font-semibold tracking-widest uppercase"
+        >
+          Servicios
+        </p>
+        <div class="flex flex-col gap-3">
+          <Link class="!text-xs" href="#services">Desarrollo a medida</Link>
+          <Link class="!text-xs" href="#services">SaaS B2B</Link>
+        </div>
+      </div>
+      <div class="flex flex-col gap-4">
+        <p
+          class="font-heading !text-light/60 text-sm font-semibold tracking-widest uppercase"
+        >
+          Legal
+        </p>
+        <div class="flex flex-col gap-3">
+          <Link class="!text-xs" href="/terms">Términos y condiciones</Link>
+          <Link class="!text-xs" href="/privacy">Política de privacidad</Link>
+          <Link class="!text-xs" href="/cookies">Política de cookies</Link>
+        </div>
+      </div>
+      <div class="flex flex-col gap-4">
+        <p
+          class="font-heading !text-light/60 text-sm font-semibold tracking-widest uppercase"
+        >
+          Síguenos
+        </p>
+        <div class="flex items-center gap-4">
+          <Link
+            href="https://instagram.com/luminaw.co"
+            target="_blank"
+            class="!text-sm"
+          >
+            <img
+              src={`${BASE}icons/ui/instagram.svg`}
+              alt="Instagram"
+              class="h-6 w-6"
+            />
+          </Link>
+          <Link
+            href="https://linkedin.com/company/lumina-w"
+            target="_blank"
+            class="!text-sm"
+          >
+            <img
+              src={`${BASE}icons/ui/linkedin.svg`}
+              alt="LinkedIn"
+              class="h-6 w-6"
+            />
+          </Link>
+          <Link
+            href="https://wa.me/573108283088"
+            target="_blank"
+            class="!text-sm"
+          >
+            <img
+              src={`${BASE}icons/ui/whatsapp.svg`}
+              alt="WhatsApp"
+              class="h-6 w-6"
+            />
+          </Link>
+        </div>
+        <div class="mt-2 flex flex-col gap-1">
+          <p class="font-body text-text-muted text-sm">
+            ¿Listo para tu proyecto?
+          </p>
+          <Link href="mailto:contact@luminaw.co" class="!lowercase">
+            contact@luminaw.co
+          </Link>
+        </div>
+      </div>
+    </div>
+    <!-- <div class="border-t border-[var(--text-muted)] py-12 flex flex-col items-center gap-4 text-center">
+      <p class="font-heading font-semibold text-lg !text-light/90">
+        Suscríbete a las novedades de Lúmina
+      </p>
+      <p class="font-body text-sm text-text-muted">
+        Nuevos servicios, guías técnicas y casos reales. Sin spam.
+      </p>
+      <form class="flex gap-3 w-full max-w-md mt-2">
+        <input 
+          type="email" 
+          placeholder="Tu correo electrónico"
+          class="flex-1 px-4 py-3 rounded-md border border-transparent bg-card font-body text-sm text-text-primary placeholder:text-text-muted outline-none transition-all duration-200 hover:scale-[1.02] focus:scale-[1] focus:border focus:border-brand focus:border-2 shadow-base cursor-pointer" />
+        <Button type="submit" icon="send-email-white">Suscribirme</Button>
+      </form>
+    </div> -->
+    <div class="flex flex-col items-center gap-2 pt-8 text-center">
+      <p class="font-body text-text-muted text-sm">
+        © Lúmina W {year}
+      </p>
+    </div>
+  </div>
+</footer>
