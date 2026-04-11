@@ -1,0 +1,111 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import Link from '@/components/ui/Link.astro';
+
+const privacy = [
+  {
+    id: 1,
+    title: 'Introducción.',
+    content: 'Lúmina W respeta tu privacidad y se compromete a proteger tus datos personales. Esta política explica cómo recopilamos, utilizamos y protegemos tu información cuando interactúas con nuestro sitio web, servicios y productos SaaS.',
+  },
+  {
+    id: 2,
+    title: 'Datos que recopilamos.',
+    items: [
+      'Llenas el formulario de contacto (nombre, email, empresa, mensaje).',
+      'Te registras en productos SaaS (email, nombre, datos de empresa).',
+      'Contratas servicios de desarrollo (información del proyecto, datos de contacto).',
+      'Te comunicas con nosotros por email, WhatsApp u otros canales.',
+      'Accedes a nuestro sitio (información técnica: IP, navegador, páginas visitadas).',
+    ],
+  },
+  {
+    id: 3,
+    title: 'Cómo usamos tus datos.',
+    items: [
+      'Responder consultas y proporcionar asesoría comercial.',
+      'Ejecutar y gestionar proyectos de desarrollo.',
+      'Administrar tu acceso a productos SaaS.',
+      'Enviar actualizaciones, soporte técnico y notificaciones contractuales.',
+      'Mejorar nuestros servicios y experiencia del usuario.',
+      'Cumplir obligaciones legales y fiscales.',
+    ],
+  },
+  {
+    id: 4,
+    title: 'Base legal para procesar tus datos.',
+    items: [
+      'Consentimiento: Cuando aceptas nuestros términos o completas un formulario.',
+      'Contrato: Necesarios para ejecutar servicios que has contratado.',
+      'Obligación legal: Como requiere la ley colombiana (Ley 1581 de 2012).',
+      'Interés legítimo: Para mejorar nuestros servicios de forma segura.',
+    ],
+  },
+  {
+    id: 5,
+    title: 'Almacenamiento y seguridad de datos.',
+    items: [
+      'Tus datos se guardan en servidores seguros ubicados en Centro América o Estados Unidos.',
+      'Utilizamos encriptación SSL/TLS para proteger datos en tránsito.',
+      'Implementamos controles de acceso y autenticación.',
+      'Realizamos auditorías de seguridad regulares.',
+    ],
+  },
+  {
+    id: 6,
+    title: 'Tus derechos.',
+    items: [
+      'Acceso: Solicitar qué datos tenemos sobre ti.',
+      'Rectificación: Corregir datos inexactos.',
+      'Supresión: Eliminar tus datos bajo ciertas circunstancias.',
+      'Oposición: Rechazar uso de datos para ciertos fines.',
+    ],
+  },
+  {
+    id: 7,
+    title: 'Contacto.',
+    content: 'Para preguntas sobre privacidad o para ejercer tus derechos: contact@luminaw.co.',
+  },
+];
+---
+
+<Layout
+  title="Política de Privacidad | Lúmina W"
+  description="Política de privacidad y protección de datos personales de Lúmina W."
+  bgClass="bg-page text-text-primary"
+>
+  <div class="max-w-3xl mx-auto px-6 py-24">
+    <div class="flex flex-col gap-4 mb-16">
+      <p class="font-body text-sm font-medium tracking-widest uppercase text-brand">Legal</p>
+      <h1 class="font-heading text-4xl font-bold text-text-primary">Política de Privacidad</h1>
+      <p class="font-body text-sm text-text-muted">Última actualización: abril 2026</p>
+    </div>
+
+    <div class="flex flex-col gap-10 font-body text-base text-text-primary leading-relaxed">
+      {privacy.map((item) => (
+        <div class="flex flex-col gap-3">
+          <h2 class="font-heading text-xl font-bold text-text-primary">
+            {item.id}. {item.title}
+          </h2>
+          {item.content && (
+            <p class="text-text-muted">{item.content}</p>
+          )}
+          {item.items && (
+            <ul class="flex flex-col gap-2 text-text-muted">
+              {item.items.map((listItem) => (
+                <li class="flex gap-3">
+                  <span class="text-brand shrink-0">•</span>
+                  <span>{listItem}</span>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+      ))}
+    </div>
+
+    <div class="mt-16 pt-8 border-t border-[var(--border-base)]">
+      <Link href="/">Volver al inicio</Link>
+    </div>
+  </div>
+</Layout>

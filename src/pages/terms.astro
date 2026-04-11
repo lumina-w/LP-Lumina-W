@@ -1,0 +1,82 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import Link from '@/components/ui/Link.astro';
+
+const terms = [
+  {
+    id: 1,
+    title: 'Aceptación de los términos.',
+    content: 'Al acceder y utilizar los servicios de Lúmina W, aceptas estos términos de uso. Te pedimos leerlos con atención, ya que establecen los términos básicos de nuestra relación contigo como usuario o cliente.',
+  },
+  {
+    id: 2,
+    title: 'Uso permitido.',
+    items: [
+      'Usar el sitio únicamente con fines personales o empresariales legítimos.',
+      'No alterar, modificar o dañar el contenido ni la infraestructura del sitio.',
+      'Respetar los derechos de autor y propiedad intelectual de nuestros contenidos.',
+    ],
+  },
+  {
+    id: 3,
+    title: 'Servicios.',
+    content: 'Lúmina W ofrece servicios de desarrollo de software a medida y productos SaaS B2B. Las condiciones específicas de cada servicio o producto se definen en contratos o acuerdos individuales con cada cliente.',
+  },
+  {
+    id: 4,
+    title: 'Propiedad intelectual.',
+    content: 'Todo el contenido de este sitio, textos, diseños, logos, código, es propiedad de Lúmina W y está protegido por las leyes de propiedad intelectual aplicables en Colombia.',
+  },
+  {
+    id: 5,
+    title: 'Limitación de responsabilidad.',
+    content: 'Lúmina W no se responsabiliza por interrupciones temporales del servicio, errores en la información publicada o el uso que hagas de ella. Buscamos ofrecer un servicio estable y de calidad, pero no podemos garantizar disponibilidad del 100%.',
+  },
+  {
+    id: 6,
+    title: 'Contacto.',
+    content: 'Si tienes preguntas sobre estos términos, escríbenos a contact@luminaw.co.',
+  },
+];
+---
+
+<Layout
+  title="Términos y Condiciones | Lúmina W"
+  description="Términos y condiciones de uso de Lúmina W."
+  bgClass="bg-page text-text-primary"
+>
+  <div class="max-w-3xl mx-auto px-6 py-24">
+    <div class="flex flex-col gap-4 mb-16">
+      <p class="font-body text-sm font-medium tracking-widest uppercase text-brand">Legal</p>
+      <h1 class="font-heading text-4xl font-bold text-text-primary">Términos y Condiciones</h1>
+      <p class="font-body text-sm text-text-muted">Última actualización: abril 2026</p>
+    </div>
+
+    <div class="flex flex-col gap-10 font-body text-base text-text-primary leading-relaxed">
+      {terms.map((term) => (
+        <div class="flex flex-col gap-3">
+          <h2 class="font-heading text-xl font-bold text-text-primary">
+            {term.id}. {term.title}
+          </h2>
+          {term.content && (
+            <p class="text-text-muted">{term.content}</p>
+          )}
+          {term.items && (
+            <ul class="flex flex-col gap-2 text-text-muted">
+              {term.items.map((item) => (
+                <li class="flex gap-3">
+                  <span class="text-brand shrink-0">•</span>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+      ))}
+    </div>
+
+    <div class="mt-16 pt-8 border-t border-[var(--border-base)]">
+      <Link href="/">Volver al inicio</Link>
+    </div>
+  </div>
+</Layout>

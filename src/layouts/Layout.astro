@@ -3,17 +3,20 @@ import '@/styles/global.css';
 import NavBar from '@/components/ui/NavBar.astro';
 import Footer from '@/components/ui/Footer.astro';
 import Loader from '@/components/ui/Loader.astro';
-
+import CookiesBanner from '@/components/ui/CookiesBanner.astro';
 
 interface Props {
   title?: string;
   description?: string;
   image?: string;
+  bgClass?: string;
 }
+
 const {
   title = 'Lúmina W | Software & Technology',
-  description = 'Creamos software. Los negocios lo rentan. Desarrollo a medida y SaaS B2B para empresas que necesitan dejar de operar en Excel.',
+  description = 'Creamos software. Los negocios lo rentan.',
   image = '/brand/og-image.png',
+  bgClass = 'bg-dark text-light'
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, 'https://luminaw.co');
@@ -83,7 +86,7 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://luminaw.co');
       }
     </script>
   </head>
-  <body class="bg-dark text-light font-body">
+  <body class={`${bgClass} font-body`}>
     <a
       href="#main-content"
       class="focus:bg-page focus:text-light sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:rounded-lg focus:px-4 focus:py-2"
@@ -96,6 +99,7 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://luminaw.co');
       <slot />
     </main>
     <Footer />
+    <CookiesBanner />
     <div
       id="cursor-glow"
       class="pointer-events-none fixed z-50 h-64 w-64 rounded-full opacity-0"
@@ -119,10 +123,5 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://luminaw.co');
     <script>
       import '@/scripts/cursor.ts';
     </script>
-    <script>
-      import '@/scripts/analytics.ts';
-    </script>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RBNC0VP6D3"
-    ></script>
   </body>
 </html>
