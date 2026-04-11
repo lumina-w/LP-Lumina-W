@@ -1,4 +1,4 @@
-# Lúmina W — Landing Page
+# Lúmina W | Landing Page
 
 ![Lúmina W](./public/mockup.png)
 
@@ -13,9 +13,9 @@ a software startup based in Medellín, Colombia.
 
 ## License
 
-MIT — you're welcome to use the code as reference.
+MIT. You're welcome to use the code as reference.
 Please don't copy the content, branding, or design.
 
 ---
 
-Made with 💙 by [Valentina Ramírez](https://luminaw.co)
+Made by [Valentina Ramírez](https://luminaw.co)
