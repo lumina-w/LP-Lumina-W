@@ -1,0 +1,20 @@
+---
+const BASE = import.meta.env.BASE_URL;
+---
+
+<div id="loader" class="fixed inset-0 z-[100] flex items-center justify-center bg-dark transition-opacity duration-500">
+  <div class="flex flex-col items-center gap-4">
+    <img 
+      src={`${BASE}brand/logo.webp`} 
+      alt="Lúmina W" 
+      class="h-12 w-auto animate-pulse"
+    />
+    <div class="w-32 h-0.5 bg-light/10 rounded-full overflow-hidden">
+      <div id="loader-bar" class="h-full bg-brand rounded-full w-0 transition-all duration-700"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+  import '@/scripts/loader.ts';
+</script>
