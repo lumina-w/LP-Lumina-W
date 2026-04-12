@@ -61,10 +61,15 @@ html {
 @layer utilities {
   .animate-on-scroll {
     opacity: 0;
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .animate-on-scroll.from-bottom {
     transform: translateY(24px);
-    transition:
-      opacity 0.6s ease,
-      transform 0.6s ease;
+  }
+
+  .animate-on-scroll.from-top {
+    transform: translateY(-24px);
   }
 
   .animate-on-scroll.visible {

@@ -1,0 +1,100 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import Link from '@/components/ui/Link.astro';
+
+const cookies = [
+  {
+    id: 1,
+    title: 'Qué son las cookies.',
+    content:
+      'Las cookies son pequeños archivos de texto que se almacenan en tu dispositivo cuando visitas un sitio web. Nos permiten recordar tus preferencias y entender cómo interactúas con nuestro sitio para mejorar tu experiencia.',
+  },
+  {
+    id: 2,
+    title: 'Cookies que utilizamos.',
+    items: [
+      'Cookies esenciales: Necesarias para el funcionamiento básico del sitio, como recordar tu preferencia sobre cookies.',
+      'Cookies de análisis: Usamos Google Analytics para entender cómo los visitantes usan el sitio (páginas visitadas, tiempo de sesión, origen del tráfico). Esta información es anónima y agregada.',
+    ],
+  },
+  {
+    id: 3,
+    title: 'Cookies de terceros.',
+    items: [
+      'Google Analytics (_ga, _gid, _gat): Miden el tráfico y comportamiento de usuarios. Puedes desactivarlas en tools.google.com/dlpage/gaoptout.',
+    ],
+  },
+  {
+    id: 4,
+    title: 'Base legal.',
+    content:
+      'El uso de cookies de análisis se realiza únicamente con tu consentimiento explícito, de acuerdo con la Ley 1581 de 2012 y el Decreto 1377 de 2013. Las cookies esenciales no requieren consentimiento porque son necesarias para el funcionamiento del sitio.',
+  },
+  {
+    id: 5,
+    title: 'Cómo gestionar tus cookies.',
+    items: [
+      'Puedes aceptar o rechazar las cookies de análisis desde el banner que aparece al visitar el sitio por primera vez.',
+      'Puedes eliminar las cookies existentes desde la configuración de tu navegador.',
+      'Puedes bloquear cookies de terceros directamente en tu navegador sin afectar las cookies esenciales.',
+    ],
+  },
+  {
+    id: 6,
+    title: 'Contacto.',
+    content:
+      'Si tienes preguntas sobre el uso de cookies en este sitio: contact@luminaw.co.',
+  },
+];
+---
+
+<Layout
+  title="Política de Cookies | Lúmina W"
+  description="Política de uso de cookies de Lúmina W. Conoce qué cookies usamos y cómo gestionarlas."
+  bgClass="bg-page text-text-primary"
+>
+  <div class="mx-auto max-w-3xl px-6 py-24">
+    <div class="mb-16 flex flex-col gap-4">
+      <p
+        class="font-body text-brand text-sm font-medium tracking-widest uppercase"
+      >
+        Legal
+      </p>
+      <h1 class="font-heading text-text-primary text-4xl font-bold">
+        Política de Cookies
+      </h1>
+      <p class="font-body text-text-muted text-sm">
+        Última actualización: abril 2026
+      </p>
+    </div>
+
+    <div
+      class="font-body text-text-primary flex flex-col gap-10 text-base leading-relaxed"
+    >
+      {
+        cookies.map((item) => (
+          <div class="flex flex-col gap-3">
+            <h2 class="font-heading text-text-primary text-xl font-bold">
+              {item.id}. {item.title}
+            </h2>
+            {item.content && <p class="text-text-muted">{item.content}</p>}
+            {item.items && (
+              <ul class="text-text-muted flex flex-col gap-2">
+                {item.items.map((listItem) => (
+                  <li class="flex gap-3">
+                    <span class="text-brand shrink-0">•</span>
+                    <span>{listItem}</span>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+        ))
+      }
+    </div>
+
+    <div class="mt-16 border-t border-[var(--border-base)] pt-8">
+      <Link href="/">Volver al inicio</Link>
+    </div>
+  </div>
+</Layout>
