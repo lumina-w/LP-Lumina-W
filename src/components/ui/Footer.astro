@@ -6,7 +6,7 @@ const BASE = import.meta.env.BASE_URL;
 const year = new Date().getFullYear();
 ---
 
-<footer class="bg-dark border-t border-[var(--text-muted)] pt-16 pb-8">
+<footer class="bg-dark border-t border-[var(--text-light)] pt-16 pb-8">
   <div class="mx-auto max-w-6xl px-6">
     <div class="mb-16 grid grid-cols-2 gap-10 md:grid-cols-4">
       <div class="flex flex-col gap-4">
@@ -86,7 +86,7 @@ const year = new Date().getFullYear();
           </Link>
         </div>
         <div class="mt-2 flex flex-col gap-1">
-          <p class="font-body text-text-muted text-sm">
+          <p class="font-body text-text-light text-sm">
             ¿Listo para tu proyecto?
           </p>
           <Link href="mailto:contact@luminaw.co" class="!lowercase">
@@ -95,23 +95,23 @@ const year = new Date().getFullYear();
         </div>
       </div>
     </div>
-    <!-- <div class="border-t border-[var(--text-muted)] py-12 flex flex-col items-center gap-4 text-center">
+    <!-- <div class="border-t border-[var(--text-light)] py-12 flex flex-col items-center gap-4 text-center">
       <p class="font-heading font-semibold text-lg !text-light/90">
         Suscríbete a las novedades de Lúmina
       </p>
-      <p class="font-body text-sm text-text-muted">
+      <p class="font-body text-sm text-text-light">
         Nuevos servicios, guías técnicas y casos reales. Sin spam.
       </p>
       <form class="flex gap-3 w-full max-w-md mt-2">
         <input 
           type="email" 
           placeholder="Tu correo electrónico"
-          class="flex-1 px-4 py-3 rounded-md border border-transparent bg-card font-body text-sm text-text-primary placeholder:text-text-muted outline-none transition-all duration-200 hover:scale-[1.02] focus:scale-[1] focus:border focus:border-brand focus:border-2 shadow-base cursor-pointer" />
+          class="flex-1 px-4 py-3 rounded-md border border-transparent bg-card font-body text-sm text-text-primary placeholder:text-text-light outline-none transition-all duration-200 hover:scale-[1.02] focus:scale-[1] focus:border focus:border-brand focus:border-2 shadow-base cursor-pointer" />
         <Button type="submit" icon="send-email-white">Suscribirme</Button>
       </form>
     </div> -->
     <div class="flex flex-col items-center gap-2 pt-8 text-center">
-      <p class="font-body text-text-muted text-sm">
+      <p class="font-body text-text-light text-sm">
         © Lúmina W {year}
       </p>
     </div>
