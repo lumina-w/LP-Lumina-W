@@ -1,4 +1,6 @@
-const triggers = document.querySelectorAll('.faq-trigger') as NodeListOf<HTMLElement>;
+const triggers = document.querySelectorAll(
+  '.faq-trigger'
+) as NodeListOf<HTMLElement>;
 
 triggers.forEach((trigger) => {
   trigger.addEventListener('click', () => {

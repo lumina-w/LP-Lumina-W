@@ -53,7 +53,9 @@
     transform: translateX(4px);
   }
   .faq-answer {
-    transition: max-height 0.3s ease, opacity 0.3s ease;
+    transition:
+      max-height 0.3s ease,
+      opacity 0.3s ease;
   }
   .faq-item {
     transition: height 0.3s ease;
