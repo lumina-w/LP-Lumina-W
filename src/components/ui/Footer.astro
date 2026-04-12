@@ -3,11 +3,28 @@ import Link from '@/components/ui/Link.astro';
 import Button from '@/components/ui/Button.astro';
 
 const BASE = import.meta.env.BASE_URL;
+const LOGO = `${BASE}brand/logo.webp`;
+const developer = {
+  logo: `${BASE}brand/logo-w-sm.png`,
+  portfolio: 'https://wavival.github.io/',
+};
 const year = new Date().getFullYear();
 ---
 
 <footer class="bg-dark border-t border-[var(--text-light)] pt-16 pb-8">
-  <div class="mx-auto max-w-6xl px-6">
+  <div class="mx-auto max-w-6xl px-6 flex-col md:flex-row flex gap-16">
+      <div class="flex flex-col gap-4">
+        <img src={LOGO} alt="Logo de Lúmina W" class="w-20" />
+        <p class="font-body text-light text-sm">
+          Creamos software. Los negocios lo rentan.
+        </p>
+        <div class="flex items-center gap-1">
+        <p class="font-body text-light text-xs">Desarrollado por: </p>
+          <Link href={developer.portfolio} target='_blank' class="!text-xs !lowercase !text-blue italic">
+          @wavival</Link
+        >
+        </div>
+      </div>
     <div class="mb-16 grid grid-cols-2 gap-10 md:grid-cols-4">
       <div class="flex flex-col gap-4">
         <p
@@ -86,12 +103,12 @@ const year = new Date().getFullYear();
           </Link>
         </div>
         <div class="mt-2 flex flex-col gap-1">
-          <p class="font-body text-text-light text-sm">
-            ¿Listo para tu proyecto?
-          </p>
+          <p class="font-body text-light text-sm">¿Listo para tu proyecto?</p>
           <Link href="mailto:contact@luminaw.co" class="!lowercase">
             contact@luminaw.co
           </Link>
+          </div>
+      
         </div>
       </div>
     </div>
@@ -111,7 +128,7 @@ const year = new Date().getFullYear();
       </form>
     </div> -->
     <div class="flex flex-col items-center gap-2 pt-8 text-center">
-      <p class="font-body text-text-light text-sm">
+      <p class="font-body text-light text-sm">
         © Lúmina W {year}
       </p>
     </div>

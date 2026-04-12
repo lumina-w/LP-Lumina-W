@@ -52,6 +52,12 @@
   .link:hover {
     transform: translateX(4px);
   }
+  .faq-answer {
+    transition: max-height 0.3s ease, opacity 0.3s ease;
+  }
+  .faq-item {
+    transition: height 0.3s ease;
+  }
 }
 
 html {
@@ -61,7 +67,9 @@ html {
 @layer utilities {
   .animate-on-scroll {
     opacity: 0;
-    transition: opacity 0.6s ease, transform 0.6s ease;
+    transition:
+      opacity 0.6s ease,
+      transform 0.6s ease;
   }
 
   .animate-on-scroll.from-bottom {

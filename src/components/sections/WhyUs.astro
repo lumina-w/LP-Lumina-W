@@ -1,4 +1,8 @@
 ---
+import Link from '@/components/ui/Link.astro';
+
+const PORTFOLIO = 'https://wavival.github.io/';
+
 const reasons = [
   {
     number: '01',
@@ -32,7 +36,7 @@ const reasons = [
 ---
 
 <section id="us" class="bg-card py-[var(--space-section)]">
-  <div class="animate-on-scroll mx-auto max-w-6xl px-6">
+  <div class="animate-on-scroll mx-auto max-w-6xl px-6 text-center">
     <div class="mx-auto mb-16 max-w-2xl text-center">
       <p
         class="font-body text-brand mb-4 text-sm font-medium tracking-widest uppercase"
@@ -65,5 +69,6 @@ const reasons = [
         ))
       }
     </div>
+    <Link href={PORTFOLIO} class="block !text-sm mt-8" target='_blank'>Saber más</Link>
   </div>
 </section>

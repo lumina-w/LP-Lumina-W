@@ -9,13 +9,13 @@ const observer = new IntersectionObserver(
         entry.target.classList.remove('from-top', 'from-bottom');
         entry.target.classList.add('visible');
       } else {
-  entry.target.classList.remove('visible');
-  if (scrollingDown) {
-    entry.target.classList.add('from-top');  
-  } else {
-    entry.target.classList.add('from-bottom');  
-  }
-}
+        entry.target.classList.remove('visible');
+        if (scrollingDown) {
+          entry.target.classList.add('from-top');
+        } else {
+          entry.target.classList.add('from-bottom');
+        }
+      }
     });
   },
   { threshold: 0.15 }
