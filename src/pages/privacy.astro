@@ -6,7 +6,8 @@ const privacy = [
   {
     id: 1,
     title: 'Introducción.',
-    content: 'Lúmina W respeta tu privacidad y se compromete a proteger tus datos personales. Esta política explica cómo recopilamos, utilizamos y protegemos tu información cuando interactúas con nuestro sitio web, servicios y productos SaaS.',
+    content:
+      'Lúmina W respeta tu privacidad y se compromete a proteger tus datos personales. Esta política explica cómo recopilamos, utilizamos y protegemos tu información cuando interactúas con nuestro sitio web, servicios y productos SaaS.',
   },
   {
     id: 2,
@@ -64,7 +65,8 @@ const privacy = [
   {
     id: 7,
     title: 'Contacto.',
-    content: 'Para preguntas sobre privacidad o para ejercer tus derechos: contact@luminaw.co.',
+    content:
+      'Para preguntas sobre privacidad o para ejercer tus derechos: contact@luminaw.co.',
   },
 ];
 ---
@@ -74,37 +76,47 @@ const privacy = [
   description="Política de privacidad y protección de datos personales de Lúmina W."
   bgClass="bg-page text-text-primary"
 >
-  <div class="max-w-3xl mx-auto px-6 py-24">
-    <div class="flex flex-col gap-4 mb-16">
-      <p class="font-body text-sm font-medium tracking-widest uppercase text-brand">Legal</p>
-      <h1 class="font-heading text-4xl font-bold text-text-primary">Política de Privacidad</h1>
-      <p class="font-body text-sm text-text-muted">Última actualización: abril 2026</p>
+  <div class="mx-auto max-w-3xl px-6 py-24 animate-on-scroll">
+    <div class="mb-16 flex flex-col gap-4">
+      <p
+        class="font-body text-brand text-sm font-medium tracking-widest uppercase"
+      >
+        Legal
+      </p>
+      <h1 class="font-heading text-text-primary text-4xl font-bold">
+        Política de Privacidad
+      </h1>
+      <p class="font-body text-text-muted text-sm">
+        Última actualización: abril 2026
+      </p>
     </div>
 
-    <div class="flex flex-col gap-10 font-body text-base text-text-primary leading-relaxed">
-      {privacy.map((item) => (
-        <div class="flex flex-col gap-3">
-          <h2 class="font-heading text-xl font-bold text-text-primary">
-            {item.id}. {item.title}
-          </h2>
-          {item.content && (
-            <p class="text-text-muted">{item.content}</p>
-          )}
-          {item.items && (
-            <ul class="flex flex-col gap-2 text-text-muted">
-              {item.items.map((listItem) => (
-                <li class="flex gap-3">
-                  <span class="text-brand shrink-0">•</span>
-                  <span>{listItem}</span>
-                </li>
-              ))}
-            </ul>
-          )}
-        </div>
-      ))}
+    <div
+      class="font-body text-text-primary flex flex-col gap-10 text-base leading-relaxed"
+    >
+      {
+        privacy.map((item) => (
+          <div class="flex flex-col gap-3">
+            <h2 class="font-heading text-text-primary text-xl font-bold">
+              {item.id}. {item.title}
+            </h2>
+            {item.content && <p class="text-text-muted">{item.content}</p>}
+            {item.items && (
+              <ul class="text-text-muted flex flex-col gap-2">
+                {item.items.map((listItem) => (
+                  <li class="flex gap-3">
+                    <span class="text-brand shrink-0">•</span>
+                    <span>{listItem}</span>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+        ))
+      }
     </div>
 
-    <div class="mt-16 pt-8 border-t border-[var(--border-base)]">
+    <div class="mt-16 border-t border-[var(--border-base)] pt-8">
       <Link href="/">Volver al inicio</Link>
     </div>
   </div>

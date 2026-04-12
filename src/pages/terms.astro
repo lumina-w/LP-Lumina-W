@@ -6,7 +6,8 @@ const terms = [
   {
     id: 1,
     title: 'Aceptación de los términos.',
-    content: 'Al acceder y utilizar los servicios de Lúmina W, aceptas estos términos de uso. Te pedimos leerlos con atención, ya que establecen los términos básicos de nuestra relación contigo como usuario o cliente.',
+    content:
+      'Al acceder y utilizar los servicios de Lúmina W, aceptas estos términos de uso. Te pedimos leerlos con atención, ya que establecen los términos básicos de nuestra relación contigo como usuario o cliente.',
   },
   {
     id: 2,
@@ -20,22 +21,26 @@ const terms = [
   {
     id: 3,
     title: 'Servicios.',
-    content: 'Lúmina W ofrece servicios de desarrollo de software a medida y productos SaaS B2B. Las condiciones específicas de cada servicio o producto se definen en contratos o acuerdos individuales con cada cliente.',
+    content:
+      'Lúmina W ofrece servicios de desarrollo de software a medida y productos SaaS B2B. Las condiciones específicas de cada servicio o producto se definen en contratos o acuerdos individuales con cada cliente.',
   },
   {
     id: 4,
     title: 'Propiedad intelectual.',
-    content: 'Todo el contenido de este sitio, textos, diseños, logos, código, es propiedad de Lúmina W y está protegido por las leyes de propiedad intelectual aplicables en Colombia.',
+    content:
+      'Todo el contenido de este sitio, textos, diseños, logos, código, es propiedad de Lúmina W y está protegido por las leyes de propiedad intelectual aplicables en Colombia.',
   },
   {
     id: 5,
     title: 'Limitación de responsabilidad.',
-    content: 'Lúmina W no se responsabiliza por interrupciones temporales del servicio, errores en la información publicada o el uso que hagas de ella. Buscamos ofrecer un servicio estable y de calidad, pero no podemos garantizar disponibilidad del 100%.',
+    content:
+      'Lúmina W no se responsabiliza por interrupciones temporales del servicio, errores en la información publicada o el uso que hagas de ella. Buscamos ofrecer un servicio estable y de calidad, pero no podemos garantizar disponibilidad del 100%.',
   },
   {
     id: 6,
     title: 'Contacto.',
-    content: 'Si tienes preguntas sobre estos términos, escríbenos a contact@luminaw.co.',
+    content:
+      'Si tienes preguntas sobre estos términos, escríbenos a contact@luminaw.co.',
   },
 ];
 ---
@@ -45,37 +50,47 @@ const terms = [
   description="Términos y condiciones de uso de Lúmina W."
   bgClass="bg-page text-text-primary"
 >
-  <div class="max-w-3xl mx-auto px-6 py-24">
-    <div class="flex flex-col gap-4 mb-16">
-      <p class="font-body text-sm font-medium tracking-widest uppercase text-brand">Legal</p>
-      <h1 class="font-heading text-4xl font-bold text-text-primary">Términos y Condiciones</h1>
-      <p class="font-body text-sm text-text-muted">Última actualización: abril 2026</p>
+  <div class="mx-auto max-w-3xl px-6 py-24 animate-on-scroll">
+    <div class="mb-16 flex flex-col gap-4">
+      <p
+        class="font-body text-brand text-sm font-medium tracking-widest uppercase"
+      >
+        Legal
+      </p>
+      <h1 class="font-heading text-text-primary text-4xl font-bold">
+        Términos y Condiciones
+      </h1>
+      <p class="font-body text-text-muted text-sm">
+        Última actualización: abril 2026
+      </p>
     </div>
 
-    <div class="flex flex-col gap-10 font-body text-base text-text-primary leading-relaxed">
-      {terms.map((term) => (
-        <div class="flex flex-col gap-3">
-          <h2 class="font-heading text-xl font-bold text-text-primary">
-            {term.id}. {term.title}
-          </h2>
-          {term.content && (
-            <p class="text-text-muted">{term.content}</p>
-          )}
-          {term.items && (
-            <ul class="flex flex-col gap-2 text-text-muted">
-              {term.items.map((item) => (
-                <li class="flex gap-3">
-                  <span class="text-brand shrink-0">•</span>
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-          )}
-        </div>
-      ))}
+    <div
+      class="font-body text-text-primary flex flex-col gap-10 text-base leading-relaxed"
+    >
+      {
+        terms.map((term) => (
+          <div class="flex flex-col gap-3">
+            <h2 class="font-heading text-text-primary text-xl font-bold">
+              {term.id}. {term.title}
+            </h2>
+            {term.content && <p class="text-text-muted">{term.content}</p>}
+            {term.items && (
+              <ul class="text-text-muted flex flex-col gap-2">
+                {term.items.map((item) => (
+                  <li class="flex gap-3">
+                    <span class="text-brand shrink-0">•</span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+        ))
+      }
     </div>
 
-    <div class="mt-16 pt-8 border-t border-[var(--border-base)]">
+    <div class="mt-16 border-t border-[var(--border-base)] pt-8">
       <Link href="/">Volver al inicio</Link>
     </div>
   </div>

@@ -16,7 +16,7 @@ const {
   title = 'Lúmina W | Software & Technology',
   description = 'Creamos software. Los negocios lo rentan.',
   image = '/brand/og-image.png',
-  bgClass = 'bg-dark text-light'
+  bgClass = 'bg-dark text-light',
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, 'https://luminaw.co');
@@ -122,6 +122,9 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://luminaw.co');
     </a>
     <script>
       import '@/scripts/cursor.ts';
+    </script>
+    <script>
+      import '@/scripts/scrollAnimations.ts';
     </script>
   </body>
 </html>
