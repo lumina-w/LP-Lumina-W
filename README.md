@@ -18,4 +18,4 @@ Please don't copy the content, branding, or design.
 
 ---
 
-Made by [Valentina Ramírez](https://luminaw.co)
+Made by [Valentina Ramírez](https://wavival.dev)
