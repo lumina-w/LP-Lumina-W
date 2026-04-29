@@ -7,9 +7,9 @@ const modules = [
 ];
 ---
 
-<section id="terracore" class="bg-page py-[var(--space-section)]">
+<section id="terracore" class="bg-page py-(--space-section)">
   <div class="animate-on-scroll mx-auto max-w-6xl px-6">
-    <div class="grid grid-cols-1 items-center gap-16 lg:grid-cols-2">
+    <div class="grid grid-cols-1 items-center gap-16">
       <div class="flex flex-col gap-8">
         <div class="flex flex-col gap-4">
           <div class="flex items-center gap-3">
@@ -35,6 +35,19 @@ const modules = [
             Excel y empezar a tomar decisiones con datos reales.
           </p>
         </div>
+        <div class="relative flex items-center justify-center">
+        <section class="hero-video">
+  <video
+    src="/videos/terracore.mp4"
+    autoplay
+    muted
+    loop
+    playsinline
+    preload="metadata"
+    poster="/images/preview.png"
+  ></video>
+</section>
+      </div>
         <div class="flex flex-col gap-3">
           <p
             class="font-body text-text-primary text-sm font-semibold tracking-widest uppercase"
@@ -44,8 +57,8 @@ const modules = [
           <div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
             {
               modules.map((module) => (
-                <div class="bg-card hover:border-brand flex items-center gap-3 rounded-md border border-[var(--border-base)] p-4 transition-all duration-300">
-                  <div class="flex h-8 w-8 shrink-0 items-center justify-center rounded-md bg-[var(--bg-blur)]">
+                <div class="bg-card hover:border-brand flex items-center gap-3 rounded-md border border-(--border-base)] p-4 transition-all duration-300">
+                  <div class="flex h-8 w-8 shrink-0 items-center justify-center rounded-md bg-(--bg-blur)">
                     <img
                       src={`/icons/isometrics/${module.icon}.webp`}
                       alt="Icono de ${module.name.toLowerCase()} en TerraCore software de gestión agroindustrial"
@@ -70,19 +83,7 @@ const modules = [
           </p>
         </div>
       </div>
-      <div class="relative flex items-center justify-center">
-        <section class="hero-video border-lg">
-  <video
-    src="/videos/terracore.mp4"
-    autoplay
-    muted
-    loop
-    playsinline
-    preload="metadata"
-    poster="/images/preview.png"
-  ></video>
-</section>
-      </div>
+      
     </div>
   </div>
 </section>
