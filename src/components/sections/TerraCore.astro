@@ -71,52 +71,17 @@ const modules = [
         </div>
       </div>
       <div class="relative flex items-center justify-center">
-        <div
-          class="bg-dark border-brand/20 shadow-base flex aspect-square w-full max-w-md items-center justify-center rounded-lg border p-8"
-        >
-          <div class="flex w-full flex-col gap-4">
-            <div class="flex items-center justify-between">
-              <span
-                class="font-body text-light/50 text-xs tracking-widest uppercase"
-                >TerraCore</span
-              >
-              <span class="bg-brand h-2 w-2 animate-pulse rounded-full"></span>
-            </div>
-            <div class="grid grid-cols-2 gap-3">
-              {
-                ['Inventario', 'Usuarios', 'Reportes', 'Empresas'].map(
-                  (item) => (
-                    <div class="bg-light/5 flex flex-col gap-2 rounded-md p-3">
-                      <div class="bg-brand/40 h-1 w-8 rounded-full" />
-                      <span class="font-body text-light/60 text-xs">
-                        {item}
-                      </span>
-                      <div class="bg-light/10 h-1 w-full rounded-full">
-                        <div
-                          class="bg-brand h-1 rounded-full"
-                          style={`width: ${Math.floor(Math.random() * 60 + 40)}%`}
-                        />
-                      </div>
-                    </div>
-                  )
-                )
-              }
-            </div>
-            <div class="flex flex-col gap-2">
-              {
-                [1, 2, 3].map(() => (
-                  <div class="bg-light/5 flex items-center gap-3 rounded-md p-2">
-                    <div class="bg-brand/60 h-2 w-2 shrink-0 rounded-full" />
-                    <div class="bg-light/10 h-1.5 flex-1 rounded-full" />
-                    <div class="bg-brand/30 h-1.5 w-8 rounded-full" />
-                  </div>
-                ))
-              }
-            </div>
-          </div>
-        </div>
-        <div class="bg-brand/5 absolute inset-0 -z-10 rounded-lg blur-3xl">
-        </div>
+        <section class="hero-video">
+  <video
+    src="/videos/terracore.mp4"
+    autoplay
+    muted
+    loop
+    playsinline
+    preload="metadata"
+    poster="/images/preview.png"
+  ></video>
+</section>
       </div>
     </div>
   </div>
