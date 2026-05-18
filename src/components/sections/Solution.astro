@@ -1,5 +1,5 @@
 ---
-import Link from '@/components/ui/Link.astro';
+import Icon from '@/components/ui/Icon.astro';
 
 const services = [
   {
@@ -13,7 +13,8 @@ const services = [
       'Código limpio y documentado.',
       'Soporte y evolución continua.',
     ],
-    icon: 'fit',
+    icon: 'custom',
+    inverse: false,
   },
   {
     tag: 'Productos SaaS B2B',
@@ -27,64 +28,47 @@ const services = [
       'Precio por uso, no por proyecto.',
     ],
     icon: 'saas',
+    inverse: true,
   },
 ];
 ---
 
-<section id="services" class="bg-card py-[var(--space-section)]">
-  <div class="animate-on-scroll mx-auto max-w-6xl px-6">
-    <div class="mx-auto mb-16 max-w-2xl text-center">
-      <p
-        class="font-body text-brand mb-4 text-sm font-medium tracking-widest uppercase"
-      >
-        La solución
-      </p>
-      <h2
-        class="font-heading text-text-primary mb-6 text-4xl leading-tight font-bold md:text-5xl"
-      >
-        Lúmina W construye<br />
-        <span class="text-brand">software que dura.</span>
-      </h2>
-      <p class="font-body text-text-muted text-lg leading-relaxed">
+<section class="section" id="services">
+  <div class="container animate-on-scroll">
+    <div class="s-head">
+      <div>
+        <div class="eyebrow">La solución</div>
+        <h2>Lúmina W construye software que dura.</h2>
+      </div>
+      <p class="lead">
         No vendemos tecnología. Vendemos operaciones que funcionan sin que
         tengas que pensar en ellas.
+        <br /><br />
+        Elige tu camino:
+        <strong>desarrollo a medida</strong> o
+        <strong>SaaS especializado</strong>.
       </p>
+      <div class="ghost-num" aria-hidden="true">03</div>
     </div>
-    <div class="grid grid-cols-1 gap-8 md:grid-cols-2">
+
+    <div class="services">
       {
-        services.map((service) => (
-          <div class="bg-page shadow-base hover:border-brand flex flex-col gap-6 rounded-lg border border-[var(--border-base)] p-8 transition-all duration-300 hover:-translate-y-1">
-            <div class="flex items-center gap-3">
-              <div class="flex h-10 w-10 items-center justify-center">
-                <img
-                  src={`/icons/isometrics/${service.icon}.png`}
-                  alt="Icono de ${service.tag.toLowerCase()} en servicios de desarrollo de software"
-                  class="h-auto w-9"
-                />
+        services.map((s) => (
+          <div class={`service ${s.inverse ? 'service--inverse' : ''}`}>
+            <div class="service__head">
+              <div class="service__tag">{s.tag}</div>
+              <div class="service__icon">
+                <Icon name={s.icon} size={32} stroke={1.5} />
               </div>
-              <span class="font-body text-brand text-xs font-semibold tracking-widest uppercase">
-                {service.tag}
-              </span>
             </div>
-            <div class="flex flex-col gap-3">
-              <h3 class="font-heading text-text-primary text-2xl font-bold">
-                {service.title}
-              </h3>
-              <p class="font-body text-text-muted text-base leading-relaxed">
-                {service.description}
-              </p>
-            </div>
-            <ul class="flex flex-col gap-3">
-              {service.features.map((feature) => (
-                <li class="flex items-center gap-3">
-                  <span class="bg-brand h-1.5 w-1.5 shrink-0 rounded-full" />
-                  <span class="font-body text-text-primary text-sm">
-                    {feature}
-                  </span>
-                </li>
+            <h3>{s.title}</h3>
+            <p>{s.description}</p>
+            <ul class="service__list">
+              {s.features.map((f) => (
+                <li>{f}</li>
               ))}
             </ul>
-            <Link href="#contact">Solicitar asesoría</Link>
+            <a class="service__cta" href="#contact">Solicitar asesoría</a>
           </div>
         ))
       }

@@ -1,94 +1,125 @@
 ---
+import Icon from '@/components/ui/Icon.astro';
+
 const modules = [
-  { name: 'Control de animales.', icon: 'layer' },
-  { name: 'Producción en tiempo real.', icon: 'chart' },
-  { name: 'Control de insumos.', icon: 'layer' },
-  { name: 'Dashboard claro y centralizado.', icon: 'chart' },
-  { name: 'Salud animal.', icon: 'layer' },
-  { name: 'Control básico de costos.', icon: 'chart' },
+  'Control de animales.',
+  'Producción en tiempo real.',
+  'Control de insumos.',
+  'Dashboard claro y centralizado.',
+  'Salud animal.',
+  'Control básico de costos.',
+];
+
+const dashFeatures = [
+  { icon: 'wifi-off', title: 'Funciona offline', tag: 'sync auto' },
+  { icon: 'calendar', title: 'Primera semana', tag: 'sin consultores' },
+  { icon: 'users', title: 'Varios roles', tag: 'admin · ops · colab' },
+  { icon: 'chart', title: 'Datos reales', tag: 'costo por kg' },
+  { icon: 'bell', title: 'Nada se te pasa', tag: 'alertas activas' },
+  { icon: 'globe', title: 'En español', tag: 'para el campo' },
 ];
 ---
 
-<section id="terracore" class="bg-page py-(--space-section)">
-  <div class="animate-on-scroll mx-auto max-w-6xl px-6">
-    <div class="grid grid-cols-1 items-center gap-16">
-      <div class="flex flex-col gap-8">
-        <div class="flex flex-col gap-4">
-          <div class="flex items-center gap-3">
-            <span
-              class="font-body text-brand text-xs font-semibold tracking-widest uppercase"
-            >
-              Producto estrella
-            </span>
-            <span
-              class="border-brand/20 font-body text-brand rounded-full border bg-[var(--bg-blur)] px-2 py-1 text-xs"
-            >
-              Preventa activa
-            </span>
-          </div>
-          <h2
-            class="font-heading text-text-primary text-4xl leading-tight font-bold md:text-5xl"
+<section class="section terracore" id="terracore">
+  <div class="container animate-on-scroll">
+    <div class="terracore__grid">
+      <div class="terracore__copy">
+        <div class="ghost-num" aria-hidden="true">05</div>
+        <div class="terracore__tags">
+          <span class="terracore__tag">Producto estrella</span>
+          <span class="terracore__tag terracore__tag--live">
+            <span></span>Preventa activa
+          </span>
+        </div>
+        <h2>TerraCore</h2>
+        <p class="terracore__lead">
+          Controla producción, costos y animales en un solo lugar. Deja de
+          depender de Excel y empieza a tomar decisiones con datos reales.
+        </p>
+        <div class="terracore__modules">
+          <div class="terracore__modules-head">Módulos MVP</div>
+          <ul>
+            {modules.map((m) => <li>{m}</li>)}
+          </ul>
+        </div>
+        <div class="terracore__actions">
+          <a
+            class="btn-primary"
+            href="https://terracoreapp.co"
+            target="_blank"
+            rel="noopener noreferrer"
           >
-            TerraCore
-          </h2>
-          <p class="font-body text-text-muted text-lg leading-relaxed">
-            Controla producción, costos y animales en un solo lugar.
-
-Deja de depender de Excel y empieza a tomar decisiones con datos reales.
-          </p>
-        </div>
-
-        <div class="relative flex items-center justify-center">
-          <section class="hero-video">
-            <video
-              src="/videos/terracore.mp4"
-              autoplay
-              muted
-              loop
-              playsinline
-              preload="metadata"
-              poster="/images/preview.png"
-              class="rounded-md border border-(--border-base)]"
-            ></video>
-          </section>
-        </div>
-
-        <div class="flex flex-col gap-3">
-          <p
-            class="font-body text-text-primary text-sm font-semibold tracking-widest uppercase"
-          >
-            Módulos MVP
-          </p>
-          <div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
-            {
-              modules.map((module) => (
-                <div class="bg-card hover:border-brand flex items-center gap-3 rounded-md border border-(--border-base)] p-4 transition-all duration-300">
-                  <div class="flex h-8 w-8 shrink-0 items-center justify-center rounded-md bg-(--bg-blur)">
-                    <img
-                      src={`/icons/isometrics/${module.icon}.webp`}
-                      alt="Icono de ${module.name.toLowerCase()} en TerraCore software de gestión agroindustrial"
-                      class="h-8 w-8"
-                    />
-                  </div>
-                  <span class="font-body text-text-primary text-sm">
-                    {module.name}
-                  </span>
-                </div>
-              ))
-            }
-          </div>
-        </div>
-
-        <div class="flex flex-col gap-3">
-          <a href="https://www.terracore.com.co" target="_blank" class="btn-primary w-fit">
             Quiero probar TerraCore
           </a>
-          <p class="font-body text-text-muted text-xs">
-            Estamos validando con los primeros clientes. Cupos limitados con
-            condiciones especiales.
-          </p>
+        </div>
+        <p class="terracore__note">
+          Estamos validando con los primeros clientes. Cupos limitados con
+          condiciones especiales.
+        </p>
+      </div>
+
+      <div class="terracore__visual" aria-hidden="true">
+        <div class="tc-dash">
+          <div class="tc-dash__bar">
+            <div class="tc-dash__bar-l">
+              <span></span><strong>TerraCore</strong> · Campo Inteligente
+            </div>
+            <div>2026</div>
+          </div>
+          <div class="tc-dash__body">
+            <div class="tc-dash__kpis">
+              <div class="tc-dash__kpi">
+                <div class="tc-dash__kpi-label">Módulos</div>
+                <div class="tc-dash__kpi-val">6</div>
+                <div class="tc-dash__kpi-trend">listos en MVP</div>
+              </div>
+              <div class="tc-dash__kpi">
+                <div class="tc-dash__kpi-label">Tu información</div>
+                <div class="tc-dash__kpi-val">100%</div>
+                <div class="tc-dash__kpi-trend">privada</div>
+              </div>
+              <div class="tc-dash__kpi">
+                <div class="tc-dash__kpi-label">Siempre accesible</div>
+                <div class="tc-dash__kpi-val">24/7</div>
+                <div class="tc-dash__kpi-trend">multi-dispositivo</div>
+              </div>
+            </div>
+            <div class="tc-dash__feats">
+              <div class="tc-dash__feats-head">
+                <span>Características Principales</span>
+                <span>06 / 06</span>
+              </div>
+              <div class="tc-dash__feats-grid">
+                {
+                  dashFeatures.map((f) => (
+                    <div class="tc-dash__feat">
+                      <div class="tc-dash__feat-icon">
+                        <Icon name={f.icon} size={16} stroke={1.5} />
+                      </div>
+                      <div class="tc-dash__feat-body">
+                        <div class="tc-dash__feat-title">{f.title}</div>
+                        <div class="tc-dash__feat-tag">{f.tag}</div>
+                      </div>
+                    </div>
+                  ))
+                }
+              </div>
+            </div>
+          </div>
         </div>
       </div>
+    </div>
+
+    <div class="terracore__video" aria-hidden="true">
+      <video
+        src="/videos/terracore.mp4"
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="metadata"
+        poster="/images/preview.png"
+        aria-label="Demostración de TerraCore"></video>
     </div>
   </div>
 </section>

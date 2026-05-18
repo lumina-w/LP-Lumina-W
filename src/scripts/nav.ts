@@ -1,71 +1,71 @@
-const root = document.documentElement;
-const KEY = 'theme';
+const nav = document.getElementById('nav');
+const burger = document.getElementById('nav-burger');
+const mobile = document.getElementById('nav-mobile');
+const groups = document.querySelectorAll<HTMLElement>('[data-nav-group]');
 
-function applyTheme(theme: string) {
-  const isDark = theme === 'dark';
-  root.classList.toggle('dark', isDark);
-  document.getElementById('sun-desktop')?.classList.toggle('hidden', !isDark);
-  document.getElementById('moon-desktop')?.classList.toggle('hidden', isDark);
-  document.getElementById('sun-mobile')?.classList.toggle('hidden', !isDark);
-  document.getElementById('moon-mobile')?.classList.toggle('hidden', isDark);
-}
+const onScroll = () => {
+  if (!nav) return;
+  if (window.scrollY > 8) nav.classList.add('scrolled');
+  else nav.classList.remove('scrolled');
+};
+onScroll();
+window.addEventListener('scroll', onScroll, { passive: true });
 
-const saved = localStorage.getItem(KEY);
-const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-applyTheme(saved ?? (prefersDark ? 'dark' : 'light'));
+const closeMobile = () => {
+  mobile?.classList.remove('open');
+  burger?.setAttribute('aria-expanded', 'false');
+  mobile?.setAttribute('aria-hidden', 'true');
+};
+const openMobile = () => {
+  mobile?.classList.add('open');
+  burger?.setAttribute('aria-expanded', 'true');
+  mobile?.setAttribute('aria-hidden', 'false');
+};
 
-['theme-toggle-desktop', 'theme-toggle-mobile'].forEach((id) => {
-  document.getElementById(id)?.addEventListener('click', () => {
-    const isDark = root.classList.contains('dark');
-    const next = isDark ? 'light' : 'dark';
-    localStorage.setItem(KEY, next);
-    applyTheme(next);
+burger?.addEventListener('click', () => {
+  if (mobile?.classList.contains('open')) closeMobile();
+  else openMobile();
+});
+mobile?.querySelectorAll('a').forEach((a) => {
+  a.addEventListener('click', closeMobile);
+});
+
+const closeAllGroups = (except?: HTMLElement) => {
+  groups.forEach((g) => {
+    if (g === except) return;
+    g.classList.remove('open');
+    g.querySelector('.nav__group-btn')?.setAttribute('aria-expanded', 'false');
+  });
+};
+
+groups.forEach((group) => {
+  const btn = group.querySelector<HTMLButtonElement>('.nav__group-btn');
+  btn?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const isOpen = group.classList.contains('open');
+    closeAllGroups();
+    if (!isOpen) {
+      group.classList.add('open');
+      btn.setAttribute('aria-expanded', 'true');
+    }
+  });
+  group.querySelectorAll('a').forEach((a) => {
+    a.addEventListener('click', () => closeAllGroups());
   });
 });
 
-const btn = document.getElementById('menu-btn');
-const menu = document.getElementById('mobile-menu');
-const iconOpen = document.getElementById('icon-open');
-const iconClose = document.getElementById('icon-close');
-
-function openMenu() {
-  menu?.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-2');
-  menu?.classList.add('opacity-100', 'pointer-events-auto', 'translate-y-0');
-  iconOpen?.classList.add('hidden');
-  iconClose?.classList.remove('hidden');
-}
-
-function closeMenu() {
-  menu?.classList.add('opacity-0', 'pointer-events-none', 'translate-y-2');
-  menu?.classList.remove('opacity-100', 'pointer-events-auto', 'translate-y-0');
-  iconOpen?.classList.remove('hidden');
-  iconClose?.classList.add('hidden');
-}
-
-btn?.addEventListener('click', () => {
-  const isOpen = menu?.classList.contains('opacity-100');
-  isOpen ? closeMenu() : openMenu();
+document.addEventListener('click', (e) => {
+  const target = e.target as Node;
+  let inside = false;
+  groups.forEach((g) => {
+    if (g.contains(target)) inside = true;
+  });
+  if (!inside) closeAllGroups();
 });
 
-menu?.querySelectorAll('a').forEach((link) => {
-  link.addEventListener('click', closeMenu);
-});
-
-const navbar = document.getElementById('navbar');
-window.addEventListener('scroll', () => {
-  if (window.scrollY > 20) {
-    navbar?.classList.add(
-      'bg-[rgba(240,244,255,0.85)]',
-      'backdrop-blur-md',
-      'border-b',
-      'border-[var(--border-base)]'
-    );
-  } else {
-    navbar?.classList.remove(
-      'bg-[rgba(240,244,255,0.85)]',
-      'backdrop-blur-md',
-      'border-b',
-      'border-[var(--border-base)]'
-    );
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    closeAllGroups();
+    closeMobile();
   }
 });

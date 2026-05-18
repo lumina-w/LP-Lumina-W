@@ -1,30 +1,19 @@
-let lastScrollY = window.scrollY;
+const prefersReduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const targets = document.querySelectorAll<HTMLElement>('.animate-on-scroll');
 
-const observer = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((entry) => {
-      const scrollingDown = window.scrollY > lastScrollY;
-
-      if (entry.isIntersecting) {
-        entry.target.classList.remove('from-top', 'from-bottom');
-        entry.target.classList.add('visible');
-      } else {
-        entry.target.classList.remove('visible');
-        if (scrollingDown) {
-          entry.target.classList.add('from-top');
-        } else {
-          entry.target.classList.add('from-bottom');
+if (prefersReduced) {
+  targets.forEach((el) => el.classList.add('visible'));
+} else {
+  const io = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          io.unobserve(entry.target);
         }
-      }
-    });
-  },
-  { threshold: 0.15 }
-);
-
-window.addEventListener('scroll', () => {
-  lastScrollY = window.scrollY;
-});
-
-document.querySelectorAll('.animate-on-scroll').forEach((el) => {
-  observer.observe(el);
-});
+      });
+    },
+    { threshold: 0.12, rootMargin: '0px 0px -60px 0px' }
+  );
+  targets.forEach((el) => io.observe(el));
+}

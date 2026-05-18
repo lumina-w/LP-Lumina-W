@@ -1,0 +1,19 @@
+---
+const items = [
+  'Software a medida',
+  'Productos SaaS B2B',
+  'Arquitectura escalable',
+  'Seguridad integrada',
+  'IA aplicada a procesos',
+  'Código limpio que escala',
+  'Soporte y operación',
+  'Calidad empresarial',
+];
+const doubled = [...items, ...items];
+---
+
+<div class="marquee animate-on-scroll" aria-hidden="true">
+  <div class="marquee__track">
+    {doubled.map((it) => <span class="marquee__item">{it}</span>)}
+  </div>
+</div>

@@ -2,124 +2,194 @@
 import '@/styles/global.css';
 import NavBar from '@/components/ui/NavBar.astro';
 import Footer from '@/components/ui/Footer.astro';
-import Loader from '@/components/ui/Loader.astro';
 import CookiesBanner from '@/components/ui/CookiesBanner.astro';
+import Loader from '@/components/ui/Loader.astro';
+import Icon from '@/components/ui/Icon.astro';
 
 interface Props {
   title?: string;
   description?: string;
   image?: string;
-  bgClass?: string;
+  noindex?: boolean;
 }
 
 const {
-  title = 'Lúmina W | Software & Technology',
-  description = 'Creamos software. Los negocios lo rentan.',
+  title = 'Lúmina W | Software a medida + TerraCore',
+  description = 'Creamos software. Los negocios lo rentan. Desarrollo a medida (Discovery → Build → Launch) y SaaS B2B desde Medellín, Colombia.',
   image = '/brand/og-image.png',
-  bgClass = 'bg-dark text-light',
+  noindex = false,
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, 'https://luminaw.co');
+const BASE = import.meta.env.BASE_URL;
 ---
 
 <!doctype html>
-<html lang="es">
+<html lang="es-CO">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <title>{title}</title>
     <meta name="title" content={title} />
     <meta name="description" content={description} />
-    <meta name="robots" content="index, follow" />
+    <meta name="author" content="Lúmina W S.A.S" />
+    <meta name="generator" content={Astro.generator} />
+    <meta
+      name="robots"
+      content={noindex
+        ? 'noindex, nofollow'
+        : 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1'}
+    />
+    <meta
+      name="keywords"
+      content="desarrollo software a medida, SaaS B2B, software agroindustrial, TerraCore, gestión empresarial, software Medellín, software Colombia, dejar Excel"
+    />
     <link rel="canonical" href={canonicalURL} />
-    <link rel="alternate" href={canonicalURL} />
+    <link rel="alternate" hreflang="es-co" href={canonicalURL} />
+    <link rel="alternate" hreflang="x-default" href={canonicalURL} />
+
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={`https://luminaw.co${image}`} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta
       property="og:image:alt"
-      content="Lúmina W - Software a medida y SaaS B2B"
+      content="Lúmina W — Software a medida y SaaS B2B"
     />
     <meta property="og:locale" content="es_CO" />
     <meta property="og:site_name" content="Lúmina W" />
+
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={`https://luminaw.co${image}`} />
+
     <meta name="format-detection" content="telephone=no" />
-    <meta name="theme-color" content="#407bff" />
-    <link
-      rel="apple-touch-icon"
-      href={`${import.meta.env.BASE_URL}brand/logo.webp`}
+    <meta name="theme-color" content="#1b1f28" />
+    <meta name="color-scheme" content="light" />
+    <meta name="application-name" content="Lúmina W" />
+    <meta name="apple-mobile-web-app-title" content="Lúmina W" />
+
+    <link rel="apple-touch-icon" href={`${BASE}brand/logo.webp`} />
+    <link rel="icon" href={`${BASE}brand/logo.ico`} />
+    <link rel="icon" type="image/webp" href={`${BASE}brand/logo.webp`} />
+
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <link rel="alternate" type="text/plain" href="/llms.txt" title="LLMs.txt" />
+
+    <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
+    <link rel="dns-prefetch" href="https://api.fontshare.com" />
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+
+    <!-- TODO: pegar verification IDs cuando estén disponibles -->
+    <!-- <meta name="msvalidate.01" content="PEGAR_AQUI" /> -->
+    <!-- <meta name="yandex-verification" content="PEGAR_AQUI" /> -->
+    <!-- <meta name="facebook-domain-verification" content="PEGAR_AQUI" /> -->
+
+    <noscript>
+      <style>
+        .animate-on-scroll {
+          opacity: 1 !important;
+          transform: none !important;
+        }
+        .loader { display: none !important; }
+      </style>
+    </noscript>
+
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify({
+        '@context': 'https://schema.org',
+        '@graph': [
+          {
+            '@type': 'Organization',
+            '@id': 'https://luminaw.co/#organization',
+            name: 'Lúmina W',
+            legalName: 'Lúmina W S.A.S',
+            url: 'https://luminaw.co',
+            logo: {
+              '@type': 'ImageObject',
+              url: 'https://luminaw.co/brand/logo.webp',
+            },
+            description:
+              'Creamos software. Los negocios lo rentan. Desarrollo a medida y SaaS B2B para empresas que necesitan dejar de operar en Excel.',
+            email: 'contact@luminaw.co',
+            telephone: '+57-3108283088',
+            address: {
+              '@type': 'PostalAddress',
+              addressLocality: 'Medellín',
+              addressRegion: 'Antioquia',
+              addressCountry: 'CO',
+            },
+            contactPoint: {
+              '@type': 'ContactPoint',
+              telephone: '+57-3108283088',
+              contactType: 'customer service',
+              email: 'contact@luminaw.co',
+              url: 'https://wa.me/573108283088',
+              availableLanguage: ['Spanish', 'es-CO'],
+              areaServed: 'CO',
+            },
+            sameAs: [
+              'https://instagram.com/luminaw.co',
+              'https://linkedin.com/company/lumina-w',
+              'https://blog.luminaw.co',
+            ],
+          },
+          {
+            '@type': 'WebSite',
+            '@id': 'https://luminaw.co/#website',
+            url: 'https://luminaw.co',
+            name: 'Lúmina W',
+            description:
+              'Software a medida + producto SaaS TerraCore para agroindustria.',
+            publisher: { '@id': 'https://luminaw.co/#organization' },
+            inLanguage: 'es-CO',
+          },
+          {
+            '@type': 'WebPage',
+            '@id': `${canonicalURL.toString()}#webpage`,
+            url: canonicalURL.toString(),
+            name: title,
+            description: description,
+            isPartOf: { '@id': 'https://luminaw.co/#website' },
+            inLanguage: 'es-CO',
+          },
+        ],
+      })}
     />
-    <link rel="icon" href={`${import.meta.env.BASE_URL}brand/logo.ico`} />
-    <link
-      rel="icon"
-      type="image/webp"
-      href={`${import.meta.env.BASE_URL}brand/logo.webp`}
-    />
-    <meta
-      name="keywords"
-      content="desarrollo software, SaaS B2B, software a medida, TerraCore, gestión empresarial"
-    />
-    <meta name="author" content="Lúmina W" />
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "Organization",
-        "name": "Lúmina W",
-        "url": "https://luminaw.co",
-        "logo": "https://luminaw.co/brand/logo.webp",
-        "description": "Creamos software. Los negocios lo rentan. Desarrollo a medida y SaaS B2B para empresas que necesitan dejar de operar en Excel.",
-        "contactPoint": {
-          "@type": "ContactPoint",
-          "telephone": "+57-3108283088",
-          "contactType": "customer service",
-          "url": "https://wa.me/573108283088"
-        },
-        "sameAs": [
-          "https://instagram.com/luminaw.co",
-          "https://linkedin.com/company/lumina-w"
-        ]
-      }
-    </script>
   </head>
-  <body class={`${bgClass} font-body`}>
+  <body>
     <a
       href="#main-content"
-      class="focus:bg-page focus:text-light sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:rounded-lg focus:px-4 focus:py-2"
+      class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:bg-[var(--brand-dark)] focus:px-4 focus:py-2 focus:text-white"
     >
       Saltar al contenido
     </a>
     <Loader />
     <NavBar />
-    <main id="main-content">
+    <main id="main-content" class="with-nav">
       <slot />
     </main>
     <Footer />
     <CookiesBanner />
-    <div
-      id="cursor-glow"
-      class="pointer-events-none fixed z-50 h-64 w-64 rounded-full opacity-0"
-      style="background: radial-gradient(circle, rgba(64,123,255,0.12) 0%, transparent 70%); transform: translate(-50%, -50%); transition: opacity 0.3s ease, left 0.08s ease, top 0.08s ease;"
-    >
-    </div>
     <a
       href="https://wa.me/573108283088"
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Contactar por WhatsApp"
-      class="fixed right-6 bottom-6 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] shadow-lg transition-transform duration-200 hover:scale-110"
+      class="wa-fab"
     >
-      <img
-        src={`${import.meta.env.BASE_URL}icons/ui/whatsapp-white.svg`}
-        alt=""
-        aria-hidden="true"
-        class="h-9 w-9"
-      />
+      <Icon name="whatsapp" size={28} stroke={2} />
     </a>
+    <div id="cursor-glow" aria-hidden="true"></div>
+    <script>
+      import '@/scripts/nav.ts';
+    </script>
     <script>
       import '@/scripts/cursor.ts';
     </script>

@@ -1,0 +1,168 @@
+---
+import Icon from '@/components/ui/Icon.astro';
+
+const customPhases = [
+  {
+    n: '01',
+    icon: 'compass',
+    title: 'Discovery',
+    body: 'Dos semanas para entender el problema, el equipo y los datos. Salida: alcance cerrado, cronograma y presupuesto.',
+  },
+  {
+    n: '02',
+    icon: 'cpu',
+    title: 'Design / Build',
+    body: 'Sprints quincenales con demo al cierre. Tu equipo aprueba entregables y prioriza backlog.',
+  },
+  {
+    n: '03',
+    icon: 'layers',
+    title: 'Launch',
+    body: 'Despliegue a producción, pruebas finales, capacitación y handover formal de credenciales y documentación.',
+  },
+  {
+    n: '04',
+    icon: 'shield',
+    title: 'Operate',
+    body: 'Retainer u órdenes específicas. Monitoreo, evolución continua y soporte para que el sistema no se quede atrás.',
+  },
+];
+
+const saasPhases = [
+  {
+    n: '01',
+    icon: 'calendar',
+    title: 'Onboarding',
+    body: 'Una o dos semanas. Configuramos tu cuenta, roles e integraciones básicas. Tu equipo está listo.',
+  },
+  {
+    n: '02',
+    icon: 'users',
+    title: 'Capacitación',
+    body: 'Entrenamos a tu equipo. Documentación, videos y soporte en vivo.',
+  },
+  {
+    n: '03',
+    icon: 'bell',
+    title: 'Soporte Técnico',
+    body: 'Disponibilidad según tu plan (8×5, 12×6 o 24×7). SLA explícito, sin sorpresas.',
+  },
+  {
+    n: '04',
+    icon: 'chart',
+    title: 'Mejoras Evolutivas',
+    body: 'Contrata retainer de horas bajo demanda. Features nuevas, integraciones, consultoría técnica.',
+  },
+];
+
+const portalCustom = [
+  'Tablero del proyecto (GitHub Projects) en lectura para tus stakeholders.',
+  'Repositorio con acceso al código en tiempo real, no al cierre del proyecto.',
+  'Canal Slack dedicado con todo el equipo asignado.',
+  'Demos quincenales viernes 15:00 COT (30 minutos en vivo).',
+  'Notas de sprint, qué salió, qué viene, decisiones.',
+  'Cero caja negra: preguntas resueltas al toque.',
+];
+
+const portalSaas = [
+  'Dashboard con datos en tiempo real.',
+  'Disponibilidad garantizada con SLA explícito.',
+  'Soporte técnico directo según tu plan.',
+  'Integraciones, conectamos con lo que ya usas.',
+  'Exporta tus datos en cualquier momento, sin lock-in.',
+];
+
+const tracks = [
+  {
+    tag: 'Track A',
+    title: 'Desarrollo a Medida',
+    lead: 'Sin caja negra. Tablero abierto desde el día uno. Cuatro fases, sprints quincenales y acceso compartido al tablero, repo y demos. Si quieres ver dónde estamos un martes a las 3 p.m., entras al portal y lo ves.',
+    phases: customPhases,
+  },
+  {
+    tag: 'Track B',
+    title: 'SaaS en Alquiler',
+    lead: 'Implementación rápida, soporte garantizado, escala sin límites.',
+    phases: saasPhases,
+  },
+];
+---
+
+<section class="section process-sec" id="process">
+  <div class="container animate-on-scroll">
+    <div class="s-head">
+      <div>
+        <div class="eyebrow">Cómo trabajamos</div>
+        <h2>Depende del camino que tomes.</h2>
+      </div>
+      <p class="lead">
+        Dos modelos, dos cadencias, dos compromisos distintos. Elige el que se
+        ajusta a tu operación.
+      </p>
+      <div class="ghost-num" aria-hidden="true">04</div>
+    </div>
+
+    {
+      tracks.map((t) => (
+        <div class="process-track">
+          <header class="process-track__head">
+            <span class="process-track__tag">{t.tag}</span>
+            <h3>{t.title}</h3>
+            <p>{t.lead}</p>
+          </header>
+          <div class="features">
+            {t.phases.map((p) => (
+              <div class="feature">
+                <div class="feature__num">{p.n}</div>
+                <div class="feature__head">
+                  <div class="feature__icon">
+                    <Icon name={p.icon} size={26} stroke={1.5} />
+                  </div>
+                  <h3>{p.title}</h3>
+                </div>
+                <p>{p.body}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      ))
+    }
+
+    <div class="portal portal--split">
+      <header class="portal__head portal__head--full">
+        <span class="portal__label">Cómo ves el progreso</span>
+        <h3>Visibilidad permanente, en ambos caminos.</h3>
+        <p>
+          Lo que ves depende del modelo que contrates: en Desarrollo a Medida
+          ves el proceso de construcción; en SaaS en Alquiler ves la operación
+          de tu plataforma.
+        </p>
+      </header>
+
+      <div class="portal__col">
+        <h4 class="portal__col-title">En Desarrollo a Medida</h4>
+        <p class="portal__col-sub">Tu proyecto, en vivo.</p>
+        <p class="portal__col-text">
+          Todos los Proyectos incluyen acceso a un espacio compartido donde
+          tú y tu equipo ven el avance real: lo que está hecho, lo que se
+          está construyendo y lo que viene en el próximo sprint.
+        </p>
+        <ul class="portal__list">
+          {portalCustom.map((it) => <li>{it}</li>)}
+        </ul>
+      </div>
+
+      <div class="portal__col">
+        <h4 class="portal__col-title">En SaaS en Alquiler</h4>
+        <p class="portal__col-sub">Dashboard en tiempo real, siempre operativo.</p>
+        <p class="portal__col-text">
+          Acceso completo a métricas, usuarios, datos y configuraciones.
+          Integraciones con tu ERP, CRM y sistemas existentes.
+        </p>
+        <ul class="portal__list">
+          {portalSaas.map((it) => <li>{it}</li>)}
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>

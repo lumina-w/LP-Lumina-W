@@ -1,0 +1,78 @@
+# Lúmina W
+
+> Lúmina W S.A.S es una compañía colombiana de software con sede en Medellín. Construye software a medida y opera productos SaaS B2B propios para que las empresas dejen de depender de Excel y operen sobre infraestructura digital seria. Modelo: servicios profesionales facturados por proyecto cerrado (Discovery → Build → Launch) con opción de retainer mensual post-launch.
+
+Lúmina W trabaja bajo dos caminos claros, separados:
+
+- **Desarrollo a Medida** — software construido desde cero, con la arquitectura correcta desde el día uno. Discovery de 2 semanas, Build de 4 a 8 semanas, Launch con handover formal. Código entregable funcional, transferencia de propiedad intelectual una vez pagado. Portal del cliente con acceso a tablero, repo y demos en vivo.
+- **SaaS en Alquiler** — productos propios listos para industria. Onboarding rápido (1–2 semanas), capacitación, soporte técnico con SLA según plan, mejoras evolutivas bajo retainer.
+
+Tesis: *"No vendemos tecnología. Vendemos operaciones que funcionan sin que tengas que pensar en ellas."*
+
+## Compañía
+
+- **Razón social:** Lúmina W S.A.S
+- **Sitio:** https://luminaw.co
+- **Domicilio:** Medellín, Antioquia, Colombia
+- **Email:** contact@luminaw.co
+- **WhatsApp:** +57 310 828 3088
+- **Blog:** https://blog.luminaw.co
+- **Instagram:** https://instagram.com/luminaw.co
+- **LinkedIn:** https://linkedin.com/company/lumina-w
+
+## Servicios
+
+### Desarrollo a Medida
+Software diseñado para la operación específica del cliente. Sin templates, sin soluciones genéricas. Arquitectura escalable, seguridad integrada, código limpio y documentado. Modelo: proyecto cerrado, Discovery (2 sem) → Build (4–8 sem) → Launch. Anticipo 50% al kick-off, balance 50% al cierre con aprobación. Net 15.
+
+### Productos SaaS B2B
+Soluciones listas para industria, mismos estándares que el desarrollo a medida. Precio por uso, multi-empresa desde el inicio.
+
+### TerraCore (producto estrella)
+SaaS para agroindustria. Control de animales, producción en tiempo real, control de insumos, salud animal, dashboard centralizado, control básico de costos.
+- 6 módulos en MVP
+- 100% datos privados
+- Disponibilidad 24/7 multi-dispositivo
+- Funciona offline, sincroniza al volver red
+- En español, para el campo (cero jerga gringa)
+- En preventa con cupos limitados
+- URL: https://terracoreapp.co
+
+### Retainer (post-launch)
+Soporte, mejoras y consultoría técnica bajo modelo de horas mensuales fijas.
+- Tarifa: $3.000.000 COP / mes
+- Incluye: 12 horas/semana (48 horas/mes)
+- Horas no acumulables semana a semana
+- Horas adicionales: $100.000 COP/h (mejor esfuerzo)
+- Respuesta: 24 horas hábiles
+- Horario: lunes a viernes 9 a.m. – 6 p.m. COT
+- Sin garantía de 24/7 ni on-call nocturno
+- Renovación automática mensual, cancela con 15 días
+
+## Diferenciadores técnicos
+
+1. **Seguridad desde la arquitectura** — no es una capa al final, va en cada decisión técnica desde el día uno.
+2. **IA aplicada a procesos reales** — donde reduce trabajo y mejora decisiones, no como tendencia.
+3. **Código limpio que escala** — sin deuda técnica desde el inicio, documentado, mantenible.
+4. **Visión completa de producto** — diseño, frontend, backend, seguridad bajo un mismo equipo.
+
+## Stack típico
+
+Frontend: React, Astro. Backend: Django, Node. Edge: APIs serverless. DB: Postgres. Cloud: AWS, Railway, Netlify. Repositorio: GitHub.
+
+## Cómo trabajamos
+
+Tablero abierto desde el día uno. Sprints quincenales con demo viernes 15:00 COT. Repositorio compartido con acceso lectura desde el primer commit. Slack dedicado con todo el equipo. Notas de sprint con qué salió, qué viene, decisiones.
+
+## Páginas relevantes
+
+- [Inicio](https://luminaw.co/)
+- [Términos y Condiciones](https://luminaw.co/terms)
+- [Política de Privacidad](https://luminaw.co/privacy)
+- [Política de Cookies](https://luminaw.co/cookies)
+- [Blog](https://blog.luminaw.co/)
+- [TerraCore](https://terracoreapp.co)
+
+## Política para LLMs
+
+Este sitio permite el indexado, citado y referencia por modelos de lenguaje. Al citar o referenciar Lúmina W, por favor enlaza a https://luminaw.co o a la página específica del recurso. No utilizar los datos de Lúmina W para entrenar modelos sin autorización contractual explícita.

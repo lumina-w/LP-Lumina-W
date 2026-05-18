@@ -1,139 +1,101 @@
 ---
-import Link from '@/components/ui/Link.astro';
-import Button from '@/components/ui/Button.astro';
+import Icon from '@/components/ui/Icon.astro';
 
 const BASE = import.meta.env.BASE_URL;
 const LOGO = `${BASE}brand/logo.webp`;
-const developer = {
-  logo: `${BASE}brand/logo-w-sm.png`,
-  portfolio: 'https://wavival.dev',
-};
 const year = new Date().getFullYear();
 ---
 
-<footer class="bg-dark border-t border-[var(--text-light)] pt-16 pb-8">
-  <div class="mx-auto flex max-w-6xl flex-col gap-16 px-6 md:flex-row">
-    <div class="flex flex-col gap-4">
-      <img src={LOGO} alt="Logo de Lúmina W" class="w-20" />
-      <p class="font-body text-light text-sm">
-        Creamos software. Los negocios lo rentan.
-      </p>
-      <div class="flex items-center gap-1">
-        <p class="font-body text-light text-xs">Desarrollado por:</p>
-        <Link
-          href={developer.portfolio}
-          target="_blank"
-          class="!text-blue !text-xs !lowercase italic"
-        >
-          @wavival</Link
-        >
-      </div>
-    </div>
-    <div class="mb-16 grid grid-cols-2 gap-10 md:grid-cols-4">
-      <div class="flex flex-col gap-4">
-        <p
-          class="font-heading !text-light text-sm font-semibold tracking-widest uppercase"
-        >
-          Empresa
+<footer class="footer surface-dark">
+  <div class="container">
+    <div class="footer__grid">
+      <div class="footer__brand">
+        <a class="footer__mark" href="/#hero" aria-label="Lúmina W, Inicio">
+          <img src={LOGO} alt="" width="28" height="28" decoding="async" />
+          <span>Lúmina W</span>
+        </a>
+        <p class="footer__legalname">Lúmina W S.A.S</p>
+        <p class="footer__copy">Creamos software. Los negocios lo rentan.</p>
+        <p class="footer__copy" style="font-size:12px;color:#6b7280">
+          Desarrollado por
+          <a
+            href="https://wavival.dev"
+            target="_blank"
+            rel="noopener noreferrer"
+            style="color:#a1a5ad;font-style:italic">@wavival</a
+          >
         </p>
-        <div class="flex flex-col gap-3">
-          <Link class="!text-xs" href="/#hero">Inicio</Link>
-          <Link class="!text-xs" href="/#terracore">TerraCore</Link>
-          <Link class="!text-xs" href="/#contact">Contacto</Link>
-          <Link href="https://blog.luminaw.co/" target="_blank" class="!text-xs">Blog</Link>
-        </div>
-      </div>
-      <div class="flex flex-col gap-4">
-        <p
-          class="font-heading !text-light text-sm font-semibold tracking-widest uppercase"
-        >
-          Servicios
-        </p>
-        <div class="flex flex-col gap-3">
-          <Link class="!text-xs" href="/#services">Desarrollo a medida</Link>
-          <Link class="!text-xs" href="/#services">SaaS B2B</Link>
-        </div>
-      </div>
-      <div class="flex flex-col gap-4">
-        <p
-          class="font-heading !text-light text-sm font-semibold tracking-widest uppercase"
-        >
-          Legal
-        </p>
-        <div class="flex flex-col gap-3">
-          <Link class="!text-xs" href="/terms">Términos y condiciones</Link>
-          <Link class="!text-xs" href="/privacy">Política de privacidad</Link>
-          <Link class="!text-xs" href="/cookies">Política de cookies</Link>
-        </div>
-      </div>
-      <div class="flex flex-col gap-4">
-        <p
-          class="font-heading !text-light text-sm font-semibold tracking-widest uppercase"
-        >
-          Síguenos
-        </p>
-        <div class="flex items-center gap-4">
-          <Link
+        <div class="footer__social">
+          <a
             href="https://instagram.com/luminaw.co"
             target="_blank"
-            class="!text-sm"
+            rel="noopener noreferrer"
+            aria-label="Instagram"
           >
-            <img
-              src={`${BASE}icons/ui/instagram.svg`}
-              alt="Instagram"
-              class="h-6 w-6"
-            />
-          </Link>
-          <Link
+            <Icon name="instagram" size={18} stroke={2} />
+          </a>
+          <a
             href="https://linkedin.com/company/lumina-w"
             target="_blank"
-            class="!text-sm"
+            rel="noopener noreferrer"
+            aria-label="LinkedIn"
           >
-            <img
-              src={`${BASE}icons/ui/linkedin.svg`}
-              alt="LinkedIn"
-              class="h-6 w-6"
-            />
-          </Link>
-          <Link
+            <Icon name="linkedin" size={18} stroke={2} />
+          </a>
+          <a
             href="https://wa.me/573108283088"
             target="_blank"
-            class="!text-sm"
+            rel="noopener noreferrer"
+            aria-label="WhatsApp"
           >
-            <img
-              src={`${BASE}icons/ui/whatsapp.svg`}
-              alt="WhatsApp"
-              class="h-6 w-6"
-            />
-          </Link>
-        </div>
-        <div class="mt-2 flex flex-col gap-1">
-          <p class="font-body text-light text-sm">¿Listo para tu proyecto?</p>
-          <Link href="mailto:contact@luminaw.co" class="!lowercase">
-            contact@luminaw.co
-          </Link>
+            <Icon name="whatsapp" size={18} stroke={2} />
+          </a>
         </div>
       </div>
+
+      <div class="footer__col">
+        <h4>Empresa</h4>
+        <ul>
+          <li><a href="/#hero">Inicio</a></li>
+          <li><a href="/#problem">Problema</a></li>
+          <li><a href="/#services">Servicios</a></li>
+          <li><a href="/#process">Proceso</a></li>
+          <li><a href="/#terracore">TerraCore</a></li>
+          <li><a href="/#us">Nosotros</a></li>
+          <li><a href="/#faq">FAQ</a></li>
+          <li><a href="/#contact">Contacto</a></li>
+          <li>
+            <a
+              href="https://blog.luminaw.co/"
+              target="_blank"
+              rel="noopener noreferrer">Blog</a
+            >
+          </li>
+        </ul>
+      </div>
+
+      <div class="footer__col">
+        <h4>Servicios</h4>
+        <ul>
+          <li><a href="/#services">Desarrollo a medida</a></li>
+          <li><a href="/#services">SaaS B2B</a></li>
+          <li><a href="/#terracore">TerraCore</a></li>
+        </ul>
+      </div>
+
+      <div class="footer__col">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="/terms">Términos y condiciones</a></li>
+          <li><a href="/privacy">Política de privacidad</a></li>
+          <li><a href="/cookies">Política de cookies</a></li>
+        </ul>
+      </div>
     </div>
-  </div>
-  <!-- <div class="border-t border-[var(--text-light)] py-12 flex flex-col items-center gap-4 text-center">
-      <p class="font-heading font-semibold text-lg !text-light/90">
-        Suscríbete a las novedades de Lúmina
-      </p>
-      <p class="font-body text-sm text-text-light">
-        Nuevos servicios, guías técnicas y casos reales. Sin spam.
-      </p>
-      <form class="flex gap-3 w-full max-w-md mt-2">
-        <input 
-          type="email" 
-          placeholder="Tu correo electrónico"
-          class="flex-1 px-4 py-3 rounded-md border border-transparent bg-card font-body text-sm text-text-primary placeholder:text-text-light outline-none transition-all duration-200 hover:scale-[1.02] focus:scale-[1] focus:border focus:border-brand focus:border-2 shadow-base cursor-pointer" />
-        <Button type="submit" icon="send-email-white">Suscribirme</Button>
-      </form>
-    </div> -->
-  <div class="flex flex-col items-center gap-2 pt-8 text-center">
-    <p class="font-body text-light text-sm">
-      © Lúmina W {year}
-    </p>
+
+    <div class="footer__bottom">
+      <span>© Lúmina W S.A.S {year}</span>
+      <span>contact@luminaw.co</span>
+    </div>
   </div>
 </footer>

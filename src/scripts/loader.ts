@@ -1,25 +1,19 @@
 const loader = document.getElementById('loader');
 const bar = document.getElementById('loader-bar');
 
-if (bar) {
-  setTimeout(() => {
-    bar.style.width = '60%';
-  }, 100);
-
-  setTimeout(() => {
+if (loader && bar) {
+  requestAnimationFrame(() => {
     bar.style.width = '100%';
-  }, 400);
+  });
+
+  const hide = () => {
+    loader.classList.add('loader--hidden');
+    setTimeout(() => loader.remove(), 600);
+  };
+
+  if (document.readyState === 'complete') {
+    setTimeout(hide, 320);
+  } else {
+    window.addEventListener('load', () => setTimeout(hide, 320));
+  }
 }
-
-window.addEventListener('load', () => {
-  if (bar) bar.style.width = '100%';
-
-  setTimeout(() => {
-    if (loader) {
-      loader.style.opacity = '0';
-      setTimeout(() => {
-        loader.style.display = 'none';
-      }, 500);
-    }
-  }, 600);
-});
