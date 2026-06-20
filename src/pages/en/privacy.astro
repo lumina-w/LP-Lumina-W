@@ -1,0 +1,468 @@
+---
+import Layout from '@/layouts/Layout.astro';
+
+const updated = 'May 18, 2026';
+const sections = [
+  'Data Controller Identification',
+  'Data We Collect',
+  'Purposes of Processing',
+  'Legal Bases',
+  'Data Retention',
+  'Sharing and Processors',
+  'Data Subject Rights',
+  'Security Measures',
+  'International Transfers',
+  'Contact and Complaints',
+];
+---
+
+<Layout
+  title="Privacy Policy | Lúmina W"
+  description="Privacy Policy of Lúmina W S.A.S, processing of personal data in accordance with Ley 1581 de 2012."
+>
+  <article class="legal">
+    <header class="legal__head">
+      <p class="legal__kicker">Legal</p>
+      <h1>Privacy Policy</h1>
+      <div class="legal__meta">
+        <span><strong>Last updated:</strong> {updated}</span>
+        <span><strong>Version:</strong> 1.0</span>
+      </div>
+    </header>
+
+    <p class="legal__intro">
+      This Policy describes how
+      <strong>Lúmina W S.A.S</strong> processes the personal data collected through
+      the site <em>luminaw.co</em>, its forms and communication channels.
+      Processing is carried out in accordance with
+      <strong>Ley 1581 de 2012</strong> (the General Personal Data Protection Regime),
+      <strong>Decreto 1377 de 2013</strong> and other applicable regulations.
+    </p>
+
+    <div class="legal__callout">
+      <p>
+        This English version is provided for convenience only. The legally
+        binding text is the Spanish original at <a href="/privacy"
+          >luminaw.co/privacy</a
+        >. In case of any discrepancy, the Spanish version prevails.
+      </p>
+    </div>
+
+    <div class="legal__body">
+      <nav class="legal__toc" aria-label="Table of contents">
+        <h2>Contents</h2>
+        <ol>
+          {
+            sections.map((s, i) => (
+              <li>
+                <a href={`#sec-${String(i + 1).padStart(2, '0')}`}>{s}</a>
+              </li>
+            ))
+          }
+        </ol>
+      </nav>
+
+      <div class="legal__content">
+        <section id="sec-01" class="legal__section">
+          <header class="legal__section-head">
+            <span class="legal__num" aria-hidden="true">01</span>
+            <h2>Data Controller Identification</h2>
+          </header>
+          <p>
+            <strong>Lúmina W S.A.S</strong>, identified in Colombia, is the
+            Controller responsible for processing the personal data collected
+            through its digital and commercial channels.
+          </p>
+          <ul>
+            <li><strong>Website:</strong> luminaw.co</li>
+            <li>
+              <strong>Contact email:</strong>
+              <a href="mailto:contact@luminaw.co">contact@luminaw.co</a>
+            </li>
+            <li>
+              <strong>Domicile:</strong> Medellín, Antioquia, Colombia.
+            </li>
+            <li><strong>WhatsApp:</strong> +57 310 828 3088</li>
+          </ul>
+        </section>
+
+        <section id="sec-02" class="legal__section">
+          <header class="legal__section-head">
+            <span class="legal__num" aria-hidden="true">02</span>
+            <h2>Data We Collect</h2>
+          </header>
+          <p>We collect only the data necessary for the purposes described.</p>
+          <h3>Contact and commercial data</h3>
+          <ul>
+            <li>Name, company, role, email address and phone number.</li>
+            <li>Message or need described in the form.</li>
+            <li>
+              Information exchanged during the commercial conversation
+              (proposals, calls, emails).
+            </li>
+          </ul>
+          <h3>Contractual and billing data</h3>
+          <ul>
+            <li>NIT or identity document, address, tax data.</li>
+            <li>Electronic invoicing information.</li>
+          </ul>
+          <h3>Technical and browsing data</h3>
+          <ul>
+            <li>
+              IP address, browser type, operating system, pages viewed and time
+              spent.
+            </li>
+            <li>
+              Information provided by analytics cookies (see
+              <a href="/en/cookies">Cookies Policy</a>).
+            </li>
+          </ul>
+          <div class="legal__callout">
+            <p>
+              <strong>We do not collect sensitive data</strong> through the site (health,
+              biometric, political affiliation, religion). If a Project context requires
+              processing it, a specific Security Annex is signed beforehand.
+            </p>
+          </div>
+          <h3>Sensitive Data in Projects</h3>
+          <p>
+            When the execution of a Project requires the processing of sensitive
+            data, such as data relating to
+            <strong
+              >animal health, biometric, financial, minors or special categories</strong
+            > under Ley 1581 de 2012, Lúmina W requests the prior signing of a
+            <strong>Security and Processing Annex</strong> that details additional
+            technical, organizational and contractual measures to protect that information.
+          </p>
+        </section>
+
+        <section id="sec-03" class="legal__section">
+          <header class="legal__section-head">
+            <span class="legal__num" aria-hidden="true">03</span>
+            <h2>Purposes of Processing</h2>
+          </header>
+          <p>Personal data is processed for the following purposes:</p>
+          <ul>
+            <li>
+              <strong>Handle commercial inquiries</strong> received by form, email,
+              WhatsApp or other channels.
+            </li>
+            <li>
+              <strong>Prepare proposals and quotes</strong> according to the requested
+              scope.
+            </li>
+            <li>
+              <strong>Execute and manage contracts</strong> for professional services
+              and Lúmina W SaaS products.
+            </li>
+            <li>
+              <strong>Comply with legal, accounting and tax obligations</strong>
+              (electronic invoicing, tax reporting, document retention).
+            </li>
+            <li>
+              <strong>Send operational communications</strong> related to active projects
+              or services (notices, updates, support).
+            </li>
+            <li>
+              <strong>Measure and improve the website</strong> through aggregated
+              and anonymized analytics.
+            </li>
+            <li>
+              <strong>Send commercial communications</strong> only when the data subject
+              has expressly authorized receiving them.
+            </li>
+            <li>
+              <strong>Provide Retainer services</strong> for technical support, platform
+              evolution and corrective maintenance under a fixed monthly hours model.
+            </li>
+          </ul>
+          <p>
+            <strong>We do not sell, rent or transfer</strong> personal data to third
+            parties for marketing purposes.
+          </p>
+        </section>
+
+        <section id="sec-04" class="legal__section">
+          <header class="legal__section-head">
+            <span class="legal__num" aria-hidden="true">04</span>
+            <h2>Legal Bases</h2>
+          </header>
+          <p>
+            The processing of personal data by Lúmina W relies on the following
+            legal bases:
+          </p>
+          <ul>
+            <li>
+              <strong>Consent</strong> of the data subject, granted by submitting
+              the contact form, subscribing to communications or accepting the cookies
+              policy.
+            </li>
+            <li>
+              <strong>Contract performance</strong>, when processing is
+              necessary for the provision of the contracted Service or the
+              preliminary negotiations.
+            </li>
+            <li>
+              <strong>Compliance with legal obligations</strong>, in tax,
+              accounting, labor and commercial matters.
+            </li>
+            <li>
+              <strong>Legitimate interest</strong> of Lúmina W to ensure the operation,
+              security and improvement of the site and the services, always weighed
+              against the rights of the data subject.
+            </li>
+          </ul>
+        </section>
+
+        <section id="sec-05" class="legal__section">
+          <header class="legal__section-head">
+            <span class="legal__num" aria-hidden="true">05</span>
+            <h2>Data Retention</h2>
+          </header>
+          <p>
+            Personal data is retained only for the time necessary to fulfill the
+            purposes for which it was collected and to meet legal obligations:
+          </p>
+          <h3>Prospects and inquiries not converted</h3>
+          <p>
+            Up to <strong>24 months</strong> after the last contact, unless a deletion
+            request is made earlier.
+          </p>
+          <h3>Project data</h3>
+          <p>
+            Code, documentation, architecture and configurations:
+            <strong>90 days after the Project closes</strong> to allow download and
+            transition. Once the period expires, it is removed from Lúmina W production
+            systems.
+          </p>
+          <h3>Personal and Billing Data</h3>
+          <p>
+            Name, email, NIT, invoices and contractual documents: throughout the
+            contractual relationship and up to <strong
+              >10 years afterward</strong
+            >, in accordance with the accounting, tax and commercial retention
+            obligations in force in Colombia.
+          </p>
+          <h3>Retainer data</h3>
+          <p>
+            History of changes, improvements and support: throughout the term of
+            the Retainer and up to <strong>2 years after</strong> its termination.
+          </p>
+          <h3>Browsing data</h3>
+          <p>
+            Aggregated and anonymized, retained according to the configured
+            analytics tools (see
+            <a href="/en/cookies">Cookies Policy</a>).
+          </p>
+          <h3>Marketing communications</h3>
+          <p>Until the data subject revokes their consent.</p>
+          <p>
+            Once the periods expire, the data is deleted, anonymized or archived
+            as appropriate and in accordance with the security standards in
+            force.
+          </p>
+        </section>
+
+        <section id="sec-06" class="legal__section">
+          <header class="legal__section-head">
+            <span class="legal__num" aria-hidden="true">06</span>
+            <h2>Sharing and Processors</h2>
+          </header>
+          <p>
+            Lúmina W may share personal data with
+            <strong>Data Processors</strong> that provide services under contract,
+            exclusively for the purposes described. These include:
+          </p>
+          <ul>
+            <li>
+              <strong>Cloud infrastructure providers</strong> (AWS, Google Cloud,
+              Cloudflare or equivalents).
+            </li>
+            <li>
+              <strong>Transactional and commercial email platforms</strong>
+              configured for sending messages.
+            </li>
+            <li>
+              <strong>Analytics tools</strong> (Google Analytics or another privacy-friendly
+              tool).
+            </li>
+            <li>
+              <strong>Form platform</strong> (Formspree for the site contact form
+              submissions).
+            </li>
+            <li>
+              <strong>Accountants and legal advisors</strong> in the fulfillment of
+              regulatory obligations.
+            </li>
+          </ul>
+          <p>
+            Each Processor acts under documented instructions from Lúmina W and
+            contractually commits to observe equivalent security and
+            confidentiality standards.
+          </p>
+        </section>
+
+        <section id="sec-07" class="legal__section">
+          <header class="legal__section-head">
+            <span class="legal__num" aria-hidden="true">07</span>
+            <h2>Data Subject Rights</h2>
+          </header>
+          <p>
+            In accordance with Ley 1581 de 2012, the data subject has the right
+            to:
+          </p>
+          <ul>
+            <li>
+              <strong>Know</strong> the personal data that Lúmina W processes.
+            </li>
+            <li>
+              <strong>Update and rectify</strong> partial, inaccurate, incomplete
+              or outdated data.
+            </li>
+            <li>
+              <strong>Request proof</strong> of the authorization granted for processing.
+            </li>
+            <li>
+              <strong>Be informed</strong> about the use given to their personal data.
+            </li>
+            <li>
+              <strong>Submit inquiries and complaints</strong> to Lúmina W or to the
+              Superintendence of Industry and Commerce (SIC).
+            </li>
+            <li>
+              <strong>Revoke the authorization</strong> and/or request the deletion
+              of the data, when there is no legal or contractual duty to retain it.
+            </li>
+            <li>
+              <strong>Access their personal data</strong> free of charge.
+            </li>
+          </ul>
+          <h3>How to exercise these rights</h3>
+          <p>
+            Requests are channeled to the email
+            <a href="mailto:contact@luminaw.co">contact@luminaw.co</a>,
+            indicating name, identity document, description of the request and
+            contact details. Lúmina W will respond within the legal timeframes:
+          </p>
+          <ul>
+            <li>Inquiries: up to ten (10) business days.</li>
+            <li>
+              Complaints: up to fifteen (15) business days, extendable by eight
+              (8) more when justified.
+            </li>
+          </ul>
+        </section>
+
+        <section id="sec-08" class="legal__section">
+          <header class="legal__section-head">
+            <span class="legal__num" aria-hidden="true">08</span>
+            <h2>Security Measures</h2>
+          </header>
+          <p>
+            Lúmina W applies reasonable and proportionate technical, human and
+            administrative measures to protect personal data against loss,
+            unauthorized access, alteration or misuse. These measures include,
+            among others:
+          </p>
+          <ul>
+            <li>
+              <strong>Encryption in transit</strong> (TLS/HTTPS) on the site, forms
+              and APIs.
+            </li>
+            <li>
+              <strong>Encryption at rest</strong> in the stores that support it.
+            </li>
+            <li>
+              <strong>Role-based access control</strong> and multifactor authentication
+              for internal systems.
+            </li>
+            <li>
+              <strong>Activity logs</strong> and periodic security reviews.
+            </li>
+            <li>
+              <strong>Training</strong> for the team on privacy and security best
+              practices.
+            </li>
+            <li>
+              <strong>Incident response procedures</strong> with notification to the
+              data subject and the SIC when applicable.
+            </li>
+          </ul>
+        </section>
+
+        <section id="sec-09" class="legal__section">
+          <header class="legal__section-head">
+            <span class="legal__num" aria-hidden="true">09</span>
+            <h2>International Transfers</h2>
+          </header>
+          <p>
+            Personal data is hosted on infrastructure located in the
+            <strong>United States</strong>, through specialized providers such
+            as
+            <strong>Railway, Netlify, AWS</strong> or other cloud services designated
+            for each Project. The Client may request a specific geographic location
+            according to their regulatory compliance requirements.
+          </p>
+          <p>
+            Lúmina W requires that any Data Processor located outside Colombia
+            offer adequate protection levels in accordance with Colombian
+            regulations, through standard contractual clauses or equivalent
+            certification (e.g.:
+            <strong>SOC 2, ISO 27001</strong>, AWS/Google Cloud standards).
+          </p>
+          <p>
+            The data subject acknowledges and authorizes these transfers by
+            accepting this Policy. Upon request, Lúmina W will provide specific
+            information about the destination countries, the safeguards applied
+            and the providers used.
+          </p>
+        </section>
+
+        <section id="sec-10" class="legal__section">
+          <header class="legal__section-head">
+            <span class="legal__num" aria-hidden="true">10</span>
+            <h2>Contact and Complaints</h2>
+          </header>
+          <p>
+            For questions, inquiries, complaints, exercise of rights or requests
+            related to this Policy, the data subject may reach out to:
+          </p>
+          <ul>
+            <li>
+              <strong>Email:</strong>
+              <a href="mailto:contact@luminaw.co">contact@luminaw.co</a>
+            </li>
+            <li><strong>WhatsApp:</strong> +57 310 828 3088</li>
+          </ul>
+          <p>
+            If the data subject considers that their rights have not been
+            satisfactorily addressed, they may file a complaint with the
+            <strong>Superintendence of Industry and Commerce (SIC)</strong> in the
+            exercise of its personal data protection powers.
+          </p>
+          <h3>Changes to this Policy</h3>
+          <p>
+            Lúmina W may update this Policy to reflect regulatory changes or
+            adjustments to its processes. Substantial modifications will be
+            communicated through the website and, where applicable, through
+            direct notification to the affected data subjects.
+          </p>
+        </section>
+
+        <footer class="legal__foot">
+          <p><strong>Last updated:</strong> {updated}</p>
+          <p>
+            <strong>Contact:</strong>
+            <a href="mailto:contact@luminaw.co">contact@luminaw.co</a>
+            , Lúmina W S.A.S, Colombia.
+          </p>
+          <div class="legal__foot-links">
+            <a href="/en/terms">Terms and Conditions</a>
+            <a href="/en/cookies">Cookies Policy</a>
+            <a href="/en">Back to home</a>
+          </div>
+        </footer>
+      </div>
+    </div>
+  </article>
+</Layout>

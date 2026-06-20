@@ -1,50 +1,22 @@
 ---
 import Icon from '@/components/ui/Icon.astro';
-
-const problems = [
-  {
-    n: '01',
-    icon: 'clock',
-    title: 'Tiempo que no recuperas',
-    description:
-      'Procesos manuales que consumen horas que podrían invertirse en hacer crecer tu negocio.',
-  },
-  {
-    n: '02',
-    icon: 'chart',
-    title: 'Datos que no puedes leer',
-    description:
-      'Información dispersa en hojas de cálculo que nadie entiende y nadie mantiene actualizada.',
-  },
-  {
-    n: '03',
-    icon: 'eye-off',
-    title: 'Decisiones a ciegas',
-    description:
-      'Sin visibilidad en tiempo real, cada decisión es una apuesta. No una estrategia.',
-  },
-  {
-    n: '04',
-    icon: 'coin',
-    title: 'Dinero que se va sin que lo veas',
-    description:
-      'Ineficiencias ocultas que se acumulan mes a mes sin que nadie las mida ni las corrija.',
-  },
-];
+import { useTranslations, anchorId } from '@/i18n/utils';
+const loc = Astro.currentLocale;
+const t = useTranslations(loc).problem;
+const problems = t.items;
 ---
 
-<section class="section" id="problem">
+<section class="section" id={anchorId('problem', loc)}>
   <div class="animate-on-scroll container">
     <div class="s-head">
       <div>
-        <div class="eyebrow">El problema</div>
-        <h2>Tu empresa crece. Tus herramientas, no.</h2>
+        <div class="eyebrow">{t.eyebrow}</div>
+        <h2>{t.heading}</h2>
       </div>
       <p class="lead">
-        Cada día que operas con procesos manuales y software genérico que no
-        entiende tu industria, estás perdiendo:
+        {t.lead}
       </p>
-      <div class="ghost-num" aria-hidden="true">Problema</div>
+      <div class="ghost-num" aria-hidden="true">{t.ghost}</div>
     </div>
     <div class="features">
       {
@@ -63,9 +35,9 @@ const problems = [
       }
     </div>
     <div class="stakes">
-      <p class="stakes__kicker">No es un problema de disciplina.</p>
+      <p class="stakes__kicker">{t.stakesKicker}</p>
       <p class="stakes__line">
-        Es un problema de <em>infraestructura</em>.
+        {t.stakesLinePre}<em>{t.stakesLineEm}</em>{t.stakesLinePost}
       </p>
     </div>
   </div>

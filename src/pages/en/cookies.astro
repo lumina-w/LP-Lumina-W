@@ -1,0 +1,295 @@
+---
+import Layout from '@/layouts/Layout.astro';
+
+const updated = 'May 18, 2026';
+const sections = [
+  'What Cookies Are',
+  'Technical Cookies',
+  'Analytics Cookies',
+  'We Do Not Use Advertising',
+  'Cookie Table',
+  'How to Manage Them',
+  'Legal Basis and Consent',
+  'Contact',
+];
+---
+
+<Layout
+  title="Cookie Policy | Lúmina W"
+  description="Cookie Policy of Lúmina W S.A.S, technical and analytics cookies, how to manage and disable them."
+>
+  <article class="legal">
+    <header class="legal__head">
+      <p class="legal__kicker">Legal</p>
+      <h1>Cookie Policy</h1>
+      <div class="legal__meta">
+        <span><strong>Last updated:</strong> {updated}</span>
+        <span><strong>Version:</strong> 1.0</span>
+      </div>
+    </header>
+
+    <p class="legal__intro">
+      This Policy explains how
+      <strong>Lúmina W S.A.S</strong> uses cookies and similar technologies on the
+      site <em>luminaw.co</em>, for what purpose, for how long, and how you can
+      disable them. It forms an integral part of the
+      <a href="/en/privacy">Privacy Policy</a>.
+    </p>
+
+    <div class="legal__callout">
+      <p>
+        This English version is provided for convenience only. The legally
+        binding text is the Spanish original at <a href="/cookies"
+          >luminaw.co/cookies</a
+        >. In case of any discrepancy, the Spanish version prevails.
+      </p>
+    </div>
+
+    <div class="legal__body">
+      <nav class="legal__toc" aria-label="Table of contents">
+        <h2>Contents</h2>
+        <ol>
+          {
+            sections.map((s, i) => (
+              <li>
+                <a href={`#sec-${String(i + 1).padStart(2, '0')}`}>{s}</a>
+              </li>
+            ))
+          }
+        </ol>
+      </nav>
+
+      <div class="legal__content">
+        <section id="sec-01" class="legal__section">
+          <header class="legal__section-head">
+            <span class="legal__num" aria-hidden="true">01</span>
+            <h2>What Cookies Are</h2>
+          </header>
+          <p>
+            <strong>Cookies</strong> are small text files that a website saves in
+            your browser or device when you visit it. They make it possible to remember
+            information across pages or visits, keep your session active, remember
+            preferences, or measure how the site is used in order to improve it.
+          </p>
+          <p>
+            There are different types according to their origin (<strong
+              >first party</strong
+            > or <strong>third party</strong>), their duration (<strong
+              >session</strong
+            > or <strong>persistent</strong>) and their purpose (<strong
+              >technical</strong
+            >, <strong>analytics</strong>,
+            <strong>advertising</strong>, etc.).
+          </p>
+        </section>
+
+        <section id="sec-02" class="legal__section">
+          <header class="legal__section-head">
+            <span class="legal__num" aria-hidden="true">02</span>
+            <h2>Technical Cookies</h2>
+          </header>
+          <p>
+            These are <strong>strictly necessary</strong> for the site to function.
+            They do not require prior consent under article 22 of the applicable regulations
+            and the current SIC doctrine.
+          </p>
+          <p>We use technical cookies to:</p>
+          <ul>
+            <li>
+              <strong>Keep the user session</strong> active during browsing.
+            </li>
+            <li>
+              <strong>Remember the decision</strong> about the cookie banner (accepted
+              or rejected) so it is not asked on every visit.
+            </li>
+            <li>
+              <strong>Protection against CSRF</strong> and other threats in forms.
+            </li>
+          </ul>
+        </section>
+
+        <section id="sec-03" class="legal__section">
+          <header class="legal__section-head">
+            <span class="legal__num" aria-hidden="true">03</span>
+            <h2>Analytics Cookies</h2>
+          </header>
+          <p>
+            They help us understand how the site is used in an
+            <strong>aggregated and anonymous</strong> way (most visited pages, time
+            on site, traffic sources), so we can make decisions about design, content,
+            and performance.
+          </p>
+          <p>
+            When we use <strong>Google Analytics</strong>, we do so with
+            configurations that minimize the personal data collected: IP
+            anonymization, disabling data sharing with other products, limited
+            data retention.
+          </p>
+          <div class="legal__callout">
+            <p>
+              Analytics cookies are activated only
+              <strong>with your express consent</strong>, given through the
+              cookie banner. You can reject them without affecting how the site
+              works.
+            </p>
+          </div>
+        </section>
+
+        <section id="sec-04" class="legal__section">
+          <header class="legal__section-head">
+            <span class="legal__num" aria-hidden="true">04</span>
+            <h2>We Do Not Use Advertising</h2>
+          </header>
+          <p>
+            Lúmina W <strong
+              >does not use advertising cookies, retargeting, commercial
+              profiling, or fingerprinting</strong
+            > on this site. We also do not share browsing data with advertising networks.
+          </p>
+          <p>
+            If in the future we adopt any marketing tool that requires
+            additional cookies, we will update this Policy and request express
+            consent before activating them.
+          </p>
+        </section>
+
+        <section id="sec-05" class="legal__section">
+          <header class="legal__section-head">
+            <span class="legal__num" aria-hidden="true">05</span>
+            <h2>Cookie Table</h2>
+          </header>
+          <p>
+            The following list describes the cookies that may be found on the
+            site, their origin, purpose, and approximate duration. The list may
+            vary depending on the active tools.
+          </p>
+          <dl class="legal__defs">
+            <div class="legal__def">
+              <dt class="legal__def-term">cookie-consent</dt>
+              <dd class="legal__def-desc">
+                First party · technical · persistent (12 months). Remembers the
+                user decision about the cookie banner.
+              </dd>
+            </div>
+            <div class="legal__def">
+              <dt class="legal__def-term">_ga</dt>
+              <dd class="legal__def-desc">
+                Google Analytics · analytics · persistent (24 months).
+                Distinguishes users.
+              </dd>
+            </div>
+            <div class="legal__def">
+              <dt class="legal__def-term">_ga_*</dt>
+              <dd class="legal__def-desc">
+                Google Analytics 4 · analytics · persistent (24 months).
+                Persists session state.
+              </dd>
+            </div>
+            <div class="legal__def">
+              <dt class="legal__def-term">_gid</dt>
+              <dd class="legal__def-desc">
+                Google Analytics · analytics · session (24 hours). Identifies
+                the user during the current visit.
+              </dd>
+            </div>
+          </dl>
+        </section>
+
+        <section id="sec-06" class="legal__section">
+          <header class="legal__section-head">
+            <span class="legal__num" aria-hidden="true">06</span>
+            <h2>How to Manage Them</h2>
+          </header>
+          <h3>From the site</h3>
+          <p>
+            You can accept or reject analytics cookies through the banner that
+            appears the first time you visit the site. The decision is recorded
+            in the technical cookie
+            <code>cookie-consent</code> for 12 months; you can change it at any time
+            by deleting that cookie in your browser.
+          </p>
+          <h3>From the browser</h3>
+          <p>Every browser lets you review, block, or delete cookies:</p>
+          <ul>
+            <li>
+              <strong>Chrome:</strong> Settings → Privacy and security → Cookies and
+              other site data.
+            </li>
+            <li>
+              <strong>Firefox:</strong> Settings → Privacy &amp; Security → Cookies
+              and site data.
+            </li>
+            <li>
+              <strong>Safari:</strong> Preferences → Privacy → Manage website data.
+            </li>
+            <li>
+              <strong>Edge:</strong> Settings → Cookies and site permissions.
+            </li>
+          </ul>
+          <h3>Google Analytics opt-out</h3>
+          <p>
+            You can install the official Google Analytics opt-out add-on:
+            <a
+              href="https://tools.google.com/dlpage/gaoptout"
+              target="_blank"
+              rel="noopener noreferrer">tools.google.com/dlpage/gaoptout</a
+            >.
+          </p>
+          <p>
+            <strong>Important:</strong> blocking technical cookies may prevent some
+            parts of the site from working correctly.
+          </p>
+        </section>
+
+        <section id="sec-07" class="legal__section">
+          <header class="legal__section-head">
+            <span class="legal__num" aria-hidden="true">07</span>
+            <h2>Legal Basis and Consent</h2>
+          </header>
+          <p>
+            The use of technical cookies is supported by the
+            <strong>legitimate interest</strong> of Lúmina W and by the need to provide
+            the service requested by the user when entering the site.
+          </p>
+          <p>
+            The use of analytics cookies is carried out only with the
+            <strong>express consent of the user</strong>, under Law 1581 of 2012
+            and Decree 1377 of 2013. Consent is revocable at any time without
+            affecting the lawfulness of the prior processing.
+          </p>
+        </section>
+
+        <section id="sec-08" class="legal__section">
+          <header class="legal__section-head">
+            <span class="legal__num" aria-hidden="true">08</span>
+            <h2>Contact</h2>
+          </header>
+          <p>
+            For questions about the use of cookies on this site or the exercise
+            of rights related to personal data:
+            <a href="mailto:contact@luminaw.co">contact@luminaw.co</a>.
+          </p>
+          <h3>Changes to this Policy</h3>
+          <p>
+            This Policy may be updated to reflect new tools or regulatory
+            changes. Substantial changes will be announced through the site.
+          </p>
+        </section>
+
+        <footer class="legal__foot">
+          <p><strong>Last updated:</strong> {updated}</p>
+          <p>
+            <strong>Contact:</strong>
+            <a href="mailto:contact@luminaw.co">contact@luminaw.co</a>
+            , Lúmina W S.A.S, Colombia.
+          </p>
+          <div class="legal__foot-links">
+            <a href="/en/terms">Terms and Conditions</a>
+            <a href="/en/privacy">Privacy Policy</a>
+            <a href="/en">Back to home</a>
+          </div>
+        </footer>
+      </div>
+    </div>
+  </article>
+</Layout>

@@ -1,56 +1,28 @@
 ---
 import Icon from '@/components/ui/Icon.astro';
-
-const services = [
-  {
-    tag: 'Desarrollo a medida',
-    title: 'Software diseñado para tu operación',
-    description:
-      'No vendemos templates ni soluciones genéricas. Analizamos tu proceso, tu industria y tu equipo, y construimos exactamente lo que necesitas, con la arquitectura correcta desde el primer día.',
-    features: [
-      'Arquitectura escalable desde el inicio.',
-      'Seguridad integrada, no añadida después.',
-      'Código limpio y documentado.',
-      'Soporte y evolución continua.',
-    ],
-    icon: 'custom',
-    inverse: false,
-    primary: true,
-  },
-  {
-    tag: 'Productos SaaS B2B',
-    title: 'Soluciones listas para tu industria',
-    description:
-      'Productos construidos con los mismos estándares del desarrollo a medida. Pagas por lo que usas, escalas cuando lo necesitas, sin inversión inicial en infraestructura.',
-    features: [
-      'Implementación rápida.',
-      'Actualizaciones automáticas.',
-      'Multi-empresa desde el inicio.',
-      'Precio por uso, no por proyecto.',
-    ],
-    icon: 'saas',
-    inverse: true,
-    primary: false,
-  },
-];
+import { useTranslations, localizePath, anchorId } from '@/i18n/utils';
+const loc = Astro.currentLocale;
+const t = useTranslations(loc).solution;
+const services = t.services;
+const lp = (p: string) => localizePath(p, loc);
 ---
 
-<section class="section" id="services">
+<section class="section" id={anchorId('services', loc)}>
   <div class="animate-on-scroll container">
     <div class="s-head s-head--stack">
       <div>
-        <div class="eyebrow">La solución</div>
-        <h2>Lúmina W construye software que dura.</h2>
+        <div class="eyebrow">{t.eyebrow}</div>
+        <h2>{t.heading}</h2>
       </div>
       <p class="lead">
-        No vendemos tecnología. Vendemos operaciones que funcionan sin que
-        tengas que pensar en ellas.
+        {t.leadA}
         <br /><br />
-        Elige tu camino:
-        <strong>desarrollo a medida</strong> o
-        <strong>SaaS especializado</strong>.
+        {t.leadBPre}
+        <strong>{t.leadBStrongA}</strong>{t.leadBMid}<strong
+          >{t.leadBStrongB}</strong
+        >{t.leadBPost}
       </p>
-      <div class="ghost-num" aria-hidden="true">Servicios</div>
+      <div class="ghost-num" aria-hidden="true">{t.ghost}</div>
     </div>
 
     <div class="services">
@@ -59,7 +31,7 @@ const services = [
           <div
             class={`service ${s.inverse ? 'service--inverse' : ''} ${s.primary ? 'service--primary' : 'service--compact'}`}
           >
-            {s.primary && <div class="service__flag">Servicio principal</div>}
+            {s.primary && <div class="service__flag">{t.flag}</div>}
             <div class="service__head">
               <div class="service__tag">{s.tag}</div>
               <div class="service__icon">
@@ -73,8 +45,13 @@ const services = [
                 <li>{f}</li>
               ))}
             </ul>
-            <a class="service__cta" href="#contact">
-              Quiero una asesoría sin costo
+            <a
+              class="service__cta"
+              href={s.ctaExternal ? s.ctaHref : lp(s.ctaHref)}
+              target={s.ctaExternal ? '_blank' : undefined}
+              rel={s.ctaExternal ? 'noopener noreferrer' : undefined}
+            >
+              {s.ctaLabel}
             </a>
           </div>
         ))

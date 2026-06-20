@@ -1,81 +1,28 @@
 ---
 import Icon from '@/components/ui/Icon.astro';
-
+import { useTranslations, anchorId } from '@/i18n/utils';
 // Equipo real — A (prueba social por credibilidad del equipo).
 // NO inventar experiencia ni usar fotos de stock (regla E).
-// `photo` opcional: ruta en /public. Si no hay foto, se usa el monograma `initials`.
-const team = [
-  {
-    name: 'Valentina Ramírez',
-    initials: 'VR',
-    handle: '@wavival',
-    role: 'Founder & Full Stack Developer',
-    bio: '+3 años de experiencia construyendo software. Aprendizaje continuo.',
-    photo: '/images/profile.webp',
-    socials: [
-      { icon: 'globe', label: 'Portfolio', href: 'https://wavival.dev' },
-      {
-        icon: 'linkedin',
-        label: 'LinkedIn',
-        href: 'https://www.linkedin.com/in/wavival',
-      },
-      {
-        icon: 'instagram',
-        label: 'Instagram',
-        href: 'https://instagram.com/wavival',
-      },
-    ],
-  },
-];
-
-const reasons = [
-  {
-    n: '01',
-    icon: 'shield',
-    title: 'Seguridad desde la arquitectura.',
-    description:
-      'Aplicamos OWASP desde la primera línea de código. Implementamos autenticación por roles, cifrado en tránsito y en reposo, y auditoría de accesos antes de salir a producción. No como un checklist final, sino como parte del diseño inicial.',
-  },
-  {
-    n: '02',
-    icon: 'cpu',
-    title: 'IA aplicada, no decorativa.',
-    description:
-      "Usamos modelos de predicción para anticipar problemas y proyectar costos antes de que ocurran. No un chatbot. No un botón de 'Generar con IA'. Automatización real en el flujo de trabajo de quien opera el sistema.",
-  },
-  {
-    n: '03',
-    icon: 'layers',
-    title: 'Código que no te cobra por crecer.',
-    description:
-      'Cada proyecto incluye documentación técnica entregada al cierre, cobertura de pruebas en módulos críticos y arquitectura modular que permite agregar funcionalidades sin reescribir lo que ya funciona.',
-  },
-  {
-    n: '04',
-    icon: 'compass',
-    title: 'Un equipo, todo el sistema.',
-    description:
-      'No tercerizamos ni el diseño ni la seguridad ni el despliegue. El mismo equipo que diseña la interfaz define la arquitectura del backend y configura el entorno de producción. Sin teléfono descompuesto entre un diseñador externo, un dev y un DevOps freelance.',
-    featured: true,
-  },
-];
-
+// Datos del equipo viven en el diccionario i18n.
+const loc = Astro.currentLocale;
+const t = useTranslations(loc).whyus;
+const team = t.team;
+const reasons = t.reasons;
 const featured = reasons.find((r) => r.featured);
 const supporting = reasons.filter((r) => !r.featured);
 ---
 
-<section class="section" id="us">
+<section class="section" id={anchorId('us', loc)}>
   <div class="animate-on-scroll container">
     <div class="s-head">
       <div>
-        <div class="eyebrow">Por qué Lúmina W</div>
-        <h2>El software que construimos no solo funciona hoy.</h2>
+        <div class="eyebrow">{t.eyebrow}</div>
+        <h2>{t.heading}</h2>
       </div>
       <p class="lead">
-        Cuatro decisiones técnicas que sostenemos en cada proyecto. Sin matices,
-        sin excepciones.
+        {t.lead}
       </p>
-      <div class="ghost-num" aria-hidden="true">Nosotros</div>
+      <div class="ghost-num" aria-hidden="true">{t.ghost}</div>
     </div>
     {
       featured && (
@@ -84,7 +31,7 @@ const supporting = reasons.filter((r) => !r.featured);
             <Icon name={featured.icon} size={40} stroke={1.5} />
           </div>
           <div class="why-feature__body">
-            <div class="why-feature__label">Diferenciador principal</div>
+            <div class="why-feature__label">{t.featuredLabel}</div>
             <h3>{featured.title}</h3>
             <p>{featured.description}</p>
           </div>
@@ -109,8 +56,8 @@ const supporting = reasons.filter((r) => !r.featured);
 
     <div class="team">
       <div class="team__head">
-        <div class="eyebrow">Quién está detrás</div>
-        <h3 class="team__title">Personas reales, no un logo.</h3>
+        <div class="eyebrow">{t.teamEyebrow}</div>
+        <h3 class="team__title">{t.teamTitle}</h3>
       </div>
       <div class="team__grid">
         {
@@ -120,7 +67,7 @@ const supporting = reasons.filter((r) => !r.featured);
                 {m.photo ? (
                   <img
                     src={m.photo}
-                    alt={m.name}
+                    alt=""
                     width="600"
                     height="600"
                     loading="lazy"
@@ -132,7 +79,9 @@ const supporting = reasons.filter((r) => !r.featured);
               <div class="team-card__body">
                 <div class="team-card__name">
                   {m.name}
-                  {m.handle && <span class="team-card__handle">{m.handle}</span>}
+                  {m.handle && (
+                    <span class="team-card__handle">{m.handle}</span>
+                  )}
                 </div>
                 <div class="team-card__role">{m.role}</div>
                 <p class="team-card__bio">{m.bio}</p>
@@ -144,7 +93,7 @@ const supporting = reasons.filter((r) => !r.featured);
                         href={s.href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        aria-label={`${m.name} · ${s.label}`}
+                        aria-label={`${m.name} · ${s.label}${t.opensNewTab}`}
                       >
                         <Icon name={s.icon} size={18} stroke={1.5} />
                       </a>

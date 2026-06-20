@@ -1,11 +1,18 @@
 import { defineConfig } from 'astro/config';
-import react from '@astrojs/react';
 import tailwindcss from '@tailwindcss/vite';
 import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
   site: 'https://luminaw.co',
-  trailingSlash: 'ignore',
+  trailingSlash: 'never',
+  i18n: {
+    locales: ['es', 'en'],
+    defaultLocale: 'es',
+    routing: {
+      prefixDefaultLocale: false,
+      redirectToDefaultLocale: false,
+    },
+  },
   build: {
     inlineStylesheets: 'auto',
   },
@@ -19,9 +26,11 @@ export default defineConfig({
       changefreq: 'monthly',
       priority: 0.7,
       lastmod: new Date(),
+      i18n: {
+        defaultLocale: 'es',
+        locales: { es: 'es-CO', en: 'en' },
+      },
     }),
-    tailwindcss(),
-    react(),
   ],
   vite: {
     plugins: [tailwindcss()],

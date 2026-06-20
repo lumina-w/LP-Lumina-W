@@ -70,4 +70,3 @@ User-agent: MistralAI-User
 Allow: /
 
 Sitemap: https://luminaw.co/sitemap-index.xml
-Host: https://luminaw.co

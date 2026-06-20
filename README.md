@@ -3,7 +3,7 @@
   Lúmina W • Landing Page
 </h1>
 
-![Banner principal](public/banner-main.png)
+![Banner principal](.github/assets/banner-main.png)
 
 > Marketing site for **Lúmina W S.A.S**, a Colombian software startup that builds custom software (Discovery → Build → Launch) and operates SaaS products like TerraCore. Editorial, sober, square-edged design system on top of Astro 6 + Tailwind v4 + TypeScript. Static build, Netlify-hosted, GA4 with consent gating, full SEO + `llms.txt` for AI crawlers.
 

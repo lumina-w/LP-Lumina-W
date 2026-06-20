@@ -1,5 +1,6 @@
 ---
-
+import { useTranslations } from '@/i18n/utils';
+const t = useTranslations(Astro.currentLocale).manifesto;
 ---
 
 <section class="manifesto">
@@ -7,15 +8,15 @@
     <div class="manifesto__inner">
       <div class="manifesto__mark">
         <b>“</b>
-        <span>Tesis<br />fundacional</span>
+        {t.markLine && <span set:html={t.markLine.replace('\n', '<br />')} />}
       </div>
       <div>
         <p class="manifesto__quote">
-          No vendemos tecnología.<br />
-          Vendemos <em>operaciones</em> que funcionan<br />
-          sin que tengas que pensar en ellas.
+          {t.quoteA}<br />
+          {t.quoteBPre}<em>{t.quoteEm}</em>{t.quoteBPost}<br />
+          {t.quoteEnd}
         </p>
-        <p class="manifesto__attribution">Lúmina W · desde el día uno</p>
+        <p class="manifesto__attribution">{t.attribution}</p>
       </div>
     </div>
   </div>

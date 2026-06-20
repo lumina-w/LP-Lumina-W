@@ -1,48 +1,29 @@
 ---
 import Icon from '@/components/ui/Icon.astro';
-
-const paths = [
-  {
-    tag: 'Producto propio · SaaS listo',
-    title: 'Gestiono una operación agropecuaria o agroindustrial',
-    line: 'TerraCore ya existe. Úsalo desde hoy.',
-    cta: 'Conocer TerraCore',
-    href: '/#terracore',
-    icon: 'layers',
-    inverse: false,
-  },
-  {
-    tag: 'Desarrollo a medida',
-    title: 'Tengo un proceso que quiero digitalizar o automatizar',
-    line: 'Sitio, sistema interno o plataforma a medida. Lo construimos contigo.',
-    cta: 'Hablar con el equipo',
-    href: '/#contact',
-    icon: 'custom',
-    inverse: true,
-  },
-];
+import { useTranslations, localizePath, anchorId } from '@/i18n/utils';
+const loc = Astro.currentLocale;
+const t = useTranslations(loc).fork;
+const paths = t.paths;
+const lp = (p: string) => localizePath(p, loc);
 ---
 
-<section class="section fork-section" id="fork">
+<section class="section fork-section" id={anchorId('fork', loc)}>
   <div class="animate-on-scroll container">
     <div class="s-head">
       <div>
-        <div class="eyebrow">¿Por dónde empezar?</div>
-        <h2>¿Qué describe mejor tu situación?</h2>
+        <div class="eyebrow">{t.eyebrow}</div>
+        <h2>{t.heading}</h2>
       </div>
       <p class="lead">
-        Dos caminos, una misma ingeniería. Elige el tuyo y llega directo a la
-        propuesta que te corresponde.
+        {t.lead}
       </p>
-      <div class="ghost-num" aria-hidden="true">Empieza</div>
+      <div class="ghost-num" aria-hidden="true">{t.ghost}</div>
     </div>
 
     <div class="fork">
       {
         paths.map((p) => (
-          <div
-            class={`fork__card ${p.inverse ? 'fork__card--inverse' : ''}`}
-          >
+          <div class={`fork__card ${p.inverse ? 'fork__card--inverse' : ''}`}>
             <div class="fork__head">
               <div class="fork__tag">{p.tag}</div>
               <div class="fork__icon">
@@ -51,15 +32,17 @@ const paths = [
             </div>
             <h3 class="fork__title">{p.title}</h3>
             <p class="fork__line">{p.line}</p>
-            <a class="fork__cta" href={p.href}>{p.cta}</a>
+            <a class="fork__cta" href={lp(p.href)}>
+              {p.cta}
+            </a>
           </div>
         ))
       }
     </div>
 
     <p class="fork__aside">
-      ¿No encaja ninguno? Cuéntanos tu caso y te orientamos.
-      <a class="fork__aside-link" href="/#contact">Hablar con el equipo</a>
+      {t.asidePre}
+      <a class="fork__aside-link" href={lp('/#contact')}>{t.asideLink}</a>
     </p>
   </div>
 </section>

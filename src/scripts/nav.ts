@@ -65,7 +65,47 @@ document.addEventListener('click', (e) => {
 
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape') {
+    // Devolver el foco al disparador del grupo abierto antes de cerrarlo
+    const openGroup = Array.from(groups).find((g) =>
+      g.classList.contains('open')
+    );
+    const openBtn =
+      openGroup?.querySelector<HTMLButtonElement>('.nav__group-btn');
     closeAllGroups();
     closeMobile();
+    openBtn?.focus();
   }
 });
+
+// Scrollspy: marca el enlace de la seccion visible con aria-current="location"
+const spyLinks = Array.from(
+  document.querySelectorAll<HTMLAnchorElement>(
+    '.nav__links a.nav__link[href*="#"]'
+  )
+);
+const sectionToLink = new Map<Element, HTMLAnchorElement>();
+spyLinks.forEach((link) => {
+  const hash = link.getAttribute('href')?.split('#')[1];
+  if (!hash) return;
+  const section = document.getElementById(hash);
+  if (section) sectionToLink.set(section, link);
+});
+
+if (sectionToLink.size > 0) {
+  const clearCurrent = () =>
+    spyLinks.forEach((l) => l.removeAttribute('aria-current'));
+  const spy = new IntersectionObserver(
+    (entries) => {
+      const visible = entries
+        .filter((e) => e.isIntersecting)
+        .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+      if (!visible) return;
+      const link = sectionToLink.get(visible.target);
+      if (!link) return;
+      clearCurrent();
+      link.setAttribute('aria-current', 'location');
+    },
+    { rootMargin: '-45% 0px -45% 0px', threshold: 0 }
+  );
+  sectionToLink.forEach((_, section) => spy.observe(section));
+}

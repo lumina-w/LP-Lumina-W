@@ -43,7 +43,7 @@ Sections like Contact and the Footer use `class="surface-dark"`, which redefines
 
 `.nav__link`, `.footer__col a`, `.service__cta`, and legal-page in-body anchors use a `scaleX` + `transform-origin` shift pattern (origin `right` → `left` on hover; back to `right` on hover-out) so the line enters left-to-right and exits right-to-left. The `.btn-primary` / `.btn-secondary` / `.btn-ghost` buttons are filled CTAs and **do not** get this underline. Default `a:hover` adds `text-decoration: underline` globally, so when adding a new anchor with button-like styling, add it to the `a.btn-…, a.<class>` reset block in `global.css` (around lines 130–161) to prevent double-underline.
 
-### CTAs are text-only — no arrows or icons (buttons *and* links)
+### CTAs are text-only — no arrows or icons (buttons _and_ links)
 
 Design rule: every CTA carries **label text only** — both `<button>`/`.btn-*` and CTA-style anchors/links (`.service__cta`, `.fork__cta`, `.prod-card__cta`, `.nav__cta`, the `Button.astro` wrapper, and any new "Saber más / Solicitar / Conocer …" link). Never add arrow glyphs (`→ › » ↗ ⟶`), `Icon`/SVG children, or chevron pseudo-elements to a CTA. The `.service__cta::after` is the animated underline (`content: ''`) — that's allowed; an arrow is not. Icons stay fine in genuinely non-CTA contexts: nav burger/chevrons, Footer social links, WhatsApp FAB, decorative card/feature badges (Problem/Process/Solution/WhyUs/TerraCore/Fork category icons), FAQ accordion `+`. The prohibition is specifically the interactive call-to-action element, button or link.
 

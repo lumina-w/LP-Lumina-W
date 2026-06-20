@@ -1,4 +1,4 @@
-@import url('https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@700,800&f[]=switzer@400,500,600&display=swap');
+/* Fontshare loaded via <link> in Layout.astro head (parallel, non-blocking) — not @import (chained/render-blocking) */
 @import 'tailwindcss';
 
 @theme {
@@ -30,6 +30,9 @@
    ============================================================ */
 :root {
   --brand-blue: #407bff;
+  /* Azul principal #407bff es solo-relleno (fondos, bordes, formas, texto display grande).
+     Como texto/enlace sobre superficie clara usar --brand-blue-ink (cumple WCAG 4.5:1). */
+  --brand-blue-ink: #2a5fd6;
   --brand-dark: #1b1f28;
   --brand-light: #dee9ff;
   /* Azul = color principal (enlaces, tags, producto TerraCore, foco).
@@ -49,13 +52,13 @@
 
   --text-primary: #0f0f12;
   --text-muted: #5b5f66;
-  --text-faint: #8a8e95;
+  --text-faint: #6f747c;
   --text-button: #ffffff;
   --text-on-dark: #f5f5f5;
   --text-on-dark-muted: #a1a5ad;
 
-  --accent-link: #1e90ff;
-  --accent-hover: #1a7fe0;
+  --accent-link: var(--brand-blue-ink);
+  --accent-hover: #1f4fc0;
 
   --border-base: #e6e6e8;
   --border-strong: #0f0f12;
@@ -76,7 +79,9 @@
   --bg-blur: rgba(255, 255, 255, 0.04);
   --text-primary: var(--text-on-dark);
   --text-muted: var(--text-on-dark-muted);
-  --text-faint: #6b7280;
+  --text-faint: #8b919c;
+  /* Azul-texto legible sobre superficie oscura (#2a5fd6 quedaria muy bajo en contraste) */
+  --brand-blue-ink: #7ea2ff;
   --border-base: var(--border-dark);
   background: var(--brand-dark);
   color: var(--text-on-dark);
@@ -86,8 +91,10 @@
   box-sizing: border-box;
 }
 
-html {
-  scroll-behavior: smooth;
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
 }
 
 body {
@@ -157,6 +164,7 @@ a.fork__cta,
 a.fork__aside-link,
 a.nav__link,
 a.nav__brand,
+a.nav__lang,
 a.footer__mark,
 a.contact__channel,
 a.footer__col-link,
@@ -188,6 +196,23 @@ a.contact__channel:hover,
 a:focus-visible {
   outline: 2px solid var(--accent-link);
   outline-offset: 3px;
+  border-radius: 1px;
+}
+/* Foco visible explicito en controles <button> (el sistema no usa box-shadow,
+   asi que no dependemos del outline por defecto del navegador). 2.4.7 / 2.4.13 */
+.faq__q:focus-visible,
+.btn-primary:focus-visible,
+.btn-secondary:focus-visible,
+.btn-ghost:focus-visible {
+  outline: 2px solid var(--brand-blue-ink);
+  outline-offset: 2px;
+  border-radius: 1px;
+}
+/* Nav oscura (no es .surface-dark): anillo claro para contraste 3:1 */
+.nav__group-btn:focus-visible,
+.nav__burger:focus-visible {
+  outline: 2px solid #7ea2ff;
+  outline-offset: 2px;
   border-radius: 1px;
 }
 
@@ -390,10 +415,44 @@ small {
   color: #fff;
   text-decoration: none;
 }
+.nav__link--ext {
+  gap: 8px;
+}
+.nav__ext-icon {
+  color: currentColor;
+  opacity: 0.8;
+}
 .nav__cta {
   display: flex;
   align-items: center;
   gap: 10px;
+}
+
+.nav__lang {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 32px;
+  height: 28px;
+  padding: 0 8px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--text-on-dark, #fff);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 2px;
+  transition:
+    border-color 0.2s ease,
+    background-color 0.2s ease;
+}
+.nav__lang:hover {
+  border-color: rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.06);
+  text-decoration: none;
+}
+.nav__mobile-lang {
+  font-weight: 600;
 }
 
 .nav__group {
@@ -561,6 +620,11 @@ small {
   display: block;
   font-size: 17px;
 }
+.nav__mobile-link--ext {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
 .nav__mobile-group {
   display: flex;
   flex-direction: column;
@@ -706,7 +770,7 @@ small {
   line-height: 1.4;
 }
 .hero-term__check {
-  color: var(--brand-blue);
+  color: var(--brand-blue-ink);
   font-weight: 700;
   flex-shrink: 0;
 }
@@ -721,7 +785,7 @@ small {
   white-space: nowrap;
 }
 .hero-term__val--num {
-  color: var(--brand-blue);
+  color: var(--brand-blue-ink);
 }
 .hero-term__foot {
   margin: 0;
@@ -907,7 +971,7 @@ small {
 .feature__icon {
   width: 28px;
   height: 28px;
-  color: var(--brand-blue);
+  color: var(--brand-blue-ink);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -1040,6 +1104,14 @@ small {
 .marquee:hover .marquee__track {
   animation-play-state: paused;
 }
+/* WCAG 2.2.2: detener la animacion automatica infinita bajo reduced-motion.
+   El texto del marquee es decorativo (aria-hidden) y se duplica en la pagina. */
+@media (prefers-reduced-motion: reduce) {
+  .marquee__track {
+    animation: none;
+    transform: none;
+  }
+}
 @keyframes marquee {
   from {
     transform: translateX(0);
@@ -1162,12 +1234,12 @@ small {
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.12em;
-  color: var(--brand-blue);
+  color: var(--brand-blue-ink);
   padding: 4px 10px;
   border: 1px solid var(--brand-blue);
 }
 .fork__icon {
-  color: var(--brand-blue);
+  color: var(--brand-blue-ink);
   flex-shrink: 0;
 }
 .fork__title {
@@ -1192,7 +1264,7 @@ small {
   align-self: flex-start;
   font-size: 0.9375rem;
   font-weight: 600;
-  color: var(--brand-blue);
+  color: var(--brand-blue-ink);
   margin-top: 8px;
 }
 .fork__cta::after {
@@ -1225,7 +1297,7 @@ small {
   display: inline-block;
   margin-left: 6px;
   font-weight: 600;
-  color: var(--brand-blue);
+  color: var(--brand-blue-ink);
 }
 .fork__aside-link::after {
   content: '';
@@ -1330,12 +1402,12 @@ small {
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.12em;
-  color: var(--brand-blue);
+  color: var(--brand-blue-ink);
   padding: 4px 10px;
   border: 1px solid var(--brand-blue);
 }
 .service__icon {
-  color: var(--brand-blue);
+  color: var(--brand-blue-ink);
 }
 .service h3 {
   font-size: clamp(1.375rem, 2vw, 1.75rem);
@@ -1383,7 +1455,7 @@ small {
   gap: 8px;
   font-size: 0.9375rem;
   font-weight: 500;
-  color: var(--brand-blue);
+  color: var(--brand-blue-ink);
   text-decoration: none;
   margin-top: 8px;
   align-self: flex-start;
@@ -1913,7 +1985,7 @@ small {
   margin-top: 4px;
   font-weight: 600;
   font-size: 0.9375rem;
-  color: var(--brand-blue);
+  color: var(--brand-blue-ink);
   position: relative;
 }
 .prod-card__cta::after {
@@ -1971,7 +2043,7 @@ small {
   font-weight: 600;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--brand-blue);
+  color: var(--brand-blue-ink);
 }
 .process-track__head h3 {
   font-family: var(--font-display);
@@ -2002,7 +2074,7 @@ small {
   font-weight: 700;
   font-size: 14px;
   letter-spacing: 0.01em;
-  color: var(--brand-blue);
+  color: var(--brand-blue-ink);
   padding: 12px 2px;
 }
 .disclosure::-webkit-details-marker {
@@ -2108,7 +2180,7 @@ details[open] > .disclosure .lbl-open {
   font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--brand-blue);
+  color: var(--brand-blue-ink);
   margin: 0;
 }
 .portal__col-text {
@@ -2146,7 +2218,7 @@ details[open] > .disclosure .lbl-open {
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.16em;
-  color: var(--brand-blue);
+  color: var(--brand-blue-ink);
 }
 .portal__head h3 {
   font-family: var(--font-display);
@@ -2292,7 +2364,7 @@ details[open] > .disclosure .lbl-open {
   font-family: var(--font-display);
   font-weight: 800;
   font-size: 28px;
-  color: var(--brand-blue);
+  color: var(--brand-blue-ink);
   letter-spacing: -0.03em;
   line-height: 1;
 }
@@ -2303,7 +2375,7 @@ details[open] > .disclosure .lbl-open {
   gap: 14px;
 }
 .why__icon {
-  color: var(--brand-blue);
+  color: var(--brand-blue-ink);
   display: inline-flex;
   align-items: center;
   flex-shrink: 0;
@@ -2396,7 +2468,7 @@ details[open] > .disclosure .lbl-open {
   font-weight: 800;
   font-size: 2rem;
   letter-spacing: -0.02em;
-  color: var(--brand-blue);
+  color: var(--brand-blue-ink);
 }
 .team-card__body {
   flex: 1;
@@ -2444,14 +2516,14 @@ details[open] > .disclosure .lbl-open {
     background 160ms ease;
 }
 .team-card__social:hover {
-  color: var(--brand-blue);
+  color: var(--brand-blue-ink);
   border-color: var(--brand-blue);
   background: var(--bg-soft);
 }
 .team-card__role {
   font-size: 0.8125rem;
   font-weight: 600;
-  color: var(--brand-blue);
+  color: var(--brand-blue-ink);
   margin-top: 2px;
 }
 .team-card__bio {
@@ -2498,7 +2570,7 @@ details[open] > .disclosure .lbl-open {
 }
 .faq__q svg {
   transition: transform 320ms cubic-bezier(0.4, 0, 0.2, 1);
-  color: var(--brand-blue);
+  color: var(--brand-blue-ink);
   flex-shrink: 0;
 }
 .faq__item.open .faq__q svg {
@@ -2519,14 +2591,24 @@ details[open] > .disclosure .lbl-open {
   line-height: 1.6;
   max-width: 70ch;
   opacity: 0;
+  /* visibility:hidden saca el panel colapsado del arbol de accesibilidad
+     (los lectores de pantalla no leen respuestas cerradas). El retardo de
+     360ms mantiene el panel visible durante la animacion de cierre. */
+  visibility: hidden;
   transition:
     opacity 280ms ease 80ms,
-    padding 320ms cubic-bezier(0.4, 0, 0.2, 1);
+    padding 320ms cubic-bezier(0.4, 0, 0.2, 1),
+    visibility 0s linear 360ms;
   padding: 0 4px;
 }
 .faq__item.open .faq__a {
   opacity: 1;
+  visibility: visible;
   padding: 0 4px 24px;
+  transition:
+    opacity 280ms ease 80ms,
+    padding 320ms cubic-bezier(0.4, 0, 0.2, 1),
+    visibility 0s;
 }
 
 /* ============================================================
@@ -2568,11 +2650,11 @@ details[open] > .disclosure .lbl-open {
   transition: color 200ms ease;
 }
 .contact__channel:hover {
-  color: var(--brand-blue);
+  color: var(--brand-blue-ink);
   text-decoration: none;
 }
 .contact__channel svg {
-  color: var(--brand-blue);
+  color: var(--brand-blue-ink);
   flex-shrink: 0;
 }
 .contact__channel-label {
@@ -2591,7 +2673,7 @@ details[open] > .disclosure .lbl-open {
   color: var(--text-primary);
 }
 .contact__channel:hover .contact__channel-value {
-  color: var(--brand-blue);
+  color: var(--brand-blue-ink);
 }
 .contact__channel-note {
   margin-top: 4px;
@@ -2642,7 +2724,7 @@ details[open] > .disclosure .lbl-open {
   font-weight: 700;
   font-size: 13px;
   letter-spacing: 0.04em;
-  color: var(--brand-blue);
+  color: var(--brand-blue-ink);
 }
 .contact__step-text {
   font-size: 14.5px;
@@ -2686,7 +2768,7 @@ details[open] > .disclosure .lbl-open {
     letter-spacing 320ms ease;
 }
 .contact__field:focus-within label {
-  color: var(--brand-blue);
+  color: var(--brand-blue-ink);
   letter-spacing: 0.14em;
 }
 .contact__field input,
@@ -2809,7 +2891,7 @@ details[open] > .disclosure .lbl-open {
   position: absolute;
   left: 0;
   top: 0;
-  color: var(--brand-blue);
+  color: var(--brand-blue-ink);
   font-weight: 700;
 }
 
@@ -2852,6 +2934,20 @@ details[open] > .disclosure .lbl-open {
 .contact__success p {
   font-size: 14px;
   color: var(--text-muted);
+}
+.contact__success:focus-visible {
+  outline: 2px solid var(--brand-blue-ink);
+  outline-offset: 4px;
+}
+/* Mensaje de error del formulario (superficie oscura). #ff9a9a sobre #1b1f28 cumple 4.5:1 */
+.contact__error {
+  margin-top: 12px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #ff9a9a;
+}
+.contact__error[hidden] {
+  display: none;
 }
 
 /* Stagger fade-in for form fields when section becomes visible */
@@ -3057,7 +3153,7 @@ details[open] > .disclosure .lbl-open {
   font-weight: 600;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--brand-blue);
+  color: var(--brand-blue-ink);
   margin-bottom: 14px;
 }
 .legal__head h1 {
@@ -3156,7 +3252,7 @@ details[open] > .disclosure .lbl-open {
   counter-increment: toc;
   font-family: ui-monospace, monospace;
   font-size: 11.5px;
-  color: var(--brand-blue);
+  color: var(--brand-blue-ink);
   letter-spacing: 0.04em;
 }
 .legal__toc a::after {
@@ -3172,7 +3268,7 @@ details[open] > .disclosure .lbl-open {
   transition: transform 280ms ease;
 }
 .legal__toc a:hover {
-  color: var(--brand-blue);
+  color: var(--brand-blue-ink);
   text-decoration: none;
 }
 .legal__toc a:hover::after {
@@ -3196,7 +3292,7 @@ details[open] > .disclosure .lbl-open {
   font-family: var(--font-display);
   font-weight: 800;
   font-size: 28px;
-  color: var(--brand-blue);
+  color: var(--brand-blue-ink);
   letter-spacing: -0.02em;
   line-height: 1;
 }
@@ -3231,12 +3327,12 @@ details[open] > .disclosure .lbl-open {
   font-weight: 600;
 }
 .legal__section em {
-  color: var(--brand-blue);
+  color: var(--brand-blue-ink);
   font-style: italic;
 }
 .legal__section a {
   position: relative;
-  color: var(--brand-blue);
+  color: var(--brand-blue-ink);
   text-decoration: none;
   display: inline;
   white-space: nowrap;
@@ -3257,7 +3353,7 @@ details[open] > .disclosure .lbl-open {
 .legal__intro a,
 .legal__callout a {
   position: relative;
-  color: var(--brand-blue);
+  color: var(--brand-blue-ink);
   text-decoration: none;
   background-image: linear-gradient(currentColor, currentColor);
   background-position: 0 100%;
@@ -3309,7 +3405,7 @@ details[open] > .disclosure .lbl-open {
   position: absolute;
   left: 0;
   top: 0;
-  color: var(--brand-blue);
+  color: var(--brand-blue-ink);
   font-family: ui-monospace, monospace;
   font-size: 13px;
 }
@@ -3359,7 +3455,7 @@ details[open] > .disclosure .lbl-open {
   font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--brand-blue);
+  color: var(--brand-blue-ink);
   margin-bottom: 6px;
 }
 .legal__example p {
@@ -3406,7 +3502,7 @@ details[open] > .disclosure .lbl-open {
   font-size: 14px;
 }
 .legal__foot-links a {
-  color: var(--brand-blue);
+  color: var(--brand-blue-ink);
   text-decoration: none;
   position: relative;
 }
@@ -3504,7 +3600,8 @@ details[open] > .disclosure .lbl-open {
   justify-content: center;
   width: 56px;
   height: 56px;
-  background: #25d366;
+  /* Verde WhatsApp oscurecido: el glifo blanco necesita >=3:1 (1.4.11). #25d366 daba 1.99:1 */
+  background: #15a04a;
   color: #fff;
   border-radius: 999px;
   transition: transform 200ms ease;
@@ -3597,6 +3694,15 @@ details[open] > .disclosure .lbl-open {
   transition: transform 280ms ease;
 }
 .nav__link:hover::after {
+  transform: scaleX(1);
+  transform-origin: left center;
+}
+/* TerraCore externo: sin subrayado animado (lleva badge e icono) */
+.nav__link--ext::after {
+  display: none;
+}
+/* Seccion activa (scrollspy): subrayado persistente */
+.nav__link[aria-current]::after {
   transform: scaleX(1);
   transform-origin: left center;
 }

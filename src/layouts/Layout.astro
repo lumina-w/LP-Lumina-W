@@ -5,6 +5,7 @@ import Footer from '@/components/ui/Footer.astro';
 import CookiesBanner from '@/components/ui/CookiesBanner.astro';
 import Loader from '@/components/ui/Loader.astro';
 import Icon from '@/components/ui/Icon.astro';
+import { useTranslations, getLang } from '@/i18n/utils';
 
 interface Props {
   title?: string;
@@ -13,19 +14,36 @@ interface Props {
   noindex?: boolean;
 }
 
+const lang = getLang(Astro.currentLocale);
+const dict = useTranslations(Astro.currentLocale);
+
 const {
-  title = 'Desarrollo de software a medida en Colombia | Lúmina W',
-  description = 'Construimos software personalizado, automatizaciones y sistemas digitales para empresas que necesitan operar sin procesos manuales. Desde Medellín, para toda Colombia.',
+  title = dict.meta.title,
+  description = dict.meta.description,
   image = '/brand/og-image.png',
   noindex = false,
 } = Astro.props;
 
-const canonicalURL = new URL(Astro.url.pathname, 'https://luminaw.co');
+const SITE = 'https://luminaw.co';
+const path = Astro.url.pathname;
+
+// Per-locale URLs for canonical + hreflang alternates.
+const esPath = lang === 'en' ? path.replace(/^\/en/, '') || '/' : path;
+const enPath = lang === 'en' ? path : path === '/' ? '/en' : `/en${path}`;
+const esURL = new URL(esPath, SITE);
+const enURL = new URL(enPath, SITE);
+const canonicalURL = new URL(path, SITE);
+
+const htmlLang = lang === 'en' ? 'en' : 'es-CO';
+const ogLocale = lang === 'en' ? 'en_US' : 'es_CO';
+const ogLocaleAlt = lang === 'en' ? 'es_CO' : 'en_US';
+const schemaLang = lang === 'en' ? 'en' : 'es-CO';
+
 const BASE = import.meta.env.BASE_URL;
 ---
 
 <!doctype html>
-<html lang="es-CO">
+<html lang={htmlLang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -41,13 +59,10 @@ const BASE = import.meta.env.BASE_URL;
         ? 'noindex, nofollow'
         : 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1'}
     />
-    <meta
-      name="keywords"
-      content="desarrollo software a medida Colombia, automatización de procesos empresariales, software empresarial Medellín, sistemas digitales para empresas, software personalizado Colombia"
-    />
     <link rel="canonical" href={canonicalURL} />
-    <link rel="alternate" hreflang="es-co" href={canonicalURL} />
-    <link rel="alternate" hreflang="x-default" href={canonicalURL} />
+    <link rel="alternate" hreflang="es-co" href={esURL} />
+    <link rel="alternate" hreflang="en" href={enURL} />
+    <link rel="alternate" hreflang="x-default" href={esURL} />
 
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonicalURL} />
@@ -55,18 +70,19 @@ const BASE = import.meta.env.BASE_URL;
     <meta property="og:description" content={description} />
     <meta property="og:image" content={`https://luminaw.co${image}`} />
     <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta
-      property="og:image:alt"
-      content="Lúmina W — Desarrollo de software a medida en Colombia"
-    />
-    <meta property="og:locale" content="es_CO" />
+    <meta property="og:image:height" content="800" />
+    <meta property="og:image:alt" content={dict.meta.ogImageAlt} />
+    <meta property="og:locale" content={ogLocale} />
+    <meta property="og:locale:alternate" content={ogLocaleAlt} />
     <meta property="og:site_name" content="Lúmina W" />
 
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@wavival0" />
+    <meta name="twitter:creator" content="@wavival0" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={`https://luminaw.co${image}`} />
+    <meta name="twitter:image:alt" content={dict.meta.ogImageAlt} />
 
     <meta name="format-detection" content="telephone=no" />
     <meta name="theme-color" content="#1b1f28" />
@@ -83,8 +99,21 @@ const BASE = import.meta.env.BASE_URL;
 
     <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
     <link rel="dns-prefetch" href="https://api.fontshare.com" />
+    <link
+      rel="preload"
+      as="style"
+      href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@700,800&f[]=switzer@400,500,600&display=swap"
+      onload="this.onload=null;this.rel='stylesheet'"
+    />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@700,800&f[]=switzer@400,500,600&display=swap"
+      />
+    </noscript>
     <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
 
+    <!-- Google Search Console verificado vía DNS (no requiere meta tag) -->
     <!-- TODO: pegar verification IDs cuando estén disponibles -->
     <!-- <meta name="msvalidate.01" content="PEGAR_AQUI" /> -->
     <!-- <meta name="yandex-verification" content="PEGAR_AQUI" /> -->
@@ -108,7 +137,7 @@ const BASE = import.meta.env.BASE_URL;
         '@context': 'https://schema.org',
         '@graph': [
           {
-            '@type': 'Organization',
+            '@type': 'ProfessionalService',
             '@id': 'https://luminaw.co/#organization',
             name: 'Lúmina W',
             legalName: 'Lúmina W S.A.S',
@@ -117,15 +146,25 @@ const BASE = import.meta.env.BASE_URL;
               '@type': 'ImageObject',
               url: 'https://luminaw.co/brand/logo.webp',
             },
-            description:
-              'Tu operación no debería depender de Excel. Software a medida y SaaS B2B para empresas que necesitan operar con control, sin procesos manuales.',
+            image: 'https://luminaw.co/brand/og-image.png',
+            description: dict.meta.description,
             email: 'contact@luminaw.co',
             telephone: '+57-3108283088',
+            priceRange: '$$',
             address: {
               '@type': 'PostalAddress',
               addressLocality: 'Medellín',
               addressRegion: 'Antioquia',
               addressCountry: 'CO',
+            },
+            geo: {
+              '@type': 'GeoCoordinates',
+              latitude: 6.2442,
+              longitude: -75.5812,
+            },
+            areaServed: {
+              '@type': 'Country',
+              name: 'Colombia',
             },
             contactPoint: {
               '@type': 'ContactPoint',
@@ -133,12 +172,13 @@ const BASE = import.meta.env.BASE_URL;
               contactType: 'customer service',
               email: 'contact@luminaw.co',
               url: 'https://wa.me/573108283088',
-              availableLanguage: ['Spanish', 'es-CO'],
+              availableLanguage: ['Spanish', 'English', 'es-CO'],
               areaServed: 'CO',
             },
             sameAs: [
               'https://instagram.com/luminaw.co',
               'https://linkedin.com/company/lumina-w',
+              'https://x.com/wavival0',
               'https://blog.luminaw.co',
             ],
           },
@@ -147,10 +187,9 @@ const BASE = import.meta.env.BASE_URL;
             '@id': 'https://luminaw.co/#website',
             url: 'https://luminaw.co',
             name: 'Lúmina W',
-            description:
-              'Desarrollo de software a medida, automatizaciones y sistemas digitales para empresas en Colombia.',
+            description: dict.meta.description,
             publisher: { '@id': 'https://luminaw.co/#organization' },
-            inLanguage: 'es-CO',
+            inLanguage: schemaLang,
           },
           {
             '@type': 'WebPage',
@@ -159,7 +198,7 @@ const BASE = import.meta.env.BASE_URL;
             name: title,
             description: description,
             isPartOf: { '@id': 'https://luminaw.co/#website' },
-            inLanguage: 'es-CO',
+            inLanguage: schemaLang,
           },
         ],
       })}
@@ -170,7 +209,7 @@ const BASE = import.meta.env.BASE_URL;
       href="#main-content"
       class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:bg-[var(--brand-dark)] focus:px-4 focus:py-2 focus:text-white"
     >
-      Saltar al contenido
+      {dict.layout.skipToContent}
     </a>
     <Loader />
     <NavBar />
@@ -183,7 +222,7 @@ const BASE = import.meta.env.BASE_URL;
       href="https://wa.me/573108283088"
       target="_blank"
       rel="noopener noreferrer"
-      aria-label="Contactar por WhatsApp"
+      aria-label={dict.layout.whatsappAria}
       class="wa-fab"
     >
       <Icon name="whatsapp" size={28} stroke={2} />

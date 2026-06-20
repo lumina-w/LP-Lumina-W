@@ -1,26 +1,28 @@
 ---
 import Icon from '@/components/ui/Icon.astro';
+import { useTranslations, anchorId } from '@/i18n/utils';
+const loc = Astro.currentLocale;
+const t = useTranslations(loc).contact;
 ---
 
-<section class="section surface-dark" id="contact">
+<section class="section surface-dark" id={anchorId('contact', loc)}>
   <div class="animate-on-scroll container">
     <div class="contact">
       <div class="contact__copy">
-        <div class="ghost-num" aria-hidden="true">Contacto</div>
+        <div class="ghost-num" aria-hidden="true">{t.ghost}</div>
         <div class="eyebrow" style="color:var(--text-on-dark-muted)">
-          Contacto
+          {t.eyebrow}
         </div>
         <h2 style="color:#fff;margin-top:20px">
-          ¿Tienes un proyecto en mente?
+          {t.heading}
         </h2>
         <p
           class="lead"
           style="margin-top:14px;max-width:42ch;color:var(--text-on-dark-muted)"
         >
-          No necesitas tenerlo todo claro todavía. Cuéntanos dónde estás y hacia
-          dónde quieres ir.
+          {t.lead}
         </p>
-        <div class="contact__direct">¿Prefieres algo más directo?</div>
+        <div class="contact__direct">{t.direct}</div>
         <div class="contact__channels">
           <a
             class="contact__channel"
@@ -30,189 +32,149 @@ import Icon from '@/components/ui/Icon.astro';
           >
             <Icon name="whatsapp" size={20} stroke={2} />
             <div>
-              <div class="contact__channel-label">WhatsApp</div>
-              <div class="contact__channel-value">+57 310 828 3088</div>
+              <div class="contact__channel-label">{t.whatsappLabel}</div>
+              <div class="contact__channel-value">{t.whatsappValue}</div>
               <div class="contact__channel-note">
-                Respuesta en menos de 2 horas en horario hábil.
+                {t.whatsappNote}
               </div>
             </div>
+            <span class="sr-only">{t.opensNewTab}</span>
           </a>
           <a class="contact__channel" href="mailto:contact@luminaw.co">
             <Icon name="mail" size={20} stroke={1.75} />
             <div>
-              <div class="contact__channel-label">Email</div>
-              <div class="contact__channel-value">contact@luminaw.co</div>
+              <div class="contact__channel-label">{t.emailLabel}</div>
+              <div class="contact__channel-value">{t.emailValue}</div>
               <div class="contact__channel-note">
-                Para briefs largos o adjuntos.
+                {t.emailNote}
               </div>
             </div>
           </a>
         </div>
 
         <div class="contact__next">
-          <div class="contact__next-title">¿Qué pasa después de enviar?</div>
+          <div class="contact__next-title">{t.nextTitle}</div>
           <ol class="contact__steps">
-            <li class="contact__step">
-              <span class="contact__step-num" aria-hidden="true">01</span>
-              <span class="contact__step-text"
-                >Recibes confirmación inmediata por correo.</span
-              >
-            </li>
-            <li class="contact__step">
-              <span class="contact__step-num" aria-hidden="true">02</span>
-              <span class="contact__step-text"
-                >Te contactamos en menos de 24 horas hábiles.</span
-              >
-            </li>
-            <li class="contact__step">
-              <span class="contact__step-num" aria-hidden="true">03</span>
-              <span class="contact__step-text"
-                >Agendamos una llamada de 30 minutos sin costo.</span
-              >
-            </li>
-            <li class="contact__step">
-              <span class="contact__step-num" aria-hidden="true">04</span>
-              <span class="contact__step-text"
-                >Si hay fit, te enviamos una propuesta en 48 horas.</span
-              >
-            </li>
+            {
+              t.steps.map((step, i) => (
+                <li class="contact__step">
+                  <span class="contact__step-num" aria-hidden="true">
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
+                  <span class="contact__step-text">{step}</span>
+                </li>
+              ))
+            }
           </ol>
-          <p class="contact__next-foot">Sin compromiso. Sin presión de venta.</p>
+          <p class="contact__next-foot">{t.nextFoot}</p>
         </div>
       </div>
 
       <div>
-        <form id="contact-form" class="contact__form">
+        <form
+          id="contact-form"
+          class="contact__form"
+          data-sending={t.submitSending}
+          data-error={t.submitError}
+        >
           <div class="contact__row">
             <div class="contact__field">
-              <label for="c-name">Nombre</label>
+              <label for="c-name">{t.fieldName}</label>
               <input
                 id="c-name"
                 name="name"
                 type="text"
-                placeholder="Tu nombre"
+                placeholder={t.fieldNamePh}
                 required
               />
             </div>
             <div class="contact__field">
-              <label for="c-company">Empresa</label>
+              <label for="c-company">{t.fieldCompany}</label>
               <input
                 id="c-company"
                 name="company"
                 type="text"
-                placeholder="Tu empresa"
+                placeholder={t.fieldCompanyPh}
               />
             </div>
           </div>
           <div class="contact__row">
             <div class="contact__field">
-              <label for="c-email">Correo electrónico</label>
+              <label for="c-email">{t.fieldEmail}</label>
               <input
                 id="c-email"
                 name="email"
                 type="email"
-                placeholder="tu@empresa.com"
+                placeholder={t.fieldEmailPh}
                 required
               />
             </div>
             <div class="contact__field">
-              <label for="c-phone">Teléfono</label>
+              <label for="c-phone">{t.fieldPhone}</label>
               <input
                 id="c-phone"
                 name="phone"
                 type="tel"
-                placeholder="+57 300 000 0000"
+                placeholder={t.fieldPhonePh}
               />
             </div>
           </div>
           <fieldset class="contact__choices">
-            <legend>¿Qué describe mejor lo que buscas?</legend>
-            <label class="contact__choice">
-              <input type="radio" name="need" value="Automatizar un proceso manual" required />
-              <span>Automatizar un proceso manual</span>
-            </label>
-            <label class="contact__choice">
-              <input
-                type="radio"
-                name="need"
-                value="Construir un sistema interno (inventario, CRM, etc.)"
-              />
-              <span>Construir un sistema interno (inventario, CRM, etc.)</span>
-            </label>
-            <label class="contact__choice">
-              <input
-                type="radio"
-                name="need"
-                value="Desarrollar una aplicación web o plataforma"
-              />
-              <span>Desarrollar una aplicación web o plataforma</span>
-            </label>
-            <label class="contact__choice">
-              <input
-                type="radio"
-                name="need"
-                value="Presencia digital (landing, sitio web)"
-              />
-              <span>Presencia digital (landing, sitio web)</span>
-            </label>
-            <label class="contact__choice">
-              <input
-                type="radio"
-                name="need"
-                value="No sé exactamente, necesito orientación"
-              />
-              <span>No sé exactamente, necesito orientación</span>
-            </label>
+            <legend>{t.needLegend}</legend>
+            {
+              t.needOptions.map((opt, i) => (
+                <label class="contact__choice">
+                  <input
+                    type="radio"
+                    name="need"
+                    value={opt}
+                    required={i === 0 ? true : undefined}
+                  />
+                  <span>{opt}</span>
+                </label>
+              ))
+            }
           </fieldset>
           <fieldset class="contact__choices">
-            <legend>¿En qué etapa estás?</legend>
-            <label class="contact__choice">
-              <input
-                type="radio"
-                name="stage"
-                value="Explorando opciones, sin urgencia"
-                required
-              />
-              <span>Explorando opciones, sin urgencia</span>
-            </label>
-            <label class="contact__choice">
-              <input
-                type="radio"
-                name="stage"
-                value="Evaluando proveedores activamente"
-              />
-              <span>Evaluando proveedores activamente</span>
-            </label>
-            <label class="contact__choice">
-              <input
-                type="radio"
-                name="stage"
-                value="Listo para empezar pronto"
-              />
-              <span>Listo para empezar pronto</span>
-            </label>
+            <legend>{t.stageLegend}</legend>
+            {
+              t.stageOptions.map((opt, i) => (
+                <label class="contact__choice">
+                  <input
+                    type="radio"
+                    name="stage"
+                    value={opt}
+                    required={i === 0 ? true : undefined}
+                  />
+                  <span>{opt}</span>
+                </label>
+              ))
+            }
           </fieldset>
           <div class="contact__field">
-            <label for="c-message">Cuéntanos brevemente el problema</label>
+            <label for="c-message">{t.fieldMessage}</label>
             <textarea
               id="c-message"
               name="message"
               rows="4"
-              placeholder="Opcional. El contexto que quieras compartir."
-            ></textarea>
+              placeholder={t.fieldMessagePh}></textarea>
           </div>
           <button id="submit-btn" type="submit" class="btn-primary">
-            Enviar mensaje
+            {t.submit}
           </button>
+          <p id="form-error" class="contact__error" role="alert" hidden></p>
           <ul class="contact__assurances">
-            <li>Respondemos en menos de 24 horas hábiles.</li>
-            <li>Primera conversación sin costo ni compromiso.</li>
-            <li>Si no hay fit, te lo decimos directo.</li>
+            {t.assurances.map((a) => <li>{a}</li>)}
           </ul>
         </form>
-        <div id="form-success" class="contact__success">
-          <h3>¡Mensaje enviado!</h3>
-          <p>Te contactamos pronto.</p>
+        <div
+          id="form-success"
+          class="contact__success"
+          role="status"
+          tabindex="-1"
+        >
+          <h3>{t.successTitle}</h3>
+          <p>{t.successText}</p>
         </div>
       </div>
     </div>
