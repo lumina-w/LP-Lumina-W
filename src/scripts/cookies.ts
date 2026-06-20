@@ -28,21 +28,35 @@ function loadGA() {
   };
 }
 
-function hideBanner() {
-  if (banner) {
-    banner.style.opacity = '0';
-    setTimeout(() => banner.classList.add('hidden'), 300);
+let lastFocused: HTMLElement | null = null;
+
+function onKeydown(e: KeyboardEvent) {
+  if (e.key === 'Escape') {
+    // Cerrar con Esc = solo esenciales: no carga analytics y la decisión se
+    // guarda para no volver a preguntar.
+    localStorage.setItem(COOKIE_KEY, 'rejected');
+    hideBanner();
   }
 }
 
+function hideBanner() {
+  if (!banner) return;
+  banner.style.opacity = '0';
+  document.removeEventListener('keydown', onKeydown);
+  setTimeout(() => banner.classList.add('hidden'), 300);
+  lastFocused?.focus();
+}
+
 function showBanner() {
-  if (banner) {
-    banner.classList.remove('hidden');
-    banner.classList.add('flex');
-    requestAnimationFrame(() => {
-      banner.style.opacity = '1';
-    });
-  }
+  if (!banner) return;
+  lastFocused = document.activeElement as HTMLElement | null;
+  banner.classList.remove('hidden');
+  banner.classList.add('flex');
+  document.addEventListener('keydown', onKeydown);
+  requestAnimationFrame(() => {
+    banner.style.opacity = '1';
+    (acceptBtn ?? banner).focus();
+  });
 }
 
 const saved = localStorage.getItem(COOKIE_KEY);
@@ -50,7 +64,21 @@ const saved = localStorage.getItem(COOKIE_KEY);
 if (saved === 'accepted') {
   loadGA();
 } else if (!saved) {
-  setTimeout(showBanner, 1500);
+  // Aparece tras el primer scroll, no al cargar, para no competir con el hero.
+  let shown = false;
+  const reveal = () => {
+    if (shown) return;
+    shown = true;
+    window.removeEventListener('scroll', onScroll);
+    clearTimeout(fallback);
+    showBanner();
+  };
+  const onScroll = () => {
+    if (window.scrollY > 80) reveal();
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  // Respaldo: si el usuario nunca hace scroll, mostrar de todos modos.
+  const fallback = setTimeout(reveal, 8000);
 }
 
 acceptBtn?.addEventListener('click', () => {

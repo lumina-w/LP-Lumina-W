@@ -3,10 +3,10 @@ import Icon from '@/components/ui/Icon.astro';
 ---
 
 <section class="section surface-dark" id="contact">
-  <div class="container animate-on-scroll">
+  <div class="animate-on-scroll container">
     <div class="contact">
       <div class="contact__copy">
-        <div class="ghost-num" aria-hidden="true">08</div>
+        <div class="ghost-num" aria-hidden="true">Contacto</div>
         <div class="eyebrow" style="color:var(--text-on-dark-muted)">
           Contacto
         </div>
@@ -17,17 +17,11 @@ import Icon from '@/components/ui/Icon.astro';
           class="lead"
           style="margin-top:14px;max-width:42ch;color:var(--text-on-dark-muted)"
         >
-          No necesitas tenerlo todo claro todavía. Cuéntanos dónde estás y
-          hacia dónde quieres ir.
+          No necesitas tenerlo todo claro todavía. Cuéntanos dónde estás y hacia
+          dónde quieres ir.
         </p>
+        <div class="contact__direct">¿Prefieres algo más directo?</div>
         <div class="contact__channels">
-          <a class="contact__channel" href="mailto:contact@luminaw.co">
-            <Icon name="mail" size={20} stroke={1.75} />
-            <div>
-              <div class="contact__channel-label">Email</div>
-              <div class="contact__channel-value">contact@luminaw.co</div>
-            </div>
-          </a>
           <a
             class="contact__channel"
             href="https://wa.me/573108283088"
@@ -38,54 +32,183 @@ import Icon from '@/components/ui/Icon.astro';
             <div>
               <div class="contact__channel-label">WhatsApp</div>
               <div class="contact__channel-value">+57 310 828 3088</div>
+              <div class="contact__channel-note">
+                Respuesta en menos de 2 horas en horario hábil.
+              </div>
             </div>
           </a>
+          <a class="contact__channel" href="mailto:contact@luminaw.co">
+            <Icon name="mail" size={20} stroke={1.75} />
+            <div>
+              <div class="contact__channel-label">Email</div>
+              <div class="contact__channel-value">contact@luminaw.co</div>
+              <div class="contact__channel-note">
+                Para briefs largos o adjuntos.
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <div class="contact__next">
+          <div class="contact__next-title">¿Qué pasa después de enviar?</div>
+          <ol class="contact__steps">
+            <li class="contact__step">
+              <span class="contact__step-num" aria-hidden="true">01</span>
+              <span class="contact__step-text"
+                >Recibes confirmación inmediata por correo.</span
+              >
+            </li>
+            <li class="contact__step">
+              <span class="contact__step-num" aria-hidden="true">02</span>
+              <span class="contact__step-text"
+                >Te contactamos en menos de 24 horas hábiles.</span
+              >
+            </li>
+            <li class="contact__step">
+              <span class="contact__step-num" aria-hidden="true">03</span>
+              <span class="contact__step-text"
+                >Agendamos una llamada de 30 minutos sin costo.</span
+              >
+            </li>
+            <li class="contact__step">
+              <span class="contact__step-num" aria-hidden="true">04</span>
+              <span class="contact__step-text"
+                >Si hay fit, te enviamos una propuesta en 48 horas.</span
+              >
+            </li>
+          </ol>
+          <p class="contact__next-foot">Sin compromiso. Sin presión de venta.</p>
         </div>
       </div>
 
       <div>
         <form id="contact-form" class="contact__form">
-          <div class="contact__field">
-            <label for="c-name">Nombre</label>
-            <input
-              id="c-name"
-              name="name"
-              type="text"
-              placeholder="Tu nombre"
-              required
-            />
+          <div class="contact__row">
+            <div class="contact__field">
+              <label for="c-name">Nombre</label>
+              <input
+                id="c-name"
+                name="name"
+                type="text"
+                placeholder="Tu nombre"
+                required
+              />
+            </div>
+            <div class="contact__field">
+              <label for="c-company">Empresa</label>
+              <input
+                id="c-company"
+                name="company"
+                type="text"
+                placeholder="Tu empresa"
+              />
+            </div>
           </div>
-          <div class="contact__field">
-            <label for="c-company">Empresa</label>
-            <input
-              id="c-company"
-              name="company"
-              type="text"
-              placeholder="Tu empresa"
-            />
+          <div class="contact__row">
+            <div class="contact__field">
+              <label for="c-email">Correo electrónico</label>
+              <input
+                id="c-email"
+                name="email"
+                type="email"
+                placeholder="tu@empresa.com"
+                required
+              />
+            </div>
+            <div class="contact__field">
+              <label for="c-phone">Teléfono</label>
+              <input
+                id="c-phone"
+                name="phone"
+                type="tel"
+                placeholder="+57 300 000 0000"
+              />
+            </div>
           </div>
+          <fieldset class="contact__choices">
+            <legend>¿Qué describe mejor lo que buscas?</legend>
+            <label class="contact__choice">
+              <input type="radio" name="need" value="Automatizar un proceso manual" required />
+              <span>Automatizar un proceso manual</span>
+            </label>
+            <label class="contact__choice">
+              <input
+                type="radio"
+                name="need"
+                value="Construir un sistema interno (inventario, CRM, etc.)"
+              />
+              <span>Construir un sistema interno (inventario, CRM, etc.)</span>
+            </label>
+            <label class="contact__choice">
+              <input
+                type="radio"
+                name="need"
+                value="Desarrollar una aplicación web o plataforma"
+              />
+              <span>Desarrollar una aplicación web o plataforma</span>
+            </label>
+            <label class="contact__choice">
+              <input
+                type="radio"
+                name="need"
+                value="Presencia digital (landing, sitio web)"
+              />
+              <span>Presencia digital (landing, sitio web)</span>
+            </label>
+            <label class="contact__choice">
+              <input
+                type="radio"
+                name="need"
+                value="No sé exactamente, necesito orientación"
+              />
+              <span>No sé exactamente, necesito orientación</span>
+            </label>
+          </fieldset>
+          <fieldset class="contact__choices">
+            <legend>¿En qué etapa estás?</legend>
+            <label class="contact__choice">
+              <input
+                type="radio"
+                name="stage"
+                value="Explorando opciones, sin urgencia"
+                required
+              />
+              <span>Explorando opciones, sin urgencia</span>
+            </label>
+            <label class="contact__choice">
+              <input
+                type="radio"
+                name="stage"
+                value="Evaluando proveedores activamente"
+              />
+              <span>Evaluando proveedores activamente</span>
+            </label>
+            <label class="contact__choice">
+              <input
+                type="radio"
+                name="stage"
+                value="Listo para empezar pronto"
+              />
+              <span>Listo para empezar pronto</span>
+            </label>
+          </fieldset>
           <div class="contact__field">
-            <label for="c-email">Correo electrónico</label>
-            <input
-              id="c-email"
-              name="email"
-              type="email"
-              placeholder="tu@empresa.com"
-              required
-            />
-          </div>
-          <div class="contact__field">
-            <label for="c-message">¿Qué necesitas?</label>
+            <label for="c-message">Cuéntanos brevemente el problema</label>
             <textarea
               id="c-message"
               name="message"
               rows="4"
-              placeholder="Cuéntanos sobre tu proyecto o necesidad..."
-              required></textarea>
+              placeholder="Opcional. El contexto que quieras compartir."
+            ></textarea>
           </div>
           <button id="submit-btn" type="submit" class="btn-primary">
             Enviar mensaje
           </button>
+          <ul class="contact__assurances">
+            <li>Respondemos en menos de 24 horas hábiles.</li>
+            <li>Primera conversación sin costo ni compromiso.</li>
+            <li>Si no hay fit, te lo decimos directo.</li>
+          </ul>
         </form>
         <div id="form-success" class="contact__success">
           <h3>¡Mensaje enviado!</h3>

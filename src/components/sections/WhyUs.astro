@@ -1,7 +1,32 @@
 ---
 import Icon from '@/components/ui/Icon.astro';
 
-const PORTFOLIO = 'https://wavival.dev/';
+// Equipo real — A (prueba social por credibilidad del equipo).
+// NO inventar experiencia ni usar fotos de stock (regla E).
+// `photo` opcional: ruta en /public. Si no hay foto, se usa el monograma `initials`.
+const team = [
+  {
+    name: 'Valentina Ramírez',
+    initials: 'VR',
+    handle: '@wavival',
+    role: 'Founder & Full Stack Developer',
+    bio: '+3 años de experiencia construyendo software. Aprendizaje continuo.',
+    photo: '/images/profile.webp',
+    socials: [
+      { icon: 'globe', label: 'Portfolio', href: 'https://wavival.dev' },
+      {
+        icon: 'linkedin',
+        label: 'LinkedIn',
+        href: 'https://www.linkedin.com/in/wavival',
+      },
+      {
+        icon: 'instagram',
+        label: 'Instagram',
+        href: 'https://instagram.com/wavival',
+      },
+    ],
+  },
+];
 
 const reasons = [
   {
@@ -9,53 +34,70 @@ const reasons = [
     icon: 'shield',
     title: 'Seguridad desde la arquitectura.',
     description:
-      'No es una capa que se agrega al final. Va en cada decisión técnica desde el día uno. Cada sistema que construimos está diseñado para resistir.',
+      'Aplicamos OWASP desde la primera línea de código. Implementamos autenticación por roles, cifrado en tránsito y en reposo, y auditoría de accesos antes de salir a producción. No como un checklist final, sino como parte del diseño inicial.',
   },
   {
     n: '02',
     icon: 'cpu',
-    title: 'IA que automatiza procesos reales.',
+    title: 'IA aplicada, no decorativa.',
     description:
-      'No integramos IA como tendencia. La usamos donde genuinamente reduce trabajo, mejora decisiones y hace que tu operación sea más inteligente.',
+      "Usamos modelos de predicción para anticipar problemas y proyectar costos antes de que ocurran. No un chatbot. No un botón de 'Generar con IA'. Automatización real en el flujo de trabajo de quien opera el sistema.",
   },
   {
     n: '03',
     icon: 'layers',
-    title: 'Código limpio que escala.',
+    title: 'Código que no te cobra por crecer.',
     description:
-      'Sin deuda técnica desde el inicio. Lo que construimos hoy no lo reconstruyes en dos años. Documentado, mantenible y listo para crecer.',
+      'Cada proyecto incluye documentación técnica entregada al cierre, cobertura de pruebas en módulos críticos y arquitectura modular que permite agregar funcionalidades sin reescribir lo que ya funciona.',
   },
   {
     n: '04',
     icon: 'compass',
-    title: 'Visión completa del producto.',
+    title: 'Un equipo, todo el sistema.',
     description:
-      'Diseño, frontend, backend, seguridad. Entendemos todo el sistema, no solo la parte que nos toca. Eso se nota en el resultado final.',
+      'No tercerizamos ni el diseño ni la seguridad ni el despliegue. El mismo equipo que diseña la interfaz define la arquitectura del backend y configura el entorno de producción. Sin teléfono descompuesto entre un diseñador externo, un dev y un DevOps freelance.',
+    featured: true,
   },
 ];
+
+const featured = reasons.find((r) => r.featured);
+const supporting = reasons.filter((r) => !r.featured);
 ---
 
 <section class="section" id="us">
-  <div class="container animate-on-scroll">
+  <div class="animate-on-scroll container">
     <div class="s-head">
       <div>
         <div class="eyebrow">Por qué Lúmina W</div>
         <h2>El software que construimos no solo funciona hoy.</h2>
       </div>
       <p class="lead">
-        Cuatro decisiones técnicas que sostenemos en cada proyecto. Sin
-        matices, sin excepciones.
+        Cuatro decisiones técnicas que sostenemos en cada proyecto. Sin matices,
+        sin excepciones.
       </p>
-      <div class="ghost-num" aria-hidden="true">06</div>
+      <div class="ghost-num" aria-hidden="true">Nosotros</div>
     </div>
-    <div class="why">
+    {
+      featured && (
+        <article class="why-feature">
+          <div class="why-feature__icon">
+            <Icon name={featured.icon} size={40} stroke={1.5} />
+          </div>
+          <div class="why-feature__body">
+            <div class="why-feature__label">Diferenciador principal</div>
+            <h3>{featured.title}</h3>
+            <p>{featured.description}</p>
+          </div>
+        </article>
+      )
+    }
+    <div class="why why--supporting">
       {
-        reasons.map((r) => (
+        supporting.map((r) => (
           <div class="why__item">
-            <div class="why__num">{r.n}</div>
             <div class="why__head">
               <div class="why__icon">
-                <Icon name={r.icon} size={28} stroke={1.5} />
+                <Icon name={r.icon} size={24} stroke={1.5} />
               </div>
               <h3>{r.title}</h3>
             </div>
@@ -64,13 +106,56 @@ const reasons = [
         ))
       }
     </div>
-    <p class="why__more">
-      <a
-        class="service__cta"
-        href={PORTFOLIO}
-        target="_blank"
-        rel="noopener noreferrer">Saber más</a
-      >
-    </p>
+
+    <div class="team">
+      <div class="team__head">
+        <div class="eyebrow">Quién está detrás</div>
+        <h3 class="team__title">Personas reales, no un logo.</h3>
+      </div>
+      <div class="team__grid">
+        {
+          team.map((m) => (
+            <article class="team-card">
+              <div class="team-card__media">
+                {m.photo ? (
+                  <img
+                    src={m.photo}
+                    alt={m.name}
+                    width="600"
+                    height="600"
+                    loading="lazy"
+                  />
+                ) : (
+                  <span aria-hidden="true">{m.initials}</span>
+                )}
+              </div>
+              <div class="team-card__body">
+                <div class="team-card__name">
+                  {m.name}
+                  {m.handle && <span class="team-card__handle">{m.handle}</span>}
+                </div>
+                <div class="team-card__role">{m.role}</div>
+                <p class="team-card__bio">{m.bio}</p>
+                {m.socials && (
+                  <div class="team-card__socials">
+                    {m.socials.map((s) => (
+                      <a
+                        class="team-card__social"
+                        href={s.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={`${m.name} · ${s.label}`}
+                      >
+                        <Icon name={s.icon} size={18} stroke={1.5} />
+                      </a>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </article>
+          ))
+        }
+      </div>
+    </div>
   </div>
 </section>

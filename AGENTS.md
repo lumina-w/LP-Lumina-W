@@ -28,6 +28,7 @@ Node `>= 22.12.0`. No test runner is configured — adding one is an explicit de
 ## Doing work in this repo
 
 ### What you can do without asking
+
 - Add or rewrite section copy **only when the task explicitly grants permission**.
 - Refactor markup or class names within a section, as long as anchors (`id`), navbar order, and copy strings stay intact.
 - Add new design tokens or BEM blocks to `src/styles/global.css`.
@@ -36,6 +37,7 @@ Node `>= 22.12.0`. No test runner is configured — adding one is an explicit de
 - Tighten accessibility (ARIA, focus order, reduced-motion gates).
 
 ### What you must confirm first
+
 - Changing **existing copy strings** in `Hero`, `Problem`, `Solution`, `TerraCore`, `WhyUs`, `FAQ`, `Contact`, `Footer`. The brand has been explicit about preserving wording.
 - Renaming routes (`/terms`, `/privacy`, `/cookies`, anchor `id`s).
 - Adding new third-party scripts, fonts, or external dependencies.
@@ -43,6 +45,8 @@ Node `>= 22.12.0`. No test runner is configured — adding one is an explicit de
 - Replacing the hero SVG, the TerraCore dashboard mock, or the TerraCore video.
 
 ### What you must never do
+
+- Use a dash (`-`, `–`, `—`) in user-facing UI copy. No hyphen-as-connector, en dash, or em dash in rendered text (headings, leads, button labels, card copy, eyebrows, legal prose). Rewrite with a period, comma, colon, or split sentence. Exceptions: real compound words (`e-commerce`, `full-stack`), code, URLs/emails.
 - Re-introduce `translateX` hover-translate effects. They were removed deliberately. The only allowed `translateX` lives in `@keyframes marquee`.
 - Use icons on `.btn-primary` / `.btn-secondary`. Filled CTAs are text-only.
 - Add `text-decoration: underline` to anchors that render as buttons. The reset block in `global.css` already handles this — extend it if you add a new button-like anchor class.
@@ -66,7 +70,7 @@ public/                        ← brand assets, icons, videos, robots.txt, llms
 ### Conventions that cut across files
 
 1. **Ghost numbers follow navbar order**, not section order. When a navbar anchor changes, renumber every numbered section.
-2. **`.surface-dark` flips tokens** for dark sections (Contact, Footer). On dark surfaces, `--border-strong` is *not* flipped — use `rgba(255,255,255,0.14)` explicitly.
+2. **`.surface-dark` flips tokens** for dark sections (Contact, Footer). On dark surfaces, `--border-strong` is _not_ flipped — use `rgba(255,255,255,0.14)` explicitly.
 3. **Animated underline** lives on `.nav__link`, `.footer__col a`, `.service__cta`, and in-body legal anchors (via `background-image` gradient hack on legal pages). Pattern: `scaleX(0) origin:right` → `scaleX(1) origin:left` on hover. Buttons do **not** get this.
 4. **Navbar markup is duplicated** between desktop (`.nav__links`) and mobile (`.nav__mobile`) — update both.
 5. **Legal pages** all share the `<article class="legal"><div class="legal__body"><nav class="legal__toc">…<div class="legal__content">…` shape. TOC is sticky at ≥1024 px. Anchors are zero-padded (`#sec-01` … `#sec-10`).
@@ -79,8 +83,8 @@ public/                        ← brand assets, icons, videos, robots.txt, llms
 - **Legal name**: Lúmina W S.A.S.
 - **Email**: `contact@luminaw.co`.
 - **WhatsApp**: `+57 310 828 3088`.
-- **Tagline**: *"Creamos software. Los negocios lo rentan."*
-- **Thesis line** (used in Manifesto + llms.txt): *"No vendemos tecnología. Vendemos operaciones que funcionan sin que tengas que pensar en ellas."*
+- **Tagline**: _"Creamos software. Los negocios lo rentan."_
+- **Thesis line** (used in Manifesto + llms.txt): _"No vendemos tecnología. Vendemos operaciones que funcionan sin que tengas que pensar en ellas."_
 - **Tone**: directo, breve, español colombiano. Sin jerga gringa ("leads", "stakeholders" se evitan en el copy público). Editorial, no marketing-fluff.
 
 ## Working with the design system
@@ -88,7 +92,7 @@ public/                        ← brand assets, icons, videos, robots.txt, llms
 See [`DESIGN.md`](./DESIGN.md) for the full token + component reference. Quick rules:
 
 - Typography pair: **Cabinet Grotesk** (display) + **Switzer** (body), loaded via Fontshare CDN preconnected from `Layout.astro`.
-- Brand colors: `#407bff` (blue), `#1b1f28` (dark), `#dee9ff` (light), `#fafafa` (page bg).
+- Brand colors: `#407bff` (blue, principal), `#f5a623` (amber, strategic accent — fill-only; use `#8a5a06` `--brand-accent-ink` for amber text/small icons), `#1b1f28` (dark), `#dee9ff` (light), `#fafafa` (page bg). No greens.
 - Radii are near-square: `0 / 2 / 4 px`. No box-shadow — elevation is expressed with 1 px borders.
 - Spacing: section padding via `--space-section` (96 px default).
 - Reduced motion is honored across cursor glow, scroll fade-up, loader, and the floating hero animation.
@@ -105,6 +109,7 @@ See [`DESIGN.md`](./DESIGN.md) for the full token + component reference. Quick r
 ## When in doubt
 
 Ask. The brand has corrected agents repeatedly on:
+
 - preserving exact copy strings,
 - nav alignment,
 - which elements get underlines,

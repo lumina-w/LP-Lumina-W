@@ -1,6 +1,6 @@
 # Lúmina W
 
-> Lúmina W S.A.S es una compañía colombiana de software con sede en Medellín. Construye software a medida y opera productos SaaS B2B propios para que las empresas dejen de depender de Excel y operen sobre infraestructura digital seria. Modelo: servicios profesionales facturados por proyecto cerrado (Discovery → Build → Launch) con opción de retainer mensual post-launch.
+> Lúmina W S.A.S es una compañía colombiana de software con sede en Medellín. Construye software a medida, automatizaciones y sistemas digitales para empresas que necesitan operar sin procesos manuales, y opera productos SaaS B2B propios. Modelo: servicios profesionales facturados por proyecto cerrado (Discovery → Build → Launch) con opción de retainer mensual post-launch.
 
 Lúmina W trabaja bajo dos caminos claros, separados:
 
@@ -23,7 +23,7 @@ Tesis: *"No vendemos tecnología. Vendemos operaciones que funcionan sin que ten
 ## Servicios
 
 ### Desarrollo a Medida
-Software diseñado para la operación específica del cliente. Sin templates, sin soluciones genéricas. Arquitectura escalable, seguridad integrada, código limpio y documentado. Modelo: proyecto cerrado, Discovery (2 sem) → Build (4–8 sem) → Launch. Anticipo 50% al kick-off, balance 50% al cierre con aprobación. Net 15.
+Software personalizado, automatización de procesos y sistemas digitales diseñados para la operación específica del cliente. Sin templates, sin soluciones genéricas. Arquitectura escalable, seguridad integrada, código limpio y documentado. Modelo: proyecto cerrado, Discovery (2 sem) → Build (4–8 sem) → Launch. Anticipo 50% al kick-off, balance 50% al cierre con aprobación. Net 15.
 
 ### Productos SaaS B2B
 Soluciones listas para industria, mismos estándares que el desarrollo a medida. Precio por uso, multi-empresa desde el inicio.
@@ -37,6 +37,15 @@ SaaS para agroindustria. Control de animales, producción en tiempo real, contro
 - En español, para el campo (cero jerga gringa)
 - En preventa con cupos limitados
 - URL: https://terracoreapp.co
+
+### Root (próximamente)
+App (PWA) de nutrición personalizada para personas con enfermedad celíaca, diabetes o intolerancia a la lactosa en Latinoamérica. Tagline: "Come con confianza."
+- Escaneo de etiquetas con veredicto inmediato según el perfil del usuario
+- Diario alimentario offline-first
+- Recetas aptas para cada perfil
+- Seguimiento e insights semanales
+- En desarrollo (próximamente)
+- URL: https://wavival.dev/root
 
 ### Retainer (post-launch)
 Soporte, mejoras y consultoría técnica bajo modelo de horas mensuales fijas.
@@ -72,6 +81,7 @@ Tablero abierto desde el día uno. Sprints quincenales con demo viernes 15:00 CO
 - [Política de Cookies](https://luminaw.co/cookies)
 - [Blog](https://blog.luminaw.co/)
 - [TerraCore](https://terracoreapp.co)
+- [Root](https://wavival.dev/root)
 
 ## Política para LLMs
 

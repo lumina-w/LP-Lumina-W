@@ -15,6 +15,7 @@ const services = [
     ],
     icon: 'custom',
     inverse: false,
+    primary: true,
   },
   {
     tag: 'Productos SaaS B2B',
@@ -29,13 +30,14 @@ const services = [
     ],
     icon: 'saas',
     inverse: true,
+    primary: false,
   },
 ];
 ---
 
 <section class="section" id="services">
-  <div class="container animate-on-scroll">
-    <div class="s-head">
+  <div class="animate-on-scroll container">
+    <div class="s-head s-head--stack">
       <div>
         <div class="eyebrow">La solución</div>
         <h2>Lúmina W construye software que dura.</h2>
@@ -48,13 +50,16 @@ const services = [
         <strong>desarrollo a medida</strong> o
         <strong>SaaS especializado</strong>.
       </p>
-      <div class="ghost-num" aria-hidden="true">03</div>
+      <div class="ghost-num" aria-hidden="true">Servicios</div>
     </div>
 
     <div class="services">
       {
         services.map((s) => (
-          <div class={`service ${s.inverse ? 'service--inverse' : ''}`}>
+          <div
+            class={`service ${s.inverse ? 'service--inverse' : ''} ${s.primary ? 'service--primary' : 'service--compact'}`}
+          >
+            {s.primary && <div class="service__flag">Servicio principal</div>}
             <div class="service__head">
               <div class="service__tag">{s.tag}</div>
               <div class="service__icon">
@@ -68,7 +73,9 @@ const services = [
                 <li>{f}</li>
               ))}
             </ul>
-            <a class="service__cta" href="#contact">Solicitar asesoría</a>
+            <a class="service__cta" href="#contact">
+              Quiero una asesoría sin costo
+            </a>
           </div>
         ))
       }

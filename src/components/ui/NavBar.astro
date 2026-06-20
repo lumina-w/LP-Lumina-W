@@ -4,20 +4,20 @@ import Icon from '@/components/ui/Icon.astro';
 const BASE = import.meta.env.BASE_URL;
 
 const groups = {
-  servicios: [
-    { href: '/#problem', label: 'Problema' },
-    { href: '/#services', label: 'Servicios' },
-    { href: '/#process', label: 'Proceso' },
-  ],
-  compania: [
-    { href: '/#us', label: 'Nosotros' },
-    { href: '/#faq', label: 'FAQ' },
+  productos: [
+    {
+      href: 'https://terracoreapp.co',
+      label: 'TerraCore',
+      external: true,
+      badge: 'SaaS · Preventa',
+    },
+    { href: '/#root', label: 'Root' },
   ],
 };
 ---
 
 <header id="nav" class="nav">
-  <div class="container nav__inner">
+  <div class="nav__inner container">
     <a class="nav__brand" href="/" aria-label="Lúmina W, Inicio">
       <img
         src={`${BASE}brand/logo.webp`}
@@ -29,7 +29,8 @@ const groups = {
       <span class="nav__wordmark">Lúmina W</span>
     </a>
     <nav class="nav__links" aria-label="Principal">
-      <a class="nav__link" href="/#hero">Inicio</a>
+      <a class="nav__link" href="/#services">Servicios</a>
+      <a class="nav__link" href="/#process">Proceso</a>
 
       <div class="nav__group" data-nav-group>
         <button
@@ -38,7 +39,7 @@ const groups = {
           aria-expanded="false"
           aria-haspopup="true"
         >
-          Servicios
+          Producto
           <svg
             class="nav__chev"
             width="10"
@@ -56,58 +57,23 @@ const groups = {
         </button>
         <div class="nav__dropdown" role="menu">
           {
-            groups.servicios.map((it) => (
-              <a class="nav__dropdown-link" href={it.href} role="menuitem">
+            groups.productos.map((it) => (
+              <a
+                class="nav__dropdown-link"
+                href={it.href}
+                role="menuitem"
+                target={it.external ? '_blank' : undefined}
+                rel={it.external ? 'noopener noreferrer' : undefined}
+              >
                 {it.label}
+                {it.badge && <span class="nav__badge">{it.badge}</span>}
               </a>
             ))
           }
         </div>
       </div>
 
-      <a class="nav__link" href="/#terracore">TerraCore</a>
-
-      <div class="nav__group" data-nav-group>
-        <button
-          type="button"
-          class="nav__link nav__group-btn"
-          aria-expanded="false"
-          aria-haspopup="true"
-        >
-          Compañía
-          <svg
-            class="nav__chev"
-            width="10"
-            height="10"
-            viewBox="0 0 12 12"
-            fill="none"
-            aria-hidden="true"
-            ><path
-              d="M3 4.5 6 7.5l3-3"
-              stroke="currentColor"
-              stroke-width="1.5"
-              stroke-linecap="round"
-              stroke-linejoin="round"></path></svg
-          >
-        </button>
-        <div class="nav__dropdown" role="menu">
-          {
-            groups.compania.map((it) => (
-              <a class="nav__dropdown-link" href={it.href} role="menuitem">
-                {it.label}
-              </a>
-            ))
-          }
-        </div>
-      </div>
-
-      <a class="nav__link" href="/#contact">Contacto</a>
-      <a
-        class="nav__link"
-        href="https://blog.luminaw.co/"
-        target="_blank"
-        rel="noopener noreferrer">Blog</a
-      >
+      <a class="nav__link" href="/#us">Nosotros</a>
     </nav>
     <div class="nav__cta">
       <a
@@ -130,37 +96,26 @@ const groups = {
 </header>
 
 <div id="nav-mobile" class="nav__mobile" aria-hidden="true">
-  <a class="nav__mobile-link" href="/#hero">Inicio</a>
+  <a class="nav__mobile-link" href="/#services">Servicios</a>
+  <a class="nav__mobile-link" href="/#process">Proceso</a>
 
   <div class="nav__mobile-group">
-    <p class="nav__mobile-label">Servicios</p>
+    <p class="nav__mobile-label">Producto</p>
     {
-      groups.servicios.map((it) => (
-        <a class="nav__mobile-sublink" href={it.href}>
+      groups.productos.map((it) => (
+        <a
+          class="nav__mobile-sublink"
+          href={it.href}
+          target={it.external ? '_blank' : undefined}
+          rel={it.external ? 'noopener noreferrer' : undefined}
+        >
           {it.label}
+          {it.badge && <span class="nav__badge">{it.badge}</span>}
         </a>
       ))
     }
   </div>
 
-  <a class="nav__mobile-link" href="/#terracore">TerraCore</a>
-
-  <div class="nav__mobile-group">
-    <p class="nav__mobile-label">Compañía</p>
-    {
-      groups.compania.map((it) => (
-        <a class="nav__mobile-sublink" href={it.href}>
-          {it.label}
-        </a>
-      ))
-    }
-  </div>
-
+  <a class="nav__mobile-link" href="/#us">Nosotros</a>
   <a class="nav__mobile-link" href="/#contact">Contacto</a>
-  <a
-    class="nav__mobile-link"
-    href="https://blog.luminaw.co/"
-    target="_blank"
-    rel="noopener noreferrer">Blog</a
-  >
 </div>

@@ -38,17 +38,17 @@ Related docs: [CLAUDE.md](./CLAUDE.md) · [AGENTS.md](./AGENTS.md) · [DESIGN.md
 
 ## Stack
 
-| Layer        | Choice                                                                 |
-| ------------ | ---------------------------------------------------------------------- |
-| Framework    | Astro 6 (static output), TypeScript 5 (strict via `astro/tsconfigs`)   |
-| UI           | Astro components + minimal islands. React 19 integration installed.    |
-| Styling      | Tailwind CSS v4 (`@tailwindcss/vite`) + a single `global.css` BEM file |
-| Type         | Cabinet Grotesk (display) + Switzer (body), via Fontshare CDN          |
-| Form         | Formspree (`xpqovooa`)                                                 |
-| Analytics    | Google Analytics 4, consent-gated by the cookies banner                |
-| SEO          | `@astrojs/sitemap`, JSON-LD `@graph`, `robots.txt`, `llms.txt`         |
-| Hosting      | Netlify (`netlify.toml` + `public/_headers` + `public/_redirects`)     |
-| Tooling      | Prettier (+ prettier-plugin-astro, prettier-plugin-tailwindcss), ESLint 10 with `eslint-plugin-astro` |
+| Layer     | Choice                                                                                                |
+| --------- | ----------------------------------------------------------------------------------------------------- |
+| Framework | Astro 6 (static output), TypeScript 5 (strict via `astro/tsconfigs`)                                  |
+| UI        | Astro components + minimal islands. React 19 integration installed.                                   |
+| Styling   | Tailwind CSS v4 (`@tailwindcss/vite`) + a single `global.css` BEM file                                |
+| Type      | Cabinet Grotesk (display) + Switzer (body), via Fontshare CDN                                         |
+| Form      | Formspree (`xpqovooa`)                                                                                |
+| Analytics | Google Analytics 4, consent-gated by the cookies banner                                               |
+| SEO       | `@astrojs/sitemap`, JSON-LD `@graph`, `robots.txt`, `llms.txt`                                        |
+| Hosting   | Netlify (`netlify.toml` + `public/_headers` + `public/_redirects`)                                    |
+| Tooling   | Prettier (+ prettier-plugin-astro, prettier-plugin-tailwindcss), ESLint 10 with `eslint-plugin-astro` |
 
 ## Local setup
 
@@ -63,25 +63,25 @@ No env file required for `npm run dev`, the contact form posts to a public Forms
 
 ### npm scripts
 
-| Script                | What it does                                                          |
-| --------------------- | --------------------------------------------------------------------- |
-| `npm run dev`         | Astro dev server with HMR (port 4321)                                 |
-| `npm run build`       | Static build to `dist/` + generates `sitemap-index.xml`               |
-| `npm run preview`     | Serve the built `dist/` locally                                       |
-| `npm run astro`       | Astro CLI passthrough (e.g. `npm run astro -- add <integration>`)     |
-| `npm run format`      | `prettier --write .`                                                  |
-| `npm run format:check`| `prettier --check .` (CI gate)                                        |
+| Script                 | What it does                                                      |
+| ---------------------- | ----------------------------------------------------------------- |
+| `npm run dev`          | Astro dev server with HMR (port 4321)                             |
+| `npm run build`        | Static build to `dist/` + generates `sitemap-index.xml`           |
+| `npm run preview`      | Serve the built `dist/` locally                                   |
+| `npm run astro`        | Astro CLI passthrough (e.g. `npm run astro -- add <integration>`) |
+| `npm run format`       | `prettier --write .`                                              |
+| `npm run format:check` | `prettier --check .` (CI gate)                                    |
 
 Node `>= 22.12.0` is enforced by `package.json` and pinned in `netlify.toml`.
 
 ## Environment variables
 
-No `.env` is required out of the box. Third-party IDs that *are* currently hard-coded:
+No `.env` is required out of the box. Third-party IDs that _are_ currently hard-coded:
 
-| Where                          | Value                            | Notes                                                              |
-| ------------------------------ | -------------------------------- | ------------------------------------------------------------------ |
-| `src/scripts/cookies.ts`       | GA4 `G-RBNC0VP6D3`               | Loaded only after the user clicks **Accept** on the cookies banner |
-| `src/scripts/contact.ts`       | Formspree ID `xpqovooa`          | POSTs `{ name, company, email, message }` as JSON                  |
+| Where                                            | Value                       | Notes                                                              |
+| ------------------------------------------------ | --------------------------- | ------------------------------------------------------------------ |
+| `src/scripts/cookies.ts`                         | GA4 `G-RBNC0VP6D3`          | Loaded only after the user clicks **Accept** on the cookies banner |
+| `src/scripts/contact.ts`                         | Formspree ID `xpqovooa`     | POSTs `{ name, company, email, message }` as JSON                  |
 | `src/components/ui/NavBar.astro`, `Footer.astro` | WhatsApp `+57 310 828 3088` | Floating FAB + footer social icons                                 |
 
 If you migrate any of these to env, prefix with `PUBLIC_` so Astro exposes the value to client bundles, and update the matching reference in the script.
@@ -122,7 +122,7 @@ NavBar uses two dropdown groups (`Servicios▾`, `Compañía▾`) with hover-ope
 
 ### Design system
 
-`src/styles/global.css` is the **single CSS file**, it carries Tailwind's `@theme` tokens, the `:root` design tokens (`--brand-blue #407bff`, `--brand-dark #1b1f28`, `--bg-page #fafafa`, near-square radii `0/2/4px`, no shadows), the type stack (Cabinet Grotesk display + Switzer body), and every component's BEM class.
+`src/styles/global.css` is the **single CSS file**, it carries Tailwind's `@theme` tokens, the `:root` design tokens (`--brand-blue #407bff` principal + `--brand-accent #f5a623` amber strategic accent, `--brand-dark #1b1f28`, `--bg-page #fafafa`, near-square radii `0/2/4px`, no shadows), the type stack (Cabinet Grotesk display + Switzer body), and every component's BEM class.
 
 `.surface-dark` is the convention for dark sections: it flips `--bg-card`, `--text-primary`, `--text-muted`, and `--border-base` so children render without bespoke colors. `--border-strong` is **not** flipped (intentional), on dark, use `rgba(255,255,255,0.14)` explicitly.
 
@@ -153,7 +153,8 @@ See [DESIGN.md](./DESIGN.md) for the full token + component reference.
   <header class="legal__head">…</header>
   <p class="legal__intro">…</p>
   <div class="legal__body">
-    <nav class="legal__toc">…</nav>          <!-- sticky at ≥1024px -->
+    <nav class="legal__toc">…</nav>
+    <!-- sticky at ≥1024px -->
     <div class="legal__content">
       <section id="sec-01" class="legal__section">…</section>
       …
@@ -178,13 +179,13 @@ When adding tests, Vitest + Astro's container API is the natural fit.
 
 ### One-time setup
 
-1. **Create site**: Netlify dashboard → *Add new site* → *Import from Git* → select repo.
+1. **Create site**: Netlify dashboard → _Add new site_ → _Import from Git_ → select repo.
 2. **Build settings** (auto-detected from `netlify.toml`):
    - Build command: `npm run build`
    - Publish directory: `dist`
    - Node version: `22.12.0`
 3. **Environment variables**: nothing required by default (see [Environment variables](#environment-variables)).
-4. **Custom domain**: *Domain settings* → add `luminaw.co` → follow CNAME / Netlify DNS instructions. SSL auto-provisions.
+4. **Custom domain**: _Domain settings_ → add `luminaw.co` → follow CNAME / Netlify DNS instructions. SSL auto-provisions.
 5. **Deploy**: push to `main`. Netlify auto-builds and publishes.
 
 ### What's already in the repo
@@ -214,22 +215,22 @@ The Cookies policy at `/cookies` documents this exact behavior, update both if y
 
 ## SEO surface
 
-- **`Layout.astro`** owns canonical / OG / Twitter meta, `hreflang="es-co"` + `x-default`, and a JSON-LD `@graph` with `Organization` (legal name *Lúmina W S.A.S*, address in Medellín, `sameAs` to Instagram + LinkedIn + blog), `WebSite`, and `WebPage` nodes.
+- **`Layout.astro`** owns canonical / OG / Twitter meta, `hreflang="es-co"` + `x-default`, and a JSON-LD `@graph` with `Organization` (legal name _Lúmina W S.A.S_, address in Medellín, `sameAs` to Instagram + LinkedIn + blog), `WebSite`, and `WebPage` nodes.
 - Verification meta tags for Google / Bing / Yandex / Facebook are placeholder comments inside `<head>`, paste IDs before deploy.
 - `dist/sitemap-index.xml` → `dist/sitemap-0.xml` is regenerated each build.
 - `<link rel="sitemap">` and `<link rel="alternate" type="text/plain" href="/llms.txt">` are advertised from the document head.
 
 ## Troubleshooting
 
-| Symptom                                       | Fix                                                                                       |
-| --------------------------------------------- | ----------------------------------------------------------------------------------------- |
-| Section anchor jumps under the navbar         | Each landing section already has `scroll-margin-top` via `.section`/`.legal__section`. If you add a new section, give it `scroll-margin-top: 88px` or larger. |
-| Ghost-num shows the wrong number              | They follow **navbar order**, not section order. Renumber across all numbered sections after reordering. |
-| New CTA gets a double underline               | Add the anchor class to the `a.btn-…, a.<class>` reset block near the top of `global.css` (~lines 130–161). |
-| `.animate-on-scroll` content stays invisible  | The IntersectionObserver in `scrollAnimations.ts` only triggers for elements present at script time. Re-running it for newly mounted elements isn't supported. |
-| Contact form returns 4xx                      | Field IDs must be `c-name / c-company / c-email / c-message` to match `contact.ts`. Formspree endpoint is hard-coded, verify on the Formspree dashboard. |
-| GA never fires                                | The user has to click **Accept** first. Inspect `localStorage['lw_cookies']`. |
-| Sticky legal TOC overlaps the nav             | TOC uses `top: 88px` to clear the 64 px nav + breathing room. If the nav grows, bump that value. |
+| Symptom                                      | Fix                                                                                                                                                            |
+| -------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Section anchor jumps under the navbar        | Each landing section already has `scroll-margin-top` via `.section`/`.legal__section`. If you add a new section, give it `scroll-margin-top: 88px` or larger.  |
+| Ghost-num shows the wrong number             | They follow **navbar order**, not section order. Renumber across all numbered sections after reordering.                                                       |
+| New CTA gets a double underline              | Add the anchor class to the `a.btn-…, a.<class>` reset block near the top of `global.css` (~lines 130–161).                                                    |
+| `.animate-on-scroll` content stays invisible | The IntersectionObserver in `scrollAnimations.ts` only triggers for elements present at script time. Re-running it for newly mounted elements isn't supported. |
+| Contact form returns 4xx                     | Field IDs must be `c-name / c-company / c-email / c-message` to match `contact.ts`. Formspree endpoint is hard-coded, verify on the Formspree dashboard.       |
+| GA never fires                               | The user has to click **Accept** first. Inspect `localStorage['lw_cookies']`.                                                                                  |
+| Sticky legal TOC overlaps the nav            | TOC uses `top: 88px` to clear the 64 px nav + breathing room. If the nav grows, bump that value.                                                               |
 
 ## Roadmap / known gaps
 

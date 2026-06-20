@@ -1,6 +1,6 @@
 # DESIGN.md
 
-Reference for the Lúmina W landing design system. Single source of truth is `src/styles/global.css`; this document explains *why* the tokens and components are shaped the way they are.
+Reference for the Lúmina W landing design system. Single source of truth is `src/styles/global.css`; this document explains _why_ the tokens and components are shaped the way they are.
 
 The system is deliberately **editorial, square, sober**. Not playful, not maximalist, not glassmorphism. Closer in spirit to a print publication than a SaaS dashboard.
 
@@ -8,31 +8,34 @@ The system is deliberately **editorial, square, sober**. Not playful, not maxima
 
 ### Brand
 
-| Token            | Value      | Used for                                  |
-| ---------------- | ---------- | ----------------------------------------- |
-| `--brand-blue`   | `#407bff`  | CTAs, links, focus rings, micro-accents   |
-| `--brand-dark`   | `#1b1f28`  | Nav, footer, dark surfaces, body on dark  |
-| `--brand-light`  | `#dee9ff`  | Tints inside dark sections, hero polygons |
+| Token                | Value     | Used for                                                       |
+| -------------------- | --------- | -------------------------------------------------------------- |
+| `--brand-blue`       | `#407bff` | Links, tags, focus rings, TerraCore product, micro-accents     |
+| `--brand-dark`       | `#1b1f28` | Nav, footer, dark surfaces, body on dark, primary-button text  |
+| `--brand-light`      | `#dee9ff` | Tints inside dark sections, hero polygons                      |
+| `--brand-accent`     | `#f5a623` | Amber. Strategic fills: primary-button bg, eyebrow dash, highlighted borders, marquee/hero shapes |
+| `--brand-accent-deep`| `#d9881a` | Amber button hover                                             |
+| `--brand-accent-ink` | `#8a5a06` | Amber **as text/icon on light surfaces** (readable; the bright `#f5a623` fails WCAG as small text) |
 
-Blue is **reserved** for actionable elements + accents. It is not a body color and never the primary surface.
+Blue is the **principal** color (links + product + accents). Amber is the **strategic accent** for conversion/attention spots — used scarcely. Primary buttons are amber with dark text (white on `#f5a623` is illegible). There are no greens; the prior green accent was fully replaced by amber.
 
 ### Surfaces
 
-| Token        | Value                  | Notes                                            |
-| ------------ | ---------------------- | ------------------------------------------------ |
-| `--bg-page`  | `#fafafa`              | Neutral, almost white. Replaces a blue-tinted page from the legacy design. |
-| `--bg-card`  | `#ffffff`              | Inside dark surfaces, redefined to `#1b1f28`.    |
-| `--bg-soft`  | `#f4f4f5`              | Subtle hover/inset fill. On dark: `#14171e`.     |
-| `--bg-blur`  | `rgba(64,123,255,0.04)`| Almost imperceptible blue overlay.               |
+| Token       | Value                   | Notes                                                                      |
+| ----------- | ----------------------- | -------------------------------------------------------------------------- |
+| `--bg-page` | `#fafafa`               | Neutral, almost white. Replaces a blue-tinted page from the legacy design. |
+| `--bg-card` | `#ffffff`               | Inside dark surfaces, redefined to `#1b1f28`.                              |
+| `--bg-soft` | `#f4f4f5`               | Subtle hover/inset fill. On dark: `#14171e`.                               |
+| `--bg-blur` | `rgba(64,123,255,0.04)` | Almost imperceptible blue overlay.                                         |
 
 `.surface-dark` is the toggle for dark sections. It rebinds the tokens above so children render correctly without bespoke classes. The Footer and Contact section use it.
 
 ### Typography
 
-| Token              | Value                       | Used for                          |
-| ------------------ | --------------------------- | --------------------------------- |
-| `--font-display`   | `Cabinet Grotesk 700/800`   | All headings, hero text, marquees |
-| `--font-body`      | `Switzer 400/500/600`       | Paragraphs, labels, form fields   |
+| Token            | Value                     | Used for                          |
+| ---------------- | ------------------------- | --------------------------------- |
+| `--font-display` | `Cabinet Grotesk 700/800` | All headings, hero text, marquees |
+| `--font-body`    | `Switzer 400/500/600`     | Paragraphs, labels, form fields   |
 
 Both are loaded from Fontshare. `Layout.astro` adds `preconnect` + `dns-prefetch` to `https://api.fontshare.com`.
 
@@ -50,31 +53,31 @@ Headings are `text-wrap: balance`. Paragraphs are `text-wrap: pretty`.
 
 ### Text colors
 
-| Token                    | Value      | Used for                                    |
-| ------------------------ | ---------- | ------------------------------------------- |
-| `--text-primary`         | `#0f0f12`  | Near-black, the editorial default.          |
-| `--text-muted`           | `#5b5f66`  | Subdued body, descriptions, leads.          |
-| `--text-faint`           | `#8a8e95`  | Numerals, monospace labels.                 |
-| `--text-button`          | `#ffffff`  | Filled CTAs.                                |
-| `--text-on-dark`         | `#f5f5f5`  | Body text on dark sections.                 |
-| `--text-on-dark-muted`   | `#a1a5ad`  | Muted text on dark.                         |
+| Token                  | Value     | Used for                           |
+| ---------------------- | --------- | ---------------------------------- |
+| `--text-primary`       | `#0f0f12` | Near-black, the editorial default. |
+| `--text-muted`         | `#5b5f66` | Subdued body, descriptions, leads. |
+| `--text-faint`         | `#8a8e95` | Numerals, monospace labels.        |
+| `--text-button`        | `#ffffff` | Filled CTAs.                       |
+| `--text-on-dark`       | `#f5f5f5` | Body text on dark sections.        |
+| `--text-on-dark-muted` | `#a1a5ad` | Muted text on dark.                |
 
 ### Radii + elevation
 
-| Token         | Value | Used for                              |
-| ------------- | ----- | ------------------------------------- |
-| `--radius-sm` | `0`   | Square corners.                       |
-| `--radius-md` | `2px` | Buttons, inputs (almost square).      |
-| `--radius-lg` | `4px` | Subtle rounding for cards if needed.  |
-| `--radius-pill` | `999px` | Only for avatars and the focus dot. |
+| Token           | Value   | Used for                             |
+| --------------- | ------- | ------------------------------------ |
+| `--radius-sm`   | `0`     | Square corners.                      |
+| `--radius-md`   | `2px`   | Buttons, inputs (almost square).     |
+| `--radius-lg`   | `4px`   | Subtle rounding for cards if needed. |
+| `--radius-pill` | `999px` | Only for avatars and the focus dot.  |
 
 `--shadow-base` is `none`. Elevation is communicated with 1 px borders, not shadows.
 
 ### Spacing
 
-| Token              | Value   | Override class                           |
-| ------------------ | ------- | ---------------------------------------- |
-| `--space-section`  | `96px`  | `.density-compact { 64px }` / `.density-spacious { 128px }` are legacy hooks from the design kit; current build uses the default. |
+| Token             | Value  | Override class                                                                                                                    |
+| ----------------- | ------ | --------------------------------------------------------------------------------------------------------------------------------- |
+| `--space-section` | `96px` | `.density-compact { 64px }` / `.density-spacious { 128px }` are legacy hooks from the design kit; current build uses the default. |
 
 ## Components
 
@@ -94,7 +97,9 @@ Applied to `.nav__link`, `.footer__col a`, `.service__cta`, and in-body anchors 
 ::after {
   content: '';
   position: absolute;
-  left: 0; right: 0; bottom: -4px;
+  left: 0;
+  right: 0;
+  bottom: -4px;
   height: 1px;
   background: currentColor;
   transform: scaleX(0);
@@ -193,14 +198,14 @@ Four-column grid at ≥780 px: brand block (logo + legal name + dev attribution 
 - Ghost-nums and the floating WhatsApp FAB are `aria-hidden`.
 - Mobile menu toggles `aria-expanded` on the burger and `aria-hidden` on the panel.
 - `focus-visible` outlines are blue (`--accent-link`) with `outline-offset: 3px`.
-- Color contrast: brand-blue on white passes WCAG AA for normal text; `--text-muted #5b5f66` on `--bg-page #fafafa` is ~6:1.
+- Color contrast: brand-blue on white passes WCAG AA for normal text; `--text-muted #5b5f66` on `--bg-page #fafafa` is ~6:1. Amber `#f5a623` is a **fill-only** color (passes as a shape/border, fails as small text on light) — use `--brand-accent-ink #8a5a06` whenever amber must be text or a small icon; primary-button text is dark `--brand-dark`, never white.
 
 ## Files of interest
 
-| File                                       | Why it matters                                       |
-| ------------------------------------------ | ---------------------------------------------------- |
+| File                                       | Why it matters                                         |
+| ------------------------------------------ | ------------------------------------------------------ |
 | `src/styles/global.css`                    | Every token + every BEM block. Single source of truth. |
-| `src/layouts/Layout.astro`                 | SEO/OG/Schema + global shell + script imports.        |
-| `tailwind.config.mjs`                      | Tailwind v4 theme extension (mirrors `@theme` block). |
-| `astro.config.mjs`                         | Sitemap config, prefetch policy, Vite tweaks.         |
-| `src/components/sections/index.astro`-side | Section markup that uses the BEM blocks.              |
+| `src/layouts/Layout.astro`                 | SEO/OG/Schema + global shell + script imports.         |
+| `tailwind.config.mjs`                      | Tailwind v4 theme extension (mirrors `@theme` block).  |
+| `astro.config.mjs`                         | Sitemap config, prefetch policy, Vite tweaks.          |
+| `src/components/sections/index.astro`-side | Section markup that uses the BEM blocks.               |

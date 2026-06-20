@@ -89,8 +89,8 @@ const tracks = [
 ---
 
 <section class="section process-sec" id="process">
-  <div class="container animate-on-scroll">
-    <div class="s-head">
+  <div class="animate-on-scroll container">
+    <div class="s-head s-head--stack">
       <div>
         <div class="eyebrow">Cómo trabajamos</div>
         <h2>Depende del camino que tomes.</h2>
@@ -99,8 +99,13 @@ const tracks = [
         Dos modelos, dos cadencias, dos compromisos distintos. Elige el que se
         ajusta a tu operación.
       </p>
-      <div class="ghost-num" aria-hidden="true">04</div>
+      <div class="ghost-num" aria-hidden="true">Proceso</div>
     </div>
+
+    <p class="process-hook">
+      Sin caja negra. Sabes qué se está construyendo, cuándo estará listo y qué
+      viene después. Desde el día uno.
+    </p>
 
     {
       tracks.map((t) => (
@@ -110,20 +115,27 @@ const tracks = [
             <h3>{t.title}</h3>
             <p>{t.lead}</p>
           </header>
-          <div class="features">
-            {t.phases.map((p) => (
-              <div class="feature">
-                <div class="feature__num">{p.n}</div>
-                <div class="feature__head">
-                  <div class="feature__icon">
-                    <Icon name={p.icon} size={26} stroke={1.5} />
+          <details class="process-track__detail">
+            <summary class="disclosure">
+              <span class="lbl-closed">Ver cómo funciona</span>
+              <span class="lbl-open">Ocultar pasos</span>
+              <Icon name="plus" size={20} stroke={1.75} />
+            </summary>
+            <div class="features">
+              {t.phases.map((p) => (
+                <div class="feature">
+                  <div class="feature__num">{p.n}</div>
+                  <div class="feature__head">
+                    <div class="feature__icon">
+                      <Icon name={p.icon} size={26} stroke={1.5} />
+                    </div>
+                    <h3>{p.title}</h3>
                   </div>
-                  <h3>{p.title}</h3>
+                  <p>{p.body}</p>
                 </div>
-                <p>{p.body}</p>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          </details>
         </div>
       ))
     }
@@ -139,30 +151,48 @@ const tracks = [
         </p>
       </header>
 
-      <div class="portal__col">
-        <h4 class="portal__col-title">En Desarrollo a Medida</h4>
-        <p class="portal__col-sub">Tu proyecto, en vivo.</p>
-        <p class="portal__col-text">
-          Todos los Proyectos incluyen acceso a un espacio compartido donde
-          tú y tu equipo ven el avance real: lo que está hecho, lo que se
-          está construyendo y lo que viene en el próximo sprint.
-        </p>
-        <ul class="portal__list">
-          {portalCustom.map((it) => <li>{it}</li>)}
-        </ul>
-      </div>
+      <details class="portal__detail">
+        <summary class="disclosure">
+          <span class="lbl-closed">Ver qué incluye cada modelo</span>
+          <span class="lbl-open">Ocultar detalle</span>
+          <Icon name="plus" size={20} stroke={1.75} />
+        </summary>
+        <div class="portal__cols">
+          <div class="portal__col">
+            <h4 class="portal__col-title">En Desarrollo a Medida</h4>
+            <p class="portal__col-sub">Tu proyecto, en vivo.</p>
+            <p class="portal__col-text">
+              Todos los Proyectos incluyen acceso a un espacio compartido donde
+              tú y tu equipo ven el avance real: lo que está hecho, lo que se
+              está construyendo y lo que viene en el próximo sprint.
+            </p>
+            <ul class="portal__list">
+              {portalCustom.map((it) => <li>{it}</li>)}
+            </ul>
+          </div>
 
-      <div class="portal__col">
-        <h4 class="portal__col-title">En SaaS en Alquiler</h4>
-        <p class="portal__col-sub">Dashboard en tiempo real, siempre operativo.</p>
-        <p class="portal__col-text">
-          Acceso completo a métricas, usuarios, datos y configuraciones.
-          Integraciones con tu ERP, CRM y sistemas existentes.
-        </p>
-        <ul class="portal__list">
-          {portalSaas.map((it) => <li>{it}</li>)}
-        </ul>
-      </div>
+          <div class="portal__col">
+            <h4 class="portal__col-title">En SaaS en Alquiler</h4>
+            <p class="portal__col-sub">
+              Dashboard en tiempo real, siempre operativo.
+            </p>
+            <p class="portal__col-text">
+              Acceso completo a métricas, usuarios, datos y configuraciones.
+              Integraciones con tu ERP, CRM y sistemas existentes.
+            </p>
+            <ul class="portal__list">
+              {portalSaas.map((it) => <li>{it}</li>)}
+            </ul>
+          </div>
+        </div>
+      </details>
+    </div>
+
+    <div style="margin-top:48px;text-align:center">
+      <p style="font-size:14px;color:var(--text-muted);margin-bottom:14px">
+        ¿Listo para mapear tu operación?
+      </p>
+      <a class="btn-primary" href="#contact">Empezar con un diagnóstico</a>
     </div>
   </div>
 </section>

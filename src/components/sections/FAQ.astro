@@ -26,11 +26,23 @@ const faqs = [
     q: '¿El software que construyen es seguro?',
     a: 'Sí. La seguridad no es una capa que añadimos al final, está integrada desde la arquitectura. Aplicamos principios OWASP, desarrollo seguro y buenas prácticas desde la primera línea de código.',
   },
+  {
+    q: '¿Por qué no contratar un freelancer?',
+    a: 'Un desarrollador solo puede escribir código, pero no puede diseñar la arquitectura, hacer el UX, configurar el servidor, documentar el sistema y darte soporte en producción al mismo tiempo. Nosotros somos un equipo completo desde el primer día, sin que tengas que coordinar cinco personas distintas.',
+  },
+  {
+    q: '¿Por qué no usar un ERP genérico como SAP o Zoho?',
+    a: 'Los ERPs genéricos están construidos para todas las industrias, lo que significa que no están construidos para la tuya. Pagas por módulos que no usas, adaptas tu operación al software en vez de al revés, y dependes de roadmaps que no controlas. Nosotros construimos alrededor de tu operación real.',
+  },
+  {
+    q: '¿En qué se diferencia Lúmina W de otras empresas de software?',
+    a: 'Las agencias grandes te asignan un gerente de cuenta que nunca toca el código y un equipo rotativo que cambia cada sprint. Con Lúmina W hablas directamente con quien construye el sistema, sin intermediarios y sin teléfono descompuesto.',
+  },
 ];
 ---
 
 <section class="section" id="faq" aria-labelledby="faq-heading">
-  <div class="container animate-on-scroll">
+  <div class="animate-on-scroll container">
     <div
       class="s-head"
       style="justify-items:center;grid-template-columns:1fr;margin-bottom:48px;text-align:center"
@@ -48,7 +60,7 @@ const faqs = [
           ganar productividad.
         </p>
       </div>
-      <div class="ghost-num" aria-hidden="true">07</div>
+      <div class="ghost-num" aria-hidden="true">FAQ</div>
     </div>
 
     <div class="faq" id="faq-list">
@@ -78,7 +90,7 @@ const faqs = [
       <p style="font-size:14px;color:var(--text-muted);margin-bottom:14px">
         ¿No encontraste lo que buscabas?
       </p>
-      <a class="btn-primary" href="#contact">Escríbenos</a>
+      <a class="btn-primary" href="#contact">Escríbenos directamente</a>
     </div>
   </div>
 </section>

@@ -1,5 +1,7 @@
 const form = document.getElementById('contact-form') as HTMLFormElement | null;
-const submitBtn = document.getElementById('submit-btn') as HTMLButtonElement | null;
+const submitBtn = document.getElementById(
+  'submit-btn'
+) as HTMLButtonElement | null;
 const success = document.getElementById('form-success');
 
 form?.addEventListener('submit', async (e) => {
@@ -9,12 +11,7 @@ form?.addEventListener('submit', async (e) => {
   submitBtn.textContent = 'Enviando...';
   submitBtn.disabled = true;
 
-  const data = {
-    name: (document.getElementById('c-name') as HTMLInputElement).value,
-    company: (document.getElementById('c-company') as HTMLInputElement).value,
-    email: (document.getElementById('c-email') as HTMLInputElement).value,
-    message: (document.getElementById('c-message') as HTMLTextAreaElement).value,
-  };
+  const data = Object.fromEntries(new FormData(form).entries());
 
   const res = await fetch('https://formspree.io/f/xpqovooa', {
     method: 'POST',

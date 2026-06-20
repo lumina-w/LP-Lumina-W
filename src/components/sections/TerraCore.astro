@@ -18,20 +18,50 @@ const dashFeatures = [
   { icon: 'bell', title: 'Nada se te pasa', tag: 'alertas activas' },
   { icon: 'globe', title: 'En español', tag: 'para el campo' },
 ];
+
+// Capturas reales del producto (reemplazan el video demo)
+const shots = [
+  {
+    base: 'dashboard-2',
+    cap: 'Dashboard claro y centralizado',
+    alt: 'Captura del dashboard centralizado de TerraCore con métricas de la operación',
+  },
+  {
+    base: 'produccion-1',
+    cap: 'Producción en tiempo real',
+    alt: 'Pantalla de producción en tiempo real en TerraCore',
+  },
+  {
+    base: 'salud-animal-3',
+    cap: 'Salud animal',
+    alt: 'Módulo de salud animal en TerraCore',
+  },
+];
 ---
 
 <section class="section terracore" id="terracore">
-  <div class="container animate-on-scroll">
+  <div class="animate-on-scroll container">
+    <div class="s-head s-head--stack">
+      <div>
+        <div class="eyebrow">Producto propio</div>
+        <h2>Nuestros productos</h2>
+      </div>
+      <p class="lead">
+        Construimos SaaS B2B con los mismos estándares del desarrollo a medida.
+        Empezamos por el campo, pero el roadmap no se detiene ahí.
+      </p>
+      <div class="ghost-num" aria-hidden="true">Producto</div>
+    </div>
+
     <div class="terracore__grid">
       <div class="terracore__copy">
-        <div class="ghost-num" aria-hidden="true">05</div>
         <div class="terracore__tags">
           <span class="terracore__tag">Producto estrella</span>
           <span class="terracore__tag terracore__tag--live">
             <span></span>Preventa activa
           </span>
         </div>
-        <h2>TerraCore</h2>
+        <h3 class="terracore__name">TerraCore</h3>
         <p class="terracore__lead">
           Controla producción, costos y animales en un solo lugar. Deja de
           depender de Excel y empieza a tomar decisiones con datos reales.
@@ -110,16 +140,60 @@ const dashFeatures = [
       </div>
     </div>
 
-    <div class="terracore__video" aria-hidden="true">
-      <video
-        src="/videos/terracore.mp4"
-        autoplay
-        muted
-        loop
-        playsinline
-        preload="metadata"
-        poster="/images/preview.png"
-        aria-label="Demostración de TerraCore"></video>
+    <p class="terracore__proof">
+      Construimos TerraCore desde cero: offline-first, multiusuario y multirol,
+      con dashboards en tiempo real y trazabilidad agroindustrial. Ese es el
+      estándar con el que trabajamos.
+    </p>
+
+    <div class="terracore__shots">
+      {
+        shots.map((s) => (
+          <figure class="tc-shot">
+            <img
+              src={`/images/terracore/${s.base}-1280.webp`}
+              srcset={`/images/terracore/${s.base}-1280.webp 1280w, /images/terracore/${s.base}-2240.webp 2240w`}
+              sizes="(min-width: 880px) 33vw, 100vw"
+              width="2240"
+              height="1287"
+              loading="lazy"
+              decoding="async"
+              alt={s.alt}
+            />
+            <figcaption>{s.cap}</figcaption>
+          </figure>
+        ))
+      }
+    </div>
+
+    <div class="terracore__more">
+      <div class="terracore__more-head">El roadmap sigue</div>
+      <div class="terracore__more-grid">
+        <article class="prod-card prod-card--soon" id="root">
+          <div class="prod-card__badge">Próximamente</div>
+          <h3 class="prod-card__title">Root</h3>
+          <p class="prod-card__tagline">Come con confianza.</p>
+          <p class="prod-card__desc">
+            App de nutrición personalizada para personas con enfermedad celíaca,
+            diabetes o intolerancia a la lactosa en Latinoamérica. Escanea
+            cualquier etiqueta y obtén un veredicto inmediato según tu perfil.
+          </p>
+          <ul class="prod-card__feats">
+            <li>Escaneo de etiquetas con veredicto al instante</li>
+            <li>Diario alimentario que funciona offline</li>
+            <li>Recetas que sí puedes comer</li>
+            <li>Seguimiento e insights semanales</li>
+          </ul>
+          <a
+            class="prod-card__cta"
+            href="https://wavival.dev/root"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Saber más sobre Root
+          </a>
+        </article>
+      </div>
     </div>
   </div>
 </section>
