@@ -30,11 +30,6 @@ const lp = (p: string) => localizePath(p, loc);
       <p class="terracore__lead">
         {t.productLead}
       </p>
-      <div class="terracore__actions">
-        <a class="btn-primary" href={lp('/productos')}>
-          {t.ctaAll}
-        </a>
-      </div>
     </div>
 
     <div class="terracore__shots">
@@ -55,6 +50,12 @@ const lp = (p: string) => localizePath(p, loc);
           </figure>
         ))
       }
+    </div>
+
+    <div class="terracore__actions terracore__actions--center">
+      <a class="btn-primary" href={lp('/productos')}>
+        {t.ctaAll}
+      </a>
     </div>
   </div>
 </section>

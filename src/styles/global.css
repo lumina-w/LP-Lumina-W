@@ -1460,6 +1460,11 @@ small {
 .service__cta {
   margin-top: 8px;
 }
+.service__cta--sec {
+  margin-top: 4px;
+  font-size: 0.875rem;
+  color: var(--text-muted);
+}
 
 /* ============================================================
    TerraCore
@@ -1573,6 +1578,10 @@ small {
   gap: 12px;
   flex-wrap: wrap;
   margin-top: 8px;
+}
+.terracore__actions--center {
+  justify-content: center;
+  margin-top: 32px;
 }
 .terracore__note {
   font-size: 0.875rem;
@@ -2628,70 +2637,86 @@ details[open] > .disclosure .lbl-open {
     grid-template-columns: 1fr 1fr;
   }
 }
+/* Single team member: cap to a portrait width and align left so the lone card
+   reads as one editorial portrait, not a full-bleed banner. 2-4 cards untouched. */
+.team__grid:has(.team-card:only-child) {
+  grid-template-columns: minmax(0, 400px);
+}
+
+/* ============================================================
+   TEAM CARD — overlay: the photo fills the whole card and the
+   name/role/bio/socials sit over a dark gradient at the bottom.
+   Same portrait layout on every device. Square/editorial: radii
+   0, elevation via 1px borders only.
+   ============================================================ */
 .team-card {
-  background: var(--bg-card);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  aspect-ratio: 4 / 5; /* portrait on every device */
+  overflow: hidden;
+  background: var(--brand-light); /* behind the initials fallback */
   border-right: 1px solid var(--border-base);
   border-bottom: 1px solid var(--border-base);
-  display: flex;
-  flex-direction: column; /* mobile: 2 rows, photo on top */
 }
-/* Tablet + desktop: 2 cols (70% text / 30% photo). The card is capped so it
-   never spans the full container width. align-items:center keeps the square
-   photo square (no vertical stretch) when the text column is taller. */
-@media (min-width: 720px) {
-  .team-card {
-    flex-direction: row;
-    align-items: center;
-    max-width: 620px;
-  }
-}
+/* The media is the full-card background layer. */
 .team-card__media {
-  flex-shrink: 0;
-  width: 100%;
-  aspect-ratio: 1 / 1; /* always square: photo fills it exactly, no extra bg */
-  background: var(
-    --brand-light
-  ); /* only visible behind the initials fallback */
+  position: absolute;
+  inset: 0;
+  z-index: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  border-bottom: 1px solid var(--border-base);
-}
-@media (min-width: 720px) {
-  .team-card__media {
-    width: 30%; /* 30% photo, 70% text */
-    border-bottom: none;
-  }
 }
 .team-card__media img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: top center; /* keep the face in frame */
   display: block;
+  transition: transform 400ms ease;
+}
+.team-card:hover .team-card__media img {
+  transform: scale(1.04);
 }
 .team-card__media span {
   font-family: var(--font-display);
   font-weight: 800;
-  font-size: 2rem;
+  font-size: clamp(2rem, 8vw, 3.5rem);
   letter-spacing: -0.02em;
+  line-height: 1;
   color: var(--brand-blue-ink);
 }
+/* Text block, pinned to the bottom over a legibility gradient. */
 .team-card__body {
-  flex: 1;
-  min-width: 0;
-  padding: 28px;
+  position: relative;
+  z-index: 1;
+  margin-top: auto;
+  width: 100%;
+  padding: 22px 22px 20px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-end; /* content stays pinned to the bottom */
+  gap: 3px;
+  color: #fff;
+  background: linear-gradient(
+    to top,
+    rgba(13, 15, 20, 0.94) 0%,
+    rgba(13, 15, 20, 0.8) 42%,
+    rgba(13, 15, 20, 0) 100%
+  );
+  transition:
+    background 240ms ease,
+    min-height 320ms ease;
 }
 .team-card__name {
   font-family: var(--font-display);
   font-weight: 800;
-  font-size: 1.0625rem;
+  font-size: 1.25rem;
   letter-spacing: -0.02em;
-  color: var(--text-primary);
-  line-height: 1.2;
+  color: #fff;
+  line-height: 1.15;
   display: flex;
   align-items: baseline;
   flex-wrap: wrap;
@@ -2702,18 +2727,38 @@ details[open] > .disclosure .lbl-open {
   font-weight: 600;
   font-size: 0.8125rem;
   letter-spacing: 0;
-  color: var(--text-muted);
+  color: rgba(255, 255, 255, 0.66);
+}
+.team-card__role {
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--brand-accent); /* amber fill on dark — legible */
+}
+.team-card__bio {
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.82);
+  margin-top: 6px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3; /* keep the overlay tidy; full text stays in the DOM */
+  line-clamp: 3;
+  overflow: hidden;
 }
 .team-card__socials {
   display: flex;
+  flex-wrap: wrap;
   gap: 8px;
   margin-top: 14px;
 }
 .team-card__social {
   width: 34px;
   height: 34px;
-  border: 1px solid var(--border-base);
-  color: var(--text-muted);
+  flex-shrink: 0;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  color: #fff;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -2722,22 +2767,71 @@ details[open] > .disclosure .lbl-open {
     border-color 160ms ease,
     background 160ms ease;
 }
-.team-card__social:hover {
-  color: var(--brand-blue-ink);
-  border-color: var(--brand-blue);
-  background: var(--bg-soft);
+.team-card__social:hover,
+.team-card__social:focus-visible {
+  color: var(--brand-dark);
+  border-color: var(--brand-accent);
+  background: var(--brand-accent);
 }
-.team-card__role {
-  font-size: 0.8125rem;
-  font-weight: 600;
-  color: var(--brand-blue-ink);
-  margin-top: 2px;
+
+/* Reveal-on-hover, only where a real hover exists (pointer: fine). At rest the
+   card shows just name + role over the photo; on hover (or keyboard focus
+   within) a solid dark overlay grows to the content height and reveals the
+   handle, bio and socials. On touch everything stays visible (no hover). */
+@media (hover: hover) and (pointer: fine) {
+  .team-card__handle,
+  .team-card__bio,
+  .team-card__socials {
+    opacity: 0;
+    max-height: 0;
+    margin-top: 0;
+    overflow: hidden;
+    transition:
+      opacity 200ms ease,
+      max-height 320ms ease,
+      margin-top 320ms ease;
+  }
+  .team-card:hover .team-card__body,
+  .team-card:focus-within .team-card__body {
+    min-height: 100%; /* overlay spans the whole card; gradient fades to the top */
+    background: linear-gradient(
+      to top,
+      rgba(13, 15, 20, 0.96) 0%,
+      rgba(13, 15, 20, 0.86) 32%,
+      rgba(13, 15, 20, 0.55) 66%,
+      rgba(13, 15, 20, 0) 100%
+    );
+  }
+  .team-card:hover .team-card__handle,
+  .team-card:focus-within .team-card__handle {
+    opacity: 1;
+    max-height: 2rem;
+  }
+  .team-card:hover .team-card__bio,
+  .team-card:focus-within .team-card__bio {
+    opacity: 1;
+    max-height: 9rem;
+    margin-top: 6px;
+  }
+  .team-card:hover .team-card__socials,
+  .team-card:focus-within .team-card__socials {
+    opacity: 1;
+    max-height: 4rem;
+    margin-top: 14px;
+  }
 }
-.team-card__bio {
-  font-size: 0.9375rem;
-  line-height: 1.6;
-  color: var(--text-muted);
-  margin-top: 10px;
+
+@media (prefers-reduced-motion: reduce) {
+  .team-card__media img,
+  .team-card:hover .team-card__media img {
+    transition: none;
+    transform: none;
+  }
+  .team-card__handle,
+  .team-card__bio,
+  .team-card__socials {
+    transition: none;
+  }
 }
 
 /* ============================================================

@@ -53,6 +53,14 @@ const lp = (p: string) => localizePath(p, loc);
             >
               {s.ctaLabel}
             </a>
+            {s.ctaSecondaryLabel && (
+              <a
+                class="cta-link service__cta service__cta--sec"
+                href={lp(s.ctaSecondaryHref)}
+              >
+                {s.ctaSecondaryLabel}
+              </a>
+            )}
           </div>
         ))
       }
