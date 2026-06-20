@@ -14,7 +14,7 @@ const toLang = curLang === 'en' ? 'es' : 'en';
 const dict = useTranslations(loc);
 const t = dict.nav;
 const L = dict.layout;
-const products = t.products;
+const pm = t.productMenu;
 const lp = (p: string) => localizePath(p, loc);
 const altURL = alternatePath(Astro.url.pathname, loc);
 ---
@@ -34,27 +34,65 @@ const altURL = alternatePath(Astro.url.pathname, loc);
     <nav class="nav__links" aria-label={t.primaryAria}>
       <a class="nav__link" href={lp('/#services')}>{t.services}</a>
       <a class="nav__link" href={lp('/#process')}>{t.process}</a>
-      <a class="nav__link" href={lp('/#us')}>{t.us}</a>
-      {
-        products.map((it) => (
-          <a
-            class="nav__link nav__link--ext"
-            href={it.external ? it.href : lp(it.href)}
-            target={it.external ? '_blank' : undefined}
-            rel={it.external ? 'noopener noreferrer' : undefined}
+
+      <div class="nav__group" data-nav-group>
+        <button
+          type="button"
+          class="nav__link nav__group-btn"
+          aria-expanded="false"
+          aria-haspopup="true"
+        >
+          {t.product}
+          <svg
+            class="nav__chev"
+            width="10"
+            height="10"
+            viewBox="0 0 12 12"
+            fill="none"
+            aria-hidden="true"
+            ><path
+              d="M3 4.5 6 7.5l3-3"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"></path></svg
           >
-            {it.label}
-            {it.badge && <span class="nav__badge">{it.badge}</span>}
-            {it.external && <span class="sr-only">{t.opensNewTab}</span>}
-            <Icon
-              name="external"
-              size={13}
-              stroke={1.75}
-              class="nav__ext-icon"
-            />
+        </button>
+        <div class="nav__dropdown" role="menu">
+          <a
+            class="nav__dropdown-link nav__dropdown-link--all"
+            href={lp(pm.allHref)}
+            role="menuitem"
+          >
+            {pm.allLabel}
           </a>
-        ))
-      }
+          {
+            pm.items.map((it) => (
+              <a
+                class="nav__dropdown-link"
+                href={it.external ? it.href : lp(it.href)}
+                role="menuitem"
+                target={it.external ? '_blank' : undefined}
+                rel={it.external ? 'noopener noreferrer' : undefined}
+              >
+                <span
+                  class={`nav__dot nav__dot--${it.status}`}
+                  aria-hidden="true"
+                />
+                {it.label}
+                {it.badge && (
+                  <span class={`nav__badge nav__badge--${it.status}`}>
+                    {it.badge}
+                  </span>
+                )}
+                {it.external && <span class="sr-only">{t.opensNewTab}</span>}
+              </a>
+            ))
+          }
+        </div>
+      </div>
+
+      <a class="nav__link" href={lp('/#us')}>{t.us}</a>
     </nav>
     <div class="nav__cta">
       <a
@@ -89,22 +127,32 @@ const altURL = alternatePath(Astro.url.pathname, loc);
 <div id="nav-mobile" class="nav__mobile" aria-hidden="true">
   <a class="nav__mobile-link" href={lp('/#services')}>{t.services}</a>
   <a class="nav__mobile-link" href={lp('/#process')}>{t.process}</a>
+
+  <div class="nav__mobile-group">
+    <p class="nav__mobile-label">{t.product}</p>
+    <a class="nav__mobile-sublink" href={lp(pm.allHref)}>{pm.allLabel}</a>
+    {
+      pm.items.map((it) => (
+        <a
+          class="nav__mobile-sublink"
+          href={it.external ? it.href : lp(it.href)}
+          target={it.external ? '_blank' : undefined}
+          rel={it.external ? 'noopener noreferrer' : undefined}
+        >
+          <span class={`nav__dot nav__dot--${it.status}`} aria-hidden="true" />
+          {it.label}
+          {it.badge && (
+            <span class={`nav__badge nav__badge--${it.status}`}>
+              {it.badge}
+            </span>
+          )}
+          {it.external && <span class="sr-only">{t.opensNewTab}</span>}
+        </a>
+      ))
+    }
+  </div>
+
   <a class="nav__mobile-link" href={lp('/#us')}>{t.us}</a>
-  {
-    products.map((it) => (
-      <a
-        class="nav__mobile-link nav__mobile-link--ext"
-        href={it.external ? it.href : lp(it.href)}
-        target={it.external ? '_blank' : undefined}
-        rel={it.external ? 'noopener noreferrer' : undefined}
-      >
-        {it.label}
-        {it.badge && <span class="nav__badge">{it.badge}</span>}
-        {it.external && <span class="sr-only">{t.opensNewTab}</span>}
-        <Icon name="external" size={14} stroke={1.75} class="nav__ext-icon" />
-      </a>
-    ))
-  }
   <a class="nav__mobile-link" href={lp('/#contact')}>{t.contact}</a>
   <a
     class="nav__mobile-link nav__mobile-lang"

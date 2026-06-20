@@ -1,11 +1,9 @@
 ---
-import Icon from '@/components/ui/Icon.astro';
-import { useTranslations, anchorId } from '@/i18n/utils';
+import { useTranslations, localizePath, anchorId } from '@/i18n/utils';
 const loc = Astro.currentLocale;
 const t = useTranslations(loc).terracore;
-const modules = t.modules;
-const dashFeatures = t.dashFeatures;
 const shots = t.shots;
+const lp = (p: string) => localizePath(p, loc);
 ---
 
 <section class="section terracore" id={anchorId('terracore', loc)}>
@@ -21,88 +19,23 @@ const shots = t.shots;
       <div class="ghost-num" aria-hidden="true">{t.ghost}</div>
     </div>
 
-    <div class="terracore__grid">
-      <div class="terracore__copy">
-        <div class="terracore__tags">
-          <span class="terracore__tag">{t.tagStar}</span>
-          <span class="terracore__tag terracore__tag--live">
-            <span></span>{t.tagLive}
-          </span>
-        </div>
-        <h3 class="terracore__name">{t.name}</h3>
-        <p class="terracore__lead">
-          {t.productLead}
-        </p>
-        <div class="terracore__modules">
-          <div class="terracore__modules-head">{t.modulesHead}</div>
-          <ul>
-            {modules.map((m) => <li>{m}</li>)}
-          </ul>
-        </div>
-        <div class="terracore__actions">
-          <a
-            class="btn-primary"
-            href="https://terracoreapp.co"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {t.cta}
-          </a>
-        </div>
-        <p class="terracore__note">
-          {t.note}
-        </p>
+    <div class="terracore__min">
+      <div class="terracore__tags">
+        <span class="terracore__tag">{t.tagStar}</span>
+        <span class="terracore__tag terracore__tag--live">
+          <span></span>{t.tagLive}
+        </span>
       </div>
-
-      <div class="terracore__visual" aria-hidden="true">
-        <div class="tc-dash">
-          <div class="tc-dash__bar">
-            <div class="tc-dash__bar-l">
-              <span></span><strong>{t.name}</strong> · {t.dashTagline}
-            </div>
-            <div>{t.dashYear}</div>
-          </div>
-          <div class="tc-dash__body">
-            <div class="tc-dash__kpis">
-              {
-                t.dashKpis.map((k) => (
-                  <div class="tc-dash__kpi">
-                    <div class="tc-dash__kpi-label">{k.label}</div>
-                    <div class="tc-dash__kpi-val">{k.val}</div>
-                    <div class="tc-dash__kpi-trend">{k.trend}</div>
-                  </div>
-                ))
-              }
-            </div>
-            <div class="tc-dash__feats">
-              <div class="tc-dash__feats-head">
-                <span>{t.dashFeatsHead}</span>
-                <span>{t.dashFeatsCount}</span>
-              </div>
-              <div class="tc-dash__feats-grid">
-                {
-                  dashFeatures.map((f) => (
-                    <div class="tc-dash__feat">
-                      <div class="tc-dash__feat-icon">
-                        <Icon name={f.icon} size={16} stroke={1.5} />
-                      </div>
-                      <div class="tc-dash__feat-body">
-                        <div class="tc-dash__feat-title">{f.title}</div>
-                        <div class="tc-dash__feat-tag">{f.tag}</div>
-                      </div>
-                    </div>
-                  ))
-                }
-              </div>
-            </div>
-          </div>
-        </div>
+      <h3 class="terracore__name">{t.name}</h3>
+      <p class="terracore__lead">
+        {t.productLead}
+      </p>
+      <div class="terracore__actions">
+        <a class="btn-primary" href={lp('/productos')}>
+          {t.ctaAll}
+        </a>
       </div>
     </div>
-
-    <p class="terracore__proof">
-      {t.proof}
-    </p>
 
     <div class="terracore__shots">
       {

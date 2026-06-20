@@ -6,6 +6,12 @@
   NODE_VERSION = "22.12.0"
   NPM_VERSION = "10"
 
+# Serverless backend for the contact form (Supabase + Resend).
+# The v2 function routes itself to /api/contact via its `config.path` export.
+[functions]
+  directory = "netlify/functions"
+  node_bundler = "esbuild"
+
 [[redirects]]
   from = "/legal/terminos"
   to = "/terms"

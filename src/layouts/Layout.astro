@@ -5,7 +5,7 @@ import Footer from '@/components/ui/Footer.astro';
 import CookiesBanner from '@/components/ui/CookiesBanner.astro';
 import Loader from '@/components/ui/Loader.astro';
 import Icon from '@/components/ui/Icon.astro';
-import { useTranslations, getLang } from '@/i18n/utils';
+import { useTranslations, getLang, localizedPages } from '@/i18n/utils';
 
 interface Props {
   title?: string;
@@ -27,9 +27,23 @@ const {
 const SITE = 'https://luminaw.co';
 const path = Astro.url.pathname;
 
-// Per-locale URLs for canonical + hreflang alternates.
-const esPath = lang === 'en' ? path.replace(/^\/en/, '') || '/' : path;
-const enPath = lang === 'en' ? path : path === '/' ? '/en' : `/en${path}`;
+// Per-locale URLs for canonical + hreflang alternates. Pages with a
+// locale-specific slug ('/productos' <-> '/en/products') map via localizedPages.
+const lpage = localizedPages.find(
+  (p) => p.es === path || `/en${p.en}` === path
+);
+const esPath = lpage
+  ? lpage.es
+  : lang === 'en'
+    ? path.replace(/^\/en/, '') || '/'
+    : path;
+const enPath = lpage
+  ? `/en${lpage.en}`
+  : lang === 'en'
+    ? path
+    : path === '/'
+      ? '/en'
+      : `/en${path}`;
 const esURL = new URL(esPath, SITE);
 const enURL = new URL(enPath, SITE);
 const canonicalURL = new URL(path, SITE);

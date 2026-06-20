@@ -1,0 +1,81 @@
+---
+import { useTranslations, localizePath } from '@/i18n/utils';
+const loc = Astro.currentLocale;
+const t = useTranslations(loc).productsPage;
+const lp = (p: string) => localizePath(p, loc);
+---
+
+<section class="section products-page surface-dark">
+  <div class="animate-on-scroll container">
+    <header class="products-page__hero">
+      <div class="eyebrow">{t.eyebrow}</div>
+      <h1 class="products-page__title">{t.heading}</h1>
+      <p class="products-page__lead">{t.lead}</p>
+    </header>
+
+    <div class="products-grid">
+      {
+        t.cards.map((c) => (
+          <article
+            class={`prod-card ${c.status === 'soon' ? 'prod-card--soon' : 'prod-card--live'}`}
+          >
+            <span class={`prod-card__status prod-card__status--${c.status}`}>
+              {c.statusLabel}
+            </span>
+            <h2 class="prod-card__title">{c.name}</h2>
+            <p class="prod-card__tagline">{c.tagline}</p>
+            <p class="prod-card__desc">{c.description}</p>
+
+            <div class="prod-card__featshead">{c.featsHead}</div>
+            <ul class="prod-card__feats">
+              {c.feats.map((f) => (
+                <li>{f}</li>
+              ))}
+            </ul>
+
+            {c.chips.length > 0 && (
+              <ul class="prod-card__chips">
+                {c.chips.map((ch) => (
+                  <li>{ch}</li>
+                ))}
+              </ul>
+            )}
+
+            <div class="prod-card__actions">
+              <a
+                class={
+                  c.status === 'soon' ? 'prod-card__btn-outline' : 'btn-primary'
+                }
+                href={c.ctaHref}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {c.ctaLabel}
+              </a>
+              {c.ctaSecondaryLabel && (
+                <a
+                  class="cta-link prod-card__cta"
+                  href={c.ctaSecondaryHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {c.ctaSecondaryLabel}
+                </a>
+              )}
+            </div>
+
+            <p class="prod-card__note">{c.note}</p>
+          </article>
+        ))
+      }
+    </div>
+
+    <div class="products-close">
+      <h2 class="products-close__title">{t.closingTitle}</h2>
+      <p class="products-close__text">{t.closingText}</p>
+      <a class="cta-link products-close__cta" href={lp(t.closingHref)}
+        >{t.closingCta}</a
+      >
+    </div>
+  </div>
+</section>

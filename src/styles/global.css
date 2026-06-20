@@ -158,10 +158,8 @@ a:hover {
 a.btn-primary,
 a.btn-secondary,
 a.btn-ghost,
-a.service__cta,
-a.prod-card__cta,
-a.fork__cta,
-a.fork__aside-link,
+a.cta-link,
+a.prod-card__btn-outline,
 a.nav__link,
 a.nav__brand,
 a.nav__lang,
@@ -179,9 +177,8 @@ a.team-card__social,
 a.btn-primary:hover,
 a.btn-secondary:hover,
 a.btn-ghost:hover,
-a.service__cta:hover,
-a.prod-card__cta:hover,
-a.fork__cta:hover,
+a.cta-link:hover,
+a.prod-card__btn-outline:hover,
 a.nav__link:hover,
 a.nav__brand:hover,
 a.footer__mark:hover,
@@ -246,23 +243,6 @@ small {
     transform 120ms ease;
   white-space: nowrap;
   text-decoration: none;
-}
-.service__cta::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: -4px;
-  height: 1px;
-  background: currentColor;
-  transform: scaleX(0);
-  transform-origin: right center;
-  transition: transform 320ms ease;
-  pointer-events: none;
-}
-.service__cta:hover::after {
-  transform: scaleX(1);
-  transform-origin: left center;
 }
 
 .btn-primary {
@@ -447,6 +427,7 @@ small {
     background-color 0.2s ease;
 }
 .nav__lang:hover {
+  color: var(--text-on-dark, #fff);
   border-color: rgba(255, 255, 255, 0.4);
   background: rgba(255, 255, 255, 0.06);
   text-decoration: none;
@@ -568,6 +549,47 @@ small {
   background: rgba(64, 123, 255, 0.18);
   border: 1px solid rgba(64, 123, 255, 0.4);
   white-space: nowrap;
+}
+/* Badges de estado alineados con .prod-card__status de la página de productos:
+   verde = activo (live), ámbar = próximamente (soon). Consistencia visual. */
+.nav__badge--live {
+  color: #6ee7a0;
+  background: rgba(34, 197, 94, 0.1);
+  border-color: rgba(34, 197, 94, 0.4);
+}
+.nav__badge--soon {
+  color: #f5c97a;
+  background: rgba(245, 166, 35, 0.1);
+  border-color: rgba(245, 166, 35, 0.4);
+}
+
+/* Encabezado del grupo "Ver todos los productos": destacado + separador. */
+.nav__dropdown-link--all {
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 4px;
+  padding-bottom: 11px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Punto de estado, mismos colores que la página de productos:
+   verde = activo, ámbar = próximamente. */
+.nav__dot {
+  flex: none;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #6b7079;
+}
+.nav__dot--live {
+  background: #22c55e;
+}
+.nav__dot--soon {
+  background: var(--brand-accent);
+}
+/* En móvil, el punto de estado sustituye al guion bullet del sublink. */
+.nav__mobile-sublink:has(.nav__dot)::before {
+  display: none;
 }
 .nav__burger {
   display: inline-flex;
@@ -1259,33 +1281,7 @@ small {
   margin-top: auto;
 }
 .fork__cta {
-  position: relative;
-  display: inline-block;
-  align-self: flex-start;
-  font-size: 0.9375rem;
-  font-weight: 600;
-  color: var(--brand-blue-ink);
   margin-top: 8px;
-}
-.fork__cta::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: -3px;
-  height: 1px;
-  background: currentColor;
-  transform: scaleX(0);
-  transform-origin: right center;
-  transition: transform 320ms ease;
-  pointer-events: none;
-}
-.fork__cta:hover::after {
-  transform: scaleX(1);
-  transform-origin: left center;
-}
-.fork__cta:hover {
-  color: var(--accent-hover);
 }
 .fork__aside {
   margin-top: 24px;
@@ -1293,28 +1289,7 @@ small {
   color: var(--text-muted);
 }
 .fork__aside-link {
-  position: relative;
-  display: inline-block;
   margin-left: 6px;
-  font-weight: 600;
-  color: var(--brand-blue-ink);
-}
-.fork__aside-link::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: -3px;
-  height: 1px;
-  background: currentColor;
-  transform: scaleX(0);
-  transform-origin: right center;
-  transition: transform 320ms ease;
-  pointer-events: none;
-}
-.fork__aside-link:hover::after {
-  transform: scaleX(1);
-  transform-origin: left center;
 }
 
 /* ============================================================
@@ -1448,21 +1423,42 @@ small {
   height: 1px;
   background: var(--brand-blue);
 }
-.service__cta {
+/* Text CTA — animated-underline inline link. SINGLE SOURCE OF TRUTH.
+   Apply `.cta-link` to every "Quiero… / Ver… / Hablar…" inline link.
+   Per-context classes (service__cta, fork__cta, …) only add layout margins. */
+.cta-link {
   position: relative;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
+  display: inline-block;
+  align-self: flex-start;
+  font-family: var(--font-body);
   font-size: 0.9375rem;
-  font-weight: 500;
+  font-weight: 600;
   color: var(--brand-blue-ink);
   text-decoration: none;
-  margin-top: 8px;
-  align-self: flex-start;
 }
-.service__cta:hover {
+.cta-link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -3px;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right center;
+  transition: transform 320ms ease;
+  pointer-events: none;
+}
+.cta-link:hover::after {
+  transform: scaleX(1);
+  transform-origin: left center;
+}
+.cta-link:hover {
   color: var(--accent-hover);
   text-decoration: none;
+}
+.service__cta {
+  margin-top: 8px;
 }
 
 /* ============================================================
@@ -1983,27 +1979,206 @@ small {
 }
 .prod-card__cta {
   margin-top: 4px;
-  font-weight: 600;
-  font-size: 0.9375rem;
-  color: var(--brand-blue-ink);
-  position: relative;
 }
-.prod-card__cta::after {
+
+/* ============================================================
+   Productos · home minimal block + /productos page
+   ============================================================ */
+.terracore__min {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 18px;
+  max-width: 60ch;
+}
+.terracore__min .terracore__lead {
+  margin: 0;
+}
+
+.products-page {
+  position: relative;
+  overflow: hidden;
+}
+.products-page::before {
   content: '';
   position: absolute;
-  left: 0;
-  right: 0;
-  bottom: -3px;
-  height: 1px;
-  background: currentColor;
-  transform: scaleX(0);
-  transform-origin: right center;
-  transition: transform 320ms ease;
+  inset: 0;
+  background: radial-gradient(
+    ellipse 60% 70% at 100% 0%,
+    rgba(64, 123, 255, 0.16),
+    transparent 70%
+  );
   pointer-events: none;
 }
-.prod-card__cta:hover::after {
-  transform: scaleX(1);
-  transform-origin: left center;
+.products-page .container {
+  position: relative;
+}
+.products-page__hero {
+  max-width: 60ch;
+  margin-bottom: 56px;
+}
+.products-page__title {
+  font-family: var(--font-display);
+  color: #fff;
+  font-size: clamp(2.25rem, 5vw, 3.75rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1.02;
+  margin: 18px 0 0;
+}
+.products-page__lead {
+  font-size: 1.125rem;
+  color: var(--text-on-dark-muted);
+  line-height: 1.6;
+  margin: 20px 0 0;
+}
+
+.products-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+@media (min-width: 880px) {
+  .products-grid {
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+  }
+}
+.products-grid .prod-card {
+  gap: 16px;
+  padding: 36px;
+}
+.prod-card--live {
+  border-top: 3px solid #22c55e;
+}
+.prod-card--soon {
+  opacity: 0.9;
+}
+
+.prod-card__status {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  padding: 5px 11px;
+  border: 1px solid transparent;
+}
+.prod-card__status::before {
+  content: '';
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  flex: none;
+}
+.prod-card__status--live {
+  color: #6ee7a0;
+  border-color: rgba(34, 197, 94, 0.4);
+  background: rgba(34, 197, 94, 0.1);
+}
+.prod-card__status--live::before {
+  background: #22c55e;
+}
+.prod-card__status--soon {
+  color: #f5c97a;
+  border-color: rgba(245, 166, 35, 0.4);
+  background: rgba(245, 166, 35, 0.1);
+}
+.prod-card__status--soon::before {
+  background: var(--brand-accent);
+}
+
+.prod-card__featshead {
+  font-size: 11.5px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--text-on-dark-muted);
+  margin-top: 4px;
+}
+.prod-card--soon .prod-card__feats li::before {
+  background: var(--brand-accent);
+}
+
+.prod-card__chips {
+  list-style: none;
+  margin: 4px 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.prod-card__chips li {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--text-on-dark);
+  padding: 5px 10px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.prod-card__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+  margin-top: 8px;
+}
+.prod-card__btn-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.9375rem;
+  padding: 0.75rem 1.5rem;
+  color: #fff;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease;
+}
+.prod-card__btn-outline:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.4);
+  text-decoration: none;
+}
+
+.prod-card__note {
+  font-size: 0.8125rem;
+  font-style: italic;
+  color: var(--text-on-dark-muted);
+  line-height: 1.5;
+  margin-top: 2px;
+}
+
+.products-close {
+  margin-top: 64px;
+  padding-top: 40px;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  max-width: 60ch;
+}
+.products-close__title {
+  font-family: var(--font-display);
+  color: #fff;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  margin: 0;
+}
+.products-close__text {
+  font-size: 1.0625rem;
+  color: var(--text-on-dark-muted);
+  line-height: 1.6;
+  margin: 12px 0 0;
+}
+.products-close__cta {
+  margin-top: 18px;
 }
 
 /* ============================================================
@@ -2068,14 +2243,41 @@ small {
   cursor: pointer;
   display: inline-flex;
   align-items: center;
-  gap: 12px;
+  gap: 8px;
   width: fit-content;
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 14px;
-  letter-spacing: 0.01em;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.9375rem;
   color: var(--brand-blue-ink);
-  padding: 12px 2px;
+  padding: 8px 0;
+  transition: color 160ms ease;
+}
+.disclosure:hover {
+  color: var(--accent-hover);
+}
+/* Subrayado animado del CTA-texto, pegado a la etiqueta (no al chevron). */
+.disclosure .lbl-closed,
+.disclosure .lbl-open {
+  position: relative;
+}
+.disclosure .lbl-closed::after,
+.disclosure .lbl-open::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -3px;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right center;
+  transition: transform 320ms ease;
+  pointer-events: none;
+}
+.disclosure:hover .lbl-closed::after,
+.disclosure:hover .lbl-open::after {
+  transform: scaleX(1);
+  transform-origin: left center;
 }
 .disclosure::-webkit-details-marker {
   display: none;
@@ -2431,30 +2633,35 @@ details[open] > .disclosure .lbl-open {
   border-right: 1px solid var(--border-base);
   border-bottom: 1px solid var(--border-base);
   display: flex;
-  flex-direction: column;
+  flex-direction: column; /* mobile: 2 rows, photo on top */
 }
-@media (min-width: 520px) {
+/* Tablet + desktop: 2 cols (70% text / 30% photo). The card is capped so it
+   never spans the full container width. align-items:center keeps the square
+   photo square (no vertical stretch) when the text column is taller. */
+@media (min-width: 720px) {
   .team-card {
     flex-direction: row;
-    align-items: stretch;
+    align-items: center;
+    max-width: 620px;
   }
 }
 .team-card__media {
   flex-shrink: 0;
-  background: var(--brand-light);
+  width: 100%;
+  aspect-ratio: 1 / 1; /* always square: photo fills it exactly, no extra bg */
+  background: var(
+    --brand-light
+  ); /* only visible behind the initials fallback */
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  aspect-ratio: 1 / 1;
   border-bottom: 1px solid var(--border-base);
 }
-@media (min-width: 520px) {
+@media (min-width: 720px) {
   .team-card__media {
-    width: 40%;
-    aspect-ratio: auto;
+    width: 30%; /* 30% photo, 70% text */
     border-bottom: none;
-    border-right: 1px solid var(--border-base);
   }
 }
 .team-card__media img {
@@ -2770,6 +2977,20 @@ details[open] > .disclosure .lbl-open {
 .contact__field:focus-within label {
   color: var(--brand-blue-ink);
   letter-spacing: 0.14em;
+}
+/* Required marker — red asterisk on every field label/legend */
+.req {
+  color: #ff6b6b;
+  margin-left: 3px;
+  font-weight: 700;
+}
+/* Honeypot anti-spam field: out of view and out of the a11y tree, still in DOM */
+.contact__hp {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
 }
 .contact__field input,
 .contact__field textarea {

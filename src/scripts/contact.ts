@@ -35,9 +35,12 @@ form?.addEventListener('submit', async (e) => {
   submitBtn.disabled = true;
 
   const data = Object.fromEntries(new FormData(form).entries());
+  // Metadatos para triage en el backend propio (Supabase + Resend)
+  data.locale = document.documentElement.lang || 'es';
+  data.source = window.location.pathname;
 
   try {
-    const res = await fetch('https://formspree.io/f/xpqovooa', {
+    const res = await fetch('/api/contact', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data),

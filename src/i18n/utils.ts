@@ -60,6 +60,14 @@ export function anchorId(key: string, locale: string | undefined): string {
   return anchorSlugs[getLang(locale)][key] ?? key;
 }
 
+// Standalone pages whose slug differs by locale. Authored markup always uses
+// the es canonical path ('/productos'); localizePath()/alternatePath() resolve
+// it to '/en/products' on en. Keyed by es path, the matching en page lives at
+// src/pages/en/products.astro.
+export const localizedPages: { es: string; en: string }[] = [
+  { es: '/productos', en: '/products' },
+];
+
 // Prefix a root-relative path with the locale segment when not default, and
 // translate home-anchor slugs to the active locale.
 // localizePath('/#process', 'es') => '/#proceso'
@@ -77,6 +85,10 @@ export function localizePath(path: string, locale: string | undefined): string {
     return lang === defaultLang ? `/#${slug}` : `/${lang}#${slug}`;
   }
 
+  // Pages with a locale-specific slug ('/productos' <-> '/en/products').
+  const lpage = localizedPages.find((p) => p.es === path || p.en === path);
+  if (lpage) return lang === 'en' ? `/en${lpage.en}` : lpage.es;
+
   if (lang === defaultLang) return path;
   if (path === '/') return `/${lang}`;
   return `/${lang}${path}`; // '/terms' -> '/en/terms'
@@ -89,6 +101,11 @@ export function alternatePath(
   locale: string | undefined
 ): string {
   const lang = getLang(locale);
+  // Locale-specific page slugs: switch between the es/en variants directly.
+  const lpage = localizedPages.find(
+    (p) => p.es === path || `/en${p.en}` === path
+  );
+  if (lpage) return lang === 'en' ? lpage.es : `/en${lpage.en}`;
   if (lang === 'en') return path.replace(/^\/en/, '') || '/';
   return path === '/' ? '/en' : `/en${path}`;
 }
