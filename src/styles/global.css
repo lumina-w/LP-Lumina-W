@@ -1,4 +1,4 @@
-@import url('https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@700,800&f[]=switzer@400,500,600&display=swap');
+/* Fontshare loaded via <link> in Layout.astro head (parallel, non-blocking) — not @import (chained/render-blocking) */
 @import 'tailwindcss';
 
 @theme {
@@ -164,6 +164,7 @@ a.fork__cta,
 a.fork__aside-link,
 a.nav__link,
 a.nav__brand,
+a.nav__lang,
 a.footer__mark,
 a.contact__channel,
 a.footer__col-link,
@@ -425,6 +426,33 @@ small {
   display: flex;
   align-items: center;
   gap: 10px;
+}
+
+.nav__lang {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 32px;
+  height: 28px;
+  padding: 0 8px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--text-on-dark, #fff);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 2px;
+  transition:
+    border-color 0.2s ease,
+    background-color 0.2s ease;
+}
+.nav__lang:hover {
+  border-color: rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.06);
+  text-decoration: none;
+}
+.nav__mobile-lang {
+  font-weight: 600;
 }
 
 .nav__group {

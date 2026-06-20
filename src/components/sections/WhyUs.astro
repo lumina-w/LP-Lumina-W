@@ -1,17 +1,18 @@
 ---
 import Icon from '@/components/ui/Icon.astro';
-import { useTranslations } from '@/i18n/utils';
+import { useTranslations, anchorId } from '@/i18n/utils';
 // Equipo real — A (prueba social por credibilidad del equipo).
 // NO inventar experiencia ni usar fotos de stock (regla E).
 // Datos del equipo viven en el diccionario i18n.
-const t = useTranslations(Astro.currentLocale).whyus;
+const loc = Astro.currentLocale;
+const t = useTranslations(loc).whyus;
 const team = t.team;
 const reasons = t.reasons;
 const featured = reasons.find((r) => r.featured);
 const supporting = reasons.filter((r) => !r.featured);
 ---
 
-<section class="section" id="us">
+<section class="section" id={anchorId('us', loc)}>
   <div class="animate-on-scroll container">
     <div class="s-head">
       <div>
@@ -92,7 +93,7 @@ const supporting = reasons.filter((r) => !r.featured);
                         href={s.href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        aria-label={`${m.name} · ${s.label} (abre en una pestaña nueva)`}
+                        aria-label={`${m.name} · ${s.label}${t.opensNewTab}`}
                       >
                         <Icon name={s.icon} size={18} stroke={1.5} />
                       </a>

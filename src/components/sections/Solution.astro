@@ -1,11 +1,13 @@
 ---
 import Icon from '@/components/ui/Icon.astro';
-import { useTranslations } from '@/i18n/utils';
-const t = useTranslations(Astro.currentLocale).solution;
+import { useTranslations, localizePath, anchorId } from '@/i18n/utils';
+const loc = Astro.currentLocale;
+const t = useTranslations(loc).solution;
 const services = t.services;
+const lp = (p: string) => localizePath(p, loc);
 ---
 
-<section class="section" id="services">
+<section class="section" id={anchorId('services', loc)}>
   <div class="animate-on-scroll container">
     <div class="s-head s-head--stack">
       <div>
@@ -45,7 +47,7 @@ const services = t.services;
             </ul>
             <a
               class="service__cta"
-              href={s.ctaHref}
+              href={s.ctaExternal ? s.ctaHref : lp(s.ctaHref)}
               target={s.ctaExternal ? '_blank' : undefined}
               rel={s.ctaExternal ? 'noopener noreferrer' : undefined}
             >

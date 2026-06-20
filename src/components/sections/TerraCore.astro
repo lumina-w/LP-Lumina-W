@@ -1,13 +1,14 @@
 ---
 import Icon from '@/components/ui/Icon.astro';
-import { useTranslations } from '@/i18n/utils';
-const t = useTranslations(Astro.currentLocale).terracore;
+import { useTranslations, anchorId } from '@/i18n/utils';
+const loc = Astro.currentLocale;
+const t = useTranslations(loc).terracore;
 const modules = t.modules;
 const dashFeatures = t.dashFeatures;
 const shots = t.shots;
 ---
 
-<section class="section terracore" id="terracore">
+<section class="section terracore" id={anchorId('terracore', loc)}>
   <div class="animate-on-scroll container">
     <div class="s-head s-head--stack">
       <div>

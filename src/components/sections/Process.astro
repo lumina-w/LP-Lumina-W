@@ -1,13 +1,15 @@
 ---
 import Icon from '@/components/ui/Icon.astro';
-import { useTranslations } from '@/i18n/utils';
-const t = useTranslations(Astro.currentLocale).process;
+import { useTranslations, localizePath, anchorId } from '@/i18n/utils';
+const loc = Astro.currentLocale;
+const t = useTranslations(loc).process;
 const tracks = t.tracks;
 const portalCustom = t.portalCustom;
 const portalSaas = t.portalSaas;
+const lp = (p: string) => localizePath(p, loc);
 ---
 
-<section class="section process-sec" id="process">
+<section class="section process-sec" id={anchorId('process', loc)}>
   <div class="animate-on-scroll container">
     <div class="s-head s-head--stack">
       <div>
@@ -104,7 +106,7 @@ const portalSaas = t.portalSaas;
       <p style="font-size:14px;color:var(--text-muted);margin-bottom:14px">
         {t.ctaKicker}
       </p>
-      <a class="btn-primary" href="#contact">{t.cta}</a>
+      <a class="btn-primary" href={lp('/#contact')}>{t.cta}</a>
     </div>
   </div>
 </section>

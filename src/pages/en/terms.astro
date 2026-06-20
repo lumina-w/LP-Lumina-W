@@ -1,0 +1,761 @@
+---
+import Layout from '@/layouts/Layout.astro';
+
+const updated = 'May 18, 2026';
+const sections = [
+  'Definitions',
+  'Purpose and Scope',
+  'Processes and Methodology',
+  'Pricing and Billing',
+  'Intellectual Property',
+  'Confidentiality and NDA',
+  'Responsibilities and Warranties',
+  'Termination',
+  'Personal Data and Privacy',
+  'Governing Law and Dispute Resolution',
+];
+---
+
+<Layout
+  title="Terms and Conditions | Lúmina W"
+  description="Terms and Conditions of Lúmina W S.A.S, custom software services, intellectual property, confidentiality, and other provisions."
+>
+  <article class="legal">
+    <header class="legal__head">
+      <p class="legal__kicker">Legal</p>
+      <h1>Terms and Conditions</h1>
+      <div class="legal__meta">
+        <span><strong>Last updated:</strong> {updated}</span>
+        <span><strong>Version:</strong> 1.0</span>
+        <span><strong>Effective:</strong> Immediately</span>
+      </div>
+    </header>
+
+    <p class="legal__intro">
+      This document governs the provision of professional software services by
+      <strong>Lúmina W S.A.S</strong>. These services include consulting,
+      design, custom development, and a post-launch support and evolution
+      retainer offered to its clients. Read it carefully. If you have questions,
+      write to us at
+      <a href="mailto:contact@luminaw.co">contact@luminaw.co</a> before signing any
+      work order.
+    </p>
+
+    <div class="legal__callout">
+      <p>
+        This English version is provided for convenience only. The legally
+        binding text is the Spanish original at
+        <a href="/terms">luminaw.co/terms</a>. In case of any discrepancy, the
+        Spanish version prevails.
+      </p>
+    </div>
+
+    <div class="legal__body">
+      <nav class="legal__toc" aria-label="Table of contents">
+        <h2>Contents</h2>
+        <ol>
+          {
+            sections.map((s, i) => (
+              <li>
+                <a href={`#sec-${String(i + 1).padStart(2, '0')}`}>{s}</a>
+              </li>
+            ))
+          }
+        </ol>
+      </nav>
+
+      <div class="legal__content">
+        <section id="sec-01" class="legal__section">
+          <header class="legal__section-head">
+            <span class="legal__num" aria-hidden="true">01</span>
+            <h2>Definitions</h2>
+          </header>
+          <p>
+            For purposes of these Terms, the following words shall have the
+            meaning assigned to them below, without prejudice to other
+            definitions contained in specific work orders.
+          </p>
+          <dl class="legal__defs">
+            <div class="legal__def">
+              <dt class="legal__def-term">Lúmina W / Provider</dt>
+              <dd class="legal__def-desc">
+                <strong>Lúmina W S.A.S</strong>, a Colombian company operating
+                the website <em>luminaw.co</em>, dedicated to providing
+                professional consulting, design, development, and custom
+                software operation services.
+              </dd>
+            </div>
+            <div class="legal__def">
+              <dt class="legal__def-term">Client</dt>
+              <dd class="legal__def-desc">
+                A natural or legal person who contracts any Service with Lúmina
+                W through a work order, accepted proposal, master agreement, or
+                signed quote.
+              </dd>
+            </div>
+            <div class="legal__def">
+              <dt class="legal__def-term">Services</dt>
+              <dd class="legal__def-desc">
+                The set of professional activities provided by Lúmina W,
+                including but not limited to technical consulting, product
+                design, custom software development, systems integration,
+                evolutionary maintenance, and platform operation.
+              </dd>
+            </div>
+            <div class="legal__def">
+              <dt class="legal__def-term">Client Data</dt>
+              <dd class="legal__def-desc">
+                All information, files, datasets, credentials, existing code, or
+                content of any nature that the Client provides to Lúmina W, or
+                that is generated within the Client's systems during the
+                provision of the Service.
+              </dd>
+            </div>
+            <div class="legal__def">
+              <dt class="legal__def-term">Deliverable Code</dt>
+              <dd class="legal__def-desc">
+                Software artifacts expressly identified as deliverables in the
+                work order, once approved by the Client and invoiced in
+                accordance with these Terms.
+              </dd>
+            </div>
+            <div class="legal__def">
+              <dt class="legal__def-term">Project</dt>
+              <dd class="legal__def-desc">
+                The specific scope of work described in an order or proposal,
+                with its deliverables, deadlines, assigned team, and associated
+                fees.
+              </dd>
+            </div>
+          </dl>
+        </section>
+
+        <section id="sec-02" class="legal__section">
+          <header class="legal__section-head">
+            <span class="legal__num" aria-hidden="true">02</span>
+            <h2>Purpose and Scope</h2>
+          </header>
+          <p>
+            Lúmina W provides professional custom software services and operates
+            its own digital products. <strong
+              >This document governs only the professional services</strong
+            > contracted directly by the Client; Lúmina W's SaaS products (including
+            <em>TerraCore</em>) have their own terms of use and service
+            agreements.
+          </p>
+          <h3>Nature of the relationship</h3>
+          <p>
+            Lúmina W acts as an independent contractor. These Terms do not
+            create any employment, agency, mandate, partnership, or
+            representation relationship of any kind between Lúmina W and the
+            Client.
+          </p>
+          <h3>Service model</h3>
+          <p>
+            The Services are provided under a professional services model,
+            billed by <strong>fixed-scope project</strong> as agreed in the work order.
+            <strong>This is not a Lúmina W SaaS product;</strong> the Client contracts
+            the team's technical capacity to build their own software.
+          </p>
+          <p>
+            Each Project has a <strong
+              >defined scope, deadline, and deliverable that ends at Launch</strong
+            >. Post-launch operation, support, or evolution is not included and
+            requires a separate work order.
+          </p>
+          <h3>Code delivery</h3>
+          <p>
+            Unless otherwise agreed, Lúmina W delivers the Deliverable Code in
+            functional form and deployed in the agreed environment.
+            <strong
+              >The transfer of rights over such code is governed by section 05</strong
+            > and operates only when the Client has paid the corresponding fees in
+            full.
+          </p>
+        </section>
+
+        <section id="sec-03" class="legal__section">
+          <header class="legal__section-head">
+            <span class="legal__num" aria-hidden="true">03</span>
+            <h2>Processes and Methodology</h2>
+          </header>
+          <p>
+            Lúmina W structures each Project in phases with a defined closing.
+            The Client acknowledges and accepts this structure as the basis of
+            the service.
+          </p>
+          <ol>
+            <li>
+              <strong>Discovery, 2 weeks.</strong> Initial phase dedicated to understanding
+              the problem, the team, the data, and the constraints. It concludes with
+              a proposal of scope, schedule, and fixed budget.
+            </li>
+            <li>
+              <strong>Build, 4 to 8 weeks.</strong> Design and construction of the
+              software in biweekly sprints with a demo at the close of each sprint.
+              The Client participates in deliverable approvals and backlog prioritization
+              within the agreed scope.
+            </li>
+            <li>
+              <strong>Launch.</strong> Deployment to production, final acceptance
+              testing, training for the Client's team, and formal handover of credentials,
+              documentation, and architecture.
+              <strong>The Project ends here.</strong>
+            </li>
+            <li>
+              <strong>Operate &amp; Retainer.</strong> Post-launch, the Client may
+              contract a monthly retainer for support, improvements, and technical
+              consulting under a fixed monthly hours model. See
+              <a href="#sec-04">Section 04</a>.
+            </li>
+          </ol>
+          <h3>Cadence and transparency</h3>
+          <ul>
+            <li>Weekly or biweekly demos, with a recording or minutes.</li>
+            <li>
+              Project boards (Linear, GitHub Projects, or equivalents)
+              accessible in read mode for the <em>stakeholders</em> designated by
+              the Client.
+            </li>
+            <li>
+              Shared communication channel (email, Slack, or equivalent)
+              throughout the entire service.
+            </li>
+            <li>
+              Code repository with visibility for the Client under the agreed
+              terms.
+            </li>
+          </ul>
+          <h3>Scope changes</h3>
+          <p>
+            Scope changes, whether requested by the Client or arising from
+            technical discovery, are documented in a change order indicating the
+            impact on time, cost, and deliverables. No modification to the fixed
+            scope is billable without prior written approval.
+          </p>
+        </section>
+
+        <section id="sec-04" class="legal__section">
+          <header class="legal__section-head">
+            <span class="legal__num" aria-hidden="true">04</span>
+            <h2>Pricing and Billing</h2>
+          </header>
+          <p>
+            Prices are <strong>variable and dependent on the scope</strong>
+            of each Project. Lúmina W does not publish fixed rates on the site: each
+            proposal is built at the close of Discovery based on complexity, assigned
+            team, deadlines, and integrations.
+          </p>
+          <h3>Currency and tax regime</h3>
+          <p>
+            Unless otherwise agreed, fees are quoted in Colombian pesos (COP) or
+            United States dollars (USD), and include the applicable taxes in
+            accordance with the current tax regime. Lúmina W issues
+            <strong>electronic invoicing</strong> with a current resolution before
+            the <em>DIAN</em>.
+          </p>
+          <h3>Payment schedule</h3>
+          <ul>
+            <li>
+              <strong>50% advance at kick-off.</strong> The Client pays half of the
+              total Project value when formally starting the Build phase, once the
+              Discovery proposal is accepted.
+            </li>
+            <li>
+              <strong>50% balance at closing and approval.</strong> The remaining
+              balance is invoiced at the close of Launch, once the Client approves
+              the final deliverables and the handover is completed.
+            </li>
+            <li>
+              <strong>Payment term: Net 15.</strong> Invoices are payable within 15
+              calendar days following their issuance.
+            </li>
+          </ul>
+          <h3>Post-launch support</h3>
+          <p>
+            Payment of the balance closes the Project. Post-launch support,
+            maintenance, and evolution are provided under the
+            <strong>monthly Retainer</strong> model described below, or through a
+            separate work order with its own scope, deadline, and fees.
+          </p>
+
+          <h3>4.5 · Retainer Model</h3>
+          <p>
+            The Client may contract a monthly retainer for continuous access to
+            development, technical support, bug fixing, and platform evolution.
+          </p>
+          <p><strong>Rate and scope:</strong></p>
+          <ul>
+            <li>Monthly retainer: <strong>$3,000,000 COP</strong>.</li>
+            <li>
+              Includes: <strong>12 hours/week (48 hours/month)</strong> of availability.
+            </li>
+            <li>
+              Response time: <strong>24 business hours</strong> for requests.
+            </li>
+            <li>Applicable only post-launch of a Project.</li>
+          </ul>
+          <p><strong>Hours cycle:</strong></p>
+          <p>
+            The 12 hours/week renew every Monday. Hours not used during the week
+            <strong>do not carry over</strong> to the following month or to later
+            periods.
+          </p>
+          <p><strong>Additional hours:</strong></p>
+          <p>
+            If the Client requires more than the 12 h/week during a given week,
+            Lúmina W may agree to work additional hours billed at a rate of
+            <strong>$100,000 COP per hour</strong>, on a <em>best effort</em> basis
+            according to availability. These hours do not form part of the retainer
+            and are billed separately in the normal period.
+          </p>
+          <p><strong>Renewal:</strong></p>
+          <p>
+            The retainer renews automatically on the first day of each calendar
+            month, unless a cancellation notice is given with
+            <strong>15 days' notice</strong>.
+          </p>
+          <p><strong>No 24/7 availability guarantees:</strong></p>
+          <p>
+            The retainer <strong
+              >does not include overnight on-call, a 24/7 availability SLA, or
+              continuous infrastructure monitoring</strong
+            >. Availability is <em>best effort</em> during Colombian business hours:
+            <strong>Monday to Friday, 9 a.m. to 6 p.m. COT</strong>.
+          </p>
+
+          <h3>Late payment and suspension</h3>
+          <p>
+            Invoices not paid within the term accrue late-payment interest at
+            the maximum legal rate in force in Colombia. If the delay exceeds
+            <strong>30 calendar days</strong>, Lúmina W may suspend the
+            provision of the Service upon notice, without this constituting a
+            breach on its part or an exemption from the payment due.
+          </p>
+          <h3>Rate review</h3>
+          <p>
+            Lúmina W may revise its rates for new proposals at any time.
+            Projects already quoted retain the price agreed in the work order
+            throughout their original scope.
+          </p>
+        </section>
+
+        <section id="sec-05" class="legal__section">
+          <header class="legal__section-head">
+            <span class="legal__num" aria-hidden="true">05</span>
+            <h2>Intellectual Property</h2>
+          </header>
+          <p>
+            The assignment of intellectual property rights over the software
+            built is one of the critical points of the relationship. The general
+            rule is as follows: <strong
+              >what is specific to the Client belongs to the Client; what is
+              generic and reusable belongs to Lúmina W</strong
+            >.
+          </p>
+          <h3>Specific Deliverable Code</h3>
+          <p>
+            Once the Client has paid the corresponding fees in full, <strong
+              >Lúmina W assigns to the Client all economic copyright rights</strong
+            > over the Deliverable Code that is specific to the Client's solution
+            (domain logic, the business's own views and flows, unique integrations,
+            functional documentation). The assignment is understood to be universal,
+            exclusive, and for the maximum applicable legal term of protection.
+          </p>
+          <h3>Lúmina W reusable components</h3>
+          <p>
+            Lúmina W retains ownership of its <strong
+              >generic components, libraries, templates, utilities, and tools</strong
+            >
+            created before or during the provision of the Service that do not incorporate
+            confidential information or Client-specific logic. Over these components,
+            Lúmina W grants the Client an <strong
+              >internal-use, perpetual, worldwide, non-exclusive, and
+              non-transferable license</strong
+            >, sufficient to operate the delivered software without
+            restrictions.
+          </p>
+          <div class="legal__example">
+            <span class="legal__example-label">Example</span>
+            <p>
+              A React module that implements your farm's dashboard with your
+              inventory rules → Client property. A library of authentication
+              <em>hooks</em> built by Lúmina W and reused across several clients →
+              Lúmina W property, licensed to the Client for indefinite internal use.
+            </p>
+          </div>
+          <h3>Open source and third-party software</h3>
+          <p>
+            The Deliverable Code may incorporate
+            <strong>open source</strong> libraries or third-party components. Each
+            retains its original license (MIT, Apache 2.0, BSD, GPL, etc.). The Client
+            acknowledges and accepts the upstream terms of such licenses; Lúmina W
+            documents the relevant dependencies in the delivered repository.
+          </p>
+          <h3>Client assets</h3>
+          <p>
+            Trademarks, logos, editorial content, datasets, and any other asset
+            provided by the Client remain its property. Lúmina W uses them
+            <strong>exclusively to provide the Service</strong> and acquires no right
+            over them.
+          </p>
+          <h3>Portfolio and references</h3>
+          <p>
+            Lúmina W may only mention the Project, show screenshots, or publish
+            case studies <strong
+              >with prior written consent from the Client</strong
+            >. In the absence of such consent, Projects are treated as
+            confidential in this respect.
+          </p>
+        </section>
+
+        <section id="sec-06" class="legal__section">
+          <header class="legal__section-head">
+            <span class="legal__num" aria-hidden="true">06</span>
+            <h2>Confidentiality and NDA</h2>
+          </header>
+          <p>
+            The parties acknowledge that during the service they exchange
+            sensitive information. All non-public information shared during the
+            relationship is considered <strong>Confidential Information</strong
+            >.
+          </p>
+          <h3>Obligation and term</h3>
+          <p>
+            Each party undertakes to (i) use the Confidential Information only
+            for the purposes of the Project, (ii) protect it with the same care
+            it uses for its own sensitive information and never less than
+            reasonable diligence, and (iii) limit access to persons with a need
+            to know. This obligation is maintained
+            <strong
+              >throughout the Project and for two (2) years after its
+              termination</strong
+            >, unless a longer term is agreed in a specific NDA.
+          </p>
+          <h3>Use of data for AI</h3>
+          <p>
+            Lúmina W <strong
+              >does not use Client Data to train its own artificial intelligence
+              models</strong
+            > nor does it send it to third-party AI providers for training purposes.
+            The AI tools used internally operate under configurations that exclude
+            the use of inputs for model training, in accordance with the contractual
+            policies in force with the respective providers.
+          </p>
+          <h3>Access to Client systems</h3>
+          <ul>
+            <li>
+              Access to legacy systems, databases, or Client environments is
+              limited to the strictly necessary Lúmina W team.
+            </li>
+            <li>
+              <strong>Credentials are not shared</strong> with subcontractors or third
+              parties without prior written authorization from the Client.
+            </li>
+            <li>
+              Temporary credentials are revoked at the close of the Project or
+              immediately upon termination for any cause.
+            </li>
+          </ul>
+          <h3>Data reuse</h3>
+          <p>
+            Lúmina W <strong>does not reuse Client production data</strong>
+            in other projects, demos, or commercial presentations. For demonstrations,
+            synthetic or anonymized datasets generated specifically are used.
+          </p>
+          <h3>Sensitive data</h3>
+          <p>
+            The processing of sensitive data, including health, biometric,
+            financial, minors', or special-category data under Law 1581 of 2012,
+            requires the prior signing of a
+            <strong>Security and Processing Annex</strong> that details additional
+            technical, organizational, and contractual measures.
+          </p>
+          <h3>Exceptions</h3>
+          <p>
+            The disclosure of information that (i) is or becomes public without
+            fault of the recipient, (ii) was already known by the recipient from
+            a legitimate source, or (iii) must be disclosed in compliance with
+            an order from a competent authority shall not be considered a
+            breach. In the latter case, the recipient will notify the other
+            party when legally possible.
+          </p>
+        </section>
+
+        <section id="sec-07" class="legal__section">
+          <header class="legal__section-head">
+            <span class="legal__num" aria-hidden="true">07</span>
+            <h2>Responsibilities and Warranties</h2>
+          </header>
+          <h3>Functionality warranty</h3>
+          <p>
+            Lúmina W warrants that the Deliverable Code will function
+            <strong
+              >substantially in accordance with the approved functional
+              specification</strong
+            > for a period of
+            <strong
+              >thirty (30) calendar days counted from the formal delivery</strong
+            >. During this period, defects attributable to Lúmina W are
+            corrected at no additional cost.
+          </p>
+          <h3>Warranty exclusions</h3>
+          <p>
+            The warranty does not cover: (i) defects arising from modifications
+            made by the Client or by unauthorized third parties; (ii) failures
+            caused by changes in third-party services or APIs (Google, AWS,
+            Stripe, etc.); (iii) use of the software outside the documented
+            technical conditions; (iv) integrations with systems that were not
+            part of the original scope.
+          </p>
+          <h3>Limitation of liability</h3>
+          <p>
+            To the maximum extent permitted by law, the
+            <strong
+              >aggregate liability of Lúmina W toward the Client for any claim
+              arising from or related to these Terms shall be limited to the
+              total amount actually paid by the Client to Lúmina W during the
+              twelve (12) months immediately preceding</strong
+            >
+            the event giving rise to the claim.
+          </p>
+          <h3>Exclusion of indirect damages</h3>
+          <p>
+            Neither party shall be liable to the other for
+            <strong
+              >lost profits, loss of opportunity, reputational harm, loss of
+              data, indirect, incidental, special, consequential, or punitive
+              damages</strong
+            >, even if it had been advised of their possibility.
+          </p>
+          <h3>Client responsibilities</h3>
+          <ul>
+            <li>
+              Execute acceptance testing and functional validation of the
+              deliverables before deployment to production.
+            </li>
+            <li>Maintain its own backups of its data and configurations.</li>
+            <li>
+              Manage access controls, roles, and permissions within its
+              production environments.
+            </li>
+            <li>
+              Provide in a timely manner the information, access, approvals, and
+              feedback necessary for the Project's progress.
+            </li>
+          </ul>
+          <h3>Force majeure</h3>
+          <p>
+            Neither party shall be liable for breaches arising from force
+            majeure or fortuitous events, including but not limited to natural
+            disasters, armed conflicts, acts of authority, widespread
+            interruptions of internet infrastructure, or massive outages of
+            cloud providers.
+          </p>
+          <h3>SLA and availability</h3>
+          <p>
+            The Provider strives to keep services operational, but
+            <strong>does not guarantee 24/7 availability</strong> nor specific resolution
+            times except as explicitly agreed in the Retainer (see <a
+              href="#sec-04">Section 04</a
+            >).
+          </p>
+          <p>
+            <strong>Exclusions.</strong> The following are not counted as downtime:
+          </p>
+          <ul>
+            <li>
+              (i) Scheduled maintenance windows notified with
+              <strong>48 hours</strong>.
+            </li>
+            <li>
+              (ii) Failures attributable to the Client or its connectivity.
+            </li>
+            <li>(iii) Force majeure events.</li>
+            <li>
+              (iv) Outages of <em>third-party</em> services (AWS, Stripe, third-party
+              APIs).
+            </li>
+          </ul>
+        </section>
+
+        <section id="sec-08" class="legal__section">
+          <header class="legal__section-head">
+            <span class="legal__num" aria-hidden="true">08</span>
+            <h2>Termination</h2>
+          </header>
+          <h3>Termination at project close</h3>
+          <p>
+            Either party may terminate the relationship
+            <strong
+              >at the natural close of the Project, sprint, or billing cycle,
+              without penalty</strong
+            >, by written notice with at least fifteen (15) calendar days'
+            notice.
+          </p>
+          <p>
+            For <strong>monthly Retainers</strong>, either party may cancel by
+            written notice with
+            <strong
+              >fifteen (15) calendar days' notice before the following month</strong
+            >. Only the current period up to the effective cancellation date is
+            paid.
+          </p>
+          <h3>Termination for breach</h3>
+          <p>
+            In the event of a serious breach, the affected party will notify the
+            breaching party in writing, describing the conduct and granting
+            <strong>fifteen (15) business days to remedy</strong>. Once the term
+            expires without remedy, the affected party may terminate the
+            relationship immediately, without prejudice to any legal actions
+            that may apply.
+          </p>
+          <h3>Immediate termination</h3>
+          <p>
+            Immediate termination, without the need for a remedy period, shall
+            proceed in cases of insolvency, liquidation, fraud, or material
+            breach of the confidentiality or intellectual property clauses.
+          </p>
+          <h3>Effects of termination</h3>
+          <ul>
+            <li>
+              The Client will pay for all Services actually provided and the
+              expenses committed up to the termination date.
+            </li>
+            <li>
+              Lúmina W will deliver the paid Deliverable Code to the Client, the
+              operational documentation, and will transfer credentials, access,
+              and repositories.
+            </li>
+            <li>
+              A <strong>written handover</strong> will be carried out with a summary
+              of the Project status, pending items, and relevant contacts.
+            </li>
+            <li>
+              Each party will return or destroy, at the other's choice, the
+              Confidential Information received during the relationship.
+            </li>
+          </ul>
+          <p>
+            The clauses that by their nature must survive termination, including
+            confidentiality, intellectual property, limitation of liability, and
+            governing law, will remain in force.
+          </p>
+        </section>
+
+        <section id="sec-09" class="legal__section">
+          <header class="legal__section-head">
+            <span class="legal__num" aria-hidden="true">09</span>
+            <h2>Personal Data and Privacy</h2>
+          </header>
+          <p>
+            The processing of personal data is governed by
+            <strong>Law 1581 of 2012</strong> (Habeas Data), <strong
+              >Decree 1377 of 2013</strong
+            >, their regulatory and amending provisions, and the
+            <a href="/en/privacy">Privacy Policy</a> of Lúmina W.
+          </p>
+          <h3>Roles in development projects</h3>
+          <p>
+            When Lúmina W processes personal data in the Client's systems or on
+            behalf of the Client, the parties acknowledge that:
+          </p>
+          <ul>
+            <li>
+              The <strong>Client acts as Data Controller</strong>, determining
+              the purposes, legal bases, and categories of data.
+            </li>
+            <li>
+              <strong>Lúmina W acts as Data Processor</strong>, processing the
+              data only in accordance with the Client's documented instructions
+              and exclusively to provide the Service.
+            </li>
+          </ul>
+          <h3>Data Subject rights</h3>
+          <p>
+            Data subjects may exercise their rights to access, update, rectify,
+            delete, and revoke authorization through the channel designated by
+            the Controller. When the data is processed in systems operated by
+            Lúmina W as Processor, Lúmina W will cooperate diligently with the
+            Client to address requests within the legal terms.
+          </p>
+          <h3>Lúmina W's own data</h3>
+          <p>
+            Lúmina W also processes personal data of prospects, clients, and
+            commercial contacts (contact forms, email, proposals). For those
+            processing activities, Lúmina W acts as
+            <strong>Controller</strong> and its conditions are detailed in the
+            <a href="/en/privacy">Privacy Policy</a>.
+          </p>
+          <h3>Contact for personal data</h3>
+          <p>
+            Any query or claim relating to the processing of personal data can
+            be directed to
+            <a href="mailto:contact@luminaw.co">contact@luminaw.co</a>.
+          </p>
+        </section>
+
+        <section id="sec-10" class="legal__section">
+          <header class="legal__section-head">
+            <span class="legal__num" aria-hidden="true">10</span>
+            <h2>Governing Law and Dispute Resolution</h2>
+          </header>
+          <h3>Governing law</h3>
+          <p>
+            These Terms, their interpretation, performance, and any controversy
+            arising from their execution shall be governed by the
+            <strong>laws of the Republic of Colombia</strong>, including but not
+            limited to the Commercial Code, the Civil Code, Law 1480 of 2011
+            (Consumer Statute), and Law 1581 of 2012 where applicable.
+          </p>
+          <h3>Amicable resolution</h3>
+          <p>
+            Before resorting to legal proceedings, the parties undertake to
+            attempt to resolve in good faith any controversy through direct
+            negotiation between their representatives with decision-making
+            power, for a period of no less than <strong
+              >thirty (30) calendar days</strong
+            > counted from the written notice of the controversy.
+          </p>
+          <h3>Jurisdiction</h3>
+          <p>
+            If no agreement is reached after that period, the controversy will
+            be resolved by the
+            <strong>competent courts of the Republic of Colombia</strong>, with
+            the parties expressly waiving any other jurisdiction that may
+            correspond to them.
+          </p>
+          <h3>Consumer protection</h3>
+          <p>
+            Without prejudice to the foregoing, if the Client qualifies as a
+            <em>consumer</em> under Law 1480 of 2011, they may turn to the
+            <strong>Superintendence of Industry and Commerce (SIC)</strong> for the
+            exercise of their rights and the filing of claims in accordance with the
+            applicable regulations.
+          </p>
+          <h3>Severability of clauses</h3>
+          <p>
+            If any provision of these Terms is invalid or unenforceable, the
+            others will remain fully in force. The affected provision will be
+            interpreted in a way that fulfills the original purpose within legal
+            limits.
+          </p>
+        </section>
+
+        <footer class="legal__foot">
+          <p><strong>Last updated:</strong> {updated}</p>
+          <p>
+            <strong>Contact:</strong>
+            <a href="mailto:contact@luminaw.co">contact@luminaw.co</a>
+            , Lúmina W S.A.S, Colombia.
+          </p>
+          <div class="legal__foot-links">
+            <a href="/en/privacy">Privacy Policy</a>
+            <a href="/en/cookies">Cookies Policy</a>
+            <a href="/en">Back to home</a>
+          </div>
+        </footer>
+      </div>
+    </div>
+  </article>
+</Layout>

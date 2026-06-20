@@ -21,6 +21,7 @@ export const es = {
     contact: 'Contacto',
     cta: 'Agenda llamada',
     openMenu: 'Abrir menú',
+    opensNewTab: ' (abre en una pestaña nueva)',
     products: [
       {
         href: 'https://terracoreapp.co',
@@ -49,6 +50,10 @@ export const es = {
       {
         title: 'Software a medida',
         desc: 'Sistemas que se ajustan a tu negocio, no al revés.',
+      },
+      {
+        title: 'IA aplicada',
+        desc: 'Chatbots e integraciones que trabajan con tus datos.',
       },
     ],
     termAria:
@@ -183,7 +188,7 @@ export const es = {
         inverse: false,
         primary: true,
         ctaLabel: 'Quiero una asesoría sin costo',
-        ctaHref: '#contact',
+        ctaHref: '/#contact',
         ctaExternal: false,
       },
       {
@@ -330,6 +335,7 @@ export const es = {
     featuredLabel: 'Diferenciador principal',
     teamEyebrow: 'Quién está detrás',
     teamTitle: 'Personas reales, no un logo.',
+    opensNewTab: ' (abre en una pestaña nueva)',
     reasons: [
       {
         n: '01',
@@ -592,6 +598,14 @@ export const es = {
     heading: 'Esta página no existe.',
     text: 'O la movimos, o nunca estuvo aquí. En cualquier caso, te podemos llevar de vuelta.',
     back: 'Volver al inicio',
+  },
+
+  layout: {
+    skipToContent: 'Saltar al contenido',
+    whatsappAria: 'Contactar por WhatsApp (abre en una pestaña nueva)',
+    langSwitchAria: 'Cambiar idioma',
+    langSwitchLabel: 'EN',
+    langSwitchTo: 'View in English',
   },
 } as const;
 

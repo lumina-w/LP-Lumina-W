@@ -1,5 +1,4 @@
 import { defineConfig } from 'astro/config';
-import react from '@astrojs/react';
 import tailwindcss from '@tailwindcss/vite';
 import sitemap from '@astrojs/sitemap';
 
@@ -27,9 +26,11 @@ export default defineConfig({
       changefreq: 'monthly',
       priority: 0.7,
       lastmod: new Date(),
+      i18n: {
+        defaultLocale: 'es',
+        locales: { es: 'es-CO', en: 'en' },
+      },
     }),
-    tailwindcss(),
-    react(),
   ],
   vite: {
     plugins: [tailwindcss()],

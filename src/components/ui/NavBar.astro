@@ -1,15 +1,27 @@
 ---
 import Icon from '@/components/ui/Icon.astro';
-import { useTranslations } from '@/i18n/utils';
+import {
+  useTranslations,
+  localizePath,
+  alternatePath,
+  anchorSlugs,
+} from '@/i18n/utils';
 
 const BASE = import.meta.env.BASE_URL;
-const t = useTranslations(Astro.currentLocale).nav;
+const loc = Astro.currentLocale;
+const curLang = loc === 'en' ? 'en' : 'es';
+const toLang = curLang === 'en' ? 'es' : 'en';
+const dict = useTranslations(loc);
+const t = dict.nav;
+const L = dict.layout;
 const products = t.products;
+const lp = (p: string) => localizePath(p, loc);
+const altURL = alternatePath(Astro.url.pathname, loc);
 ---
 
 <header id="nav" class="nav">
   <div class="nav__inner container">
-    <a class="nav__brand" href="/" aria-label={t.brandAria}>
+    <a class="nav__brand" href={lp('/')} aria-label={t.brandAria}>
       <img
         src={`${BASE}brand/logo.webp`}
         alt=""
@@ -20,22 +32,20 @@ const products = t.products;
       <span class="nav__wordmark">Lúmina W</span>
     </a>
     <nav class="nav__links" aria-label={t.primaryAria}>
-      <a class="nav__link" href="/#services">{t.services}</a>
-      <a class="nav__link" href="/#process">{t.process}</a>
-      <a class="nav__link" href="/#us">{t.us}</a>
+      <a class="nav__link" href={lp('/#services')}>{t.services}</a>
+      <a class="nav__link" href={lp('/#process')}>{t.process}</a>
+      <a class="nav__link" href={lp('/#us')}>{t.us}</a>
       {
         products.map((it) => (
           <a
             class="nav__link nav__link--ext"
-            href={it.href}
+            href={it.external ? it.href : lp(it.href)}
             target={it.external ? '_blank' : undefined}
             rel={it.external ? 'noopener noreferrer' : undefined}
           >
             {it.label}
             {it.badge && <span class="nav__badge">{it.badge}</span>}
-            {it.external && (
-              <span class="sr-only"> (abre en una pestaña nueva)</span>
-            )}
+            {it.external && <span class="sr-only">{t.opensNewTab}</span>}
             <Icon
               name="external"
               size={13}
@@ -48,8 +58,18 @@ const products = t.products;
     </nav>
     <div class="nav__cta">
       <a
+        class="nav__lang"
+        href={altURL}
+        data-lang-switch
+        hreflang={loc === 'en' ? 'es' : 'en'}
+        aria-label={L.langSwitchTo}
+        title={L.langSwitchTo}
+      >
+        {L.langSwitchLabel}
+      </a>
+      <a
         class="btn-primary"
-        href="/#contact"
+        href={lp('/#contact')}
         style="padding:8px 14px;font-size:13.5px"
       >
         {t.cta}
@@ -67,25 +87,62 @@ const products = t.products;
 </header>
 
 <div id="nav-mobile" class="nav__mobile" aria-hidden="true">
-  <a class="nav__mobile-link" href="/#services">{t.services}</a>
-  <a class="nav__mobile-link" href="/#process">{t.process}</a>
-  <a class="nav__mobile-link" href="/#us">{t.us}</a>
+  <a class="nav__mobile-link" href={lp('/#services')}>{t.services}</a>
+  <a class="nav__mobile-link" href={lp('/#process')}>{t.process}</a>
+  <a class="nav__mobile-link" href={lp('/#us')}>{t.us}</a>
   {
     products.map((it) => (
       <a
         class="nav__mobile-link nav__mobile-link--ext"
-        href={it.href}
+        href={it.external ? it.href : lp(it.href)}
         target={it.external ? '_blank' : undefined}
         rel={it.external ? 'noopener noreferrer' : undefined}
       >
         {it.label}
         {it.badge && <span class="nav__badge">{it.badge}</span>}
-        {it.external && (
-          <span class="sr-only"> (abre en una pestaña nueva)</span>
-        )}
+        {it.external && <span class="sr-only">{t.opensNewTab}</span>}
         <Icon name="external" size={14} stroke={1.75} class="nav__ext-icon" />
       </a>
     ))
   }
-  <a class="nav__mobile-link" href="/#contact">{t.contact}</a>
+  <a class="nav__mobile-link" href={lp('/#contact')}>{t.contact}</a>
+  <a
+    class="nav__mobile-link nav__mobile-lang"
+    href={altURL}
+    data-lang-switch
+    hreflang={loc === 'en' ? 'es' : 'en'}
+  >
+    {L.langSwitchTo}
+  </a>
 </div>
+
+{
+  /* Carry the current section anchor across the language switch, re-slugging it
+    to the target locale (es '#proceso' <-> en '#process'). The hash is
+    client-only, so the server-rendered altURL can't include it. */
+}
+<script
+  define:vars={{
+    fromMap: anchorSlugs[curLang],
+    toMap: anchorSlugs[toLang],
+  }}
+>
+  const fromKeys = Object.entries(fromMap);
+  function syncLangAnchor() {
+    const slug = location.hash.slice(1);
+    let targetSlug = '';
+    if (slug) {
+      const entry = fromKeys.find(([, s]) => s === slug);
+      if (entry) targetSlug = toMap[entry[0]] || '';
+    }
+    document.querySelectorAll('[data-lang-switch]').forEach((a) => {
+      const base = (a.getAttribute('href') || '').split('#')[0] || '/';
+      a.setAttribute(
+        'href',
+        targetSlug ? (base === '/' ? '/#' : base + '#') + targetSlug : base
+      );
+    });
+  }
+  syncLangAnchor();
+  window.addEventListener('hashchange', syncLangAnchor);
+</script>

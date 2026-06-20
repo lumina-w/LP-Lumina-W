@@ -1,10 +1,11 @@
 ---
 import Icon from '@/components/ui/Icon.astro';
-import { useTranslations } from '@/i18n/utils';
-const t = useTranslations(Astro.currentLocale).contact;
+import { useTranslations, anchorId } from '@/i18n/utils';
+const loc = Astro.currentLocale;
+const t = useTranslations(loc).contact;
 ---
 
-<section class="section surface-dark" id="contact">
+<section class="section surface-dark" id={anchorId('contact', loc)}>
   <div class="animate-on-scroll container">
     <div class="contact">
       <div class="contact__copy">

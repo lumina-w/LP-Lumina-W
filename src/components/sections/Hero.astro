@@ -1,9 +1,11 @@
 ---
-import { useTranslations } from '@/i18n/utils';
-const t = useTranslations(Astro.currentLocale).hero;
+import { useTranslations, localizePath, anchorId } from '@/i18n/utils';
+const loc = Astro.currentLocale;
+const t = useTranslations(loc).hero;
+const lp = (p: string) => localizePath(p, loc);
 ---
 
-<section class="hero hero--center" id="hero">
+<section class="hero hero--center" id={anchorId('hero', loc)}>
   <div class="section hero__inner animate-on-scroll container">
     <div class="eyebrow">{t.eyebrow}</div>
 
@@ -17,8 +19,8 @@ const t = useTranslations(Astro.currentLocale).hero;
     </p>
 
     <div class="hero__actions">
-      <a class="btn-primary" href="/#contact">{t.ctaPrimary}</a>
-      <a class="btn-secondary" href="/#terracore">{t.ctaSecondary}</a>
+      <a class="btn-primary" href={lp('/#contact')}>{t.ctaPrimary}</a>
+      <a class="btn-secondary" href={lp('/#terracore')}>{t.ctaSecondary}</a>
     </div>
 
     <ul class="hero__caps" aria-label={t.capsAria}>

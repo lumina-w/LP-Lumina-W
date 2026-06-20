@@ -1,11 +1,13 @@
 ---
 import Icon from '@/components/ui/Icon.astro';
-import { useTranslations } from '@/i18n/utils';
-const t = useTranslations(Astro.currentLocale).fork;
+import { useTranslations, localizePath, anchorId } from '@/i18n/utils';
+const loc = Astro.currentLocale;
+const t = useTranslations(loc).fork;
 const paths = t.paths;
+const lp = (p: string) => localizePath(p, loc);
 ---
 
-<section class="section fork-section" id="fork">
+<section class="section fork-section" id={anchorId('fork', loc)}>
   <div class="animate-on-scroll container">
     <div class="s-head">
       <div>
@@ -30,7 +32,7 @@ const paths = t.paths;
             </div>
             <h3 class="fork__title">{p.title}</h3>
             <p class="fork__line">{p.line}</p>
-            <a class="fork__cta" href={p.href}>
+            <a class="fork__cta" href={lp(p.href)}>
               {p.cta}
             </a>
           </div>
@@ -40,7 +42,7 @@ const paths = t.paths;
 
     <p class="fork__aside">
       {t.asidePre}
-      <a class="fork__aside-link" href="/#contact">{t.asideLink}</a>
+      <a class="fork__aside-link" href={lp('/#contact')}>{t.asideLink}</a>
     </p>
   </div>
 </section>

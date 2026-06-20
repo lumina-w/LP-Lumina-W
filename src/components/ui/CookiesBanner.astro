@@ -1,7 +1,8 @@
 ---
-import { useTranslations } from '@/i18n/utils';
+import { useTranslations, localizePath } from '@/i18n/utils';
 const BASE = import.meta.env.BASE_URL;
-const t = useTranslations(Astro.currentLocale).cookies;
+const loc = Astro.currentLocale;
+const t = useTranslations(loc).cookies;
 ---
 
 <div
@@ -12,8 +13,9 @@ const t = useTranslations(Astro.currentLocale).cookies;
 >
   <p class="font-body text-light/85 text-xs leading-relaxed">
     {t.textPre}
-    <a href="/cookies" class="text-light hover:text-brand underline"
-      >{t.moreLink}</a
+    <a
+      href={localizePath('/cookies', loc)}
+      class="text-light hover:text-brand underline">{t.moreLink}</a
     >
   </p>
 

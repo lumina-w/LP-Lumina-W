@@ -1,11 +1,12 @@
 ---
 import Icon from '@/components/ui/Icon.astro';
-import { useTranslations } from '@/i18n/utils';
-const t = useTranslations(Astro.currentLocale).problem;
+import { useTranslations, anchorId } from '@/i18n/utils';
+const loc = Astro.currentLocale;
+const t = useTranslations(loc).problem;
 const problems = t.items;
 ---
 
-<section class="section" id="problem">
+<section class="section" id={anchorId('problem', loc)}>
   <div class="animate-on-scroll container">
     <div class="s-head">
       <div>

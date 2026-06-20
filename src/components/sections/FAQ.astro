@@ -1,11 +1,17 @@
 ---
 import Icon from '@/components/ui/Icon.astro';
-import { useTranslations } from '@/i18n/utils';
-const t = useTranslations(Astro.currentLocale).faq;
+import { useTranslations, localizePath, anchorId } from '@/i18n/utils';
+const loc = Astro.currentLocale;
+const t = useTranslations(loc).faq;
 const faqs = t.items;
+const lp = (p: string) => localizePath(p, loc);
 ---
 
-<section class="section" id="faq" aria-labelledby="faq-heading">
+<section
+  class="section"
+  id={anchorId('faq', loc)}
+  aria-labelledby="faq-heading"
+>
   <div class="animate-on-scroll container">
     <div
       class="s-head"
@@ -58,7 +64,7 @@ const faqs = t.items;
       <p style="font-size:14px;color:var(--text-muted);margin-bottom:14px">
         {t.ctaKicker}
       </p>
-      <a class="btn-primary" href="#contact">{t.cta}</a>
+      <a class="btn-primary" href={lp('/#contact')}>{t.cta}</a>
     </div>
   </div>
 </section>

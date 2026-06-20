@@ -24,15 +24,71 @@ export function useTranslations(locale: string | undefined): Dictionary {
   return dictionaries[getLang(locale)];
 }
 
-// Prefix a root-relative path with the locale segment when not default.
-// localizePath('/#contact', 'es') => '/#contact'
-// localizePath('/#contact', 'en') => '/en/#contact'
+// Section anchor slugs per locale. Authored markup uses the English canonical
+// key (fork, services, process, us, contact…); the slug actually rendered in
+// the URL and the section `id` is localized so es reads '/#proceso' and en
+// reads '/en#process'. Section ids resolve via anchorId(); in-page hrefs flow
+// through localizePath(), which re-slugs any '/#key' it receives.
+export const anchorSlugs: Record<Lang, Record<string, string>> = {
+  es: {
+    hero: 'inicio',
+    fork: 'empieza',
+    problem: 'problema',
+    services: 'servicios',
+    process: 'proceso',
+    us: 'nosotros',
+    terracore: 'terracore',
+    faq: 'faq',
+    contact: 'contacto',
+  },
+  en: {
+    hero: 'home',
+    fork: 'start',
+    problem: 'problem',
+    services: 'services',
+    process: 'process',
+    us: 'about',
+    terracore: 'terracore',
+    faq: 'faq',
+    contact: 'contact',
+  },
+};
+
+// Canonical anchor key -> locale slug, for a section's `id` attribute.
+// anchorId('process', 'es') => 'proceso'; anchorId('process', 'en') => 'process'.
+export function anchorId(key: string, locale: string | undefined): string {
+  return anchorSlugs[getLang(locale)][key] ?? key;
+}
+
+// Prefix a root-relative path with the locale segment when not default, and
+// translate home-anchor slugs to the active locale.
+// localizePath('/#process', 'es') => '/#proceso'
+// localizePath('/#process', 'en') => '/en#process'
 // localizePath('/terms', 'en')    => '/en/terms'
 export function localizePath(path: string, locale: string | undefined): string {
   const lang = getLang(locale);
-  if (lang === defaultLang) return path;
   if (!path.startsWith('/')) return path; // external / absolute — leave as-is
+
+  // Home anchors: re-slug to the active locale. '/#contact' becomes
+  // '/#contacto' on es and '/en#contact' on en (no slash before '#'; the
+  // pathname '/en/' 404s under trailingSlash: 'never').
+  if (path.startsWith('/#')) {
+    const slug = anchorSlugs[lang][path.slice(2)] ?? path.slice(2);
+    return lang === defaultLang ? `/#${slug}` : `/${lang}#${slug}`;
+  }
+
+  if (lang === defaultLang) return path;
   if (path === '/') return `/${lang}`;
-  if (path.startsWith('/#')) return `/${lang}${path}`; // anchor on home
-  return `/${lang}${path}`;
+  return `/${lang}${path}`; // '/terms' -> '/en/terms'
+}
+
+// Same page in the other locale, for the language switcher.
+// On 'en' strip the /en prefix; on 'es' add it.
+export function alternatePath(
+  path: string,
+  locale: string | undefined
+): string {
+  const lang = getLang(locale);
+  if (lang === 'en') return path.replace(/^\/en/, '') || '/';
+  return path === '/' ? '/en' : `/en${path}`;
 }

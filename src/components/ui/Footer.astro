@@ -1,18 +1,20 @@
 ---
 import Icon from '@/components/ui/Icon.astro';
-import { useTranslations } from '@/i18n/utils';
+import { useTranslations, localizePath } from '@/i18n/utils';
 
 const BASE = import.meta.env.BASE_URL;
 const LOGO = `${BASE}brand/logo.webp`;
 const year = new Date().getFullYear();
-const t = useTranslations(Astro.currentLocale).footer;
+const loc = Astro.currentLocale;
+const t = useTranslations(loc).footer;
+const lp = (p: string) => localizePath(p, loc);
 ---
 
 <footer class="footer surface-dark">
   <div class="container">
     <div class="footer__grid">
       <div class="footer__brand">
-        <a class="footer__mark" href="/#hero" aria-label={t.brandAria}>
+        <a class="footer__mark" href={lp('/#hero')} aria-label={t.brandAria}>
           <img src={LOGO} alt="" width="28" height="28" decoding="async" />
           <span>Lúmina W</span>
         </a>
@@ -54,7 +56,7 @@ const t = useTranslations(Astro.currentLocale).footer;
           {
             t.nav.map((it) => (
               <li>
-                <a href={it.href}>{it.label}</a>
+                <a href={lp(it.href)}>{it.label}</a>
               </li>
             ))
           }
@@ -68,7 +70,7 @@ const t = useTranslations(Astro.currentLocale).footer;
             t.product.map((it) => (
               <li>
                 <a
-                  href={it.href}
+                  href={it.external ? it.href : lp(it.href)}
                   target={it.external ? '_blank' : undefined}
                   rel={it.external ? 'noopener noreferrer' : undefined}
                 >
@@ -86,7 +88,7 @@ const t = useTranslations(Astro.currentLocale).footer;
           {
             t.legal.map((it) => (
               <li>
-                <a href={it.href}>{it.label}</a>
+                <a href={lp(it.href)}>{it.label}</a>
               </li>
             ))
           }

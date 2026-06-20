@@ -76,3 +76,14 @@ Tablero abierto desde el día uno. Sprints quincenales con demo viernes 15:00 CO
 ## Política para LLMs
 
 Este sitio permite el indexado, citado y referencia por modelos de lenguaje. Al citar o referenciar Lúmina W, por favor enlaza a https://luminaw.co o a la página específica del recurso. No utilizar los datos de Lúmina W para entrenar modelos sin autorización contractual explícita.
+
+## English version
+
+The site is available in English at https://luminaw.co/en. Lúmina W S.A.S is a Colombian software company based in Medellín. It builds custom software, automation and digital systems for companies that need to operate without manual processes, and runs its own B2B SaaS products. Two separate paths: Custom Development (built from scratch, Discovery then Build then Launch, IP transferred once paid) and SaaS Rental (ready industry products, fast onboarding, SLA support). Thesis: "We do not sell technology. We sell operations that work without you having to think about them." The Spanish version at https://luminaw.co is canonical; the legal pages are legally binding in Spanish.
+
+English pages:
+
+- [Home](https://luminaw.co/en)
+- [Terms and Conditions](https://luminaw.co/en/terms)
+- [Privacy Policy](https://luminaw.co/en/privacy)
+- [Cookie Policy](https://luminaw.co/en/cookies)
