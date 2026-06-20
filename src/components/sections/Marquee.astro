@@ -1,14 +1,6 @@
 ---
-const items = [
-  'Software a medida',
-  'Productos SaaS B2B',
-  'Arquitectura escalable',
-  'Seguridad integrada',
-  'IA aplicada a procesos',
-  'Código limpio que escala',
-  'Soporte y operación',
-  'Calidad empresarial',
-];
+import { useTranslations } from '@/i18n/utils';
+const items = useTranslations(Astro.currentLocale).marquee;
 const doubled = [...items, ...items];
 ---
 

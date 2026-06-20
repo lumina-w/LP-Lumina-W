@@ -6,6 +6,14 @@ import sitemap from '@astrojs/sitemap';
 export default defineConfig({
   site: 'https://luminaw.co',
   trailingSlash: 'never',
+  i18n: {
+    locales: ['es', 'en'],
+    defaultLocale: 'es',
+    routing: {
+      prefixDefaultLocale: false,
+      redirectToDefaultLocale: false,
+    },
+  },
   build: {
     inlineStylesheets: 'auto',
   },

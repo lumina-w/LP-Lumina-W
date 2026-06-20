@@ -1,44 +1,8 @@
 ---
 import Icon from '@/components/ui/Icon.astro';
-
-const faqs = [
-  {
-    q: '¿Cuánto cuesta desarrollar un software a medida?',
-    a: 'Depende del alcance y la complejidad del proyecto. Trabajamos con presupuestos desde proyectos pequeños hasta plataformas completas. Lo primero es una conversación sin costo donde entendemos tu necesidad y te damos una estimación real.',
-  },
-  {
-    q: '¿Cuánto tiempo toma desarrollar un proyecto?',
-    a: 'Un MVP básico puede estar listo en 6 a 12 semanas. Proyectos más complejos toman más tiempo. Siempre definimos un roadmap claro antes de empezar para que sepas exactamente qué esperar y cuándo.',
-  },
-  {
-    q: '¿Trabajan con empresas pequeñas o solo con grandes?',
-    a: 'Trabajamos con empresas de todos los tamaños. Lo que importa no es el tamaño sino que tengas un problema real que el software pueda resolver. Si tienes ese problema, podemos construir la solución.',
-  },
-  {
-    q: '¿Qué pasa si el proyecto cambia durante el desarrollo?',
-    a: 'Es normal que los proyectos evolucionen. Trabajamos con metodología ágil:  iteramos en ciclos cortos para adaptarnos a los cambios sin que eso descarrile el proyecto ni el presupuesto.',
-  },
-  {
-    q: '¿Qué es TerraCore y para quién es?',
-    a: 'TerraCore es nuestro producto SaaS propio para el sector agroindustrial. Está diseñado para medianas empresas que gestionan inventario, usuarios y operaciones en Excel y necesitan una solución más robusta. Actualmente estamos en preventa con condiciones especiales para los primeros clientes.',
-  },
-  {
-    q: '¿El software que construyen es seguro?',
-    a: 'Sí. La seguridad no es una capa que añadimos al final, está integrada desde la arquitectura. Aplicamos principios OWASP, desarrollo seguro y buenas prácticas desde la primera línea de código.',
-  },
-  {
-    q: '¿Por qué no contratar un freelancer?',
-    a: 'Un desarrollador solo puede escribir código, pero no puede diseñar la arquitectura, hacer el UX, configurar el servidor, documentar el sistema y darte soporte en producción al mismo tiempo. Nosotros somos un equipo completo desde el primer día, sin que tengas que coordinar cinco personas distintas.',
-  },
-  {
-    q: '¿Por qué no usar un ERP genérico como SAP o Zoho?',
-    a: 'Los ERPs genéricos están construidos para todas las industrias, lo que significa que no están construidos para la tuya. Pagas por módulos que no usas, adaptas tu operación al software en vez de al revés, y dependes de roadmaps que no controlas. Nosotros construimos alrededor de tu operación real.',
-  },
-  {
-    q: '¿En qué se diferencia Lúmina W de otras empresas de software?',
-    a: 'Las agencias grandes te asignan un gerente de cuenta que nunca toca el código y un equipo rotativo que cambia cada sprint. Con Lúmina W hablas directamente con quien construye el sistema, sin intermediarios y sin teléfono descompuesto.',
-  },
-];
+import { useTranslations } from '@/i18n/utils';
+const t = useTranslations(Astro.currentLocale).faq;
+const faqs = t.items;
 ---
 
 <section class="section" id="faq" aria-labelledby="faq-heading">
@@ -50,17 +14,15 @@ const faqs = [
       <div
         style="display:flex;flex-direction:column;align-items:center;gap:16px"
       >
-        <div class="eyebrow">Preguntas frecuentes</div>
+        <div class="eyebrow">{t.eyebrow}</div>
         <h2 id="faq-heading" style="text-align:center;max-width:22ch">
-          Todo lo que necesitas saber antes de escribirnos.
+          {t.heading}
         </h2>
         <p class="lead" style="text-align:center">
-          Resolvemos dudas comunes sobre desarrollo de software a medida, SaaS
-          B2B y TerraCore para empresas que quieren dejar de operar en Excel y
-          ganar productividad.
+          {t.lead}
         </p>
       </div>
-      <div class="ghost-num" aria-hidden="true">FAQ</div>
+      <div class="ghost-num" aria-hidden="true">{t.ghost}</div>
     </div>
 
     <div class="faq" id="faq-list">
@@ -94,9 +56,9 @@ const faqs = [
 
     <div style="margin-top:48px;text-align:center">
       <p style="font-size:14px;color:var(--text-muted);margin-bottom:14px">
-        ¿No encontraste lo que buscabas?
+        {t.ctaKicker}
       </p>
-      <a class="btn-primary" href="#contact">Escríbenos directamente</a>
+      <a class="btn-primary" href="#contact">{t.cta}</a>
     </div>
   </div>
 </section>

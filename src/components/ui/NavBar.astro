@@ -1,24 +1,15 @@
 ---
 import Icon from '@/components/ui/Icon.astro';
+import { useTranslations } from '@/i18n/utils';
 
 const BASE = import.meta.env.BASE_URL;
-
-const groups = {
-  productos: [
-    {
-      href: 'https://terracoreapp.co',
-      label: 'TerraCore',
-      external: true,
-      badge: 'SaaS · Preventa',
-    },
-    { href: '/#root', label: 'Root' },
-  ],
-};
+const t = useTranslations(Astro.currentLocale).nav;
+const products = t.products;
 ---
 
 <header id="nav" class="nav">
   <div class="nav__inner container">
-    <a class="nav__brand" href="/" aria-label="Lúmina W, Inicio">
+    <a class="nav__brand" href="/" aria-label={t.brandAria}>
       <img
         src={`${BASE}brand/logo.webp`}
         alt=""
@@ -28,52 +19,32 @@ const groups = {
       />
       <span class="nav__wordmark">Lúmina W</span>
     </a>
-    <nav class="nav__links" aria-label="Principal">
-      <a class="nav__link" href="/#services">Servicios</a>
-      <a class="nav__link" href="/#process">Proceso</a>
-
-      <div class="nav__group" data-nav-group>
-        <button
-          type="button"
-          class="nav__link nav__group-btn"
-          aria-expanded="false"
-          aria-haspopup="true"
-        >
-          Producto
-          <svg
-            class="nav__chev"
-            width="10"
-            height="10"
-            viewBox="0 0 12 12"
-            fill="none"
-            aria-hidden="true"
-            ><path
-              d="M3 4.5 6 7.5l3-3"
-              stroke="currentColor"
-              stroke-width="1.5"
-              stroke-linecap="round"
-              stroke-linejoin="round"></path></svg
+    <nav class="nav__links" aria-label={t.primaryAria}>
+      <a class="nav__link" href="/#services">{t.services}</a>
+      <a class="nav__link" href="/#process">{t.process}</a>
+      <a class="nav__link" href="/#us">{t.us}</a>
+      {
+        products.map((it) => (
+          <a
+            class="nav__link nav__link--ext"
+            href={it.href}
+            target={it.external ? '_blank' : undefined}
+            rel={it.external ? 'noopener noreferrer' : undefined}
           >
-        </button>
-        <div class="nav__dropdown" role="menu">
-          {
-            groups.productos.map((it) => (
-              <a
-                class="nav__dropdown-link"
-                href={it.href}
-                role="menuitem"
-                target={it.external ? '_blank' : undefined}
-                rel={it.external ? 'noopener noreferrer' : undefined}
-              >
-                {it.label}
-                {it.badge && <span class="nav__badge">{it.badge}</span>}
-              </a>
-            ))
-          }
-        </div>
-      </div>
-
-      <a class="nav__link" href="/#us">Nosotros</a>
+            {it.label}
+            {it.badge && <span class="nav__badge">{it.badge}</span>}
+            {it.external && (
+              <span class="sr-only"> (abre en una pestaña nueva)</span>
+            )}
+            <Icon
+              name="external"
+              size={13}
+              stroke={1.75}
+              class="nav__ext-icon"
+            />
+          </a>
+        ))
+      }
     </nav>
     <div class="nav__cta">
       <a
@@ -81,12 +52,12 @@ const groups = {
         href="/#contact"
         style="padding:8px 14px;font-size:13.5px"
       >
-        Agenda llamada
+        {t.cta}
       </a>
       <button
         id="nav-burger"
         class="nav__burger"
-        aria-label="Abrir menú"
+        aria-label={t.openMenu}
         aria-expanded="false"
       >
         <Icon name="menu" size={22} stroke={1.75} />
@@ -96,26 +67,25 @@ const groups = {
 </header>
 
 <div id="nav-mobile" class="nav__mobile" aria-hidden="true">
-  <a class="nav__mobile-link" href="/#services">Servicios</a>
-  <a class="nav__mobile-link" href="/#process">Proceso</a>
-
-  <div class="nav__mobile-group">
-    <p class="nav__mobile-label">Producto</p>
-    {
-      groups.productos.map((it) => (
-        <a
-          class="nav__mobile-sublink"
-          href={it.href}
-          target={it.external ? '_blank' : undefined}
-          rel={it.external ? 'noopener noreferrer' : undefined}
-        >
-          {it.label}
-          {it.badge && <span class="nav__badge">{it.badge}</span>}
-        </a>
-      ))
-    }
-  </div>
-
-  <a class="nav__mobile-link" href="/#us">Nosotros</a>
-  <a class="nav__mobile-link" href="/#contact">Contacto</a>
+  <a class="nav__mobile-link" href="/#services">{t.services}</a>
+  <a class="nav__mobile-link" href="/#process">{t.process}</a>
+  <a class="nav__mobile-link" href="/#us">{t.us}</a>
+  {
+    products.map((it) => (
+      <a
+        class="nav__mobile-link nav__mobile-link--ext"
+        href={it.href}
+        target={it.external ? '_blank' : undefined}
+        rel={it.external ? 'noopener noreferrer' : undefined}
+      >
+        {it.label}
+        {it.badge && <span class="nav__badge">{it.badge}</span>}
+        {it.external && (
+          <span class="sr-only"> (abre en una pestaña nueva)</span>
+        )}
+        <Icon name="external" size={14} stroke={1.75} class="nav__ext-icon" />
+      </a>
+    ))
+  }
+  <a class="nav__mobile-link" href="/#contact">{t.contact}</a>
 </div>

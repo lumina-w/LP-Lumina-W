@@ -1,30 +1,31 @@
 ---
 import Icon from '@/components/ui/Icon.astro';
+import { useTranslations } from '@/i18n/utils';
 
 const BASE = import.meta.env.BASE_URL;
 const LOGO = `${BASE}brand/logo.webp`;
 const year = new Date().getFullYear();
+const t = useTranslations(Astro.currentLocale).footer;
 ---
 
 <footer class="footer surface-dark">
   <div class="container">
     <div class="footer__grid">
       <div class="footer__brand">
-        <a class="footer__mark" href="/#hero" aria-label="Lúmina W, Inicio">
+        <a class="footer__mark" href="/#hero" aria-label={t.brandAria}>
           <img src={LOGO} alt="" width="28" height="28" decoding="async" />
           <span>Lúmina W</span>
         </a>
-        <p class="footer__legalname">Lúmina W S.A.S</p>
+        <p class="footer__legalname">{t.legalName}</p>
         <p class="footer__copy">
-          Construimos el software exacto que necesitas: desde automatizaciones
-          puntuales hasta plataformas completas a medida.
+          {t.copy}
         </p>
         <div class="footer__social">
           <a
             href="https://instagram.com/luminaw.co"
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="Instagram"
+            aria-label={`Instagram${t.opensNewTab}`}
           >
             <Icon name="instagram" size={18} stroke={2} />
           </a>
@@ -32,7 +33,7 @@ const year = new Date().getFullYear();
             href="https://linkedin.com/company/lumina-w"
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="LinkedIn"
+            aria-label={`LinkedIn${t.opensNewTab}`}
           >
             <Icon name="linkedin" size={18} stroke={2} />
           </a>
@@ -40,7 +41,7 @@ const year = new Date().getFullYear();
             href="https://wa.me/573108283088"
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="WhatsApp"
+            aria-label={`WhatsApp${t.opensNewTab}`}
           >
             <Icon name="whatsapp" size={18} stroke={2} />
           </a>
@@ -48,39 +49,47 @@ const year = new Date().getFullYear();
       </div>
 
       <div class="footer__col">
-        <h4>Navegación</h4>
+        <h4>{t.navTitle}</h4>
         <ul>
-          <li><a href="/#fork">Empieza</a></li>
-          <li><a href="/#problem">Problema</a></li>
-          <li><a href="/#services">Servicios</a></li>
-          <li><a href="/#process">Proceso</a></li>
-          <li><a href="/#us">Nosotros</a></li>
-          <li><a href="/#faq">FAQ</a></li>
-          <li><a href="/#contact">Contacto</a></li>
+          {
+            t.nav.map((it) => (
+              <li>
+                <a href={it.href}>{it.label}</a>
+              </li>
+            ))
+          }
         </ul>
       </div>
 
       <div class="footer__col">
-        <h4>Producto</h4>
+        <h4>{t.productTitle}</h4>
         <ul>
-          <li><a href="/#terracore">TerraCore</a></li>
-          <li><a href="/#root">Root</a></li>
-          <li>
-            <a
-              href="https://blog.luminaw.co/"
-              target="_blank"
-              rel="noopener noreferrer">Blog</a
-            >
-          </li>
+          {
+            t.product.map((it) => (
+              <li>
+                <a
+                  href={it.href}
+                  target={it.external ? '_blank' : undefined}
+                  rel={it.external ? 'noopener noreferrer' : undefined}
+                >
+                  {it.label}
+                </a>
+              </li>
+            ))
+          }
         </ul>
       </div>
 
       <div class="footer__col">
-        <h4>Legal</h4>
+        <h4>{t.legalTitle}</h4>
         <ul>
-          <li><a href="/terms">Términos y condiciones</a></li>
-          <li><a href="/privacy">Política de privacidad</a></li>
-          <li><a href="/cookies">Política de cookies</a></li>
+          {
+            t.legal.map((it) => (
+              <li>
+                <a href={it.href}>{it.label}</a>
+              </li>
+            ))
+          }
         </ul>
       </div>
     </div>

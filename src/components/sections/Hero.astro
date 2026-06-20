@@ -1,81 +1,60 @@
 ---
-
+import { useTranslations } from '@/i18n/utils';
+const t = useTranslations(Astro.currentLocale).hero;
 ---
 
 <section class="hero hero--center" id="hero">
   <div class="section hero__inner animate-on-scroll container">
-    <div class="eyebrow">Software a medida · SaaS B2B · Medellín, Colombia</div>
+    <div class="eyebrow">{t.eyebrow}</div>
 
     <h1>
-      Tu operación tiene problemas<br />
-      que Excel <em>no puede resolver</em>.
+      {t.titleA}<br />
+      {t.titlePre}<em>{t.titleEm}</em>{t.titlePost}
     </h1>
 
     <p class="hero__lead">
-      Construimos el software exacto que necesitas: desde automatizaciones
-      puntuales hasta plataformas completas a medida.
+      {t.lead}
     </p>
 
     <div class="hero__actions">
-      <a class="btn-primary" href="/#contact">Cuéntanos tu problema</a>
-      <a class="btn-secondary" href="/#terracore">Ver TerraCore</a>
+      <a class="btn-primary" href="/#contact">{t.ctaPrimary}</a>
+      <a class="btn-secondary" href="/#terracore">{t.ctaSecondary}</a>
     </div>
 
-    <ul class="hero__caps" aria-label="Lo que hacemos">
-      <li class="hero__cap">
-        <span class="hero__cap-title">Automatizamos procesos</span>
-        <span class="hero__cap-desc"
-          >Menos trabajo manual, más operación que avanza sola.</span
-        >
-      </li>
-      <li class="hero__cap">
-        <span class="hero__cap-title">Software a medida</span>
-        <span class="hero__cap-desc"
-          >Sistemas que se ajustan a tu negocio, no al revés.</span
-        >
-      </li>
-      <li class="hero__cap">
-        <span class="hero__cap-title">IA aplicada</span>
-        <span class="hero__cap-desc"
-          >Chatbots e integraciones que trabajan con tus datos.</span
-        >
-      </li>
+    <ul class="hero__caps" aria-label={t.capsAria}>
+      {
+        t.caps.map((cap) => (
+          <li class="hero__cap">
+            <span class="hero__cap-title">{cap.title}</span>
+            <span class="hero__cap-desc">{cap.desc}</span>
+          </li>
+        ))
+      }
     </ul>
 
-    <div
-      class="hero-term"
-      role="img"
-      aria-label="Resultados de un sistema en producción: proceso de facturación automatizado, inventario en tiempo real operativo, reportes semanales manuales eliminados, cero horas de carga de datos por semana. Sistema en producción sin intervención manual."
-    >
+    <div class="hero-term" role="img" aria-label={t.termAria}>
       <div class="hero-term__bar" aria-hidden="true">
         <span class="hero-term__dot"></span>
         <span class="hero-term__dot"></span>
         <span class="hero-term__dot"></span>
       </div>
       <ul class="hero-term__rows" aria-hidden="true">
-        <li class="hero-term__row">
-          <span class="hero-term__check">✓</span>
-          <span class="hero-term__label">Proceso de facturación</span>
-          <span class="hero-term__val">automatizado</span>
-        </li>
-        <li class="hero-term__row">
-          <span class="hero-term__check">✓</span>
-          <span class="hero-term__label">Inventario en tiempo real</span>
-          <span class="hero-term__val">operativo</span>
-        </li>
-        <li class="hero-term__row">
-          <span class="hero-term__check">✓</span>
-          <span class="hero-term__label">Reportes semanales manuales</span>
-          <span class="hero-term__val">eliminados</span>
-        </li>
-        <li class="hero-term__row">
-          <span class="hero-term__check">✓</span>
-          <span class="hero-term__label">Horas de carga de datos / sem</span>
-          <span class="hero-term__val hero-term__val--num">0 hrs</span>
-        </li>
+        {
+          t.termRows.map((row) => (
+            <li class="hero-term__row">
+              <span class="hero-term__check">✓</span>
+              <span class="hero-term__label">{row.label}</span>
+              <span
+                class={`hero-term__val ${row.num ? 'hero-term__val--num' : ''}`}
+              >
+                {row.val}
+              </span>
+            </li>
+          ))
+        }
       </ul>
       <p class="hero-term__foot" aria-hidden="true">
-        Sistema en producción · sin intervención manual
+        {t.termFoot}
       </p>
     </div>
   </div>

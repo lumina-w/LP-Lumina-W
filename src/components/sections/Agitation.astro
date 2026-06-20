@@ -1,22 +1,20 @@
 ---
-const points = [
-  'Un sistema que falla en producción detiene tu operación.',
-  'Uno que no escala te obliga a reconstruirlo en dos años.',
-  'Uno sin seguridad expone los datos de tu empresa y tus clientes.',
-];
+import { useTranslations } from '@/i18n/utils';
+const t = useTranslations(Astro.currentLocale).agitation;
+const points = t.points;
 ---
 
 <section class="stakes-band">
   <div class="animate-on-scroll container">
     <h2 class="stakes-band__h">
-      El software mal construido<br />
-      cuesta más que no tener software.
+      {t.headingA}<br />
+      {t.headingB}
     </h2>
     <div class="stakes-band__list">
       {points.map((point) => <p>{point}</p>)}
     </div>
     <p class="stakes-band__tail">
-      La mayoría de las empresas lo descubren tarde.
+      {t.tail}
     </p>
   </div>
 </section>

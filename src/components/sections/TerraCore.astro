@@ -1,73 +1,39 @@
 ---
 import Icon from '@/components/ui/Icon.astro';
-
-const modules = [
-  'Control de animales.',
-  'Producción en tiempo real.',
-  'Control de insumos.',
-  'Dashboard claro y centralizado.',
-  'Salud animal.',
-  'Control básico de costos.',
-];
-
-const dashFeatures = [
-  { icon: 'wifi-off', title: 'Funciona offline', tag: 'sync auto' },
-  { icon: 'calendar', title: 'Primera semana', tag: 'sin consultores' },
-  { icon: 'users', title: 'Varios roles', tag: 'admin · ops · colab' },
-  { icon: 'chart', title: 'Datos reales', tag: 'costo por kg' },
-  { icon: 'bell', title: 'Nada se te pasa', tag: 'alertas activas' },
-  { icon: 'globe', title: 'En español', tag: 'para el campo' },
-];
-
-// Capturas reales del producto (reemplazan el video demo)
-const shots = [
-  {
-    base: 'dashboard-2',
-    cap: 'Dashboard claro y centralizado',
-    alt: 'Captura del dashboard centralizado de TerraCore con métricas de la operación',
-  },
-  {
-    base: 'produccion-1',
-    cap: 'Producción en tiempo real',
-    alt: 'Pantalla de producción en tiempo real en TerraCore',
-  },
-  {
-    base: 'salud-animal-3',
-    cap: 'Salud animal',
-    alt: 'Módulo de salud animal en TerraCore',
-  },
-];
+import { useTranslations } from '@/i18n/utils';
+const t = useTranslations(Astro.currentLocale).terracore;
+const modules = t.modules;
+const dashFeatures = t.dashFeatures;
+const shots = t.shots;
 ---
 
 <section class="section terracore" id="terracore">
   <div class="animate-on-scroll container">
     <div class="s-head s-head--stack">
       <div>
-        <div class="eyebrow">Producto propio</div>
-        <h2>Nuestros productos</h2>
+        <div class="eyebrow">{t.eyebrow}</div>
+        <h2>{t.heading}</h2>
       </div>
       <p class="lead">
-        Construimos SaaS B2B con los mismos estándares del desarrollo a medida.
-        Empezamos por el campo, pero el roadmap no se detiene ahí.
+        {t.lead}
       </p>
-      <div class="ghost-num" aria-hidden="true">Producto</div>
+      <div class="ghost-num" aria-hidden="true">{t.ghost}</div>
     </div>
 
     <div class="terracore__grid">
       <div class="terracore__copy">
         <div class="terracore__tags">
-          <span class="terracore__tag">Producto estrella</span>
+          <span class="terracore__tag">{t.tagStar}</span>
           <span class="terracore__tag terracore__tag--live">
-            <span></span>Preventa activa
+            <span></span>{t.tagLive}
           </span>
         </div>
-        <h3 class="terracore__name">TerraCore</h3>
+        <h3 class="terracore__name">{t.name}</h3>
         <p class="terracore__lead">
-          Controla producción, costos y animales en un solo lugar. Deja de
-          depender de Excel y empieza a tomar decisiones con datos reales.
+          {t.productLead}
         </p>
         <div class="terracore__modules">
-          <div class="terracore__modules-head">Módulos MVP</div>
+          <div class="terracore__modules-head">{t.modulesHead}</div>
           <ul>
             {modules.map((m) => <li>{m}</li>)}
           </ul>
@@ -79,12 +45,11 @@ const shots = [
             target="_blank"
             rel="noopener noreferrer"
           >
-            Quiero probar TerraCore
+            {t.cta}
           </a>
         </div>
         <p class="terracore__note">
-          Estamos validando con los primeros clientes. Cupos limitados con
-          condiciones especiales.
+          {t.note}
         </p>
       </div>
 
@@ -92,32 +57,26 @@ const shots = [
         <div class="tc-dash">
           <div class="tc-dash__bar">
             <div class="tc-dash__bar-l">
-              <span></span><strong>TerraCore</strong> · Campo Inteligente
+              <span></span><strong>{t.name}</strong> · {t.dashTagline}
             </div>
-            <div>2026</div>
+            <div>{t.dashYear}</div>
           </div>
           <div class="tc-dash__body">
             <div class="tc-dash__kpis">
-              <div class="tc-dash__kpi">
-                <div class="tc-dash__kpi-label">Módulos</div>
-                <div class="tc-dash__kpi-val">6</div>
-                <div class="tc-dash__kpi-trend">listos en MVP</div>
-              </div>
-              <div class="tc-dash__kpi">
-                <div class="tc-dash__kpi-label">Tu información</div>
-                <div class="tc-dash__kpi-val">100%</div>
-                <div class="tc-dash__kpi-trend">privada</div>
-              </div>
-              <div class="tc-dash__kpi">
-                <div class="tc-dash__kpi-label">Siempre accesible</div>
-                <div class="tc-dash__kpi-val">24/7</div>
-                <div class="tc-dash__kpi-trend">multi-dispositivo</div>
-              </div>
+              {
+                t.dashKpis.map((k) => (
+                  <div class="tc-dash__kpi">
+                    <div class="tc-dash__kpi-label">{k.label}</div>
+                    <div class="tc-dash__kpi-val">{k.val}</div>
+                    <div class="tc-dash__kpi-trend">{k.trend}</div>
+                  </div>
+                ))
+              }
             </div>
             <div class="tc-dash__feats">
               <div class="tc-dash__feats-head">
-                <span>Características Principales</span>
-                <span>06 / 06</span>
+                <span>{t.dashFeatsHead}</span>
+                <span>{t.dashFeatsCount}</span>
               </div>
               <div class="tc-dash__feats-grid">
                 {
@@ -141,9 +100,7 @@ const shots = [
     </div>
 
     <p class="terracore__proof">
-      Construimos TerraCore desde cero: offline-first, multiusuario y multirol,
-      con dashboards en tiempo real y trazabilidad agroindustrial. Ese es el
-      estándar con el que trabajamos.
+      {t.proof}
     </p>
 
     <div class="terracore__shots">
@@ -167,22 +124,17 @@ const shots = [
     </div>
 
     <div class="terracore__more">
-      <div class="terracore__more-head">El roadmap sigue</div>
+      <div class="terracore__more-head">{t.moreHead}</div>
       <div class="terracore__more-grid">
         <article class="prod-card prod-card--soon" id="root">
-          <div class="prod-card__badge">Próximamente</div>
-          <h3 class="prod-card__title">Root</h3>
-          <p class="prod-card__tagline">Come con confianza.</p>
+          <div class="prod-card__badge">{root.badge}</div>
+          <h3 class="prod-card__title">{root.title}</h3>
+          <p class="prod-card__tagline">{root.tagline}</p>
           <p class="prod-card__desc">
-            App de nutrición personalizada para personas con enfermedad celíaca,
-            diabetes o intolerancia a la lactosa en Latinoamérica. Escanea
-            cualquier etiqueta y obtén un veredicto inmediato según tu perfil.
+            {root.desc}
           </p>
           <ul class="prod-card__feats">
-            <li>Escaneo de etiquetas con veredicto al instante</li>
-            <li>Diario alimentario que funciona offline</li>
-            <li>Recetas que sí puedes comer</li>
-            <li>Seguimiento e insights semanales</li>
+            {root.feats.map((f) => <li>{f}</li>)}
           </ul>
           <a
             class="prod-card__cta"
@@ -190,7 +142,7 @@ const shots = [
             target="_blank"
             rel="noopener noreferrer"
           >
-            Saber más sobre Root
+            {root.cta}
           </a>
         </article>
       </div>

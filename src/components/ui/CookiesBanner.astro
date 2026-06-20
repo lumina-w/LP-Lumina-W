@@ -1,17 +1,19 @@
 ---
+import { useTranslations } from '@/i18n/utils';
 const BASE = import.meta.env.BASE_URL;
+const t = useTranslations(Astro.currentLocale).cookies;
 ---
 
 <div
   id="cookie-banner"
   role="region"
-  aria-label="Aviso de cookies"
+  aria-label={t.regionAria}
   class="bg-dark border-light/10 shadow-base fixed right-6 bottom-6 left-6 z-[90] flex hidden flex-col gap-3 rounded-lg border p-4 outline-none md:right-auto md:left-6 md:max-w-xs"
 >
   <p class="font-body text-light/85 text-xs leading-relaxed">
-    Usamos cookies para mejorar tu experiencia.
+    {t.textPre}
     <a href="/cookies" class="text-light hover:text-brand underline"
-      >Más información</a
+      >{t.moreLink}</a
     >
   </p>
 
@@ -20,13 +22,13 @@ const BASE = import.meta.env.BASE_URL;
       id="cookie-accept"
       class="btn-primary flex-1 justify-center py-2 text-xs"
     >
-      Aceptar
+      {t.accept}
     </button>
     <button
       id="cookie-reject"
       class="border-light/20 font-body text-light/70 hover:border-light/40 flex-1 cursor-pointer rounded-md border px-3 py-2 text-xs font-semibold transition-colors duration-200"
     >
-      Solo esenciales
+      {t.reject}
     </button>
   </div>
 </div>
