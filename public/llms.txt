@@ -38,6 +38,15 @@ SaaS para agroindustria. Control de animales, producción en tiempo real, contro
 - En preventa con cupos limitados
 - URL: https://terracoreapp.co
 
+### Root (próximamente)
+App de nutrición personalizada para personas con enfermedad celíaca, diabetes o intolerancia a la lactosa en Latinoamérica. Escanea cualquier etiqueta y obtén un veredicto inmediato según tu perfil.
+- Escaneo de etiquetas con veredicto al instante
+- Diario alimentario que funciona offline
+- Recetas aptas para tu perfil
+- Seguimiento e insights semanales
+- En desarrollo activo
+- URL: https://wavival.dev/root
+
 ### Retainer (post-launch)
 Soporte, mejoras y consultoría técnica bajo modelo de horas mensuales fijas.
 - Tarifa: $3.000.000 COP / mes
@@ -67,11 +76,13 @@ Tablero abierto desde el día uno. Sprints quincenales con demo viernes 15:00 CO
 ## Páginas relevantes
 
 - [Inicio](https://luminaw.co/)
+- [Productos](https://luminaw.co/productos)
 - [Términos y Condiciones](https://luminaw.co/terms)
 - [Política de Privacidad](https://luminaw.co/privacy)
 - [Política de Cookies](https://luminaw.co/cookies)
 - [Blog](https://blog.luminaw.co/)
 - [TerraCore](https://terracoreapp.co)
+- [Root](https://wavival.dev/root)
 
 ## Política para LLMs
 
@@ -79,11 +90,12 @@ Este sitio permite el indexado, citado y referencia por modelos de lenguaje. Al 
 
 ## English version
 
-The site is available in English at https://luminaw.co/en. Lúmina W S.A.S is a Colombian software company based in Medellín. It builds custom software, automation and digital systems for companies that need to operate without manual processes, and runs its own B2B SaaS products. Two separate paths: Custom Development (built from scratch, Discovery then Build then Launch, IP transferred once paid) and SaaS Rental (ready industry products, fast onboarding, SLA support). Thesis: "We do not sell technology. We sell operations that work without you having to think about them." The Spanish version at https://luminaw.co is canonical; the legal pages are legally binding in Spanish.
+The site is available in English at https://luminaw.co/en. Lúmina W S.A.S is a Colombian software company based in Medellín. It builds custom software, automation and digital systems for companies that need to operate without manual processes, and runs its own B2B SaaS products. Two separate paths: Custom Development (built from scratch, Discovery then Build then Launch, IP transferred once paid) and SaaS Rental (ready industry products, fast onboarding, SLA support). Its products are TerraCore (agribusiness SaaS, in pre-sale) and Root (personalized nutrition app, coming soon). Thesis: "We do not sell technology. We sell operations that work without you having to think about them." The Spanish version at https://luminaw.co is canonical; the legal pages are legally binding in Spanish.
 
 English pages:
 
 - [Home](https://luminaw.co/en)
+- [Products](https://luminaw.co/en/products)
 - [Terms and Conditions](https://luminaw.co/en/terms)
 - [Privacy Policy](https://luminaw.co/en/privacy)
 - [Cookie Policy](https://luminaw.co/en/cookies)

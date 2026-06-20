@@ -52,7 +52,8 @@
 
   --text-primary: #0f0f12;
   --text-muted: #5b5f66;
-  --text-faint: #6f747c;
+  /* >=4.5:1 sobre --bg-page para textos informativos (feature__num, manifesto). */
+  --text-faint: #5f636a;
   --text-button: #ffffff;
   --text-on-dark: #f5f5f5;
   --text-on-dark-muted: #a1a5ad;
@@ -95,6 +96,11 @@
   html {
     scroll-behavior: smooth;
   }
+}
+
+/* Los anclajes de seccion deben librar el nav fijo (64px) al saltar a ellos. */
+section[id] {
+  scroll-margin-top: 80px;
 }
 
 body {
@@ -158,10 +164,8 @@ a:hover {
 a.btn-primary,
 a.btn-secondary,
 a.btn-ghost,
-a.service__cta,
-a.prod-card__cta,
-a.fork__cta,
-a.fork__aside-link,
+a.cta-link,
+a.prod-card__btn-outline,
 a.nav__link,
 a.nav__brand,
 a.nav__lang,
@@ -179,9 +183,8 @@ a.team-card__social,
 a.btn-primary:hover,
 a.btn-secondary:hover,
 a.btn-ghost:hover,
-a.service__cta:hover,
-a.prod-card__cta:hover,
-a.fork__cta:hover,
+a.cta-link:hover,
+a.prod-card__btn-outline:hover,
 a.nav__link:hover,
 a.nav__brand:hover,
 a.footer__mark:hover,
@@ -246,23 +249,6 @@ small {
     transform 120ms ease;
   white-space: nowrap;
   text-decoration: none;
-}
-.service__cta::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: -4px;
-  height: 1px;
-  background: currentColor;
-  transform: scaleX(0);
-  transform-origin: right center;
-  transition: transform 320ms ease;
-  pointer-events: none;
-}
-.service__cta:hover::after {
-  transform: scaleX(1);
-  transform-origin: left center;
 }
 
 .btn-primary {
@@ -447,6 +433,7 @@ small {
     background-color 0.2s ease;
 }
 .nav__lang:hover {
+  color: var(--text-on-dark, #fff);
   border-color: rgba(255, 255, 255, 0.4);
   background: rgba(255, 255, 255, 0.06);
   text-decoration: none;
@@ -487,14 +474,6 @@ small {
 .nav__group.open .nav__group-btn {
   color: #fff;
 }
-@media (hover: hover) and (pointer: fine) {
-  .nav__group:hover .nav__group-btn .nav__chev {
-    transform: rotate(180deg);
-  }
-  .nav__group:hover .nav__group-btn {
-    color: #fff;
-  }
-}
 
 .nav__dropdown {
   position: absolute;
@@ -529,13 +508,6 @@ small {
   transform: translateY(0);
   pointer-events: auto;
 }
-@media (hover: hover) and (pointer: fine) {
-  .nav__group:hover .nav__dropdown {
-    opacity: 1;
-    transform: translateY(0);
-    pointer-events: auto;
-  }
-}
 .nav__dropdown-link {
   position: relative;
   display: flex;
@@ -568,6 +540,47 @@ small {
   background: rgba(64, 123, 255, 0.18);
   border: 1px solid rgba(64, 123, 255, 0.4);
   white-space: nowrap;
+}
+/* Badges de estado alineados con .prod-card__status de la página de productos:
+   verde = activo (live), ámbar = próximamente (soon). Consistencia visual. */
+.nav__badge--live {
+  color: #6ee7a0;
+  background: rgba(34, 197, 94, 0.1);
+  border-color: rgba(34, 197, 94, 0.4);
+}
+.nav__badge--soon {
+  color: #f5c97a;
+  background: rgba(245, 166, 35, 0.1);
+  border-color: rgba(245, 166, 35, 0.4);
+}
+
+/* Encabezado del grupo "Ver todos los productos": destacado + separador. */
+.nav__dropdown-link--all {
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 4px;
+  padding-bottom: 11px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Punto de estado, mismos colores que la página de productos:
+   verde = activo, ámbar = próximamente. */
+.nav__dot {
+  flex: none;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #6b7079;
+}
+.nav__dot--live {
+  background: #22c55e;
+}
+.nav__dot--soon {
+  background: var(--brand-accent);
+}
+/* En móvil, el punto de estado sustituye al guion bullet del sublink. */
+.nav__mobile-sublink:has(.nav__dot)::before {
+  display: none;
 }
 .nav__burger {
   display: inline-flex;
@@ -1259,33 +1272,7 @@ small {
   margin-top: auto;
 }
 .fork__cta {
-  position: relative;
-  display: inline-block;
-  align-self: flex-start;
-  font-size: 0.9375rem;
-  font-weight: 600;
-  color: var(--brand-blue-ink);
   margin-top: 8px;
-}
-.fork__cta::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: -3px;
-  height: 1px;
-  background: currentColor;
-  transform: scaleX(0);
-  transform-origin: right center;
-  transition: transform 320ms ease;
-  pointer-events: none;
-}
-.fork__cta:hover::after {
-  transform: scaleX(1);
-  transform-origin: left center;
-}
-.fork__cta:hover {
-  color: var(--accent-hover);
 }
 .fork__aside {
   margin-top: 24px;
@@ -1293,28 +1280,7 @@ small {
   color: var(--text-muted);
 }
 .fork__aside-link {
-  position: relative;
-  display: inline-block;
   margin-left: 6px;
-  font-weight: 600;
-  color: var(--brand-blue-ink);
-}
-.fork__aside-link::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: -3px;
-  height: 1px;
-  background: currentColor;
-  transform: scaleX(0);
-  transform-origin: right center;
-  transition: transform 320ms ease;
-  pointer-events: none;
-}
-.fork__aside-link:hover::after {
-  transform: scaleX(1);
-  transform-origin: left center;
 }
 
 /* ============================================================
@@ -1448,21 +1414,47 @@ small {
   height: 1px;
   background: var(--brand-blue);
 }
-.service__cta {
+/* Text CTA — animated-underline inline link. SINGLE SOURCE OF TRUTH.
+   Apply `.cta-link` to every "Quiero… / Ver… / Hablar…" inline link.
+   Per-context classes (service__cta, fork__cta, …) only add layout margins. */
+.cta-link {
   position: relative;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
+  display: inline-block;
+  align-self: flex-start;
+  font-family: var(--font-body);
   font-size: 0.9375rem;
-  font-weight: 500;
+  font-weight: 600;
   color: var(--brand-blue-ink);
   text-decoration: none;
-  margin-top: 8px;
-  align-self: flex-start;
 }
-.service__cta:hover {
+.cta-link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -3px;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right center;
+  transition: transform 320ms ease;
+  pointer-events: none;
+}
+.cta-link:hover::after {
+  transform: scaleX(1);
+  transform-origin: left center;
+}
+.cta-link:hover {
   color: var(--accent-hover);
   text-decoration: none;
+}
+.service__cta {
+  margin-top: 8px;
+}
+.service__cta--sec {
+  margin-top: 4px;
+  font-size: 0.875rem;
+  color: var(--text-muted);
 }
 
 /* ============================================================
@@ -1577,6 +1569,10 @@ small {
   gap: 12px;
   flex-wrap: wrap;
   margin-top: 8px;
+}
+.terracore__actions--center {
+  justify-content: center;
+  margin-top: 32px;
 }
 .terracore__note {
   font-size: 0.875rem;
@@ -1983,27 +1979,206 @@ small {
 }
 .prod-card__cta {
   margin-top: 4px;
-  font-weight: 600;
-  font-size: 0.9375rem;
-  color: var(--brand-blue-ink);
-  position: relative;
 }
-.prod-card__cta::after {
+
+/* ============================================================
+   Productos · home minimal block + /productos page
+   ============================================================ */
+.terracore__min {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 18px;
+  max-width: 60ch;
+}
+.terracore__min .terracore__lead {
+  margin: 0;
+}
+
+.products-page {
+  position: relative;
+  overflow: hidden;
+}
+.products-page::before {
   content: '';
   position: absolute;
-  left: 0;
-  right: 0;
-  bottom: -3px;
-  height: 1px;
-  background: currentColor;
-  transform: scaleX(0);
-  transform-origin: right center;
-  transition: transform 320ms ease;
+  inset: 0;
+  background: radial-gradient(
+    ellipse 60% 70% at 100% 0%,
+    rgba(64, 123, 255, 0.16),
+    transparent 70%
+  );
   pointer-events: none;
 }
-.prod-card__cta:hover::after {
-  transform: scaleX(1);
-  transform-origin: left center;
+.products-page .container {
+  position: relative;
+}
+.products-page__hero {
+  max-width: 60ch;
+  margin-bottom: 56px;
+}
+.products-page__title {
+  font-family: var(--font-display);
+  color: #fff;
+  font-size: clamp(2.25rem, 5vw, 3.75rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1.02;
+  margin: 18px 0 0;
+}
+.products-page__lead {
+  font-size: 1.125rem;
+  color: var(--text-on-dark-muted);
+  line-height: 1.6;
+  margin: 20px 0 0;
+}
+
+.products-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+@media (min-width: 880px) {
+  .products-grid {
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+  }
+}
+.products-grid .prod-card {
+  gap: 16px;
+  padding: 36px;
+}
+.prod-card--live {
+  border-top: 3px solid #22c55e;
+}
+.prod-card--soon {
+  opacity: 0.9;
+}
+
+.prod-card__status {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  padding: 5px 11px;
+  border: 1px solid transparent;
+}
+.prod-card__status::before {
+  content: '';
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  flex: none;
+}
+.prod-card__status--live {
+  color: #6ee7a0;
+  border-color: rgba(34, 197, 94, 0.4);
+  background: rgba(34, 197, 94, 0.1);
+}
+.prod-card__status--live::before {
+  background: #22c55e;
+}
+.prod-card__status--soon {
+  color: #f5c97a;
+  border-color: rgba(245, 166, 35, 0.4);
+  background: rgba(245, 166, 35, 0.1);
+}
+.prod-card__status--soon::before {
+  background: var(--brand-accent);
+}
+
+.prod-card__featshead {
+  font-size: 11.5px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--text-on-dark-muted);
+  margin-top: 4px;
+}
+.prod-card--soon .prod-card__feats li::before {
+  background: var(--brand-accent);
+}
+
+.prod-card__chips {
+  list-style: none;
+  margin: 4px 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.prod-card__chips li {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--text-on-dark);
+  padding: 5px 10px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.prod-card__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+  margin-top: 8px;
+}
+.prod-card__btn-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.9375rem;
+  padding: 0.75rem 1.5rem;
+  color: #fff;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease;
+}
+.prod-card__btn-outline:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.4);
+  text-decoration: none;
+}
+
+.prod-card__note {
+  font-size: 0.8125rem;
+  font-style: italic;
+  color: var(--text-on-dark-muted);
+  line-height: 1.5;
+  margin-top: 2px;
+}
+
+.products-close {
+  margin-top: 64px;
+  padding-top: 40px;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  max-width: 60ch;
+}
+.products-close__title {
+  font-family: var(--font-display);
+  color: #fff;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  margin: 0;
+}
+.products-close__text {
+  font-size: 1.0625rem;
+  color: var(--text-on-dark-muted);
+  line-height: 1.6;
+  margin: 12px 0 0;
+}
+.products-close__cta {
+  margin-top: 18px;
 }
 
 /* ============================================================
@@ -2068,14 +2243,41 @@ small {
   cursor: pointer;
   display: inline-flex;
   align-items: center;
-  gap: 12px;
+  gap: 8px;
   width: fit-content;
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 14px;
-  letter-spacing: 0.01em;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.9375rem;
   color: var(--brand-blue-ink);
-  padding: 12px 2px;
+  padding: 8px 0;
+  transition: color 160ms ease;
+}
+.disclosure:hover {
+  color: var(--accent-hover);
+}
+/* Subrayado animado del CTA-texto, pegado a la etiqueta (no al chevron). */
+.disclosure .lbl-closed,
+.disclosure .lbl-open {
+  position: relative;
+}
+.disclosure .lbl-closed::after,
+.disclosure .lbl-open::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -3px;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right center;
+  transition: transform 320ms ease;
+  pointer-events: none;
+}
+.disclosure:hover .lbl-closed::after,
+.disclosure:hover .lbl-open::after {
+  transform: scaleX(1);
+  transform-origin: left center;
 }
 .disclosure::-webkit-details-marker {
   display: none;
@@ -2426,65 +2628,86 @@ details[open] > .disclosure .lbl-open {
     grid-template-columns: 1fr 1fr;
   }
 }
+/* Single team member: cap to a portrait width and align left so the lone card
+   reads as one editorial portrait, not a full-bleed banner. 2-4 cards untouched. */
+.team__grid:has(.team-card:only-child) {
+  grid-template-columns: minmax(0, 400px);
+}
+
+/* ============================================================
+   TEAM CARD — overlay: the photo fills the whole card and the
+   name/role/bio/socials sit over a dark gradient at the bottom.
+   Same portrait layout on every device. Square/editorial: radii
+   0, elevation via 1px borders only.
+   ============================================================ */
 .team-card {
-  background: var(--bg-card);
-  border-right: 1px solid var(--border-base);
-  border-bottom: 1px solid var(--border-base);
+  position: relative;
   display: flex;
   flex-direction: column;
+  aspect-ratio: 4 / 5; /* portrait on every device */
+  overflow: hidden;
+  background: var(--brand-light); /* behind the initials fallback */
+  border-right: 1px solid var(--border-base);
+  border-bottom: 1px solid var(--border-base);
 }
-@media (min-width: 520px) {
-  .team-card {
-    flex-direction: row;
-    align-items: stretch;
-  }
-}
+/* The media is the full-card background layer. */
 .team-card__media {
-  flex-shrink: 0;
-  background: var(--brand-light);
+  position: absolute;
+  inset: 0;
+  z-index: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  aspect-ratio: 1 / 1;
-  border-bottom: 1px solid var(--border-base);
-}
-@media (min-width: 520px) {
-  .team-card__media {
-    width: 40%;
-    aspect-ratio: auto;
-    border-bottom: none;
-    border-right: 1px solid var(--border-base);
-  }
 }
 .team-card__media img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: top center; /* keep the face in frame */
   display: block;
+  transition: transform 400ms ease;
+}
+.team-card:hover .team-card__media img {
+  transform: scale(1.04);
 }
 .team-card__media span {
   font-family: var(--font-display);
   font-weight: 800;
-  font-size: 2rem;
+  font-size: clamp(2rem, 8vw, 3.5rem);
   letter-spacing: -0.02em;
+  line-height: 1;
   color: var(--brand-blue-ink);
 }
+/* Text block, pinned to the bottom over a legibility gradient. */
 .team-card__body {
-  flex: 1;
-  min-width: 0;
-  padding: 28px;
+  position: relative;
+  z-index: 1;
+  margin-top: auto;
+  width: 100%;
+  padding: 22px 22px 20px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-end; /* content stays pinned to the bottom */
+  gap: 3px;
+  color: #fff;
+  background: linear-gradient(
+    to top,
+    rgba(13, 15, 20, 0.94) 0%,
+    rgba(13, 15, 20, 0.8) 42%,
+    rgba(13, 15, 20, 0) 100%
+  );
+  transition:
+    background 240ms ease,
+    min-height 320ms ease;
 }
 .team-card__name {
   font-family: var(--font-display);
   font-weight: 800;
-  font-size: 1.0625rem;
+  font-size: 1.25rem;
   letter-spacing: -0.02em;
-  color: var(--text-primary);
-  line-height: 1.2;
+  color: #fff;
+  line-height: 1.15;
   display: flex;
   align-items: baseline;
   flex-wrap: wrap;
@@ -2495,18 +2718,38 @@ details[open] > .disclosure .lbl-open {
   font-weight: 600;
   font-size: 0.8125rem;
   letter-spacing: 0;
-  color: var(--text-muted);
+  color: rgba(255, 255, 255, 0.66);
+}
+.team-card__role {
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--brand-accent); /* amber fill on dark — legible */
+}
+.team-card__bio {
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.82);
+  margin-top: 6px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3; /* keep the overlay tidy; full text stays in the DOM */
+  line-clamp: 3;
+  overflow: hidden;
 }
 .team-card__socials {
   display: flex;
+  flex-wrap: wrap;
   gap: 8px;
   margin-top: 14px;
 }
 .team-card__social {
   width: 34px;
   height: 34px;
-  border: 1px solid var(--border-base);
-  color: var(--text-muted);
+  flex-shrink: 0;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  color: #fff;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -2515,22 +2758,71 @@ details[open] > .disclosure .lbl-open {
     border-color 160ms ease,
     background 160ms ease;
 }
-.team-card__social:hover {
-  color: var(--brand-blue-ink);
-  border-color: var(--brand-blue);
-  background: var(--bg-soft);
+.team-card__social:hover,
+.team-card__social:focus-visible {
+  color: var(--brand-dark);
+  border-color: var(--brand-accent);
+  background: var(--brand-accent);
 }
-.team-card__role {
-  font-size: 0.8125rem;
-  font-weight: 600;
-  color: var(--brand-blue-ink);
-  margin-top: 2px;
+
+/* Reveal-on-hover, only where a real hover exists (pointer: fine). At rest the
+   card shows just name + role over the photo; on hover (or keyboard focus
+   within) a solid dark overlay grows to the content height and reveals the
+   handle, bio and socials. On touch everything stays visible (no hover). */
+@media (hover: hover) and (pointer: fine) {
+  .team-card__handle,
+  .team-card__bio,
+  .team-card__socials {
+    opacity: 0;
+    max-height: 0;
+    margin-top: 0;
+    overflow: hidden;
+    transition:
+      opacity 200ms ease,
+      max-height 320ms ease,
+      margin-top 320ms ease;
+  }
+  .team-card:hover .team-card__body,
+  .team-card:focus-within .team-card__body {
+    min-height: 100%; /* overlay spans the whole card; gradient fades to the top */
+    background: linear-gradient(
+      to top,
+      rgba(13, 15, 20, 0.96) 0%,
+      rgba(13, 15, 20, 0.86) 32%,
+      rgba(13, 15, 20, 0.55) 66%,
+      rgba(13, 15, 20, 0) 100%
+    );
+  }
+  .team-card:hover .team-card__handle,
+  .team-card:focus-within .team-card__handle {
+    opacity: 1;
+    max-height: 2rem;
+  }
+  .team-card:hover .team-card__bio,
+  .team-card:focus-within .team-card__bio {
+    opacity: 1;
+    max-height: 9rem;
+    margin-top: 6px;
+  }
+  .team-card:hover .team-card__socials,
+  .team-card:focus-within .team-card__socials {
+    opacity: 1;
+    max-height: 4rem;
+    margin-top: 14px;
+  }
 }
-.team-card__bio {
-  font-size: 0.9375rem;
-  line-height: 1.6;
-  color: var(--text-muted);
-  margin-top: 10px;
+
+@media (prefers-reduced-motion: reduce) {
+  .team-card__media img,
+  .team-card:hover .team-card__media img {
+    transition: none;
+    transform: none;
+  }
+  .team-card__handle,
+  .team-card__bio,
+  .team-card__socials {
+    transition: none;
+  }
 }
 
 /* ============================================================
@@ -2771,6 +3063,20 @@ details[open] > .disclosure .lbl-open {
   color: var(--brand-blue-ink);
   letter-spacing: 0.14em;
 }
+/* Required marker — red asterisk on every field label/legend */
+.req {
+  color: #ff6b6b;
+  margin-left: 3px;
+  font-weight: 700;
+}
+/* Honeypot anti-spam field: out of view and out of the a11y tree, still in DOM */
+.contact__hp {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
 .contact__field input,
 .contact__field textarea {
   font-family: var(--font-body);
@@ -2948,6 +3254,20 @@ details[open] > .disclosure .lbl-open {
 }
 .contact__error[hidden] {
   display: none;
+}
+/* Mensaje de error por campo, asociado via aria-describedby. Vacio = sin error. */
+.contact__field-err {
+  margin-top: 6px;
+  font-size: 12.5px;
+  font-weight: 500;
+  color: #ff9a9a;
+}
+.contact__field-err:empty {
+  display: none;
+}
+.contact__field input[aria-invalid='true'],
+.contact__field textarea[aria-invalid='true'] {
+  border-color: #ff9a9a;
 }
 
 /* Stagger fade-in for form fields when section becomes visible */
@@ -3606,9 +3926,16 @@ details[open] > .disclosure .lbl-open {
   border-radius: 999px;
   transition: transform 200ms ease;
 }
-.wa-fab:hover {
+.wa-fab:hover,
+.wa-fab:focus-visible {
   transform: scale(1.06);
   text-decoration: none;
+  color: #fff;
+}
+/* En verde, el anillo azul de foco se ve mal: usar blanco (cumple 3:1) */
+.wa-fab:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 3px;
 }
 .wa-fab svg {
   width: 28px;

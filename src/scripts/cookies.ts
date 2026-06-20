@@ -55,7 +55,6 @@ function showBanner() {
   document.addEventListener('keydown', onKeydown);
   requestAnimationFrame(() => {
     banner.style.opacity = '1';
-    (acceptBtn ?? banner).focus();
   });
 }
 

@@ -1,6 +1,5 @@
 ---
 import Layout from '@/layouts/Layout.astro';
-import Link from '@/components/ui/Link.astro';
 import { useTranslations } from '@/i18n/utils';
 
 const base = import.meta.env.BASE_URL;
@@ -22,6 +21,6 @@ const t = dict.notFound;
         {t.text}
       </p>
     </div>
-    <Link href={base} class="mt-3">{t.back}</Link>
+    <a href={base} class="btn-secondary mt-3">{t.back}</a>
   </div>
 </Layout>

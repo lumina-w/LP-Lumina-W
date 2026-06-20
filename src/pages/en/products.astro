@@ -1,0 +1,11 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import ProductsPage from '@/components/sections/ProductsPage.astro';
+import { useTranslations } from '@/i18n/utils';
+
+const t = useTranslations(Astro.currentLocale).productsPage;
+---
+
+<Layout title={t.metaTitle} description={t.metaDescription}>
+  <ProductsPage />
+</Layout>

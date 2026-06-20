@@ -122,22 +122,22 @@ Section kickers use `.eyebrow` — a 12 px uppercase Switzer line with a 20 px l
 
 ### Section heading + ghost numeral
 
-The `.s-head` block holds the eyebrow + h2 + lead + ghost-num. Ghost numerals (`.ghost-num`) are absolutely positioned, `text-wrap: balance`-free, and use a near-transparent color (`rgba(15,15,18,0.04)` on light; `rgba(255,255,255,0.05)` on dark surfaces).
+The `.s-head` block holds the eyebrow + h2 + lead + ghost word. The `.ghost-num` element is absolutely positioned, `text-wrap: balance`-free, and uses a near-transparent color (`rgba(15,15,18,0.04)` on light; `rgba(255,255,255,0.05)` on dark surfaces).
 
-**Ghost-nums encode navbar order, not section order.** Current numbering:
+**`.ghost-num` renders a faded context word, not a numeral** — the section's navbar label, so the reader knows where they are. (The class name `.ghost-num` is retained for CSS continuity from the old numbered design.) The word comes from each locale's dictionary (`t.ghost`), so it's translated automatically. Current mapping (es anchors shown; en anchors differ via `anchorSlugs` in `i18n/utils.ts`):
 
-| Section   | Anchor       | Ghost-num |
-| --------- | ------------ | --------- |
-| Hero      | `#hero`      | `01`      |
-| Problem   | `#problem`   | `02`      |
-| Solution  | `#services`  | `03`      |
-| Process   | `#process`   | `04`      |
-| TerraCore | `#terracore` | `05`      |
-| WhyUs     | `#us`        | `06`      |
-| FAQ       | `#faq`       | `07`      |
-| Contact   | `#contact`   | `08`      |
+| Section   | es anchor     | Ghost word   |
+| --------- | ------------- | ------------ |
+| Fork      | `#empieza`    | `Empieza`    |
+| Problem   | `#problema`   | `Problema`   |
+| Solution  | `#servicios`  | `Servicios`  |
+| Process   | `#proceso`    | `Proceso`    |
+| WhyUs     | `#nosotros`   | `Nosotros`   |
+| TerraCore | `#terracore`  | `Producto`   |
+| FAQ       | `#faq`        | `FAQ`        |
+| Contact   | `#contacto`   | `Contacto`   |
 
-Marquee, Manifesto, and Stakes/Agitation have no ghost-num (decorative interleave).
+Hero carries no ghost word. Marquee, Manifesto, and Stakes/Agitation have none (decorative interleave). Note the rendered order places WhyUs before TerraCore.
 
 ### Grids with hairline borders
 
@@ -169,7 +169,7 @@ Two-column layout at ≥1024 px: 260 px sticky TOC on the left (`position: stick
 
 ### Navbar
 
-Always-dark (`var(--brand-dark)`), 64 px high. Desktop ≥1024 px shows the full link strip with two dropdown groups; below 1024 px collapses to a burger that opens `.nav__mobile`. Dropdowns open on hover (`@media (hover:hover) and (pointer:fine)`) **and** on click; the `::before` bridge keeps the hover area continuous across the 14 px gap between button and panel.
+Always-dark (`var(--brand-dark)`), 64 px high. Desktop ≥1024 px shows a trimmed link strip — `Servicios · Proceso · Producto▾ · Nosotros` plus the `Agenda llamada` CTA. Only `Producto▾` is a dropdown; below 1024 px everything collapses to a burger that opens `.nav__mobile`. The dropdown opens on hover (`@media (hover:hover) and (pointer:fine)`) **and** on click; the `::before` bridge keeps the hover area continuous across the gap between button and panel. The dropdown's items come from `nav.productMenu` in `es.ts`/`en.ts` (not hardcoded): a bold `Ver todos los productos` header linking to the products page, then one entry per product with a `status` dot/badge (`--live` green / `--soon` amber). Demoted sections (Inicio, Empieza, Problema, FAQ) stay reachable via scroll + Footer.
 
 ### Footer
 
@@ -208,4 +208,5 @@ Four-column grid at ≥780 px: brand block (logo + legal name + dev attribution 
 | `src/layouts/Layout.astro`                 | SEO/OG/Schema + global shell + script imports.         |
 | `tailwind.config.mjs`                      | Tailwind v4 theme extension (mirrors `@theme` block).  |
 | `astro.config.mjs`                         | Sitemap config, prefetch policy, Vite tweaks.          |
-| `src/components/sections/index.astro`-side | Section markup that uses the BEM blocks.               |
+| `src/components/sections/*.astro`          | Section markup that uses the BEM blocks.               |
+| `src/i18n/{es,en}.ts`                      | Bilingual copy dictionaries (every key in both).       |

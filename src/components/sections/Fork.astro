@@ -32,7 +32,7 @@ const lp = (p: string) => localizePath(p, loc);
             </div>
             <h3 class="fork__title">{p.title}</h3>
             <p class="fork__line">{p.line}</p>
-            <a class="fork__cta" href={lp(p.href)}>
+            <a class="cta-link fork__cta" href={lp(p.href)}>
               {p.cta}
             </a>
           </div>
@@ -42,7 +42,9 @@ const lp = (p: string) => localizePath(p, loc);
 
     <p class="fork__aside">
       {t.asidePre}
-      <a class="fork__aside-link" href={lp('/#contact')}>{t.asideLink}</a>
+      <a class="cta-link fork__aside-link" href={lp('/#contact')}
+        >{t.asideLink}</a
+      >
     </p>
   </div>
 </section>

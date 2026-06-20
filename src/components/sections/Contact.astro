@@ -77,50 +77,90 @@ const t = useTranslations(loc).contact;
           data-sending={t.submitSending}
           data-error={t.submitError}
         >
+          {/* Honeypot anti-spam: oculto para humanos, los bots lo rellenan */}
+          <div class="contact__hp" aria-hidden="true">
+            <label for="c-website">No llenar este campo</label>
+            <input
+              id="c-website"
+              name="website"
+              type="text"
+              tabindex="-1"
+              autocomplete="off"
+            />
+          </div>
           <div class="contact__row">
             <div class="contact__field">
-              <label for="c-name">{t.fieldName}</label>
+              <label for="c-name"
+                >{t.fieldName}<span class="req" aria-hidden="true">*</span
+                ></label
+              >
               <input
                 id="c-name"
                 name="name"
                 type="text"
                 placeholder={t.fieldNamePh}
                 required
+                aria-describedby="c-name-err"
               />
+              <p class="contact__field-err" id="c-name-err" aria-live="polite" />
             </div>
             <div class="contact__field">
-              <label for="c-company">{t.fieldCompany}</label>
+              <label for="c-company"
+                >{t.fieldCompany}<span class="req" aria-hidden="true">*</span
+                ></label
+              >
               <input
                 id="c-company"
                 name="company"
                 type="text"
                 placeholder={t.fieldCompanyPh}
+                required
+                aria-describedby="c-company-err"
+              />
+              <p
+                class="contact__field-err"
+                id="c-company-err"
+                aria-live="polite"
               />
             </div>
           </div>
           <div class="contact__row">
             <div class="contact__field">
-              <label for="c-email">{t.fieldEmail}</label>
+              <label for="c-email"
+                >{t.fieldEmail}<span class="req" aria-hidden="true">*</span
+                ></label
+              >
               <input
                 id="c-email"
                 name="email"
                 type="email"
                 placeholder={t.fieldEmailPh}
                 required
+                aria-describedby="c-email-err"
               />
+              <p class="contact__field-err" id="c-email-err" aria-live="polite" />
             </div>
             <div class="contact__field">
-              <label for="c-phone">{t.fieldPhone}</label>
+              <label for="c-phone"
+                >{t.fieldPhone}<span class="req" aria-hidden="true">*</span
+                ></label
+              >
               <input
                 id="c-phone"
                 name="phone"
                 type="tel"
                 placeholder={t.fieldPhonePh}
+                required
+                aria-describedby="c-phone-err"
               />
+              <p class="contact__field-err" id="c-phone-err" aria-live="polite" />
             </div>
           </div>
           <fieldset class="contact__choices">
-            <legend>{t.needLegend}</legend>
+            <legend
+              >{t.needLegend}<span class="req" aria-hidden="true">*</span
+              ></legend
+            >
             {
               t.needOptions.map((opt, i) => (
                 <label class="contact__choice">
@@ -129,14 +169,19 @@ const t = useTranslations(loc).contact;
                     name="need"
                     value={opt}
                     required={i === 0 ? true : undefined}
+                    aria-describedby={i === 0 ? 'need-err' : undefined}
                   />
                   <span>{opt}</span>
                 </label>
               ))
             }
+            <p class="contact__field-err" id="need-err" aria-live="polite"></p>
           </fieldset>
           <fieldset class="contact__choices">
-            <legend>{t.stageLegend}</legend>
+            <legend
+              >{t.stageLegend}<span class="req" aria-hidden="true">*</span
+              ></legend
+            >
             {
               t.stageOptions.map((opt, i) => (
                 <label class="contact__choice">
@@ -145,19 +190,27 @@ const t = useTranslations(loc).contact;
                     name="stage"
                     value={opt}
                     required={i === 0 ? true : undefined}
+                    aria-describedby={i === 0 ? 'stage-err' : undefined}
                   />
                   <span>{opt}</span>
                 </label>
               ))
             }
+            <p class="contact__field-err" id="stage-err" aria-live="polite"></p>
           </fieldset>
           <div class="contact__field">
-            <label for="c-message">{t.fieldMessage}</label>
+            <label for="c-message"
+              >{t.fieldMessage}<span class="req" aria-hidden="true">*</span
+              ></label
+            >
             <textarea
               id="c-message"
               name="message"
               rows="4"
-              placeholder={t.fieldMessagePh}></textarea>
+              placeholder={t.fieldMessagePh}
+              required
+              aria-describedby="c-message-err"></textarea>
+            <p class="contact__field-err" id="c-message-err" aria-live="polite" />
           </div>
           <button id="submit-btn" type="submit" class="btn-primary">
             {t.submit}
@@ -172,9 +225,9 @@ const t = useTranslations(loc).contact;
           class="contact__success"
           role="status"
           tabindex="-1"
+          data-title={t.successTitle}
+          data-text={t.successText}
         >
-          <h3>{t.successTitle}</h3>
-          <p>{t.successText}</p>
         </div>
       </div>
     </div>

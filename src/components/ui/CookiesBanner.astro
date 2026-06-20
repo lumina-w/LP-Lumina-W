@@ -9,13 +9,14 @@ const t = useTranslations(loc).cookies;
   id="cookie-banner"
   role="region"
   aria-label={t.regionAria}
-  class="bg-dark border-light/10 shadow-base fixed right-6 bottom-6 left-6 z-[90] flex hidden flex-col gap-3 rounded-lg border p-4 outline-none md:right-auto md:left-6 md:max-w-xs"
+  class="shadow-base border-dark/20 fixed right-6 bottom-6 left-6 z-[90] flex hidden flex-col gap-3 rounded-lg border p-4 outline-none md:right-auto md:left-6 md:max-w-xs"
+  style="background-color: #ffffff"
 >
-  <p class="font-body text-light/85 text-xs leading-relaxed">
+  <p class="font-body text-dark text-xs leading-relaxed">
     {t.textPre}
     <a
       href={localizePath('/cookies', loc)}
-      class="text-light hover:text-brand underline">{t.moreLink}</a
+      class="hover:text-brand text-[#2a5fd6] underline">{t.moreLink}</a
     >
   </p>
 
@@ -28,7 +29,7 @@ const t = useTranslations(loc).cookies;
     </button>
     <button
       id="cookie-reject"
-      class="border-light/20 font-body text-light/70 hover:border-light/40 flex-1 cursor-pointer rounded-md border px-3 py-2 text-xs font-semibold transition-colors duration-200"
+      class="border-dark/30 font-body text-dark hover:border-dark/60 flex-1 cursor-pointer rounded-md border px-3 py-2 text-xs font-semibold transition-colors duration-200"
     >
       {t.reject}
     </button>

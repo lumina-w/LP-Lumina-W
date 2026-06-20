@@ -46,13 +46,22 @@ const lp = (p: string) => localizePath(p, loc);
               ))}
             </ul>
             <a
-              class="service__cta"
+              class="cta-link service__cta"
               href={s.ctaExternal ? s.ctaHref : lp(s.ctaHref)}
               target={s.ctaExternal ? '_blank' : undefined}
               rel={s.ctaExternal ? 'noopener noreferrer' : undefined}
             >
               {s.ctaLabel}
+              {s.ctaExternal && <span class="sr-only">{t.opensNewTab}</span>}
             </a>
+            {s.ctaSecondaryLabel && (
+              <a
+                class="cta-link service__cta service__cta--sec"
+                href={lp(s.ctaSecondaryHref)}
+              >
+                {s.ctaSecondaryLabel}
+              </a>
+            )}
           </div>
         ))
       }

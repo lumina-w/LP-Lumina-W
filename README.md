@@ -5,7 +5,7 @@
 
 ![Banner principal](.github/assets/banner-main.png)
 
-> Marketing site for **Lúmina W S.A.S**, a Colombian software startup that builds custom software (Discovery → Build → Launch) and operates SaaS products like TerraCore. Editorial, sober, square-edged design system on top of Astro 6 + Tailwind v4 + TypeScript. Static build, Netlify-hosted, GA4 with consent gating, full SEO + `llms.txt` for AI crawlers.
+> Marketing site for **Lúmina W S.A.S**, a Colombian software startup that builds custom software (Discovery → Build → Launch) and operates SaaS products like TerraCore. Editorial, sober, square-edged design system on top of Astro 6 + Tailwind v4 + TypeScript. Static build, Netlify-hosted, bilingual (Spanish default + English under `/en`), GA4 with consent gating, a contact form backed by a Netlify Function (Supabase + Resend), full SEO + `llms.txt` for AI crawlers.
 
 [![Live Site](https://img.shields.io/badge/Live_Site-luminaw.co-407bff?style=for-the-badge&logo=astro&logoColor=white)](https://luminaw.co)
 [![Blog](https://img.shields.io/badge/Blog-blog.luminaw.co-407bff?style=for-the-badge&logo=ghost&logoColor=white)](https://blog.luminaw.co)
@@ -42,9 +42,10 @@ Related docs: [CLAUDE.md](./CLAUDE.md) · [AGENTS.md](./AGENTS.md) · [DESIGN.md
 | --------- | ----------------------------------------------------------------------------------------------------- |
 | Framework | Astro 6 (static output), TypeScript 5 (strict via `astro/tsconfigs`)                                  |
 | UI        | Astro components + minimal islands. React 19 integration installed.                                   |
+| i18n      | Astro locales — Spanish default (`/`), English (`/en/*`); dictionaries in `src/i18n/{es,en}.ts`        |
 | Styling   | Tailwind CSS v4 (`@tailwindcss/vite`) + a single `global.css` BEM file                                |
 | Type      | Cabinet Grotesk (display) + Switzer (body), via Fontshare CDN                                         |
-| Form      | Formspree (`xpqovooa`)                                                                                |
+| Form      | Own backend: Netlify Function `/api/contact` → Supabase (`contact_submissions`) + Resend notification |
 | Analytics | Google Analytics 4, consent-gated by the cookies banner                                               |
 | SEO       | `@astrojs/sitemap`, JSON-LD `@graph`, `robots.txt`, `llms.txt`                                        |
 | Hosting   | Netlify (`netlify.toml` + `public/_headers` + `public/_redirects`)                                    |
@@ -56,10 +57,11 @@ Related docs: [CLAUDE.md](./CLAUDE.md) · [AGENTS.md](./AGENTS.md) · [DESIGN.md
 git clone git@github.com:wavival/LP-Lumina-W.git
 cd LP-Lumina-W
 npm install
-npm run dev                      # http://localhost:4321
+npm run dev                      # http://localhost:4321 (no Netlify Functions)
+npm run dev:netlify              # netlify dev — runs the /api/contact Function too
 ```
 
-No env file required for `npm run dev`, the contact form posts to a public Formspree endpoint, GA4 only loads after user consent, and the site has no backend.
+`npm run dev` serves the static site with HMR but does **not** run Netlify Functions, so the contact form's `/api/contact` endpoint 404s. To exercise the form locally, run `npm run dev:netlify` with the backend env vars set (see [Environment variables](#environment-variables)). GA4 only loads after user consent.
 
 ### npm scripts
 
@@ -76,49 +78,69 @@ Node `>= 22.12.0` is enforced by `package.json` and pinned in `netlify.toml`.
 
 ## Environment variables
 
-No `.env` is required out of the box. Third-party IDs that _are_ currently hard-coded:
+The **contact form backend** (`netlify/functions/contact.mts`) requires server env vars. Copy `.env.example` → `.env` for local `netlify dev`, and set the same keys in Netlify → Site config → Environment variables for production. `.env` is gitignored — never commit real values.
+
+| Var                         | Purpose                                                                  |
+| --------------------------- | ------------------------------------------------------------------------ |
+| `SUPABASE_URL`              | Supabase project URL                                                     |
+| `SUPABASE_SERVICE_ROLE_KEY` | Supabase **secret** key (server-only, bypasses RLS; not the publishable) |
+| `RESEND_API_KEY`            | Resend API key for the lead-notification email                          |
+| `CONTACT_TO`                | Inbox that receives leads (`contact@luminaw.co`)                         |
+| `CONTACT_FROM`              | Sender on the verified Resend subdomain (`…@info.luminaw.co`)            |
+
+The static front-end needs **no** env vars (`npm run dev` runs without any). Third-party IDs still hard-coded in the client:
 
 | Where                                            | Value                       | Notes                                                              |
 | ------------------------------------------------ | --------------------------- | ------------------------------------------------------------------ |
 | `src/scripts/cookies.ts`                         | GA4 `G-RBNC0VP6D3`          | Loaded only after the user clicks **Accept** on the cookies banner |
-| `src/scripts/contact.ts`                         | Formspree ID `xpqovooa`     | POSTs `{ name, company, email, message }` as JSON                  |
 | `src/components/ui/NavBar.astro`, `Footer.astro` | WhatsApp `+57 310 828 3088` | Floating FAB + footer social icons                                 |
 
-If you migrate any of these to env, prefix with `PUBLIC_` so Astro exposes the value to client bundles, and update the matching reference in the script.
+If you migrate a client-side ID to env, prefix with `PUBLIC_` so Astro exposes it to client bundles, and update the matching reference in the script.
 
 ## Architecture
 
 ```
 src/
 ├── pages/
-│   ├── index.astro          composes the landing in nav-anchored order
-│   ├── terms.astro          /terms      · 10 numbered sections + sticky TOC
-│   ├── privacy.astro        /privacy    · 10 numbered sections + sticky TOC
-│   ├── cookies.astro        /cookies    ·  8 numbered sections + sticky TOC
-│   └── 404.astro
+│   ├── index.astro          es landing, composed in nav-anchored order
+│   ├── productos.astro      /productos  · products overview page
+│   ├── terms.astro          /terms      · numbered sections + sticky TOC
+│   ├── privacy.astro        /privacy    · numbered sections + sticky TOC
+│   ├── cookies.astro        /cookies    · numbered sections + sticky TOC
+│   ├── 404.astro
+│   └── en/                  English twins: index, products, terms,
+│                            privacy, cookies (served under /en/*)
+├── i18n/
+│   ├── es.ts · en.ts        copy dictionaries (en typed : Dictionary)
+│   └── utils.ts             locale + anchor-slug + path helpers
 ├── layouts/
-│   └── Layout.astro         <head> SEO/OG/Schema.org @graph, body shell,
-│                            Loader, NavBar, Footer, CookiesBanner, WA FAB,
-│                            cursor-glow div, global script imports
+│   └── Layout.astro         <head> SEO/OG/Schema.org @graph, hreflang,
+│                            body shell, Loader, NavBar, Footer,
+│                            CookiesBanner, WA FAB, cursor-glow div,
+│                            global script imports
 ├── components/
-│   ├── ui/                  NavBar, Footer, CookiesBanner, Loader, Icon,
-│   │                        Button, Link
-│   └── sections/            Hero, Problem, Agitation (stakes-band),
+│   ├── ui/                  NavBar, Footer, CookiesBanner, Loader, Icon
+│   └── sections/            Hero, Fork, Problem, Agitation (stakes-band),
 │                            Marquee, Solution (services), Process,
-│                            Manifesto, TerraCore, WhyUs, FAQ, Contact
+│                            Manifesto, WhyUs, TerraCore, FAQ, Contact,
+│                            ProductsPage
 ├── scripts/                 nav · cookies · cursor · scrollAnimations ·
-│                            faq · contact · loader · analytics
-├── styles/
-│   └── global.css           single source of truth: tokens, @theme,
-│                            element resets, every component's BEM CSS
-└── styles assets in public/ brand/, icons/, images/, videos/
+│                            faq · contact · loader
+└── styles/
+    └── global.css           single source of truth: tokens, @theme,
+                             element resets, every component's BEM CSS
+
+netlify/functions/contact.mts   contact-form backend (v2 fn → /api/contact)
+supabase/schema.sql             contact_submissions table DDL
+public/                         brand/, icons/, images/, videos/,
+                                robots.txt, llms.txt, _headers, _redirects
 ```
 
 ### Page composition
 
-`src/pages/index.astro` mounts sections in a fixed order. Each section that appears in the navbar has an `id` that matches a nav anchor and a `.ghost-num` (the giant translucent number top-right of the section header). **Ghost-nums encode navbar order, not section order**: `Hero 01 · Problem 02 · Solution (Servicios) 03 · Process 04 · TerraCore 05 · WhyUs (Nosotros) 06 · FAQ 07 · Contact 08`. Marquee, Manifesto, and the stakes-band sit between numbered sections as decorative interleave, no anchor, no ghost-num.
+`src/pages/index.astro` mounts sections in a fixed order: Hero · Fork · Problem · Agitation · Marquee · Solution · Process · Manifesto · WhyUs · TerraCore · FAQ · Contact. Each section that appears in the navbar has an `id` matching a (locale-slugged) nav anchor and a `.ghost-num` — the faded **context word** top-right of the section header (the navbar label, e.g. Servicios / Proceso / Nosotros / Producto), not a numeral. The word comes from the locale dictionary so it translates automatically. Marquee, Manifesto, and the stakes-band sit between sections as decorative interleave, no anchor, no ghost word. Hero carries no ghost word.
 
-NavBar uses two dropdown groups (`Servicios▾`, `Compañía▾`) with hover-open on `(hover: hover) and (pointer: fine)` plus click-toggle for keyboard + touch. Desktop (`.nav__links`) and mobile (`.nav__mobile`) markup is duplicated rather than shared.
+NavBar is trimmed to four top-level items — `Servicios · Proceso · Producto▾ · Nosotros` plus the `Agenda llamada` CTA. Only `Producto▾` is a dropdown (hover-open on `(hover: hover) and (pointer: fine)` plus click-toggle for keyboard + touch); its items come from `nav.productMenu` in the dictionaries. Demoted sections (Inicio, Empieza, Problema, FAQ) stay reachable via scroll + Footer. Desktop (`.nav__links`) and mobile (`.nav__mobile`) markup is duplicated rather than shared.
 
 ### Design system
 
@@ -136,11 +158,11 @@ See [DESIGN.md](./DESIGN.md) for the full token + component reference.
 
 `src/scripts/*.ts` are vanilla TypeScript imported inline via `<script>` tags from `Layout.astro` (global) or the relevant section (e.g. FAQ imports its own script). They query the DOM by ID/class and bind listeners, nothing is reactive.
 
-- **`nav.ts`**, burger toggle, dropdown groups (`[data-nav-group]`), Escape closes everything.
-- **`cookies.ts`**, gates GA4. Loads `gtag.js` only after `Accept`. `localStorage` key `lw_cookies` = `accepted | rejected`.
+- **`nav.ts`**, burger toggle, the `Producto▾` dropdown group (`[data-nav-group]`), Escape closes everything.
+- **`cookies.ts`**, gates GA4. Injects `gtag.js` and configs `G-RBNC0VP6D3` only after `Accept`. `localStorage` key `lw_cookies` = `accepted | rejected`.
 - **`cursor.ts`**, `#cursor-glow` div lerps toward pointer at 0.18; hidden on coarse pointer or `prefers-reduced-motion`.
 - **`scrollAnimations.ts`**, single IntersectionObserver, threshold 0.12, **unobserves after first hit**. `<noscript>` fallback forces `.animate-on-scroll` visible.
-- **`contact.ts`**, POSTs to Formspree; field IDs are `c-name / c-company / c-email / c-message`.
+- **`contact.ts`**, POSTs JSON to the own backend `/api/contact` (Netlify Function → Supabase + Resend). Field IDs are `c-name / c-company / c-email / c-phone / c-need / c-stage / c-message`; sends `locale`/`source` metadata; hidden `website` honeypot.
 - **`faq.ts`**, accordion open/close, single-open behavior.
 - **`loader.ts`**, fills the progress bar on `window.load`, fades the loader and removes it from the DOM.
 
@@ -169,8 +191,8 @@ The TOC is `position: sticky; top: 88px` on desktop and inline above content on 
 
 No test runner is configured. The current production bar is:
 
-- Manual smoke: nav anchors land on the right section, dropdowns work on hover + click, mobile burger opens, accordion expands, contact form submits to Formspree.
-- Build gate: `npm run build` must succeed (5 pages + sitemap generated).
+- Manual smoke: nav anchors land on the right section, the `Producto▾` dropdown works on hover + click, mobile burger opens, accordion expands, the language switcher swaps es ⇄ en, and the contact form submits to `/api/contact` (run `npm run dev:netlify`).
+- Build gate: `npm run build` must succeed (es + en pages + sitemap generated).
 - Format gate: `npm run format:check` must pass.
 
 When adding tests, Vitest + Astro's container API is the natural fit.
@@ -184,7 +206,7 @@ When adding tests, Vitest + Astro's container API is the natural fit.
    - Build command: `npm run build`
    - Publish directory: `dist`
    - Node version: `22.12.0`
-3. **Environment variables**: nothing required by default (see [Environment variables](#environment-variables)).
+3. **Environment variables**: set the contact-form backend keys (`SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`, `RESEND_API_KEY`, `CONTACT_TO`, `CONTACT_FROM`) in Netlify → Site config → Environment variables, or the `/api/contact` Function fails (see [Environment variables](#environment-variables)).
 4. **Custom domain**: _Domain settings_ → add `luminaw.co` → follow CNAME / Netlify DNS instructions. SSL auto-provisions.
 5. **Deploy**: push to `main`. Netlify auto-builds and publishes.
 
@@ -201,7 +223,7 @@ When adding tests, Vitest + Astro's container API is the natural fit.
 
 `netlify.toml` sets `Strict-Transport-Security` (HSTS preload), `X-Frame-Options: SAMEORIGIN`, `X-Content-Type-Options: nosniff`, `Referrer-Policy: strict-origin-when-cross-origin`, and `Permissions-Policy: camera=(), microphone=(), geolocation=(), interest-cohort=()`. Static assets (`*.webp`, `*.png`, `*.svg`, `/_astro/*`) ship with `Cache-Control: public, max-age=31536000, immutable`; video gets 30 days; `robots.txt` / `llms.txt` / `sitemap-index.xml` get 1 hour.
 
-There is **no Content-Security-Policy** set yet, adding one requires whitelisting Fontshare, Google Analytics, Formspree, and the `data:` URIs the inline SVGs use. Open question for production hardening.
+There is **no Content-Security-Policy** set yet, adding one requires whitelisting Fontshare, Google Analytics, the `/api/contact` Function origin (and Supabase/Resend it calls server-side), and the `data:` URIs the inline SVGs use. Open question for production hardening.
 
 ### Analytics consent
 
@@ -215,7 +237,7 @@ The Cookies policy at `/cookies` documents this exact behavior, update both if y
 
 ## SEO surface
 
-- **`Layout.astro`** owns canonical / OG / Twitter meta, `hreflang="es-co"` + `x-default`, and a JSON-LD `@graph` with `Organization` (legal name _Lúmina W S.A.S_, address in Medellín, `sameAs` to Instagram + LinkedIn + blog), `WebSite`, and `WebPage` nodes.
+- **`Layout.astro`** owns canonical / OG / Twitter meta, bilingual `hreflang` alternates (`es-CO` + `en` + `x-default`) plus `og:locale:alternate`, and a JSON-LD `@graph` with `Organization` (legal name _Lúmina W S.A.S_, address in Medellín, `sameAs` to Instagram + LinkedIn + blog), `WebSite`, and `WebPage` nodes.
 - Verification meta tags for Google / Bing / Yandex / Facebook are placeholder comments inside `<head>`, paste IDs before deploy.
 - `dist/sitemap-index.xml` → `dist/sitemap-0.xml` is regenerated each build.
 - `<link rel="sitemap">` and `<link rel="alternate" type="text/plain" href="/llms.txt">` are advertised from the document head.
@@ -228,18 +250,18 @@ The Cookies policy at `/cookies` documents this exact behavior, update both if y
 | Ghost-num shows the wrong number             | They follow **navbar order**, not section order. Renumber across all numbered sections after reordering.                                                       |
 | New CTA gets a double underline              | Add the anchor class to the `a.btn-…, a.<class>` reset block near the top of `global.css` (~lines 130–161).                                                    |
 | `.animate-on-scroll` content stays invisible | The IntersectionObserver in `scrollAnimations.ts` only triggers for elements present at script time. Re-running it for newly mounted elements isn't supported. |
-| Contact form returns 4xx                     | Field IDs must be `c-name / c-company / c-email / c-message` to match `contact.ts`. Formspree endpoint is hard-coded, verify on the Formspree dashboard.       |
+| Contact form returns 4xx / 404               | `/api/contact` only runs under `npm run dev:netlify` (not `astro dev`). Check the backend env vars are set and the `c-*` field IDs match `contact.ts`.        |
 | GA never fires                               | The user has to click **Accept** first. Inspect `localStorage['lw_cookies']`.                                                                                  |
 | Sticky legal TOC overlaps the nav            | TOC uses `top: 88px` to clear the 64 px nav + breathing room. If the nav grows, bump that value.                                                               |
 
 ## Roadmap / known gaps
 
-- **No Content-Security-Policy**. Add to `netlify.toml` once allowlists for Fontshare / GA / Formspree are settled.
+- **No Content-Security-Policy**. Add to `netlify.toml` once allowlists for Fontshare / GA / the `/api/contact` Function are settled.
 - **No automated tests**. Vitest + Astro's container API is the natural fit when the surface grows.
 - **TerraCore video** (`/videos/terracore.mp4`) is `preload="metadata"` but not lazy-loaded; consider an `IntersectionObserver` swap if Core Web Vitals regress.
 - **React integration** is installed (`@astrojs/react`) but unused, drop it if no islands appear in the next iteration.
 - **Verification IDs** for Google Search Console / Bing Webmaster are placeholders.
-- **Hreflang** is single-locale (`es-co`), split if/when we add other markets.
+- **Hreflang** is bilingual (`es-CO` + `en` + `x-default`); add more `alternate` pairs if we open other markets.
 
 ## License
 

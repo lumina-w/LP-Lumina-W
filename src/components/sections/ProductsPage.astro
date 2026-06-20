@@ -1,0 +1,134 @@
+---
+import { useTranslations, localizePath, getLang } from '@/i18n/utils';
+const loc = Astro.currentLocale;
+const t = useTranslations(loc).productsPage;
+const lp = (p: string) => localizePath(p, loc);
+
+// Page-specific structured data (Layout only emits Organization/WebSite/WebPage).
+// BreadcrumbList (Home -> Products) + ItemList of the product cards so each
+// SaaS product is eligible for rich results.
+const SITE = 'https://luminaw.co';
+const pageURL = new URL(Astro.url.pathname, SITE).toString();
+const homeURL = new URL(localizePath('/', loc), SITE).toString();
+const crumbLabel = getLang(loc) === 'en' ? 'Products' : 'Productos';
+
+const productsSchema = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'BreadcrumbList',
+      '@id': `${pageURL}#breadcrumb`,
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Lúmina W', item: homeURL },
+        { '@type': 'ListItem', position: 2, name: crumbLabel, item: pageURL },
+      ],
+    },
+    {
+      '@type': 'ItemList',
+      '@id': `${pageURL}#products`,
+      itemListElement: t.cards.map((c, i) => ({
+        '@type': 'ListItem',
+        position: i + 1,
+        item: {
+          '@type': 'SoftwareApplication',
+          name: c.name,
+          applicationCategory: 'BusinessApplication',
+          operatingSystem: 'Web',
+          description: c.description,
+          url: c.ctaHref,
+          offers: {
+            '@type': 'Offer',
+            availability:
+              c.status === 'live'
+                ? 'https://schema.org/PreOrder'
+                : 'https://schema.org/ComingSoon',
+          },
+          provider: { '@id': 'https://luminaw.co/#organization' },
+        },
+      })),
+    },
+  ],
+};
+---
+
+<section class="section products-page surface-dark">
+  <div class="animate-on-scroll container">
+    <header class="products-page__hero">
+      <div class="eyebrow">{t.eyebrow}</div>
+      <h1 class="products-page__title">{t.heading}</h1>
+      <p class="products-page__lead">{t.lead}</p>
+    </header>
+
+    <div class="products-grid">
+      {
+        t.cards.map((c) => (
+          <article
+            class={`prod-card ${c.status === 'soon' ? 'prod-card--soon' : 'prod-card--live'}`}
+          >
+            <span class={`prod-card__status prod-card__status--${c.status}`}>
+              {c.statusLabel}
+            </span>
+            <h2 class="prod-card__title">{c.name}</h2>
+            <p class="prod-card__tagline">{c.tagline}</p>
+            <p class="prod-card__desc">{c.description}</p>
+
+            <div class="prod-card__featshead">{c.featsHead}</div>
+            <ul class="prod-card__feats">
+              {c.feats.map((f) => (
+                <li>{f}</li>
+              ))}
+            </ul>
+
+            {c.chips.length > 0 && (
+              <ul class="prod-card__chips">
+                {c.chips.map((ch) => (
+                  <li>{ch}</li>
+                ))}
+              </ul>
+            )}
+
+            <div class="prod-card__actions">
+              <a
+                class={
+                  c.status === 'soon' ? 'prod-card__btn-outline' : 'btn-primary'
+                }
+                href={c.ctaHref}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {c.ctaLabel}
+                <span class="sr-only">{t.opensNewTab}</span>
+              </a>
+              {c.ctaSecondaryLabel && (
+                <a
+                  class="cta-link prod-card__cta"
+                  href={c.ctaSecondaryHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {c.ctaSecondaryLabel}
+                  <span class="sr-only">{t.opensNewTab}</span>
+                </a>
+              )}
+            </div>
+
+            <p class="prod-card__note">{c.note}</p>
+          </article>
+        ))
+      }
+    </div>
+
+    <div class="products-close">
+      <h2 class="products-close__title">{t.closingTitle}</h2>
+      <p class="products-close__text">{t.closingText}</p>
+      <a class="cta-link products-close__cta" href={lp(t.closingHref)}
+        >{t.closingCta}</a
+      >
+    </div>
+  </div>
+</section>
+
+<script
+  type="application/ld+json"
+  set:html={JSON.stringify(productsSchema)}
+/>

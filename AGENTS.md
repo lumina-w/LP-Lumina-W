@@ -10,7 +10,7 @@ If something is not described here but matters, ask before changing it.
 - **Owner**: Lúmina W S.A.S, Medellín, Colombia.
 - **Public URL**: `https://luminaw.co`.
 - **Hosting**: Netlify (config in `netlify.toml`, `public/_headers`, `public/_redirects`).
-- **Language**: Spanish (`es-CO`). All visible copy is in Spanish — keep it that way unless explicitly asked.
+- **Languages**: Bilingual — Spanish (`es-CO`, default at `/`) and English (`en`, served under `/en/*`). Copy lives in `src/i18n/es.ts` + `src/i18n/en.ts` (every key must exist in both; `en.ts` is typed `: Dictionary` and breaks the build if a key is missing). Any new/changed string, label, alt, or route must land in both dictionaries in the same change.
 
 ## Commands
 
@@ -26,6 +26,54 @@ npm run astro -- ...   # passthrough to the Astro CLI
 Node `>= 22.12.0`. No test runner is configured — adding one is an explicit decision, not a side-effect.
 
 ## Doing work in this repo
+
+### Keep docs in sync (ALWAYS)
+
+After **any** change, before you finish the task, ask: "Did this change anything the docs describe?" Dependencies (added/removed), folder structure, architecture, scripts, env vars, endpoints, backend/services, conventions, routes, brand/legal data — anything an agent reading the docs would now find wrong.
+
+If yes, update **every** affected Markdown file in the same change: `AGENTS.md`, `CLAUDE.md`, `DESIGN.md`, and any other `.md` (README, etc.). You decide what counts as "important enough to document" — when unsure, document it.
+
+**The invariant: the docs always describe the repo exactly as it is right now. Never leave a doc stale.** A change is not done until its docs match.
+
+### UI changes: SEO + performance + a11y (ALWAYS)
+
+Whenever you **create, edit, or delete** a section, page, or UI component, every one of the three checklists below must pass before the change is done. Non-negotiable, every time. Target: Lighthouse **≥ 95** in SEO, Performance, and Accessibility on the changed page.
+
+**SEO (every page/section):**
+
+- Exactly one `<h1>` per page; headings nest in order (`h1 → h2 → h3`, never skip a level).
+- Unique, descriptive `<title>` (≤ 60 chars) and meta `description` (≤ 160 chars) per page, set via `Layout.astro` props — never duplicated across pages.
+- Canonical URL present and correct (`trailingSlash: 'never'`); no accidental duplicate-content URLs.
+- Semantic landmarks: `<header> <nav> <main> <section> <footer>`. Each `<section>` keeps its anchor `id` and a label (heading or `aria-label`).
+- JSON-LD `@graph` in `Layout.astro` stays valid; update the relevant node (`WebPage`, `Organization`, `FAQPage`, `ProfessionalService`, `BreadcrumbList`) when the matching content changes. Validate against schema.org.
+- OG + Twitter tags resolve (title, description, image, `og:image:alt`).
+- Every `<img>` has descriptive `alt` (empty `alt=""` only for purely decorative); real `<a href>` for internal links (no JS-only navigation).
+- `hreflang` alternates for `es` ⇄ `en` stay in sync when a route is added/removed.
+- **On any content/route/product change, update the discovery + machine files in the same commit:** `public/llms.txt`, `public/robots.txt`, the sitemap filter in `astro.config.mjs` (output is regenerated on build), and the JSON-LD/meta above. Keep brand/legal data (`contact@luminaw.co`, WhatsApp, `Lúmina W S.A.S`) consistent across all of them.
+
+**Performance (every page/section):**
+
+- Static-first. No client JS unless required; if needed, vanilla TS imported inline (`src/scripts/*.ts`), kept minimal. No new framework runtime without confirmation.
+- Images: modern format (`.webp`), explicit `width`/`height` (zero CLS), `loading="lazy"` + `decoding="async"` for below-the-fold; the LCP image (hero) loads eager / preloaded, never lazy. Use `srcset`/`sizes` for responsive art.
+- No layout shift: reserve space for any async/animated element. CLS target ≈ 0.
+- Fonts via Fontshare with `preconnect`/`dns-prefetch` in `Layout.astro` and `font-display: swap`. No new font without confirmation.
+- CSS stays in the single `global.css`; reuse tokens/BEM, no unused bloat, no `box-shadow` (design uses 1px borders).
+- Third-party scripts `async`/`defer` and consent-gated where applicable (GA loads only after `Accept`).
+- Honor `prefers-reduced-motion` for any new motion (mirror the existing cursor/scroll/loader gates).
+- Keep the immutable cache headers in `netlify.toml` / `public/_headers` covering any new asset type.
+
+**Accessibility (WCAG 2.2 AA, every page/section):**
+
+- Semantic HTML first; ARIA only to fill gaps, never to replace native elements.
+- Fully keyboard operable; visible focus on every interactive element (`:focus-visible`); logical tab/DOM order; no keyboard traps.
+- Every form control has an associated `<label>`; required fields marked (visually + `required`); errors/status announced via `role="alert"` / `role="status"` / `aria-live`.
+- Color contrast ≥ **4.5:1** for text, ≥ **3:1** for large text, icons, and UI borders — verify on `.surface-dark` too.
+- Images: meaningful `alt`; decorative content `alt=""` or `aria-hidden="true"`.
+- One set of landmarks per page; correct heading outline (shared with SEO above).
+- `lang` attribute matches the locale (`es` / `en`); `hreflang` alternates correct.
+- Touch/click targets ≥ 24×24 px (WCAG 2.2 `2.5.8`); aim for 44×44.
+- Any element with `.animate-on-scroll` MUST be reached by the IntersectionObserver or it stays `opacity: 0` — verify it animates in, or do not add the class.
+- Honor `prefers-reduced-motion` (shared with Performance above).
 
 ### What you can do without asking
 
@@ -52,30 +100,36 @@ Node `>= 22.12.0`. No test runner is configured — adding one is an explicit de
 - Add `text-decoration: underline` to anchors that render as buttons. The reset block in `global.css` already handles this — extend it if you add a new button-like anchor class.
 - Hard-code colors outside the token system. Use `var(--brand-blue)`, `var(--text-primary)`, etc.
 - Commit `.env`, secrets, GA debug payloads, or the local `dist/` build.
+- Leave documentation out of sync with the repo after a change. See [Keep docs in sync](#keep-docs-in-sync-always).
 
 ## Architecture cheatsheet
 
 ```
-src/pages/index.astro          ← nav-anchored section order
-src/layouts/Layout.astro       ← <head> SEO + JSON-LD + global shell + script imports
-src/components/sections/*.astro  ← Hero, Problem, Agitation, Marquee, Solution,
-                                   Process, Manifesto, TerraCore, WhyUs, FAQ, Contact
-src/components/ui/*.astro      ← NavBar, Footer, Loader, CookiesBanner, Icon, Button, Link
+src/pages/index.astro          ← es landing, nav-anchored section order
+src/pages/{terms,privacy,cookies,productos}.astro ← es standalone pages
+src/pages/en/*.astro           ← en twins (index, terms, privacy, cookies, products)
+src/layouts/Layout.astro       ← <head> SEO + JSON-LD + hreflang + global shell + script imports
+src/i18n/{es,en}.ts            ← copy dictionaries (en typed : Dictionary); utils.ts = locale/anchor helpers
+src/components/sections/*.astro  ← Hero, Fork, Problem, Agitation, Marquee, Solution,
+                                   Process, Manifesto, WhyUs, TerraCore, FAQ, Contact, ProductsPage
+src/components/ui/*.astro      ← NavBar, Footer, Loader, CookiesBanner, Icon
 src/scripts/*.ts               ← vanilla TS, imported via <script>
 src/styles/global.css          ← tokens + @theme + every BEM component (single file)
+netlify/functions/contact.mts  ← contact-form backend (v2 fn → /api/contact)
+supabase/schema.sql            ← contact_submissions table DDL (run once in Supabase)
 public/                        ← brand assets, icons, videos, robots.txt, llms.txt,
                                  _headers, _redirects
 ```
 
 ### Conventions that cut across files
 
-1. **Ghost numbers follow navbar order**, not section order. When a navbar anchor changes, renumber every numbered section.
+1. **Ghost words mirror the navbar label**, not a number and not section order. The `.ghost-num` (faded context word top-right of each `.s-head`) renders the section's navbar label (e.g. Servicios, Proceso, Nosotros, Producto) so the user knows where they are. When a section's navbar label changes, update its `.ghost-num` text. Hero carries no ghost word; Marquee/Manifesto/Agitation have none (decorative interleave). The class name `.ghost-num` is kept for CSS continuity though it now renders a word.
 2. **`.surface-dark` flips tokens** for dark sections (Contact, Footer). On dark surfaces, `--border-strong` is _not_ flipped — use `rgba(255,255,255,0.14)` explicitly.
 3. **Animated underline** lives on `.nav__link`, `.footer__col a`, `.service__cta`, and in-body legal anchors (via `background-image` gradient hack on legal pages). Pattern: `scaleX(0) origin:right` → `scaleX(1) origin:left` on hover. Buttons do **not** get this.
 4. **Navbar markup is duplicated** between desktop (`.nav__links`) and mobile (`.nav__mobile`) — update both.
 5. **Legal pages** all share the `<article class="legal"><div class="legal__body"><nav class="legal__toc">…<div class="legal__content">…` shape. TOC is sticky at ≥1024 px. Anchors are zero-padded (`#sec-01` … `#sec-10`).
 6. **GA4 is consent-gated**. ID `G-RBNC0VP6D3` lives in `src/scripts/cookies.ts`. Loads only after `Accept`.
-7. **Contact form posts to Formspree** (`xpqovooa`). Field IDs are `c-name / c-company / c-email / c-message`.
+7. **Contact form posts to the own backend** `/api/contact` (Netlify Function v2 at `netlify/functions/contact.mts`): validates → stores in Supabase (`contact_submissions`) → notifies via Resend. Field `name` attrs are `name/company/email/phone/need/stage/message` (IDs `c-…`), all required (HTML + server). Hidden `website` honeypot. Env: `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`, `RESEND_API_KEY`, `CONTACT_TO`, `CONTACT_FROM` (`.env.example`). Local dev needs `npm run dev:netlify` (`astro dev` does not run functions).
 8. **`@/` resolves to `/src`** in both `tsconfig` and Vite. Always use it instead of `../../`.
 
 ### Brand voice + identity
