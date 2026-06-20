@@ -3926,9 +3926,16 @@ details[open] > .disclosure .lbl-open {
   border-radius: 999px;
   transition: transform 200ms ease;
 }
-.wa-fab:hover {
+.wa-fab:hover,
+.wa-fab:focus-visible {
   transform: scale(1.06);
   text-decoration: none;
+  color: #fff;
+}
+/* En verde, el anillo azul de foco se ve mal: usar blanco (cumple 3:1) */
+.wa-fab:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 3px;
 }
 .wa-fab svg {
   width: 28px;

@@ -10,7 +10,7 @@ If something is not described here but matters, ask before changing it.
 - **Owner**: Lúmina W S.A.S, Medellín, Colombia.
 - **Public URL**: `https://luminaw.co`.
 - **Hosting**: Netlify (config in `netlify.toml`, `public/_headers`, `public/_redirects`).
-- **Language**: Spanish (`es-CO`). All visible copy is in Spanish — keep it that way unless explicitly asked.
+- **Languages**: Bilingual — Spanish (`es-CO`, default at `/`) and English (`en`, served under `/en/*`). Copy lives in `src/i18n/es.ts` + `src/i18n/en.ts` (every key must exist in both; `en.ts` is typed `: Dictionary` and breaks the build if a key is missing). Any new/changed string, label, alt, or route must land in both dictionaries in the same change.
 
 ## Commands
 
@@ -105,11 +105,14 @@ Whenever you **create, edit, or delete** a section, page, or UI component, every
 ## Architecture cheatsheet
 
 ```
-src/pages/index.astro          ← nav-anchored section order
-src/layouts/Layout.astro       ← <head> SEO + JSON-LD + global shell + script imports
-src/components/sections/*.astro  ← Hero, Problem, Agitation, Marquee, Solution,
-                                   Process, Manifesto, TerraCore, WhyUs, FAQ, Contact
-src/components/ui/*.astro      ← NavBar, Footer, Loader, CookiesBanner, Icon, Button, Link
+src/pages/index.astro          ← es landing, nav-anchored section order
+src/pages/{terms,privacy,cookies,productos}.astro ← es standalone pages
+src/pages/en/*.astro           ← en twins (index, terms, privacy, cookies, products)
+src/layouts/Layout.astro       ← <head> SEO + JSON-LD + hreflang + global shell + script imports
+src/i18n/{es,en}.ts            ← copy dictionaries (en typed : Dictionary); utils.ts = locale/anchor helpers
+src/components/sections/*.astro  ← Hero, Fork, Problem, Agitation, Marquee, Solution,
+                                   Process, Manifesto, WhyUs, TerraCore, FAQ, Contact, ProductsPage
+src/components/ui/*.astro      ← NavBar, Footer, Loader, CookiesBanner, Icon
 src/scripts/*.ts               ← vanilla TS, imported via <script>
 src/styles/global.css          ← tokens + @theme + every BEM component (single file)
 netlify/functions/contact.mts  ← contact-form backend (v2 fn → /api/contact)
@@ -120,7 +123,7 @@ public/                        ← brand assets, icons, videos, robots.txt, llms
 
 ### Conventions that cut across files
 
-1. **Ghost numbers follow navbar order**, not section order. When a navbar anchor changes, renumber every numbered section.
+1. **Ghost words mirror the navbar label**, not a number and not section order. The `.ghost-num` (faded context word top-right of each `.s-head`) renders the section's navbar label (e.g. Servicios, Proceso, Nosotros, Producto) so the user knows where they are. When a section's navbar label changes, update its `.ghost-num` text. Hero carries no ghost word; Marquee/Manifesto/Agitation have none (decorative interleave). The class name `.ghost-num` is kept for CSS continuity though it now renders a word.
 2. **`.surface-dark` flips tokens** for dark sections (Contact, Footer). On dark surfaces, `--border-strong` is _not_ flipped — use `rgba(255,255,255,0.14)` explicitly.
 3. **Animated underline** lives on `.nav__link`, `.footer__col a`, `.service__cta`, and in-body legal anchors (via `background-image` gradient hack on legal pages). Pattern: `scaleX(0) origin:right` → `scaleX(1) origin:left` on hover. Buttons do **not** get this.
 4. **Navbar markup is duplicated** between desktop (`.nav__links`) and mobile (`.nav__mobile`) — update both.
