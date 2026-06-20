@@ -122,30 +122,5 @@ const shots = t.shots;
         ))
       }
     </div>
-
-    <div class="terracore__more">
-      <div class="terracore__more-head">{t.moreHead}</div>
-      <div class="terracore__more-grid">
-        <article class="prod-card prod-card--soon" id="root">
-          <div class="prod-card__badge">{root.badge}</div>
-          <h3 class="prod-card__title">{root.title}</h3>
-          <p class="prod-card__tagline">{root.tagline}</p>
-          <p class="prod-card__desc">
-            {root.desc}
-          </p>
-          <ul class="prod-card__feats">
-            {root.feats.map((f) => <li>{f}</li>)}
-          </ul>
-          <a
-            class="prod-card__cta"
-            href="https://wavival.dev/root"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {root.cta}
-          </a>
-        </article>
-      </div>
-    </div>
   </div>
 </section>

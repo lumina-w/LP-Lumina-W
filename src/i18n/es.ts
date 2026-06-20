@@ -413,7 +413,6 @@ export const es = {
     dashFeatsCount: '06 / 06',
     proof:
       'Construimos TerraCore desde cero: offline-first, multiusuario y multirol, con dashboards en tiempo real y trazabilidad agroindustrial. Ese es el estándar con el que trabajamos.',
-    moreHead: 'El roadmap sigue',
     modules: [
       'Control de animales.',
       'Producción en tiempo real.',
