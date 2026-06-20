@@ -15,7 +15,7 @@ interface Props {
 
 const {
   title = 'Desarrollo de software a medida en Colombia | Lúmina W',
-  description = 'Construimos software personalizado, automatizaciones y sistemas digitales para empresas que necesitan operar sin procesos manuales. Desde Medellín, para toda Colombia.',
+  description = 'Software a medida, automatizaciones y sistemas digitales para empresas que necesitan operar sin procesos manuales. Desde Medellín para toda Colombia.',
   image = '/brand/og-image.png',
   noindex = false,
 } = Astro.props;
@@ -41,10 +41,6 @@ const BASE = import.meta.env.BASE_URL;
         ? 'noindex, nofollow'
         : 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1'}
     />
-    <meta
-      name="keywords"
-      content="desarrollo software a medida Colombia, automatización de procesos empresariales, software empresarial Medellín, sistemas digitales para empresas, software personalizado Colombia"
-    />
     <link rel="canonical" href={canonicalURL} />
     <link rel="alternate" hreflang="es-co" href={canonicalURL} />
     <link rel="alternate" hreflang="x-default" href={canonicalURL} />
@@ -64,9 +60,15 @@ const BASE = import.meta.env.BASE_URL;
     <meta property="og:site_name" content="Lúmina W" />
 
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@wavival0" />
+    <meta name="twitter:creator" content="@wavival0" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={`https://luminaw.co${image}`} />
+    <meta
+      name="twitter:image:alt"
+      content="Lúmina W — Desarrollo de software a medida en Colombia"
+    />
 
     <meta name="format-detection" content="telephone=no" />
     <meta name="theme-color" content="#1b1f28" />
@@ -83,8 +85,14 @@ const BASE = import.meta.env.BASE_URL;
 
     <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
     <link rel="dns-prefetch" href="https://api.fontshare.com" />
+    <link
+      rel="preload"
+      as="style"
+      href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@700,800&f[]=switzer@400,500,600&display=swap"
+    />
     <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
 
+    <!-- Google Search Console verificado vía DNS (no requiere meta tag) -->
     <!-- TODO: pegar verification IDs cuando estén disponibles -->
     <!-- <meta name="msvalidate.01" content="PEGAR_AQUI" /> -->
     <!-- <meta name="yandex-verification" content="PEGAR_AQUI" /> -->
@@ -108,7 +116,7 @@ const BASE = import.meta.env.BASE_URL;
         '@context': 'https://schema.org',
         '@graph': [
           {
-            '@type': 'Organization',
+            '@type': 'ProfessionalService',
             '@id': 'https://luminaw.co/#organization',
             name: 'Lúmina W',
             legalName: 'Lúmina W S.A.S',
@@ -117,15 +125,26 @@ const BASE = import.meta.env.BASE_URL;
               '@type': 'ImageObject',
               url: 'https://luminaw.co/brand/logo.webp',
             },
+            image: 'https://luminaw.co/brand/og-image.png',
             description:
               'Tu operación no debería depender de Excel. Software a medida y SaaS B2B para empresas que necesitan operar con control, sin procesos manuales.',
             email: 'contact@luminaw.co',
             telephone: '+57-3108283088',
+            priceRange: '$$',
             address: {
               '@type': 'PostalAddress',
               addressLocality: 'Medellín',
               addressRegion: 'Antioquia',
               addressCountry: 'CO',
+            },
+            geo: {
+              '@type': 'GeoCoordinates',
+              latitude: 6.2442,
+              longitude: -75.5812,
+            },
+            areaServed: {
+              '@type': 'Country',
+              name: 'Colombia',
             },
             contactPoint: {
               '@type': 'ContactPoint',
@@ -139,6 +158,7 @@ const BASE = import.meta.env.BASE_URL;
             sameAs: [
               'https://instagram.com/luminaw.co',
               'https://linkedin.com/company/lumina-w',
+              'https://x.com/wavival0',
               'https://blog.luminaw.co',
             ],
           },

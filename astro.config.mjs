@@ -5,7 +5,7 @@ import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
   site: 'https://luminaw.co',
-  trailingSlash: 'ignore',
+  trailingSlash: 'never',
   build: {
     inlineStylesheets: 'auto',
   },

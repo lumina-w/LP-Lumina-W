@@ -69,6 +69,7 @@ const faqs = [
           <div class={`faq__item ${i === 0 ? 'open' : ''}`} data-index={i}>
             <button
               type="button"
+              id={`faq-q-${i}`}
               class="faq__q"
               aria-expanded={i === 0 ? 'true' : 'false'}
               aria-controls={`faq-a-${i}`}
@@ -77,7 +78,12 @@ const faqs = [
               <Icon name="plus" size={20} stroke={1.75} />
             </button>
             <div class="faq__a-wrap">
-              <div id={`faq-a-${i}`} class="faq__a" role="region">
+              <div
+                id={`faq-a-${i}`}
+                class="faq__a"
+                role="region"
+                aria-labelledby={`faq-q-${i}`}
+              >
                 {f.a}
               </div>
             </div>
@@ -94,6 +100,23 @@ const faqs = [
     </div>
   </div>
 </section>
+
+<script
+  type="application/ld+json"
+  set:html={JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    '@id': 'https://luminaw.co/#faq',
+    mainEntity: faqs.map((f) => ({
+      '@type': 'Question',
+      name: f.q,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: f.a,
+      },
+    })),
+  })}
+/>
 
 <script>
   import '@/scripts/faq.ts';
