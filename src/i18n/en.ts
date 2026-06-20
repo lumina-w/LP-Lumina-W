@@ -183,6 +183,7 @@ export const en: Dictionary = {
     leadBMid: ' or ',
     leadBStrongB: 'specialized SaaS',
     leadBPost: '.',
+    opensNewTab: ' (opens in a new tab)',
     ghost: 'Services',
     flag: 'Main service',
     cta: 'I want a free consultation',
@@ -612,6 +613,7 @@ export const en: Dictionary = {
     eyebrow: 'B2B SaaS products',
     heading: 'Solutions ready for your industry.',
     lead: 'Built to the same standards as our custom software. Pay for what you use, scale when you need to.',
+    opensNewTab: ' (opens in a new tab)',
     featsHeadDefault: 'Features',
     cards: [
       {
@@ -687,7 +689,6 @@ export const en: Dictionary = {
   layout: {
     skipToContent: 'Skip to content',
     whatsappAria: 'Contact us on WhatsApp (opens in a new tab)',
-    langSwitchAria: 'Change language',
     langSwitchLabel: 'ES',
     langSwitchTo: 'Ver en español',
   },

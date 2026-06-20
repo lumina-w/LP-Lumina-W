@@ -40,7 +40,7 @@ const altURL = alternatePath(Astro.url.pathname, loc);
           type="button"
           class="nav__link nav__group-btn"
           aria-expanded="false"
-          aria-haspopup="true"
+          aria-controls="nav-product-menu"
         >
           {t.product}
           <svg
@@ -58,11 +58,10 @@ const altURL = alternatePath(Astro.url.pathname, loc);
               stroke-linejoin="round"></path></svg
           >
         </button>
-        <div class="nav__dropdown" role="menu">
+        <div class="nav__dropdown" id="nav-product-menu">
           <a
             class="nav__dropdown-link nav__dropdown-link--all"
             href={lp(pm.allHref)}
-            role="menuitem"
           >
             {pm.allLabel}
           </a>
@@ -71,7 +70,6 @@ const altURL = alternatePath(Astro.url.pathname, loc);
               <a
                 class="nav__dropdown-link"
                 href={it.external ? it.href : lp(it.href)}
-                role="menuitem"
                 target={it.external ? '_blank' : undefined}
                 rel={it.external ? 'noopener noreferrer' : undefined}
               >
@@ -100,7 +98,7 @@ const altURL = alternatePath(Astro.url.pathname, loc);
         href={altURL}
         data-lang-switch
         hreflang={loc === 'en' ? 'es' : 'en'}
-        aria-label={L.langSwitchTo}
+        aria-label={`${L.langSwitchLabel}: ${L.langSwitchTo}`}
         title={L.langSwitchTo}
       >
         {L.langSwitchLabel}
@@ -117,6 +115,7 @@ const altURL = alternatePath(Astro.url.pathname, loc);
         class="nav__burger"
         aria-label={t.openMenu}
         aria-expanded="false"
+        aria-controls="nav-mobile"
       >
         <Icon name="menu" size={22} stroke={1.75} />
       </button>
@@ -124,7 +123,7 @@ const altURL = alternatePath(Astro.url.pathname, loc);
   </div>
 </header>
 
-<div id="nav-mobile" class="nav__mobile" aria-hidden="true">
+<div id="nav-mobile" class="nav__mobile" aria-hidden="true" inert>
   <a class="nav__mobile-link" href={lp('/#services')}>{t.services}</a>
   <a class="nav__mobile-link" href={lp('/#process')}>{t.process}</a>
 

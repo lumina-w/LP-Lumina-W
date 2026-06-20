@@ -183,6 +183,7 @@ export const es = {
     leadBPost: '.',
     ghost: 'Servicios',
     flag: 'Servicio principal',
+    opensNewTab: ' (abre en una pestaña nueva)',
     cta: 'Quiero una asesoría sin costo',
     services: [
       {
@@ -610,6 +611,7 @@ export const es = {
     eyebrow: 'Productos SaaS B2B',
     heading: 'Soluciones listas para tu industria.',
     lead: 'Construidos con los mismos estándares del desarrollo a medida. Pagas por lo que usas, escalas cuando lo necesitas.',
+    opensNewTab: ' (abre en una pestaña nueva)',
     featsHeadDefault: 'Funcionalidades',
     cards: [
       {
@@ -685,7 +687,6 @@ export const es = {
   layout: {
     skipToContent: 'Saltar al contenido',
     whatsappAria: 'Contactar por WhatsApp (abre en una pestaña nueva)',
-    langSwitchAria: 'Cambiar idioma',
     langSwitchLabel: 'EN',
     langSwitchTo: 'View in English',
   },

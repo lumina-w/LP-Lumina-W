@@ -100,7 +100,9 @@ const t = useTranslations(loc).contact;
                 type="text"
                 placeholder={t.fieldNamePh}
                 required
+                aria-describedby="c-name-err"
               />
+              <p class="contact__field-err" id="c-name-err" aria-live="polite" />
             </div>
             <div class="contact__field">
               <label for="c-company"
@@ -113,6 +115,12 @@ const t = useTranslations(loc).contact;
                 type="text"
                 placeholder={t.fieldCompanyPh}
                 required
+                aria-describedby="c-company-err"
+              />
+              <p
+                class="contact__field-err"
+                id="c-company-err"
+                aria-live="polite"
               />
             </div>
           </div>
@@ -128,7 +136,9 @@ const t = useTranslations(loc).contact;
                 type="email"
                 placeholder={t.fieldEmailPh}
                 required
+                aria-describedby="c-email-err"
               />
+              <p class="contact__field-err" id="c-email-err" aria-live="polite" />
             </div>
             <div class="contact__field">
               <label for="c-phone"
@@ -141,7 +151,9 @@ const t = useTranslations(loc).contact;
                 type="tel"
                 placeholder={t.fieldPhonePh}
                 required
+                aria-describedby="c-phone-err"
               />
+              <p class="contact__field-err" id="c-phone-err" aria-live="polite" />
             </div>
           </div>
           <fieldset class="contact__choices">
@@ -157,11 +169,13 @@ const t = useTranslations(loc).contact;
                     name="need"
                     value={opt}
                     required={i === 0 ? true : undefined}
+                    aria-describedby={i === 0 ? 'need-err' : undefined}
                   />
                   <span>{opt}</span>
                 </label>
               ))
             }
+            <p class="contact__field-err" id="need-err" aria-live="polite"></p>
           </fieldset>
           <fieldset class="contact__choices">
             <legend
@@ -176,11 +190,13 @@ const t = useTranslations(loc).contact;
                     name="stage"
                     value={opt}
                     required={i === 0 ? true : undefined}
+                    aria-describedby={i === 0 ? 'stage-err' : undefined}
                   />
                   <span>{opt}</span>
                 </label>
               ))
             }
+            <p class="contact__field-err" id="stage-err" aria-live="polite"></p>
           </fieldset>
           <div class="contact__field">
             <label for="c-message"
@@ -192,7 +208,9 @@ const t = useTranslations(loc).contact;
               name="message"
               rows="4"
               placeholder={t.fieldMessagePh}
-              required></textarea>
+              required
+              aria-describedby="c-message-err"></textarea>
+            <p class="contact__field-err" id="c-message-err" aria-live="polite" />
           </div>
           <button id="submit-btn" type="submit" class="btn-primary">
             {t.submit}
@@ -207,9 +225,9 @@ const t = useTranslations(loc).contact;
           class="contact__success"
           role="status"
           tabindex="-1"
+          data-title={t.successTitle}
+          data-text={t.successText}
         >
-          <h3>{t.successTitle}</h3>
-          <p>{t.successText}</p>
         </div>
       </div>
     </div>

@@ -52,6 +52,7 @@ const lp = (p: string) => localizePath(p, loc);
               rel={s.ctaExternal ? 'noopener noreferrer' : undefined}
             >
               {s.ctaLabel}
+              {s.ctaExternal && <span class="sr-only">{t.opensNewTab}</span>}
             </a>
             {s.ctaSecondaryLabel && (
               <a
