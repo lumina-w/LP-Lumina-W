@@ -8,14 +8,14 @@ The system is deliberately **editorial, square, sober**. Not playful, not maxima
 
 ### Brand
 
-| Token                | Value     | Used for                                                       |
-| -------------------- | --------- | -------------------------------------------------------------- |
-| `--brand-blue`       | `#407bff` | Links, tags, focus rings, TerraCore product, micro-accents     |
-| `--brand-dark`       | `#1b1f28` | Nav, footer, dark surfaces, body on dark, primary-button text  |
-| `--brand-light`      | `#dee9ff` | Tints inside dark sections, hero polygons                      |
-| `--brand-accent`     | `#f5a623` | Amber. Strategic fills: primary-button bg, eyebrow dash, highlighted borders, marquee/hero shapes |
-| `--brand-accent-deep`| `#d9881a` | Amber button hover                                             |
-| `--brand-accent-ink` | `#8a5a06` | Amber **as text/icon on light surfaces** (readable; the bright `#f5a623` fails WCAG as small text) |
+| Token                 | Value     | Used for                                                                                           |
+| --------------------- | --------- | -------------------------------------------------------------------------------------------------- |
+| `--brand-blue`        | `#407bff` | Links, tags, focus rings, TerraCore product, micro-accents                                         |
+| `--brand-dark`        | `#1b1f28` | Nav, footer, dark surfaces, body on dark, primary-button text                                      |
+| `--brand-light`       | `#dee9ff` | Tints inside dark sections, hero polygons                                                          |
+| `--brand-accent`      | `#f5a623` | Amber. Strategic fills: primary-button bg, eyebrow dash, highlighted borders, marquee/hero shapes  |
+| `--brand-accent-deep` | `#d9881a` | Amber button hover                                                                                 |
+| `--brand-accent-ink`  | `#8a5a06` | Amber **as text/icon on light surfaces** (readable; the bright `#f5a623` fails WCAG as small text) |
 
 Blue is the **principal** color (links + product + accents). Amber is the **strategic accent** for conversion/attention spots — used scarcely. Primary buttons are amber with dark text (white on `#f5a623` is illegible). There are no greens; the prior green accent was fully replaced by amber.
 
