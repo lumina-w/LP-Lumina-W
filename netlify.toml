@@ -5,6 +5,10 @@
 [build.environment]
   NODE_VERSION = "22.12.0"
   NPM_VERSION = "10"
+  # CONTACT_TO / CONTACT_FROM are the public business email (contact@luminaw.co),
+  # intentionally present in docs, llms.txt, legal pages and contact markup.
+  # They are not secrets, so exclude them from Netlify's secrets scanner.
+  SECRETS_SCAN_OMIT_KEYS = "CONTACT_TO,CONTACT_FROM"
 
 # Serverless backend for the contact form (Supabase + Resend).
 # The v2 function routes itself to /api/contact via its `config.path` export.
